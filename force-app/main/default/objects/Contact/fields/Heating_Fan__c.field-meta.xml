@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Heating_Fan__c</fullName>
+    <label>Heating &amp; Fan</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Ventiladores</fullName>
+                <default>false</default>
+                <label>Ventiladores</label>
+            </value>
+            <value>
+                <fullName>Purificadores &amp; Humidificadores</fullName>
+                <default>false</default>
+                <label>Purificadores &amp; Humidificadores</label>
+            </value>
+            <value>
+                <fullName>Calefactores</fullName>
+                <default>false</default>
+                <label>Calefactores</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>

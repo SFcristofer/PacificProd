@@ -1,0 +1,224 @@
+<apex:page showHeader="false" standardController="PedidoDeCompra__c" extensions="AgentMailController" standardStylesheets="false" applyHtmlTag="false"  applyBodyTag="false">
+
+<head>
+<style>
+
+  .tabla {
+     border-collapse: collapse;
+  }
+  
+  .titulo {
+    white-space:pre;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .footer {
+    white-space:pre;
+    text-align: left;
+    font-size: 14px;
+  }
+  
+  .tituloSeccion {
+     border-collapse: collapse;
+     border: 1px solid black;
+     background-color: #F7CAAC;
+     text-align: center;
+     font-size: 13px;
+     font-weight: bold;
+     font-family: Arial Unicode MS;
+  }
+
+  .tituloNumero {
+     border-collapse: collapse;
+     border: 1px solid black;
+     background-color: #FBE4D5;
+     width: 20px;
+  }
+
+  .tituloColumna {
+     white-space:pre-line;
+     border-collapse: collapse;
+     border: 1px solid black;
+     background-color: #FBE4D5;
+     width: 200px;
+     font-size: 12px;
+     padding: 0px;
+  }
+
+  .tituloColumnaBarCode {
+     white-space:pre-line;
+     border-collapse: collapse;
+     border: 1px solid black;
+     background-color: #FBE4D5;
+     width: 100px;
+     font-size: 12px;
+     padding: 0px;
+  }
+
+  .valorColumna {
+     border-collapse: collapse;
+     border: 1px solid black;
+  }
+
+  .valorColumnaDetallesBarCode {
+     border-collapse: collapse;
+     border: 1px solid black;
+     text-align: center;
+     width: 100px;     
+  }
+
+  .valorColumnaDetallesDesc {
+     border-collapse: collapse;
+     border: 1px solid black;
+     text-align: center;
+     width: 450px;
+  }
+
+  .valorColumnaDetallesCant {
+     border-collapse: collapse;
+     border: 1px solid black;
+     text-align: center;
+     width: 80px;
+  }
+
+  .valorColumnaDetallesNum{
+     border-collapse: collapse;
+     border: 1px solid black;
+     width: 20px;
+  }
+  
+</style>
+</head>
+
+<body>
+<table class="tabla">
+
+   <tr>
+     <td colspan="4" class="titulo"><pre style="font-family: Arial Unicode MS;text-align:center;">
+BOOKING REQUEST
+订舱申请</pre></td>
+   </tr>
+
+
+   <tr>
+     <td colspan="4" class="tituloSeccion">General Information  基本信息</td>
+   </tr>
+
+   <tr>
+     <td class="tituloNumero">1.</td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+Customer Name
+客户名称</pre> </td>    
+     <td colspan="2" class="valorColumna"><apex:outputText >{!nameTopParent}</apex:outputText></td>
+   </tr>
+
+   <tr>
+     <td class="tituloNumero">2.</td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+PO Number
+DO订单编号</pre></td>
+     <td colspan="2" class="valorColumna"><apex:outputText >{!PedidoDeCompra__c.Name}</apex:outputText></td>    
+   </tr>
+
+   <tr>
+     <td class="tituloNumero">3.</td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+Customer P.O.
+客户订单编号</pre></td>  
+     <td colspan="2" class="valorColumna"><apex:outputText >{!PedidoDeCompra__c.Numero_de_Orden__c}</apex:outputText></td>
+   </tr>
+
+   <tr>
+     <td class="tituloNumero">4.</td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+Shipping Window
+订舱窗口
+(DD/MM/YY)</pre></td>
+     <td colspan="2" class="valorColumna">
+       <apex:outputText value="{0, date, dd'/'MM'/'yyyy}">
+         <apex:param value="{!PedidoDeCompra__c.Fecha_Minima_Embarque__c}" /> 
+        </apex:outputText> -
+       <apex:outputText value="{0, date, dd'/'MM'/'yyyy}">
+         <apex:param value="{!PedidoDeCompra__c.Fecha_Maxima_Embarque__c}" /> 
+        </apex:outputText>     
+     </td>
+   </tr>
+
+   <tr>
+     <td class="tituloNumero">5.</td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+Port of Loading 
+起运港</pre></td>
+     <td colspan="2" class="valorColumna"><apex:outputText >{!PedidoDeCompra__c.Proveedor__r.Puerto__c}</apex:outputText></td>    
+   </tr>
+
+   <tr>
+     <td class="tituloNumero">6.</td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+Container Type
+柜型
+(20GP/40GP/40HQ)</pre></td>  
+     <td colspan="2" class="valorColumna"><apex:outputText >{!PedidoDeCompra__c.TipoDeContenedor__c}</apex:outputText></td> 
+   </tr>
+
+   <tr>
+     <td class="tituloNumero">7.</td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+BL Release Method
+放单方式
+(Must be original/ Telex Released/ Sea Way Bill)</pre></td>
+     <td colspan="2" class="valorColumna"><apex:outputText >{!PedidoDeCompra__c.BL__c}</apex:outputText></td>
+   </tr>
+   
+   <tr>
+     <td colspan="4" class="tituloSeccion">Cargo Details 货物细节基本信息</td>
+   </tr>
+   
+   <tr>
+     <td class="tituloNumero">No.</td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+Bar Code
+条形码编号</pre></td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+Goods Description
+货品描述</pre></td>
+     <td class="tituloColumna"><pre style="font-family: Arial Unicode MS;text-align:center;">
+Quantity
+数量(CTNs)</pre></td>
+   </tr>
+
+   <apex:variable var="count" value="{!1}"/> 
+   <apex:repeat value="{!PedidoDeCompra__c.PedidoLineItems__r}" var="item">
+    <tr>
+      <td class="valorColumnaDetallesNum"><apex:outputText >{!count}</apex:outputText></td>
+      <td class="valorColumnaDetallesBarCode"><apex:outputText >{!item.ProformaLineItem__r.Producto__r.Codigo_EAN__c}</apex:outputText></td>
+      <td class="valorColumnaDetallesDesc "><apex:outputText >{!item.Name} - {!item.ProformaLineItem__r.Codigo_de_Producto__c}</apex:outputText></td>
+      <td class="valorColumnaDetallesCant "><apex:outputText >{!item.NumeroDeCajas__c}</apex:outputText></td>
+    </tr>
+    <apex:variable value="{!count+1}" var="count"/>
+   </apex:repeat>
+
+
+   <tr>
+     <td colspan="4" class="tituloSeccion">Special Customer Requirements 客户特别要求***</td>
+   </tr>
+   <tr>
+     <td colspan="4" class="valorColumna"><apex:outputText >{!PedidoDeCompra__c.Requisitos_Especiales__c}</apex:outputText></td>
+   </tr>
+   
+   
+   <tr>
+     <td colspan="4" class="footer"><pre style="font-family: Arial Unicode MS;text-align:left;">
+Note: Product description on BL must include the Bar Code and Goods Description mentioned 
+above.
+备注: 提单上的货品描述需包含上述的Bar Code和货品描述。
+</pre></td>
+   </tr>
+   
+</table>
+
+</body>
+
+</apex:page>

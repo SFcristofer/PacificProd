@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PlazoFabricacion__c</fullName>
+    <description>Al crear el Pedido, el sistema copia el valor de la Fabrica.</description>
+    <externalId>false</externalId>
+    <inlineHelpText>When creating the order, the system copies the factory value.</inlineHelpText>
+    <label>Plazo de Fabricación</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

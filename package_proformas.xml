@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Proforma__c.All</members>
+        <members>Proforma__c.Confirmacion_Subida_Falta_Aprobar</members>
+        <members>Proforma__c.Copia_de_2024_Todas_las_Proformas</members>
+        <members>Proforma__c.Copia_de_PRs_Confirmaci_n_Subida_SIN_CHE</members>
+        <members>Proforma__c.Todas_las_Proformas_2022</members>
+        <members>Proforma__c.X2019_Todas_las_Proformas</members>
+        <members>Proforma__c.X2020_Todas_las_Proformas</members>
+        <members>Proforma__c.X2021_Todas_las_Proformas</members>
+        <members>Proforma__c.X2023_Todas_las_Proformas</members>
+        <members>Proforma__c.X2024_Todas_las_Proformas</members>
+        <members>Proforma__c.X2026_Todas_las_Proformas</members>
+        <name>ListView</name>
+    </types>
+    <version>60.0</version>
+</Package>

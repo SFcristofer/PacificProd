@@ -1,0 +1,3 @@
+<apex:page standardController="Product2"
+    action="{!URLFOR($Action.Product2.Clone, Product2.Id, [ProductCode=null, Codigo_EAN__c=null, Codigo_DUN_14__c=null], true)}">
+</apex:page>

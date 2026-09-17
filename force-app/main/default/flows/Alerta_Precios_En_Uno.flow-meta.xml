@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>EnviarAviso</name>
+        <label>Enviar aviso</label>
+        <locationX>50</locationX>
+        <locationY>1100</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>Destinatarios</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>[PacificPROD] Hay productos con precio en 1</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>CuerpoCorreo</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>AcumularCorreo</name>
+        <label>Acumular correo</label>
+        <locationX>230</locationX>
+        <locationY>1020</locationY>
+        <assignmentItems>
+            <assignToReference>Destinatarios</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>RecorrerUsuarios.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>RecorrerUsuarios</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>AcumularIdUsuario</name>
+        <label>Acumular id de usuario</label>
+        <locationX>230</locationX>
+        <locationY>860</locationY>
+        <assignmentItems>
+            <assignToReference>IdsUsuarios</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>RecorrerMiembros.UserOrGroupId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>RecorrerMiembros</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>AcumularProductoId</name>
+        <label>Acumular id de producto</label>
+        <locationX>230</locationX>
+        <locationY>260</locationY>
+        <assignmentItems>
+            <assignToReference>IdsProductos</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>RecorrerEntradas.Product2Id</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>RecorrerEntradas</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Contar</name>
+        <label>Contar</label>
+        <locationX>230</locationX>
+        <locationY>500</locationY>
+        <assignmentItems>
+            <assignToReference>Contador</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>RecorrerProductos</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>HayAlgoQueAvisar</name>
+        <label>Hay algo que avisar?</label>
+        <locationX>50</locationX>
+        <locationY>620</locationY>
+        <defaultConnectorLabel>No, todo limpio</defaultConnectorLabel>
+        <rules>
+            <name>Si_hay</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Contador</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>BuscarGrupo</targetReference>
+            </connector>
+            <label>Si hay</label>
+        </rules>
+    </decisions>
+    <description>Alerta por SINTOMA: productos con PricebookEntry activo en UnitPrice = 1 CUYO PRODUCTO
+TIENE COSTE REAL. Complementa a Alerta Jobs Asincronos Con Error, que vigila la CAUSA.
+Esta salta pase lo que pase: batch, carga masiva, integracion Libra o alta manual.
+
+El filtro de coste no es opcional: hay articulos con precio 1 legitimo (muestras, productos
+sin coste). Sin ese filtro la alerta saltaria a diario sobre los mismos registros benignos
+y en dos semanas nadie la leeria. Como Flow no permite filtrar por campo de objeto
+relacionado, se resuelve en dos pasos: se recogen los Product2Id y luego se consultan los
+productos con CostoTotal2__c mayor que 1.
+
+Los destinatarios NO estan escritos en este flujo. Se resuelven en ejecucion a partir de los
+miembros activos del grupo publico indicado en la variable NombreGrupo. Para cambiar a quien
+se avisa se edita el grupo en Configuracion, no este metadato.</description>
+    <environments>Default</environments>
+    <label>Alerta Precios En Uno</label>
+    <loops>
+        <name>RecorrerEntradas</name>
+        <label>Recorrer entradas</label>
+        <locationX>50</locationX>
+        <locationY>260</locationY>
+        <collectionReference>BuscarEntradasEnUno</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AcumularProductoId</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>BuscarProductosConCoste</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>RecorrerMiembros</name>
+        <label>Recorrer miembros</label>
+        <locationX>50</locationX>
+        <locationY>860</locationY>
+        <collectionReference>BuscarMiembros</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AcumularIdUsuario</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>BuscarUsuarios</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>RecorrerProductos</name>
+        <label>Recorrer productos</label>
+        <locationX>50</locationX>
+        <locationY>500</locationY>
+        <collectionReference>BuscarProductosConCoste</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Contar</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>HayAlgoQueAvisar</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>RecorrerUsuarios</name>
+        <label>Recorrer usuarios</label>
+        <locationX>50</locationX>
+        <locationY>1020</locationY>
+        <collectionReference>BuscarUsuarios</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AcumularCorreo</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>EnviarAviso</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>BuscarEntradasEnUno</name>
+        <label>Buscar entradas en 1</label>
+        <locationX>50</locationX>
+        <locationY>140</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>RecorrerEntradas</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>UnitPrice</field>
+            <operator>EqualTo</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>PricebookEntry</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>BuscarGrupo</name>
+        <label>Buscar grupo</label>
+        <locationX>50</locationX>
+        <locationY>700</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>BuscarMiembros</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>NombreGrupo</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Regular</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>BuscarMiembros</name>
+        <label>Buscar miembros</label>
+        <locationX>50</locationX>
+        <locationY>780</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>RecorrerMiembros</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>GroupId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>BuscarGrupo.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>GroupMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>BuscarProductosConCoste</name>
+        <label>Buscar productos con coste</label>
+        <locationX>50</locationX>
+        <locationY>380</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>RecorrerProductos</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>IdsProductos</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>CostoTotal2__c</field>
+            <operator>GreaterThan</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>Product2</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>BuscarUsuarios</name>
+        <label>Buscar usuarios</label>
+        <locationX>50</locationX>
+        <locationY>940</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>RecorrerUsuarios</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>IdsUsuarios</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>20</locationY>
+        <connector>
+            <targetReference>BuscarEntradasEnUno</targetReference>
+        </connector>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2026-08-19</startDate>
+            <startTime>07:15:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>CuerpoCorreo</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Hay {!Contador} producto(s) con precio 1 en su tarifa Y con coste real.
+
+Un precio de 1 es el valor placeholder que deja ProductTriggerHelper al crear la entrada de
+tarifa, y que luego deberia sobrescribir el recalculo de precios. Si sigue en 1 teniendo el
+producto un coste real, el recalculo no llego a correr.
+
+Consulta para ver el detalle:
+
+SELECT Id, Product2.Name, Product2.ProductCode, Product2.CostoTotal2__c,
+       Pricebook2.Name, UnitPrice
+FROM PricebookEntry
+WHERE UnitPrice = 1 AND Product2.CostoTotal2__c &gt; 1
+ORDER BY Product2.Name
+
+Los productos sin coste con precio 1 (muestras y similares) no cuentan para esta alerta.</text>
+    </textTemplates>
+    <variables>
+        <name>Contador</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>Destinatarios</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>IdsProductos</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>IdsUsuarios</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>DeveloperName del grupo publico cuyos miembros activos reciben el aviso.</description>
+        <name>NombreGrupo</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Admin</stringValue>
+        </value>
+    </variables>
+</Flow>

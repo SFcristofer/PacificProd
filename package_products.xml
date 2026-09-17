@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Product2.AllProducts</members>
+        <members>Product2.Productos_Fabrica</members>
+        <members>Product2.Nuevos_Productos_ltimos_30_d_as</members>
+        <members>Product2.Prospectos_de_Producto</members>
+        <name>ListView</name>
+    </types>
+    <version>60.0</version>
+</Package>

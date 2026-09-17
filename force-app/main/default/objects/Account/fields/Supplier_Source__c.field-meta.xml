@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Supplier_Source__c</fullName>
+    <label>Supplier Source</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Trade FAIR</fullName>
+                <default>false</default>
+                <label>Trade FAIR</label>
+            </value>
+            <value>
+                <fullName>Internet Search</fullName>
+                <default>false</default>
+                <label>Internet Search</label>
+            </value>
+            <value>
+                <fullName>Alibaba</fullName>
+                <default>false</default>
+                <label>Alibaba</label>
+            </value>
+            <value>
+                <fullName>Made-in-China</fullName>
+                <default>false</default>
+                <label>Made-in-China</label>
+            </value>
+            <value>
+                <fullName>Existing Supplier</fullName>
+                <default>false</default>
+                <label>Existing Supplier</label>
+            </value>
+            <value>
+                <fullName>Linkeding</fullName>
+                <default>false</default>
+                <label>Linkeding</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

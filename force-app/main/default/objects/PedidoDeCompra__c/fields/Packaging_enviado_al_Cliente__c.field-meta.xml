@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Packaging_enviado_al_Cliente__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>The packaging has been sent to the Customer for commercial approval by the buyer and their import department</inlineHelpText>
+    <label>Packaging enviado al cliente</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

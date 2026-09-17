@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Factura__c</fullName>
+    <label>Factura</label>
+    <referenceTo>FacturaDeProveedor__c</referenceTo>
+    <relationshipLabel>Items</relationshipLabel>
+    <relationshipName>ItemsDeFacturaDeProveedor</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

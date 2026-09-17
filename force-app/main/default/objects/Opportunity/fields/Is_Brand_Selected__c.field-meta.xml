@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Brand_Selected__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Cuando se recibe una oportunidad del catalogo, los productos de oportunidad aun no tienen seleccioanda una marca (Is_Brand_Selected=false). Cuando la marca es seleciconada (modificar productos en oportunidad) esta bandera se activa. (Is_Brand_Selected = true)</description>
+    <label>Marca seleciconada</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

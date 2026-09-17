@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>test_items_to_proc__c</fullName>
+    <description>Campo usado para pruebas de cotizacion. Para fines de depuracion, se indican los items a ser procesados en el archivo excel  Ej: tst-42  , si se envian 100 items, solo se procesaran 100  Ej: todos  , se procesan todos</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Test Items To Proccess</label>
+    <length>8</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

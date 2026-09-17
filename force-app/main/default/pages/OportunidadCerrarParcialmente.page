@@ -1,0 +1,56 @@
+<apex:page showHeader="true" standardController="Opportunity" extensions="OportunidadCerrarParcialmente" sidebar="true" lightningstylesheets="true">
+<apex:form id="formaOp" rendered="{!NOT(noOrders)}">
+<apex:pageBlock title="Won Opportunity">
+  <table>
+    <tr>
+      <td>{!opportunity.Name}</td>
+    </tr>
+  </table>
+  <apex:pageBlockTable value="{!splitOppLineItemsOrig}" var="olitemor">
+    <apex:column value="{!olitemor.oppLI.PricebookEntry.Product2.Name}"/>
+    <apex:column value="{!olitemor.oppLI.Codigo_de_Producto__c}"/>
+    <apex:column >
+        <apex:facet name="header">PROFORMAS</apex:facet>
+        <apex:outputText value="{!olitemor.proformaOrderNames}"/>
+    </apex:column>
+    <apex:column value="{!olitemor.oppLI.Quantity}"/>
+    <apex:column value="{!olitemor.oppLI.UnitPrice}"/>
+    <apex:column >
+        <apex:facet name="header">TOTAL PRICE</apex:facet>
+        <apex:outputText value="{!olitemor.oppLI.CurrencyIsoCode} {0, number,###,###,##0.00}">
+            <apex:param value="{!olitemor.oppLI.Quantity * olitemor.oppLI.UnitPrice}"/>
+        </apex:outputText>
+    </apex:column>
+  </apex:pageBlockTable>
+</apex:pageBlock>
+<apex:pageBlock title="Open Opportunity">
+  <table>
+    <tr>
+      <td>{!clonedOpportunity.Name}</td>
+    </tr>
+  </table>
+  <apex:pageBlockTable value="{!oppLineItemsCloned}" var="olitem">
+    <apex:column value="{!olitem.PricebookEntry.Product2.Name}"/>  
+    <apex:column value="{!olitem.Codigo_de_Producto__c}"/>
+    <apex:column >
+        <apex:facet name="header">PROFORMAS</apex:facet>
+        <apex:outputText value="{!prodsInProformaNOOrder[olitem.Product2Id]}" />
+    </apex:column>
+    <apex:column value="{!olitem.Quantity}"/>
+    <apex:column value="{!olitem.UnitPrice}"/>
+    <apex:column >
+        <apex:facet name="header">TOTAL PRICE</apex:facet>
+        <apex:outputText value="{!olitem.CurrencyIsoCode} {0, number,###,###,##0.00}">
+            <apex:param value="{!olitem.Quantity * olitem.UnitPrice}"/>
+        </apex:outputText>
+    </apex:column>
+  </apex:pageBlockTable>
+</apex:pageBlock>
+<apex:commandButton action="{!cancel}" value="Cancel"/> 
+<apex:commandButton action="{!saveChanges}" value="Save" id="siguiente" styleClass="next"/>
+</apex:form>
+<apex:form id="formaOpNO" rendered="{!noOrders}">
+  <apex:messages />
+  <apex:commandButton action="{!cancel}" value="Cancel"/> 
+</apex:form>
+</apex:page>

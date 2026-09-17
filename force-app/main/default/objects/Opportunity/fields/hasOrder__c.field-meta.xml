@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>hasOrder__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>This field indicates if there is an order associated to current opportunity</description>
+    <label>hasOrder</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

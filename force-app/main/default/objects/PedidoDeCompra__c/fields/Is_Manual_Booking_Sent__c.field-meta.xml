@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Manual_Booking_Sent__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Determina si la tarea de envio de booking manual ha sido enviada</description>
+    <label>Booking Manual Enviado</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

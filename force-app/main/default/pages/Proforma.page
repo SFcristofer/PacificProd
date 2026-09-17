@@ -1,0 +1,266 @@
+<apex:page standardController="Proforma__c" showHeader="false" 
+    applyHtmlTag="false" applyBodyTag="false" renderAs="PDF"
+    extensions="PDFNamer">
+    <head>
+
+<style>
+
+@page{
+
+margin:0.15in;
+
+}
+
+.tableClass{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tableClass td{
+    text-align: center;
+    font-size:8px;
+    padding-bottom:8px;
+}
+
+.headerRow{
+    padding: 5px;
+    text-align:center;
+    background-color: #CCE5FF;
+    border-top:1px solid;
+    border-bottom:1px solid;
+    font-size:8px;
+}
+.totalRow{
+    padding: 5px;
+    text-align:center;
+    background-color: #CCE5FF;
+    font-size:8px;
+    border-top:1px solid;
+    border-bottom:1px solid;
+    white-space:nowrap; 
+}
+
+
+.topData{
+    padding: 5px;
+    font-size:8px;
+}
+
+
+.topData td{
+    width:60px;
+    vertical-align:top;
+}
+
+.topDataExt{
+    width:190px;
+}
+
+.dataTitle{
+    padding-left:94px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.para{
+    margin-top: 8px;
+}
+
+.indent{
+    padding-left:130px;
+}
+
+.proformaTitle{
+    font-weight:bold;
+}
+</style>
+
+</head> 
+
+    <body>
+        <apex:stylesheet value="{!URLFOR($Resource.pdfresources, 'sheet.css')}"/>
+        <apex:panelGrid columns="3" columnClasses="left,left, indent">
+            <apex:image value="{!URLFOR($Resource.pdfresources,'DB_logo.png')}" width="150px"/>
+            <apex:panelGrid columns="1" styleClass="companyTable" width="100%">
+                <apex:outputText value="{!razonSocial}" styleClass="companyName"/>
+                <apex:outputText value="{!calle}"/>
+                <apex:outputText value="{!ciudad}, {!paisCS} {!division}"/>
+                <apex:outputText value="{!telefono} {!correo}"/>
+            </apex:panelGrid>
+            <apex:panelGrid columns="1" styleClass="companyTable">
+                <apex:outputText value="PROFORMA INVOICE" styleClass="proformaTitle"/>
+                <apex:outputText value="Proforma #: {!Proforma__c.Name}"/>
+                <apex:outputText value=""/>
+                <apex:outputText value="{0, date, 'Date: ' dd/MM/yyyy}">
+                    <apex:param value="{!NOW()}" />
+                </apex:outputText>
+            </apex:panelGrid>
+        </apex:panelGrid>
+        <br/><br/><br/>
+        <apex:panelGrid columns="4" styleClass="topData">
+            <apex:panelGrid columns="1">
+                <apex:outputText value="To:" styleClass="para"/>
+            </apex:panelGrid>
+            <apex:panelGrid columns="1" styleClass="topDataExt bold">
+                <apex:outputText value="{!Proforma__c.Cuenta__r.Parent.RazonSocial__c}"/>
+                <apex:outputText value="{!Proforma__c.Cuenta__r.Parent.name}"/>
+                <apex:outputText value="{!Proforma__c.Cuenta__r.parent.billingStreet}"/>
+                <apex:panelGroup >
+                    <apex:outputText value="{!Proforma__c.Cuenta__r.parent.billingCity}"/>
+                    <apex:outputText value="{!IF(NOT(ISBLANK(Proforma__c.Cuenta__r.parent.billingState)), ', ' + Proforma__c.Cuenta__r.parent.billingState, '')}"/>
+                    <apex:outputText value=" {!Proforma__c.Cuenta__r.parent.billingPostalCode}
+                                             {!IF(NOT(ISBLANK(Proforma__c.Cuenta__r.parent.billingPostalCode)), ' - ', '')} 
+                                             {!Proforma__c.Cuenta__r.parent.billingCountry}"/>
+                </apex:panelGroup>
+                <apex:outputText value="Phone: {!Proforma__c.Cuenta__r.parent.phone}"/>
+                <apex:outputText value="Buyer: {!RIGHT(Proforma__c.Cuenta__r.name, LEN(Proforma__c.Cuenta__r.name) - FIND('- ', Proforma__c.Cuenta__r.name))}"/>
+            </apex:panelGrid>
+            
+            <apex:panelGrid columns="1" styleClass="topDataExt dataTitle">
+                <apex:outputText value="Incoterm:" />
+                <apex:outputText value="Payment Method:"/>
+                <apex:outputText value="Loading Port:"/>
+                <apex:outputText value="Containers:"/>
+                <apex:outputText value="Cargo Ready Date:"/>
+                <apex:outputText value="Initial Shipping Window:"/>
+            </apex:panelGrid>
+            <apex:panelGrid columns="1" styleClass="topDataExt bold">
+                <apex:outputText value="{!Proforma__c.Incoterm__c}" />
+                <apex:outputText value="{!Proforma__c.Cuenta__r.parent.FormaPago__c} {!Proforma__c.Cuenta__r.parent.PlazoPago__c} days from BL date"/>
+                <apex:outputText value="{!puerto} ({!pais})"/>
+                <apex:outputText value="{!Proforma__c.Tipo_de_Contenedores__c}"/>
+                <apex:outputText value="60 days from IMT confirmation date" rendered="{!FIND('CENCOSUD', Proforma__c.Cuenta__r.parent.Name) > 0}"/>
+                <apex:outputText value="{0, date, dd/MM/yyyy}" rendered="{!FIND('CENCOSUD', Proforma__c.Cuenta__r.parent.Name) == 0}"><apex:param value="{!Proforma__c.ETD__c}"/></apex:outputText>
+                <apex:outputText value="{0, date, dd/MM/yyyy}" rendered="{!FIND('CENCOSUD', Proforma__c.Cuenta__r.parent.Name) == 0}"><apex:param value="{!Proforma__c.Initial_Shipping_Window__c}"/></apex:outputText>
+            </apex:panelGrid>
+        </apex:panelGrid>
+        <br/><br/><br/><br/>
+        <apex:pageBlock >
+        <apex:pageBlockTable value="{!Proforma__c.ProformaLineItems__r}" var="line" id="theTable" rowClasses="odd,even" 
+            styleClass="tableClass">
+            <apex:column >
+                <apex:facet name="header">CODE</apex:facet>
+                <apex:outputText value="{!line.Producto__r.CodigoDeProductoBase__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">IMAGE</apex:facet>
+                <apex:image style="margin-top:3px" value="{!line.Producto__r.ProformaImage__c}" height="50px" />
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">EAN</apex:facet>
+                <apex:outputText value="{!line.Producto__r.Codigo_EAN2__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">MASTER PACK</apex:facet>
+                <apex:outputField value="{!line.Producto__r.Unidades_por_Masterbox2__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">DESCRIPTION</apex:facet>
+                <apex:outputText value="{!line.Producto__r.Descripcion_Larga__c}"/>
+                <br/>
+                <apex:outputText value="{!RIGHT(line.Producto__r.Packaging__c, LEN(line.Producto__r.Packaging__c) - 2)}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">QUANTITY PIECES</apex:facet>
+                <apex:outputField value="{!line.Unidades__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">QUANTITY BOXES</apex:facet>
+                <apex:outputField value="{!line.NumeroDeCajas__c}"/>
+                <apex:facet name="footer"><apex:outputText value="TOTAL"/></apex:facet>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">CBM</apex:facet>
+                <apex:outputText value="{!line.CBMMasterBox__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">TOTAL CBM</apex:facet>
+                <apex:outputText value="{!line.CBMTotal__c}"/>
+                <apex:facet name="footer"><apex:outputField value="{!Proforma__c.CBMTotal__c}" /></apex:facet>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">PRICE</apex:facet>
+                <span>
+                    {!Proforma__c.CurrencyISOCode}
+                    {!IF(line.PrecioUnitario__c < 0, 
+                        "-", 
+                        "") & 
+                        IF(ABS(line.PrecioUnitario__c) >= 1000000, 
+                            TEXT(FLOOR(ABS(line.PrecioUnitario__c) / 1000000)) & ".", 
+                            "") & 
+                        IF(ABS(line.PrecioUnitario__c) >= 1000, 
+                            RIGHT(TEXT(FLOOR(ABS(line.PrecioUnitario__c) / 1000)), 3) & ".", 
+                            "") & 
+                        RIGHT(TEXT(FLOOR(ABS(line.PrecioUnitario__c))), 3) & "," & 
+                        IF(MOD(ABS(line.PrecioUnitario__c) , 1) * 100 < 10, 
+                            "0" & TEXT(ROUND(MOD(ABS(line.PrecioUnitario__c), 1), 2) * 100), 
+                            TEXT(MIN(ROUND(MOD(ABS(line.PrecioUnitario__c) , 1), 2) * 100, 99))
+                        )}
+                </span>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">AMOUNT</apex:facet>
+                <span>
+                    {!Proforma__c.CurrencyISOCode}
+                    {!IF(line.ImporteTotal__c < 0, 
+                        "-", 
+                        "") & 
+                        IF(ABS(line.ImporteTotal__c) >= 1000000, 
+                            TEXT(FLOOR(ABS(line.ImporteTotal__c) / 1000000)) & ".", 
+                            "") & 
+                        IF(ABS(line.ImporteTotal__c) >= 1000, 
+                            RIGHT(TEXT(FLOOR(ABS(line.ImporteTotal__c) / 1000)), 3) & ".", 
+                            "") & 
+                        RIGHT(TEXT(FLOOR(ABS(line.ImporteTotal__c))), 3) & "," & 
+                        IF(MOD(ABS(line.ImporteTotal__c) , 1) * 100 < 10, 
+                            "0" & TEXT(ROUND(MOD(ABS(line.ImporteTotal__c), 1), 2) * 100), 
+                            TEXT(MIN(ROUND(MOD(ABS(line.ImporteTotal__c) , 1), 2) * 100, 99))
+                        )}
+                </span> 
+                <apex:facet name="footer">
+                    <span>
+                        {!Proforma__c.CurrencyISOCode}
+                        {!IF(Proforma__c.ImporteTotal__c < 0, 
+                            "-", 
+                            "") & 
+                            IF(ABS(Proforma__c.ImporteTotal__c) >= 1000000, 
+                                TEXT(FLOOR(ABS(Proforma__c.ImporteTotal__c) / 1000000)) & ".", 
+                                "") & 
+                            IF(ABS(Proforma__c.ImporteTotal__c) >= 1000, 
+                                RIGHT(TEXT(FLOOR(ABS(Proforma__c.ImporteTotal__c) / 1000)), 3) & ".", 
+                                "") & 
+                            RIGHT(TEXT(FLOOR(ABS(Proforma__c.ImporteTotal__c))), 3) & "," & 
+                            IF(MOD(ABS(Proforma__c.ImporteTotal__c) , 1) * 100 < 10, 
+                                "0" & TEXT(ROUND(MOD(ABS(Proforma__c.ImporteTotal__c), 1), 2) * 100), 
+                                TEXT(MIN(ROUND(MOD(ABS(Proforma__c.ImporteTotal__c) , 1), 2) * 100, 99))
+                            )}
+                    </span> 
+                </apex:facet>
+            </apex:column>
+        </apex:pageBlockTable>
+        </apex:pageBlock>
+        <br/><br/><br/><br/>
+        <apex:outputPanel layout="block">
+            <apex:panelGrid columns="2" columnClasses="left,none">
+                <apex:outputPanel >
+                    <b>BANK DETAILS:</b><br/>
+                    Beneficiary : <b><apex:outputText value="{!beneficiario}"/></b><br/>
+                    Account Number: <b><apex:outputText value="{!numeroDeCuenta}"/></b><br/>
+                    Account Currency: <b><apex:outputText value="{!divisa}"/></b><br/>
+                    Beneficiary Bank: <b><apex:outputText value="{!bancoBeneficiario}"/></b><br/> 
+                    Bank Address:  <b><apex:outputText value="{!direccionBanco}"/></b><br/> 
+                    SWIFT CODE: <b><apex:outputText value="{!swiftCode}"/></b><br/>
+                </apex:outputPanel>
+                <apex:outputPanel layout="block" style="padding-left:150px">
+                    <b>CUSTOMER ACCEPTANCE:</b><br/>
+                    Full Name:<br/>
+                    Title:<br/>
+                    Date:<br/>
+                    Signature and seal:<br/><br/>
+                </apex:outputPanel>
+            </apex:panelGrid>
+        </apex:outputPanel>
+    </body>
+</apex:page>

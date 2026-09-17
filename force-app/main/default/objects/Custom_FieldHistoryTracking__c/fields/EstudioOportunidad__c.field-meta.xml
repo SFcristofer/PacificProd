@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EstudioOportunidad__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Estudio de Oportunidad</label>
+    <referenceTo>EstudioOportunidad__c</referenceTo>
+    <relationshipLabel>Seguimiento del Historial</relationshipLabel>
+    <relationshipName>Seguimiento_del_Historial</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

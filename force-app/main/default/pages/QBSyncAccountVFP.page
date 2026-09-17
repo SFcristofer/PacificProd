@@ -1,0 +1,44 @@
+<apex:page standardController="Account" extensions="QBSyncAccountController">
+<!-- apex:page standardController="Account" extensions="QBSyncAccountController" lightningStylesheets="true" -->
+    
+    <script>
+        function disableBtnQBSync(btn){
+            btn.disabled = true;
+            btn.className='grayButton';
+            btn.value='Sending to QB ..';
+            sendToQB();
+        }
+    </script> 
+    
+    <style>
+        .addQB {
+            font-weight: bold;
+            font-size: 25px;            
+        }
+    </style>
+    
+   <apex:form id="returnForm">
+   
+       <table>
+         <tr>
+           <td>
+             <apex:outputText style="font-weight:bold;font-size:15px;" value="This action will create this account in Quickbooks Online. Only complete this action if you are certain there will be invoicing with this account"/>
+           </td>
+         </tr>
+         <tr>
+           <td>
+             <br/>
+             <apex:actionFunction name="sendToQB" action="{!syncQB}" />
+             <apex:commandButton styleClass="blueButton" onClick="disableBtnQBSync(this)" value="Send to QB" rendered="{!NOT(envioExitoso)}"/>
+           </td>
+         </tr>
+         <tr>
+            <td>
+                <apex:outputText style="font-weight:bold;font-size:15px;" value="{!resultMessage}"/>
+            </td>
+         </tr>       
+       </table>
+              
+   </apex:form>
+  
+</apex:page>

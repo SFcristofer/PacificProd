@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2023_Todas_las_Proformas</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Oportunidad__c</columns>
+    <columns>Tipo_de_Contenedores__c</columns>
+    <columns>CBMTotal__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ImporteTotal__c</columns>
+    <columns>Importe_Venta_Neto_Nuevo__c</columns>
+    <columns>MargenOperacion__c</columns>
+    <columns>FechaAprobacionDireccion__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2022 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>lessOrEqual</operation>
+        <value>12/31/2023 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>ETD__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2023</value>
+    </filters>
+    <filters>
+        <field>NAME</field>
+        <operation>notContain</operation>
+        <value>PR22115,PR22116,PR22119,PR22120,PR22123,PR22131,PR22132,PR22045,PR22046,PR22124</value>
+    </filters>
+    <label>Proformas 2023</label>
+</ListView>

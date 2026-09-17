@@ -1,0 +1,49 @@
+<apex:page controller="VerFabricasController" applyHtmlTag="false" showHeader="false" lightningStyleSheets="true">
+    <table>
+        <tr>
+            <td><strong>Product: </strong></td>
+            <td>{!descriptionProduct}</td>
+        </tr>
+        <tr>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    <apex:form >
+        <!-- apex:commandButton styleClass="blueButton" onclick="disableAndSave()" value="Aprobar" oncomplete="handleRedirect()" id="aprobar"/>
+        <apex:actionFunction name="aprobarCosto" action="{!aprobar}" / -->
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!fabricasAlternas}" var="fa" id="table" title="Alternate Factories">
+    
+                <!-- apex:column headerValue="Aprobación">
+                    <apex:inputCheckbox value="{!vcp.isCostApproved}"/>
+                </apex:column -->
+                 <apex:column headerValue="Name">
+                     <!-- apex:outputText value="{!fa.Fabrica__r.Name}"/ -->
+                     <apex:outputText value="{!fa.name}"/>                     
+                 </apex:column>
+                 <apex:column headerValue="Current Price">
+                    <!-- apex:outputText value="{!fa.PrecioDeFabrica__c}"/ -->
+                    <apex:outputText value="{!fa.currentPrice}"/>                    
+                </apex:column>    
+                <apex:column headerValue="New Price">
+                    <!-- apex:outputText value="{!fa.PrecioDeFabrica__c}"/ -->
+                    <apex:outputText value="{!fa.newPrice}"/>                    
+                </apex:column>    
+                <apex:column headerValue="Type">
+                    <!-- apex:outputText value="{!fa.PrecioDeFabrica__c}"/ -->
+                    <apex:outputText value="{!fa.type}"/>                    
+                </apex:column>    
+                <apex:column headerValue="Token">
+                    <!-- a href="#">Generar Token</a -->
+                    <apex:outputLink value="#" id="gt" rendered="{!IF(fa.type=='Principal', 'false', 'true')}">Generate Token</apex:outputLink>                    
+                </apex:column>    
+                <apex:column headerValue="Change">
+                    <!-- a href="#">Asignar esta fábrica</a -->
+                    <apex:outputLink value="#" id="af" rendered="{!IF(fa.type=='Principal', 'false', 'true')}">Assign this Factory</apex:outputLink>                                        
+                </apex:column>    
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        </apex:form>
+</apex:page>

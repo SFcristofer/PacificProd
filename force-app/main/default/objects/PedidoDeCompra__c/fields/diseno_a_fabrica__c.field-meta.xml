@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>diseno_a_fabrica__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Se marca cuando Compras envía a la fábrica el diseño de packaging aprobado por el cliente.</description>
+    <inlineHelpText>The Order owner has already sent the packagings to the Factory for production</inlineHelpText>
+    <label>Diseño a fábrica</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

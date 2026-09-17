@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CP_MueblesComedorYCocina__c</fullName>
+    <label>Muebles de comedor y cocina</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Juegos de comedor</fullName>
+                <default>false</default>
+                <label>Sets de Comedor</label>
+            </value>
+            <value>
+                <fullName>Taburetes bar</fullName>
+                <default>false</default>
+                <label>Taburetes/Bancos de Bar</label>
+            </value>
+            <value>
+                <fullName>Carritos de apoyo cocina</fullName>
+                <default>false</default>
+                <label>Muebles Auxiliares</label>
+            </value>
+            <value>
+                <fullName>Complementos</fullName>
+                <default>false</default>
+                <label>Complementos</label>
+            </value>
+            <value>
+                <fullName>Barra de desayuno</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Barra de desayuno</label>
+            </value>
+            <value>
+                <fullName>Sets Ahorraespacio</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sets Ahorraespacio</label>
+            </value>
+            <value>
+                <fullName>Sillas de espera y eventos</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sillas de espera y eventos</label>
+            </value>
+            <value>
+                <fullName>Sillas metálicas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sillas metálicas</label>
+            </value>
+            <value>
+                <fullName>Sillas pata madera, y mesas a juego</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sillas pata madera, y mesas a juego</label>
+            </value>
+            <value>
+                <fullName>Sillas plásticas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sillas plásticas</label>
+            </value>
+            <value>
+                <fullName>Sillas y taburetes plegables</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sillas y taburetes plegables</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

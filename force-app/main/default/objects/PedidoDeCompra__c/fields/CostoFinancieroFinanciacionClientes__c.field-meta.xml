@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CostoFinancieroFinanciacionClientes__c</fullName>
+    <description>Costo Origen *  (Plazo Cobro Cliente - Plazo Pago) /360 *  Tipo De Interes Financiacion Clientes</description>
+    <formula>CostoOrigen__c *  (PlazoPago__c - PlazoPagoFab__c)/360 *  TipoDeInteresFinanciacionClient__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Origin Cost * (Customer Collection Term - Payment Term) / 360 * Customer Financing Interest Rate</inlineHelpText>
+    <label>Costo Financiero</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

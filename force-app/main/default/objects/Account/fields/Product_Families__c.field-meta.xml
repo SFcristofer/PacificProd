@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Families__c</fullName>
+    <description>Product categories manufactured by the supplier</description>
+    <inlineHelpText>Select all product families this supplier can manufacture.</inlineHelpText>
+    <label>Product Fam</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>H-!DEA Home</fullName>
+                <default>false</default>
+                <label>H-!DEA Home</label>
+            </value>
+            <value>
+                <fullName>G-!DEA Garden</fullName>
+                <default>false</default>
+                <label>G-!DEA Garden</label>
+            </value>
+            <value>
+                <fullName>B-!DEA Heating&amp;Fan</fullName>
+                <default>false</default>
+                <label>B-!DEA Heating&amp;Fan</label>
+            </value>
+            <value>
+                <fullName>P-!IDEA Kids</fullName>
+                <default>false</default>
+                <label>P-!IDEA Kids</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>meses_atras__c</fullName>
+    <description>en la generacion de solicitudes, la fecha es el criterio de busuqeda para encontrar los pedidos a los que se les debe generar la solicitud</description>
+    <externalId>false</externalId>
+    <label>meses atras</label>
+    <precision>2</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PagoAportacionesComerciales__c</fullName>
+    <inlineHelpText>Total commercial contribution payments. Commercial agreement contribution payments are created manually by mutual agreement with the Customer. Commercial agreement contribution payments (not calculated here) are created automatically when an ETD is set in the order that originated them</inlineHelpText>
+    <label>Pago aportaciones comerciales</label>
+    <summarizedField>PagoDeAportaciones__c.Importe__c</summarizedField>
+    <summaryFilterItems>
+        <field>PagoDeAportaciones__c.TipoDeAportacion__c</field>
+        <operation>equals</operation>
+        <value>Comercial</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>PagoDeAportaciones__c.Estado__c</field>
+        <operation>equals</operation>
+        <value>Creado, En Aprobación, Aprobado, Contabilizado, Pagado</value>
+    </summaryFilterItems>
+    <summaryForeignKey>PagoDeAportaciones__c.Cliente__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

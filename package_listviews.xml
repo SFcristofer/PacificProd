@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Opportunity.AllOpportunities</members>
+        <members>Opportunity.Copia_de_2024_Todas_las_Oportunidades</members>
+        <members>Opportunity.Oportunidades_2019</members>
+        <members>Opportunity.Todas_las_Oportunidades</members>
+        <members>Opportunity.X2020_Todas_las_Oportunidades</members>
+        <members>Opportunity.X2021_Todas_las_Oportunidades</members>
+        <members>Opportunity.X2022_Todas_las_Oportunidades</members>
+        <members>Opportunity.X2023_Todas_las_Oportunidades</members>
+        <members>Opportunity.X2024_Todas_las_Oportunidades</members>
+        <members>Opportunity.X2026_Todas_las_Oportunidades</members>
+        <members>Opportunity.X2026_Todas_las_Oportunidades_JENNY</members>
+        <members>Opportunity.X2026_Todas_las_Oportunidades_MIGUEL</members>
+        <members>Opportunity.X2026_Todas_las_Oportunidades_VANESSA</members>
+        <members>Opportunity.X2027_Todas_las_Oportunidades_JENNY</members>
+        <members>Opportunity.X2027_Todas_las_Oportunidades_MIGUEL</members>
+        <members>Opportunity.X2027_Todas_las_Oportunidades_VANESSA</members>
+        <members>Opportunity.X2027_Todas_Oportunidades</members>
+        <name>ListView</name>
+    </types>
+    <version>60.0</version>
+</Package>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado_Operacion__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(
+    ISBLANK(MargenOperacion__c),
+    IF(
+        TEXT($User.LanguageLocaleKey) = &quot;en_US&quot;,
+        &quot;No items&quot;,
+        &quot;Sin items&quot;
+    ),
+    IF(
+        Aprobado_Direccion__c,
+        IF(
+            TEXT($User.LanguageLocaleKey) = &quot;en_US&quot;,
+            &quot;Approved&quot;,
+            &quot;Aprobada&quot;
+        ),
+        IF(
+            OR(
+                MargenOperacion__c &lt; 0.18,
+                (Cuenta__r.Parent.Balance_Cuenta__c - ImporteTotal__c) &lt; 0
+            ),
+            IF(
+                TEXT($User.LanguageLocaleKey) = &quot;en_US&quot;,
+                &quot;Requires Approval&quot;,
+                &quot;Requiere Aprobación&quot;
+            ),
+            IF(
+                TEXT($User.LanguageLocaleKey) = &quot;en_US&quot;,
+                &quot;Meets Conditions&quot;,
+                &quot;Cumple Condiciones&quot;
+            )
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estado Operación</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

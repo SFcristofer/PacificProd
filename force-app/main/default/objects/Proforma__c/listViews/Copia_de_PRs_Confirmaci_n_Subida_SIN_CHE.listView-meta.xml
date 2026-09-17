@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copia_de_PRs_Confirmaci_n_Subida_SIN_CHE</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Oportunidad__c</columns>
+    <columns>Tipo_de_Contenedores__c</columns>
+    <columns>CBMTotal__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ImporteTotal__c</columns>
+    <columns>Importe_Venta_Neto_Nuevo__c</columns>
+    <columns>MargenOperacion__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>ConfirmacionCliente__c</field>
+        <operation>equals</operation>
+        <value>0</value>
+    </filters>
+    <filters>
+        <field>FechaConfirmacionCliente__c</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2023</value>
+    </filters>
+    <label>PRs Upload Confirmation WITHOUT CHECK</label>
+</ListView>

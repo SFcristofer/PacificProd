@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CostosImportacion__c</fullName>
+    <description>Gastos Bancarios + Gastos En Puerto +  Gastos Inspeccion + Otros Costos</description>
+    <formula>GastosBancarios__c + GastosEnPuerto__c +  GastosInspeccion__c + OtrosCostos__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Bank charges + port charges + inspection charges + other costs</inlineHelpText>
+    <label>Costo Extra (total)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,28 @@
+<apex:page standardController="Product2" extensions="UploadProdImages" lightningStylesheets="true">
+    <apex:messages />
+    <apex:form id="attForm" enctype="multipart/form-data">
+        <apex:pageBlock title="{!$Label.UPLOADPRODIMG_TITLE}">
+            <apex:pageBlockSection showHeader="false" columns="1" id="block0">
+                <apex:outputText label="" value="{!Product2.Name}" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection showHeader="false" columns="2" id="block1">
+                <apex:repeat value="{!prodImageList}" var="image">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputPanel >
+                            <apex:outputLabel value="{!image.label}" />
+                            <apex:image value="/servlet/servlet.FileDownload?file={!image.existingImage}" 
+                                        style="width:80px;height:80px;display:block;clear:both;padding:10px;"/>
+                            <apex:inputFile value="{!image.fileBody}" filename="{!image.fileName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <apex:outputPanel style="padding-top:20px;text-align:center;" layout="block">
+                <apex:actionFunction name="save" action="{!saveChanges}" />
+                <apex:commandButton value="{!$Label.GENERIC_SAVE}" id="saveBtn"
+                        onclick="this.disabled = true;this.style.color = '#CCC';this.value='{!$Label.GENERIC_SAVING}';this.nextSibling.disabled = true;save();"/>
+                <apex:commandButton value="{!$Label.GENERIC_BACK}" action="{!done}" />
+            </apex:outputPanel>         
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

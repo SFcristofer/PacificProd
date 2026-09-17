@@ -1,0 +1,4 @@
+<apex:page showHeader="true" sidebar="true" standardController="Product2"
+        lightningstylesheets="true">
+    
+</apex:page>

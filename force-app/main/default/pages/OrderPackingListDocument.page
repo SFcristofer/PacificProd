@@ -1,0 +1,229 @@
+<apex:page standardController="PedidoDeCompra__c" showHeader="false"  
+    applyHtmlTag="false" applyBodyTag="false" extensions="OrderPackingListDocument">
+    <head>
+
+<style>
+
+@page{
+
+margin:0.15in;
+
+}
+
+.tableClass{
+    border-collapse: collapse;
+    width: 100%;
+}
+.headerRow{
+    padding: 5px;
+    text-align:center;
+    background-color: #D9E1F1;
+    border: 1px solid;
+    font-size:8px;
+}
+
+.summary{
+    padding: 5px;
+    text-align:center;
+    background-color: #D9E1F1;
+    font-size:8px;
+    border-top:1px solid;
+    border-bottom:1px solid;
+}
+
+.summary-last-child{
+    border-right:1px solid;
+}
+
+.summary th:first-child{
+    border-left:1px solid;
+}
+
+.dataCell{
+    padding: 5px;
+    vertical-align: baseline;
+    text-align: center;
+    font-size:8px;
+}
+
+.indent{
+    padding-left:130px;
+}
+
+.companyTable{
+    font-family: "Arial Black", Helvetica, sans-serif;
+    color: #36568D;
+    font-weight: bold;
+}
+
+.item-label {
+    font-weight: bold;
+    width: 100px;
+}
+
+.item-data {
+    text-align: right;
+    width: 100px;
+}
+
+.top-align {
+    vertical-align: top;
+}
+</style>
+
+</head> 
+
+    <body>
+        <apex:stylesheet value="{!URLFOR($Resource.pdfresources, 'sheet.css')}"/>
+        <apex:panelGrid columns="2" columnClasses="left,left">
+            <div style='width:500px;font-size:24pt;font-family:"Arial Black", Helvetica, sans-serif;font-weight:bolder;color:#8FAAD9;position:relative;top:21px;'>
+                PACKING LIST
+            </div>
+            <apex:panelGrid columns="1" styleClass="companyTable" width="200px">
+                <apex:image value="{!URLFOR($Resource.pdfresources,'DB_logo.png')}" width="150px"/>
+                <apex:outputText value="{!razonSocial}"/>
+                <apex:outputText value="{!calle}"/>
+                <apex:outputText value="{!ciudad}, {!pais} {!division}"/>
+                <apex:outputText value="Telf. {!telefono}"/>
+                <apex:outputText value="{!correo}"/>
+            </apex:panelGrid>
+        </apex:panelGrid>
+        
+        
+        <apex:panelGrid columns="2"  width="100%" style="margin-top:20px" columnClasses="none, top-align">
+            <apex:panelGrid columns="1">
+                
+                <apex:outputPanel layout="none" rendered="{!NOT(ISBLANK(PedidoDeCompra__c.Proforma__r.Cuenta__r.parent.Consignee_Linea_1__c))}">
+                    <apex:outputText value="Consignee to:" style="font-weight:bold"/><br/>
+                    <apex:outputText value="{!PedidoDeCompra__c.Proforma__r.Cuenta__r.parent.Consignee_Linea_1__c}"/><br/>
+                    <apex:outputText value="{!PedidoDeCompra__c.Proforma__r.Cuenta__r.parent.Consignee_Linea_2__c}"/><br/>
+                    <apex:outputText value="{!PedidoDeCompra__c.Proforma__r.Cuenta__r.parent.Consignee_Linea_3__c}"/><br/>
+                    <apex:outputText value="{!PedidoDeCompra__c.Proforma__r.Cuenta__r.parent.Consignee_Linea_4__c}"/><br/>
+                    <apex:outputText value=" {!PedidoDeCompra__c.Proforma__r.Cuenta__r.parent.Consignee_Linea_5__c}"/><br/>
+                    <apex:outputText value="{!PedidoDeCompra__c.Proforma__r.Cuenta__r.parent.Consignee_Linea_6__c}"/>
+                </apex:outputPanel>
+                
+                <apex:panelGrid columns="2" style="margin-left:-6px" columnClasses="item-label, item-data">
+                    <apex:panelGrid columns="2">
+                        <apex:outputText value="Order:" />
+                        <apex:outputText value="{!PedidoDeCompra__c.Numero_de_Orden__c}" />
+                    </apex:panelGrid>    
+                </apex:panelGrid>
+            </apex:panelGrid>
+            
+            
+            <apex:panelGrid columns="1" style="float:right">
+                <apex:panelGrid columns="2" style="margin-left:-3px" columnClasses="item-label, item-data">
+                    <apex:outputText value="Date:" style="font-weight:bold"/>
+                    <apex:outputText value="{0, date, dd'/'MM'/'yyyy}">
+                       <apex:param value="{!PedidoDeCompra__c.Fecha_Factura__c}" /> 
+                    </apex:outputText>
+                    <apex:outputText value="Invoice:" style="font-weight:bold"/>
+                    <apex:outputText value="{!PedidoDeCompra__c.Numero_de_Factura__c}"/><br/>
+                </apex:panelGrid>
+            </apex:panelGrid>
+        </apex:panelGrid>
+        <br/><br/><br/><br/>
+        <apex:pageBlock >
+        <table class="tableClass" border="0" cellpadding="0" cellspacing="0">
+            <colgroup span="6"></colgroup>
+            <thead class="">
+                <tr class="headerRow">
+                    <th class="headerRow" scope="col" colspan="1">
+                        <div>ITEM NO.</div>
+                    </th>
+                    <th class="headerRow" scope="col" colspan="1">
+                        <div>MARK</div>
+                    </th>
+                    <th class="headerRow" scope="col" colspan="1">
+                        <div>DESCRIPTION</div>
+                    </th>
+                    <th class="headerRow" scope="col" colspan="1">
+                        <div>QTY</div>
+                    </th>
+                    <th class="headerRow" scope="col" colspan="1">
+                        <div>TOTAL CTN</div>
+                    </th>
+                    <th class="headerRow" scope="col" colspan="1">
+                        <div>TOTAL PIECES</div>
+                    </th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr class="summary">
+                    <th class="summary" scope="col" colspan="1"> SUMMARY</th>
+                    <th class="summary" scope="col" colspan="1"></th>
+                    <th class="summary" scope="col" colspan="1"></th>
+                    <th class="summary" scope="col" colspan="1"><apex:outputField value="{!PedidoDeCompra__c.Total_Cantidad__c}"/></th>
+                    <th class="summary" scope="col" colspan="1"><apex:outputField value="{!PedidoDeCompra__c.Total_Cantidad__c}"/></th>
+                    <th scope="col" colspan="1" class="summary summary-last-child"><apex:outputField value="{!PedidoDeCompra__c.Total_Cantidad__c}"/></th>
+                </tr>
+            </tfoot>
+            <tbody >
+                <apex:repeat value="{!listPLIReport}" var="line">                
+                <tr class="dataRow even odd first last">
+                    <td class="dataCell" colspan="1"><apex:outputText value="{!line.codigoProductoBase}"/></td>
+                    <td class="dataCell" colspan="1"><apex:outputText value="{!line.marca}"/></td>
+                    <td class="dataCell" colspan="1">
+                        <table>
+                            <tr>
+                                <td colspan="2" style="text-align:left"><apex:outputText value="{!line.description}" style="text-align:left"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">NET WT (KG):</td>
+                                <td style="text-align:left"><apex:outputText value="{!line.netWeight}"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">GROSS WT (KG):</td>
+                                <td style="text-align:left"><apex:outputText value="{!line.grossWeight}"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">CBM</td>
+                                <td style="text-align:left"><apex:outputText value="{!line.cmb}"/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align:left">EAN 13:</td>
+                                <td style="text-align:left"><apex:outputText value="{!line.ean}"/></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:left">SEAL:</td>
+                              <td style="text-align:left"><apex:outputText value="{!line.seals}"/></td>
+                            </tr>
+                            <tr>
+                              <td style="text-align:left">Container:</td>
+                              <td style="text-align:left"><apex:outputText value="{!line.containers}"/></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="dataCell" colspan="1"><apex:outputText value="{!line.unidades}"/></td>
+                    <td class="dataCell" colspan="1">
+                        <apex:outputText value="{0,number, ###,###,###.##}">
+                            <apex:param value="{!line.totalCtn}"/>
+                        </apex:outputText>                  
+                    </td>                    
+                    <td class="dataCell" colspan="1"><apex:outputText value="{!line.unidades}"/></td>
+                </tr>
+                </apex:repeat>
+            </tbody>
+        </table>
+        <br/>
+        <table style="border: 1px solid black;border-collapse: collapse;background-color: #D9E1F1;" width="100%">
+          <tr>
+            <td style="font-weight:bold;border-top:1px solid black;border-left:1px solid black;font-size:8px" width="14%">TOTAL NET WT:</td>
+            <td style="border-top:1px solid black;border-right:1px solid black;text-align:left"><apex:outputText value="{!netWt} KG"/></td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;border-left:1px solid black;font-size:8px" width="14%">TOTAL GROSS WT:</td>
+            <td style="border-right:1px solid black;text-align:left"><apex:outputText value="{!grossWt} KG"/></td>
+          </tr>
+          <tr>
+            <td style="font-weight:bold;border-bottom: 1px solid black;border-left:1px solid black;font-size:8px" width="14%">TOTAL CBM:</td>
+            <td style="border-bottom:1px solid black;border-right:1px solid black;text-align:left"><apex:outputText value="{!cbmTotal} CBM"/></td>            
+          </tr>
+        </table>
+
+        </apex:pageBlock>
+        <br/><br/><br/><br/>
+
+    </body>
+</apex:page>

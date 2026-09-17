@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SumaDeCantidadesDeProductos__c</fullName>
+    <description>Suma de la cantidad de producto de todos los productos de la oportunidad.</description>
+    <label>Suma de cantidades de productos</label>
+    <summarizedField>OpportunityLineItem.Quantity</summarizedField>
+    <summaryForeignKey>OpportunityLineItem.OpportunityId</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

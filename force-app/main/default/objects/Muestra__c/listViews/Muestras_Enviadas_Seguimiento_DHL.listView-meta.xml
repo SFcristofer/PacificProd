@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Muestras_Enviadas_Seguimiento_DHL</fullName>
+    <columns>NAME</columns>
+    <columns>Cliente__c</columns>
+    <columns>CREATEDBY_USER.ALIAS</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Tipo__c</columns>
+    <columns>Cantidad__c</columns>
+    <columns>ID_DO__c</columns>
+    <columns>Producto__c</columns>
+    <columns>Descripcion__c</columns>
+    <columns>Thumb_1__c</columns>
+    <columns>Fecha_de_finalizacion__c</columns>
+    <columns>Seguir_en_DHL__c</columns>
+    <columns>Estado__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>12/1/2024 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>Seguir_en_DHL__c</field>
+        <operation>contains</operation>
+        <value>Seguir en DHL</value>
+    </filters>
+    <filters>
+        <field>Estado__c</field>
+        <operation>notEqual</operation>
+        <value>Recibida</value>
+    </filters>
+    <label>Samples Shipped (DHL Tracking)</label>
+</ListView>

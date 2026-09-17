@@ -1,0 +1,66 @@
+<apex:page standardController="Product2" lightningStylesheets="true" extensions="UploadAWSS3Controller">
+
+
+    <script>
+
+        function buttonsEnabled(enabled) {
+            var buttons = document.querySelectorAll('.btn');
+            if (enabled === false) {
+                for(i = 0; i < buttons.length; i++){
+                    buttons[i].setAttribute("disabled", "disabled");
+                }
+            } else {
+               for(i = 0; i < buttons.length; i++){
+                    buttons[i].removeAttribute("disabled");
+                }
+            } 
+        }
+    
+    
+        function disableAndSend() {
+                // first, call the action function to post the form
+                upladoAWSS3Image();
+                // second, disable the buttons
+                buttonsEnabled(false);
+                // third, return false to prevent the click from
+                // posting the form a second time
+                return false;
+        }
+    
+    
+        function handleRedirect() {
+            console.log('Redirecting in the controller using pageReference was not refreshing the page');
+            window.location.href = '/lightning/r/Product2/{!product.Id}/view';
+        }
+    
+       </script>
+    
+<apex:messages />
+
+<table>
+    <tr>
+        <td><apex:outputText escape="false" value="Nombre Producto:"/></td>
+        <td><apex:outputText escape="false" id="prname" value="{!product.Name}"/></td>
+    </tr>
+    <tr>
+        <td><apex:outputText escape="false" value="Código :"/></td>
+        <td><apex:outputText escape="false" id="prcode" value="{!product.ProductCode}" /></td>
+    </tr>
+    <tr>
+        <td><apex:outputText escape="false" value="Nombre Imagen:"/></td>
+        <td><apex:outputText escape="false" id="prnmimg" value="{!nameImageToUpload}" /></td>
+    </tr>
+    <tr>
+        <td><apex:outputText escape="false" styleClass="imagenProd" id="imagenProd" value="{!product.Imagen1__c}" /></td>
+    </tr>
+</table>
+<br/>
+<apex:form >
+  <apex:commandButton styleClass="blueButton" value="Regresar" oncomplete="handleRedirect()" id="regresar"/>
+  <apex:commandButton styleClass="blueButton" value="Subir Imagen a Repositorio de Cotizaciones" onClick="disableAndSend()" rendered="{!NOT(errorImage)}"/>
+
+  <apex:actionFunction name="upladoAWSS3Image" action="{!uploadImage}" />    
+</apex:form>
+
+
+</apex:page>

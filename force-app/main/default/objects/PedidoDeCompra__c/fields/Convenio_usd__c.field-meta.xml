@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Convenio_usd__c</fullName>
+    <description>Calculado según el % de convenio en la planificación asociada (si la planificación cambia dentro del ejercicio este calculo NO sirve)</description>
+    <formula>Convenio_Pedido__c *  Precio_Total__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Convenio (% plan * importe bruto)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

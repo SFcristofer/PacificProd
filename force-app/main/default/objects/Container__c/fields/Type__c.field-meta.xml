@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Type__c</fullName>
+    <label>Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>LCL</fullName>
+                <default>false</default>
+                <label>LCL</label>
+            </value>
+            <value>
+                <fullName>CFS</fullName>
+                <default>false</default>
+                <label>CFS</label>
+            </value>
+            <value>
+                <fullName>20 GP</fullName>
+                <default>false</default>
+                <label>20 GP</label>
+            </value>
+            <value>
+                <fullName>40 GP</fullName>
+                <default>false</default>
+                <label>40 GP</label>
+            </value>
+            <value>
+                <fullName>40 HQ</fullName>
+                <default>false</default>
+                <label>40 HQ</label>
+            </value>
+            <value>
+                <fullName>40 NOR</fullName>
+                <default>false</default>
+                <label>40 NOR</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

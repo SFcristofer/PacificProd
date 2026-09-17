@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CP_OutdoorYTemporada__c</fullName>
+    <label>Outdoor y temporada</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>BBQ, y fundas para barbacoas económicas.</fullName>
+                <default>false</default>
+                <label>BBQ y Accesorios</label>
+            </value>
+            <value>
+                <fullName>Sets de herramientas de Jardin</fullName>
+                <default>false</default>
+                <label>Jardinería</label>
+            </value>
+            <value>
+                <fullName>Playa</fullName>
+                <default>false</default>
+                <label>Playa</label>
+            </value>
+            <value>
+                <fullName>Camping</fullName>
+                <default>false</default>
+                <label>Camping</label>
+            </value>
+            <value>
+                <fullName>Decoración Jardin</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Decoración Jardin</label>
+            </value>
+            <value>
+                <fullName>Fumigadoras</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Fumigadoras</label>
+            </value>
+            <value>
+                <fullName>Hamaca hinchable</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Hamaca hinchable</label>
+            </value>
+            <value>
+                <fullName>Hornillos a gas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Hornillos a gas</label>
+            </value>
+            <value>
+                <fullName>Mangueras</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Mangueras</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

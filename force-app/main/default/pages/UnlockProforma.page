@@ -1,0 +1,4 @@
+<apex:page standardController="Proforma__c" extensions="UnlockProforma" 
+                                                    lightningStylesheets="true" action="{!unlock}">
+    <apex:pageMessages />
+</apex:page>

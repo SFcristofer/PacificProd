@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cal_Costo_Financiero_Financiacion_Client__c</fullName>
+    <formula>PrecioCompraFabrica__c * Producto__r.UnidadesContainer20__c * Escandallo__r.PlazoPago__c / 360 * Escandallo__r.TipoDeInteresFinanciacionClient__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>cal Costo Financiero</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

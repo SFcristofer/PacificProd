@@ -1,0 +1,94 @@
+<apex:page controller="PortalModifCostProdController" applyHtmlTag="false" showHeader="false" lightningStyleSheets="true" action="{!loadPage}">
+
+
+    <script>
+        function buttonsEnabled(enabled) {
+          var buttons = document.querySelectorAll('.btn');
+          if (enabled === false) {
+              for(i = 0; i < buttons.length; i++){
+                  buttons[i].setAttribute("disabled", "disabled");
+              }
+          } else {
+              for(i = 0; i < buttons.length; i++){
+                  buttons[i].removeAttribute("disabled");
+              }
+          } 
+      }
+
+  function handleRedirect() {
+          console.log('Redirecting in the controller using pageReference was not refreshing the page');
+          window.location.href = '/apex/PortalModificacionCostoConfirm';
+  }
+
+  function disableAndSave() {
+     // first, call the action function to post the form
+     aprobarCosto();
+     // second, disable the buttons
+     buttonsEnabled(false);
+     // third, return false to prevent the click from
+     // posting the form a second time
+     return false;
+  }
+
+
+  function disableAndSaveManual() {
+     // first, call the action function to post the form
+     verificarManual();
+     // second, disable the buttons
+     buttonsEnabled(false);
+     // third, return false to prevent the click from
+     // posting the form a second time
+     return false;
+  }
+
+</script>
+
+
+<apex:PageMessages id="portalProvMsgs" rendered="true"/>
+
+    <apex:form >
+
+        <apex:commandButton styleClass="blueButton" onclick="disableAndSave()" value="Send Review" oncomplete="handleRedirect()" id="aprobar"/>
+        <apex:actionFunction name="aprobarCosto" action="{!aprobar}" />
+
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!verifications}" var="vcp" id="table" title="Aprobación Costos">
+    
+                <!-- apex:column headerValue="Aprobacación">
+                    <apex:inputCheckbox value="{!vcp.isCostApproved}"/>
+                </apex:column -->
+
+                 <apex:column headerValue="Image">
+                     <img src="/servlet/servlet.FileDownload?file={!vcp.imageInfo}" style="height:150px; width:150px;" border="0"/>                     
+                 </apex:column>
+
+                  <apex:column headerValue="PG Code">
+                     <apex:outputText value="{!vcp.productCode}"/>
+                 </apex:column>
+    
+                 <apex:column headerValue="Supplier Code">
+                    <apex:outputText value="{!vcp.supplierCodeProduct}"/>
+                </apex:column>    
+
+                 <apex:column headerValue="Description">
+                     <apex:outputText value="{!vcp.englishProductDescription}"/>
+                 </apex:column>
+    
+                 <apex:column headerValue="Current Price">
+                     <!-- apex:outputText value="{0, number, ##,###,###}">
+                        <apex:param value="{!vcp.oldCostProduct}"/>
+                    </apex:outputText -->
+                   <apex:outputText value="{!vcp.oldCostProduct}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="New Price">
+                     <apex:inputText value="{!vcp.newCostProduct}"/>
+                 </apex:column>
+
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        </apex:form>
+    
+
+</apex:page>

@@ -1,0 +1,3 @@
+<apex:page controller="RedirectProductImageController" contentType="image/jpeg">
+    <img src="https://cs66.salesforce.com/servlet/servlet.FileDownload?file=0150v000000DM4T"/>
+</apex:page>

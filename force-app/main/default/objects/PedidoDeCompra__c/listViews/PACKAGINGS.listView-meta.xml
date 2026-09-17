@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PACKAGINGS</fullName>
+    <columns>NAME</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Fecha_limite_de_aprobacion_de_Packaging__c</columns>
+    <columns>Fecha_aprobacion_Packaging_Cliente__c</columns>
+    <columns>info_a_disenadores__c</columns>
+    <columns>RefOpp__c</columns>
+    <columns>Propietario_de_la_Oportunidad__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>contains</operation>
+        <value>PE25,PE26,PE27</value>
+    </filters>
+    <filters>
+        <field>RefOpp__c</field>
+        <operation>notContain</operation>
+        <value>RESINA</value>
+    </filters>
+    <label>PACKAGINGS</label>
+</ListView>

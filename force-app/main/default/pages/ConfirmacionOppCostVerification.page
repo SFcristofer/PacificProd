@@ -1,0 +1,35 @@
+<!-- apex:page lightningStylesheets="true" controller="OppCostVerificationController" -->
+
+<apex:page lightningStylesheets="true" standardController="Opportunity" extensions="OppCostVerificationController">
+  
+
+    <script>
+        function handleRedirect() {
+                console.log('Redirecting in the controller using pageReference was not refreshing the page');
+                window.location.href = '/lightning/o/Opportunity/list';
+        }
+
+        function disableBtnAndSave(btn){
+            btn.disabled = true;
+            btn.className='grayButton';
+            btn.value='Generando..';
+            generateSend();
+        }
+
+     </script>
+
+
+    <apex:PageMessages id="PageMessages" />
+
+    <!-- apex:outputText value="{!customMsg}" id="output_msg"/ -->
+    <table>
+      <tr>
+        <td>Se ha registrado la verificación de precios</td>
+      </tr>
+    </table>
+
+    <apex:form >
+        <apex:commandButton styleClass="blueButton" value="Regresar" oncomplete="handleRedirect()" id="regresar" />
+    </apex:form>
+
+</apex:page>

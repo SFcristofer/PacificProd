@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ultimo_Precio__c</fullName>
+    <description>En caso de que el cliente haya comprado el producto anteriormente, marca el precio al que se le vendió en al última oportunidad cerrada ganada</description>
+    <inlineHelpText>En caso de que el cliente haya comprado el producto anteriormente, marca el precio al que se le vendió en al última oportunidad cerrada ganada</inlineHelpText>
+    <label>Último Precio</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,110 @@
+<apex:page showHeader="false" applyHtmlTag="false" sidebar="false" applyBodyTag="false" lightningStylesheets="true" Controller="PortalProveedorAltaProductoController" action="{!loadPage}">
+
+  <apex:stylesheet value="{!URLFOR($Resource.Portal, 'css/DO-Brands.css')}" />
+  <apex:image url="https://pacificglob.com/wp-content/uploads/logo.png" styleClass="header-image" alt="Salesforce" title="Salesforce"/>
+  <div class="portal-title">Providers Portal</div>
+
+  <apex:PageMessages id="portalProvMsgs" rendered="true"/>
+
+      <apex:form id="addProduct">
+
+         <apex:pageBlock title="{!$Label.PORTAL_ADD_PRODS_TITLE}" rendered="{!isPageShowed}">
+          <apex:pageBlockSection title="{!$Label.PORTAL_ADD_PRODS_GENERAL}">
+                <apex:inputField value="{!product.Name}" required="true"/>
+                <apex:inputField value="{!product.CodigoArancelario__c}"/>                
+                <apex:inputField value="{!product.Material__c}" required="true"/>
+                <apex:inputField value="{!product.ComposicionEnPorcentaje__c}"/>
+                <apex:inputField value="{!product.Garantia__c}"/>
+                <apex:inputField value="{!product.ManualDeInstrucciones__c}"/>
+                <apex:inputField value="{!product.Packaging__c}" required="true"/>
+                <apex:inputField value="{!product.Codigo_Proveedor__c}" required="true"/>
+                <apex:inputField value="{!product.PlazoDeFabricacion__c}"/>
+                <apex:inputField value="{!product.MOQ__c}" required="true"/>
+                <apex:inputField value="{!product.PrecioDeFabrica__c}" required="true"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="{!$Label.PORTAL_ADD_PRODS_DESC}">
+              <apex:inputField value="{!product.Description__c}" required="true"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="{!$Label.PORTAL_ADD_PRODS_PROD_MEASURE}">
+              <apex:inputField value="{!product.ProductoLargoCm__c}" required="true"/>
+              <apex:inputField value="{!product.ProductoAnchoCm__c}" required="true"/>
+              <apex:inputField value="{!product.ProductoAltoCm__c}" required="true"/>
+              <apex:inputField value="{!product.ProductoDiametroCm__c}"/>
+              <apex:inputField value="{!product.ProductoM3__c}"/>
+              <apex:inputField value="{!product.Producto_detalle__c}"/>
+              <apex:inputField value="{!product.ProductoPesoKg__c}"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="{!$Label.PORTAL_ADD_PRODS_PROD_MEASURE2}">
+              <apex:inputField value="{!product.Producto2LargoCm__c}"/>
+              <apex:inputField value="{!product.Producto2AnchoCm__c}"/>
+              <apex:inputField value="{!product.Producto2AltoCm__c}"/>
+              <apex:inputField value="{!product.Producto2DiametroCm__c}"/>
+              <apex:inputField value="{!product.Producto2M3__c}"/>
+              <apex:inputField value="{!product.Producto2_detalle__c}"/>
+              <apex:inputField value="{!product.Producto2PesoKg__c}"/>
+              <apex:inputField value="{!product.Producto2PesoBruto__c}"/>
+              <br/>
+              <apex:inputField value="{!product.Producto3LargoCm__c}"/>
+              <apex:inputField value="{!product.Producto3AnchoCm__c}"/>
+              <apex:inputField value="{!product.Producto3AltoCm__c}"/>
+              <apex:inputField value="{!product.Producto3DiametroCm__c}"/>
+              <apex:inputField value="{!product.Producto3M3__c}"/>
+              <apex:inputField value="{!product.Producto3_detalle__c}"/>
+              <apex:inputField value="{!product.Producto3PesoKg__c}"/>
+              <apex:inputField value="{!product.Producto3PesoBruto__c}"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="{!$Label.PORTAL_ADD_PRODS_BOX}">
+              <apex:inputField value="{!product.CajaAltoCm__c}"/>
+              <apex:inputField value="{!product.CajaLargoCm__c}"/>
+              <apex:inputField value="{!product.CajaAnchoCm__c}"/>
+              <apex:inputField value="{!product.CajaM3__c}"/>
+              <apex:inputField value="{!product.CajaPesoKg__c}"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="{!$Label.PORTAL_ADD_PRODS_MASTERBOX}">
+              <apex:inputField value="{!product.MasterboxLargoCm__c}" required="true"/>
+              <apex:inputField value="{!product.MasterboxAnchoCm__c}" required="true"/>
+              <apex:inputField value="{!product.MasterboxAltoCm__c}" required="true"/>
+              <apex:inputField value="{!product.MasterboxM3__c}"/>
+              <apex:inputField value="{!product.MasterboxPesoKg__c}"/>
+              <apex:inputField value="{!product.Masterbox1_detalle__c}"/>
+              <apex:inputField value="{!product.UnidadesPorMasterBox__c}" required="true"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="{!$Label.PORTAL_ADD_PRODS_MASTERBOX2}">
+              <apex:inputField value="{!product.Masterbox2AltoCm__c}"/>
+              <apex:inputField value="{!product.Masterbox2AnchoCm__c}"/>
+              <apex:inputField value="{!product.Masterbox2LargoCm__c}"/>
+              <apex:inputField value="{!product.Masterbox2M3__c}"/>
+              <apex:inputField value="{!product.Masterbox2PesoKg__c}"/>
+              <apex:inputField value="{!product.Masterbox2_detalle__c}"/>
+              <br/>
+              <apex:inputField value="{!product.Masterbox3AltoCm__c}"/>
+              <apex:inputField value="{!product.Masterbox3AnchoCm__c}"/>
+              <apex:inputField value="{!product.Masterbox3LargoCm__c}"/>
+              <apex:inputField value="{!product.Masterbox3M3__c}"/>
+              <apex:inputField value="{!product.Masterbox3PesoKg__c}"/>
+              <apex:inputField value="{!product.Masterbox3_detalle__c}"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockSection title="{!$Label.PORTAL_ADD_PRODS_CONTAINERUNITS}">
+              <apex:inputField value="{!product.UnidadesContainer20__c}" required="true"/>
+              <apex:inputField value="{!product.UnidadesContainer40__c}" required="true"/>
+              <apex:inputField value="{!product.UnidadesHQ__c}" required="true"/>
+          </apex:pageBlockSection>
+
+          <apex:pageBlockButtons >
+              <apex:actionFunction name="save" action="{!saveProduct}" />              
+              <apex:commandButton value="{!$Label.PORTAL_BTN_SAVE_PROD}" id="saveBtn"
+                      onclick="this.disabled = true;this.style.color = '#CCC';this.value='{!$Label.GENERIC_SAVING}';save();" disabled="{!NOT(isButtonAddProdEnabled)}"/>              
+           </apex:pageBlockButtons>
+    
+        </apex:pageBlock>
+        
+     </apex:form> 
+   
+</apex:page>

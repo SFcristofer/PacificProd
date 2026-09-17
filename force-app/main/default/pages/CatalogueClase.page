@@ -1,0 +1,291 @@
+<apex:page docType="html-5.0" showHeader="false" applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" Controller="CatalogoController" cache="false">
+
+    <html class="no-js" lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>E-Catalog PACIFIC GLOBAL</title>
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,700,700i,900,900i|Montserrat:200,400,600,700,800" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="{!URLFOR($Resource.doBrandsCatalogo, 'css/foundation.css')}"/>
+        <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.doBrandsCatalogo, 'slick/slick.css')}"/>
+        <!-- Add the new slick-theme.css if you want the default styling -->
+        <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.doBrandsCatalogo, 'slick/slick-theme.css')}"/>
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.doBrandsCatalogo, 'css/app.css')}"/>
+        <link rel="stylesheet" href="{!URLFOR($Resource.doBrandsCatalogo, 'css/responsive.css')}"/>
+        <style>
+            .light {
+                color:#089EBA;
+                background-color: #FFF !important;
+            }
+            .grayer {
+                color:#939797;
+            }
+
+            .grayed {
+                color:#DDDDDD;
+            }
+            .best-seller-global::before{ content: "";  background: url({!URLFOR($Resource.doBrandsCatalogoImages, 'img/SELLO-BEST-SELLER-GLOBAL.png')}); background-repeat: no-repeat; background-size: contain; width: 96px; height: 73px; position: absolute; margin-left:8px; margin-top: 8px;}
+            .best-seller-in-out::before{ content: ""; background: url({!URLFOR($Resource.doBrandsCatalogoImages, 'img/SELLO-BEST-SELLER-IN-OUT.png')}); background-repeat: no-repeat; background-size: contain; width: 96px; height: 73px; position: absolute; margin-left: 8px; margin-top: 8px;}
+            .new-item::before{ content: ""; background: url({!URLFOR($Resource.doBrandsCatalogoImages, 'img/SELLO-NEW-ITEM.png')}); background-repeat: no-repeat; background-size: contain; width: 96px; height: 71px; position: absolute; margin-left:8px; margin-top: 8px;}
+        </style>
+    </head>
+    <body id="{!catalogoGUI.bodyTag}">
+
+        <apex:form >
+        <div id="main-navigation">
+            <div styleClass="grid-container">            
+                <div id="header" class="grid-x grid-padding-x">
+                    <div class="small-6 medium-3 cell">
+                        <a href="index.html"><img id="inner-logo" src="{!URLFOR($Resource.doBrandsCatalogoImages, 'img/pacific-logo.svg')}" alt="do brands logo" style="width:auto;height:96px;"/></a>
+                    </div>
+                    <div class="medium-9 cell hide-for-small show-for-large">
+                        <ul id="main-menu" class="align-right dropdown menu" data-dropdown-menu="true">
+                            <li id="go-home">
+                                <a href="/portal/CatalogueIndex"><span>Home</span></a>
+                            </li>
+                            
+                            <apex:repeat value="{!catalogoGUI.familias}" var="itemF">
+                                <apex:variable var="imageMSF" value="{!itemF.imagenSF}"/>
+                                
+                                <li id="go-do-home" class="{!itemF.cssOrStyle}"><a href="/portal/CatalogueSubfamily?fam={!itemF.clave}" class="{!itemF.classSubfamiliaMenu}"><span><img src="{!URLFOR($Resource.doBrandsCatalogoImages, imageMSF)}" class="{!itemF.cssOrStyle}" style="width:139px;height:32px;"/></span></a>
+                                    <ul class="menu">
+                                        <apex:repeat value="{!itemF.subfamilias}" var="itemMS">
+                                            <li><a href="/portal/CatalogueClase?fam={!catalogoGUI.currentFamily.clave}&sfm={!itemMS.clave}">{!itemMS.descripcion}</a></li>
+                                        </apex:repeat>
+                                    </ul>
+                                </li>
+                                
+                            </apex:repeat>
+    
+                            <li>
+                                <apex:outputPanel id="cart">
+                                    <a href="/portal/CataloguePedido" style="{!styleCartHref}">
+                                        <i class="fas fa-dolly-flatbed"></i>
+                                        <span style="{!styleCartSpan}">{!IF(numberProductsCart != '0', numberProductsCart, '')}</span>
+                                    </a>
+                                </apex:outputPanel>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div id="responsive-menu-header" class="small-6 medium-9 cell hide-for-large">
+                        <ul class="menu">
+                            <li id="cart">
+                                <apex:outputPanel id="cart-responsive">
+                                    <a href="/portal/CataloguePedido" style="{!styleCartHref}">
+                                        <i class="fas fa-dolly-flatbed"></i>
+                                        <span style="{!styleCartSpan}margin:0px !important;">{!IF(numberProductsCart != '0', numberProductsCart, '')}</span>
+                                    </a>
+                                </apex:outputPanel>
+                            </li>
+                            <li id="show-menu"><a href="#show-menu"><i class="fa fa-bars" aria-hidden="true"></i></a></li>
+                            <li id="hide-menu"><a href="#hide-menu"><i class="fa fa-times" aria-hidden="true"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Responsive Menu -->
+        <div id="responsive-menu">
+            <div class="grid-container">
+                <div class="grid-x">
+                    <div class="small-12 cell">
+                        <ul id="" class="">
+                            <apex:repeat value="{!catalogoGUI.familias}" var="itemF">
+                                <li id="go-do-home">
+                                    <a href="/portal/CatalogueSubfamily?fam={!itemF.clave}" class="{!itemF.classSubfamiliaMenu}">
+                                        <span>
+                                            <img src="{!URLFOR($Resource.doBrandsCatalogoImages, itemF.imagenSF)}" class="{!itemF.cssOrStyle}" />
+                                        </span>
+                                    </a>
+                                </li>
+                            </apex:repeat>
+                            <li id="go-home">
+                                <a href="/portal/CatalogueIndex">
+                                    <span>Home</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        <div class="divider1"></div>        
+        
+        
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+            
+            
+                <div class="show-for-large large-3 cell" data-sticky-container="true">
+                    <ul id="left-menu" class="menu vertical" data-sticky="true" data-margin-top="18">
+                        <li><a href="/portal/CatalogueClase?fam={!catalogoGUI.currentFamily.clave}&sfm={!catalogoGUI.currentSubfamily.clave}" class="{!IF(selectedClase == null, 'active', '')}">All</a></li>
+                        
+                        <apex:repeat value="{!catalogoGUI.currentSubfamily.clases}" var="itemC">
+                        <li><a href="/portal/CatalogueClase?fam={!catalogoGUI.currentFamily.clave}&sfm={!catalogoGUI.currentSubfamily.clave}&cla={!itemC.clave}" class="{!IF(selectedClase == itemC.clave, 'active', '')}">{!itemC.descripcion}</a></li>                            
+                        </apex:repeat>
+                            
+                    </ul>
+                </div>
+                
+                <div class="small-12 medium-12 large-9 cell">
+                
+                    <div class="grid-container">
+                        <div id="products-container" class="grid-x grid-padding-x">
+
+                            <apex:repeat value="{!catalogoGUI.productos}" var="prod">
+                            
+                                <div class="small-12 medium-4 cell product-card">
+                                    <a id="{!prod.ProductoBase__r.ProductCode}" class="{!IF(catalogoGUI.highlightAsNew[prod.ProductoBase__r.Id], 'new-item',
+                                                                                            IF(catalogoGUI.highlightAsBSellerGlobal[prod.ProductoBase__r.Id], 'best-seller-global',
+                                                                                            IF(catalogoGUI.highlightAsBSellerInNOut[prod.ProductoBase__r.Id], 'best-seller-in-out',
+                                                                                            '')))}"/>
+                                    <div class="product-small card">
+                                        <div class="img-container">
+                                            <a href="/portal/CatalogueProduct?fam={!catalogoGUI.currentFamily.clave}&sfm={!catalogoGUI.currentSubfamily.clave}&cla={!LEFT(prod.ProductoBase__r.Clase__c, 2)}&pro={!prod.ProductoBase__r.ProductCode}">
+                                                <img src="/portal/servlet/servlet.FileDownload?file={!IF(prod.ProductoBase__r.IDImagen1__c != null, prod.ProductoBase__r.IDImagen1__c, '015460000005lAl')}" alt="{!prod.ProductoBase__r.Name}" title="{!prod.ProductoBase__r.Name}"/>
+                                            </a>
+                                        </div>
+                                        <div class="product-title">
+                                            <a href="/portal/CatalogueProduct?fam={!catalogoGUI.currentFamily.clave}&sfm={!catalogoGUI.currentSubfamily.clave}&cla={!LEFT(prod.ProductoBase__r.Clase__c, 2)}&pro={!prod.ProductoBase__r.ProductCode}">
+                                                <h2>{!prod.ProductoBase__r.Name}</h2>
+                                            </a>
+                                            <apex:outputPanel layout="none" rendered="{!addedProducts[prod.ProductoBase__r.productCode]}">
+                                                <i class="fas fa-check-circle light" style="font-size:2em;position:relative;top:30px;" data-pcode="{!prod.ProductoBase__r.productCode}"
+                                                        onmouseover="showRemove(this)" onmouseout="backToChecked(this)" onClick="removeItemJS(this)" title="remove from quote"></i>
+                                            </apex:outputPanel>
+                                            <apex:outputPanel layout="none" rendered="{!NOT(addedProducts[prod.ProductoBase__r.productCode])}">
+                                                <i class="fas fa-plus-circle grayed" style="font-size:2em;position:relative;top:30px;" data-pcode="{!prod.ProductoBase__r.productCode}"
+                                                        onmouseover="showAdd(this)" onmouseout="backToNotSelected(this)" onClick="addItemJS(this)" title="add to quote"></i>
+                                            </apex:outputPanel>
+                                        </div>
+                                        
+                                        <ul>
+    <li style="width:180px">Sizes: {!prod.ProductoBase__r.Medidas_Agrupadas__c}</li>
+    <li>Material: {!prod.ProductoBase__r.Material__c}</li>
+</ul>
+                                    </div>
+                                </div>
+                                
+                            </apex:repeat>
+
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+        <script src="{!URLFOR($Resource.doBrandsCatalogo, 'js/vendor/jquery.js')}"></script>
+        <script src="{!URLFOR($Resource.doBrandsCatalogo, 'js/vendor/what-input.js')}"></script>
+        <script src="{!URLFOR($Resource.doBrandsCatalogo, 'js/vendor/foundation.js')}"></script>
+        <script src="{!URLFOR($Resource.doBrandsCatalogo, 'js/app.js')}"></script>
+        
+        <!-- Script para ordenar alfabéticamente los productos -->
+        <script>
+            $(document).ready(function() {
+                var container = $('#products-container');
+                var products = container.children('.product-card');
+                
+                // Ordenar por el nombre del producto (h2) dentro de cada tarjeta
+                products.sort(function(a, b) {
+                    var nameA = $(a).find('h2').text().trim().toUpperCase();
+                    var nameB = $(b).find('h2').text().trim().toUpperCase();
+                    return nameA.localeCompare(nameB);
+                });
+                
+                // Reorganizar en el DOM
+                container.append(products);
+            });
+        </script>
+        
+        <script>
+            function showRemove(elem) {
+                elem.className = "";
+                elem.classList.add('far');
+                elem.classList.add('fa-times-circle');
+                elem.classList.add('light');
+            }
+
+            function backToChecked(elem) {
+                elem.className = "";
+                elem.classList.add('fas');
+                elem.classList.add('fa-check-circle');
+                elem.classList.add('light');
+            }
+
+            function showAdd(elem) {
+                elem.className = "";
+                elem.classList.add('fas');
+                elem.classList.add('fa-plus-circle');
+                elem.classList.add('light');
+            }
+
+            function backToNotSelected(elem) {
+                elem.className = "";
+                elem.classList.add('fas');
+                elem.classList.add('fa-plus-circle');
+                elem.classList.add('grayed');
+            }
+
+            function addItemJS(elem) {
+                showRemove(elem);
+                elem.onclick = function() { removeItemJS(elem)};
+                elem.onmouseover = function() { showRemove(elem)};
+                elem.onmouseout = function() { backToChecked(elem)};
+                console.log(elem.dataset.pcode);
+                addItem(elem.dataset.pcode);
+            }
+
+            function removeItemJS(elem) {
+                showAdd(elem);
+                elem.onclick = function() { addItemJS(elem)};
+                elem.onmouseover = function() { showAdd(elem)};
+                elem.onmouseout = function() { backToNotSelected(elem)};
+                removeItem(elem.dataset.pcode);
+            }
+
+        </script>
+        
+        <!-- Script para ordenar alfabéticamente las clases del menú izquierdo -->
+<script>
+    $(document).ready(function() {
+        var menu = $('#left-menu');
+        var allItem = menu.find('li:first'); // Guardar el item "All"
+        var items = menu.find('li:not(:first)'); // Todos excepto "All"
+        
+        // Ordenar alfabéticamente
+        items.sort(function(a, b) {
+            var nameA = $(a).find('a').text().trim().toUpperCase();
+            var nameB = $(b).find('a').text().trim().toUpperCase();
+            return nameA.localeCompare(nameB);
+        });
+        
+        // Reconstruir: primero "All", luego los ordenados
+        menu.empty();
+        menu.append(allItem);
+        menu.append(items);
+    });
+</script>
+
+        <apex:actionFunction name="addItem" action="{!addToCartFromList}" reRender="cart, cart-responsive">
+            <apex:param name="selectedAddProduct" value="" assignTo="{!selectedProd}" />
+        </apex:actionFunction>
+
+        <apex:actionFunction name="removeItem" action="{!deleteProductFromCart}" reRender="cart, cart-responsive">
+            <apex:param name="selectedDeleteProduct" value=""/>
+        </apex:actionFunction>
+                
+
+    </apex:form>
+    </body>
+    </html>
+
+</apex:page>

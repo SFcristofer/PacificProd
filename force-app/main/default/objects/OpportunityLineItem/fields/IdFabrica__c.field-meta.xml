@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IdFabrica__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(PricebookEntry.Product2.Fabrica__c != null,
+PricebookEntry.Product2.Fabrica__c,
+PricebookEntry.Product2.ProductoDeFabrica__r.Fabrica__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Id Fábrica</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

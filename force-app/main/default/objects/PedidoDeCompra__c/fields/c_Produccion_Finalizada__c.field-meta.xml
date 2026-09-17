@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>c_Produccion_Finalizada__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>It is marked when purchase confirming the completion of production</inlineHelpText>
+    <label>Producción finalizada</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

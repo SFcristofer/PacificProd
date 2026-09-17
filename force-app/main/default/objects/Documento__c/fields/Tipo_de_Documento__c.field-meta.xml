@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_Documento__c</fullName>
+    <label>Tipo de Documento</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Proceso__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Proforma Confirmación Cliente</fullName>
+                <default>false</default>
+                <label>Proforma Confirmación Cliente</label>
+            </value>
+            <value>
+                <fullName>Confirmación Proveedor</fullName>
+                <default>false</default>
+                <label>Confirmación Proveedor</label>
+            </value>
+            <value>
+                <fullName>Justificante Pago Deposito Pedido</fullName>
+                <default>false</default>
+                <label>Justificante Pago Deposito Pedido</label>
+            </value>
+            <value>
+                <fullName>Packaging Draft</fullName>
+                <default>false</default>
+                <label>Packaging Draft</label>
+            </value>
+            <value>
+                <fullName>Packaging Diseño</fullName>
+                <default>false</default>
+                <label>Packaging Diseño</label>
+            </value>
+            <value>
+                <fullName>Packaging Fábrica</fullName>
+                <default>false</default>
+                <label>Packaging Fábrica</label>
+            </value>
+            <value>
+                <fullName>Packaging Aprobación Cliente</fullName>
+                <default>false</default>
+                <label>Packaging Aprobación Cliente</label>
+            </value>
+            <value>
+                <fullName>Fotos final de Producción</fullName>
+                <default>false</default>
+                <label>Fotos final de Producción</label>
+            </value>
+            <value>
+                <fullName>Informe de Auditoría de Calidad</fullName>
+                <default>false</default>
+                <label>Informe de Auditoría de Calidad</label>
+            </value>
+            <value>
+                <fullName>Informe Carga de Contenedor</fullName>
+                <default>false</default>
+                <label>Informe Carga de Contenedor</label>
+            </value>
+            <value>
+                <fullName>Justificante de Pago Balance Pedido</fullName>
+                <default>false</default>
+                <label>Justificante de Pago Balance Pedido</label>
+            </value>
+            <value>
+                <fullName>Factura</fullName>
+                <default>false</default>
+                <label>Factura</label>
+            </value>
+            <value>
+                <fullName>Packing List</fullName>
+                <default>false</default>
+                <label>Packing List</label>
+            </value>
+            <value>
+                <fullName>BL</fullName>
+                <default>false</default>
+                <label>BL</label>
+            </value>
+            <value>
+                <fullName>Certificado de Origen</fullName>
+                <default>false</default>
+                <label>Certificado de Origen</label>
+            </value>
+            <value>
+                <fullName>Otros Certificados</fullName>
+                <default>false</default>
+                <label>Otros Certificados</label>
+            </value>
+            <value>
+                <fullName>Orden de compra</fullName>
+                <default>false</default>
+                <label>Orden de compra</label>
+            </value>
+            <value>
+                <fullName>OAC // Open Account Credit</fullName>
+                <default>false</default>
+                <label>OAC // Open Account Credit</label>
+            </value>
+            <value>
+                <fullName>LC // Letter of Credit</fullName>
+                <default>false</default>
+                <label>LC // Letter of Credit</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Confirmación</controllingFieldValue>
+            <valueName>Proforma Confirmación Cliente</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pedido Fábrica</controllingFieldValue>
+            <valueName>Confirmación Proveedor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pedido Fábrica</controllingFieldValue>
+            <valueName>Justificante Pago Deposito Pedido</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pedido Fábrica</controllingFieldValue>
+            <valueName>Justificante de Pago Balance Pedido</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pedido Fábrica</controllingFieldValue>
+            <controllingFieldValue>Documentación del Cliente</controllingFieldValue>
+            <valueName>Factura</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pedido Fábrica</controllingFieldValue>
+            <controllingFieldValue>Documentación del Cliente</controllingFieldValue>
+            <valueName>Packing List</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pedido Fábrica</controllingFieldValue>
+            <controllingFieldValue>Documentación del Cliente</controllingFieldValue>
+            <valueName>BL</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pedido Fábrica</controllingFieldValue>
+            <controllingFieldValue>Documentación del Cliente</controllingFieldValue>
+            <valueName>Certificado de Origen</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Pedido Fábrica</controllingFieldValue>
+            <controllingFieldValue>Documentación del Cliente</controllingFieldValue>
+            <valueName>Otros Certificados</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Packaging</controllingFieldValue>
+            <valueName>Packaging Draft</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Packaging</controllingFieldValue>
+            <valueName>Packaging Fábrica</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Packaging</controllingFieldValue>
+            <valueName>Packaging Aprobación Cliente</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Producción</controllingFieldValue>
+            <valueName>Fotos final de Producción</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Producción</controllingFieldValue>
+            <valueName>Informe de Auditoría de Calidad</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Producción</controllingFieldValue>
+            <valueName>Informe Carga de Contenedor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Documentación del Cliente</controllingFieldValue>
+            <valueName>Orden de compra</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Documentación del Cliente</controllingFieldValue>
+            <valueName>OAC // Open Account Credit</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Documentación del Cliente</controllingFieldValue>
+            <valueName>LC // Letter of Credit</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

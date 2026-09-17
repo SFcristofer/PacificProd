@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>cal_Importe_Adelantado__c</fullName>
+    <description>Utilizado en el cálculo de los costos extra</description>
+    <formula>PrecioCompraFabrica__c * Producto__r.UnidadesContainer20__c * Escandallo__r.PorcentajeDepositoAFabrica__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Utilizado en el cálculo de los costos extra</inlineHelpText>
+    <label>cal Importe Adelantado</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Indicador_Packaging__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(
+    TEXT($User.LanguageLocaleKey),
+
+    /* ---------------- ENGLISH ---------------- */
+    &quot;en_US&quot;,
+    IF(
+        diseno_a_fabrica__c,
+        IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;Completed&quot;) &amp; &quot; Completed&quot;,
+        
+        IF(
+            ISBLANK(Fecha_limite_de_aprobacion_de_Packaging__c),
+            IMAGE(&quot;/img/msg_icons/warning16.png&quot;, &quot;Missing Deadline&quot;) &amp; &quot; Deadline Pending&quot;,
+            
+            IF(
+                Fecha_limite_de_aprobacion_de_Packaging__c - TODAY() &lt;= 0,
+                IMAGE(&quot;/img/msg_icons/error16.png&quot;, &quot;Deadline Exceeded&quot;) &amp; &quot; Deadline Exceeded&quot;,
+                
+                IF(
+                    Fecha_limite_de_aprobacion_de_Packaging__c - TODAY() &lt;= 15,
+                    IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;Deadline Near&quot;) &amp;
+                    &quot; &quot; &amp; TEXT(Fecha_limite_de_aprobacion_de_Packaging__c - TODAY()) &amp; &quot; days left&quot;,
+                    
+                    IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;Packaging Pending&quot;) &amp;
+                    &quot; &quot; &amp; TEXT(Fecha_limite_de_aprobacion_de_Packaging__c - TODAY()) &amp; &quot; days left&quot;
+                )
+            )
+        )
+    ),
+
+    /* ---------------- SPANISH (DEFAULT) ---------------- */
+    IF(
+        diseno_a_fabrica__c,
+        IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;Concluido&quot;) &amp; &quot; Concluido&quot;,
+        
+        IF(
+            ISBLANK(Fecha_limite_de_aprobacion_de_Packaging__c),
+            IMAGE(&quot;/img/msg_icons/warning16.png&quot;, &quot;Pendiente Fecha Límite&quot;) &amp; &quot; Pendiente Fecha Límite&quot;,
+            
+            IF(
+                Fecha_limite_de_aprobacion_de_Packaging__c - TODAY() &lt;= 0,
+                IMAGE(&quot;/img/msg_icons/error16.png&quot;, &quot;Violación Fecha Límite&quot;) &amp; &quot; Excedida Fecha Límite&quot;,
+                
+                IF(
+                    Fecha_limite_de_aprobacion_de_Packaging__c - TODAY() &lt;= 15,
+                    IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;Fecha Límite Cerca&quot;) &amp;
+                    &quot; Faltan &quot; &amp; TEXT(Fecha_limite_de_aprobacion_de_Packaging__c - TODAY()) &amp; &quot; días&quot;,
+                    
+                    IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;Packaging Pendiente&quot;) &amp;
+                    &quot; Faltan &quot; &amp; TEXT(Fecha_limite_de_aprobacion_de_Packaging__c - TODAY()) &amp; &quot; días&quot;
+                )
+            )
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Indicador Packaging</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

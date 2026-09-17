@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CuentaCreadaEnQbo__c</fullName>
+    <formula>NOT ( ISBLANK (  IdQbo__c ) )</formula>
+    <label>Cuenta creada en QBO</label>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

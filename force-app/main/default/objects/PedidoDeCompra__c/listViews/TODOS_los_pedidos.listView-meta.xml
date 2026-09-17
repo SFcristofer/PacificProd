@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TODOS_los_pedidos</fullName>
+    <columns>NAME</columns>
+    <columns>Proforma__c</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Numero_de_Orden__c</columns>
+    <columns>Estado__c</columns>
+    <columns>ETD__c</columns>
+    <columns>Precio_Total__c</columns>
+    <columns>MargenOperacion__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Planificacion__c</field>
+        <operation>equals</operation>
+        <value>2018</value>
+    </filters>
+    <label>Orders 2018</label>
+</ListView>

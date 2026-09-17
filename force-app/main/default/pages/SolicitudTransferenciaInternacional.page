@@ -1,0 +1,224 @@
+<!-- apex:page controller="SolicitudTransferenciaInternacional" standardStylesheets="false" applyHtmlTag="false"  applyBodyTag="false" showHeader="false" renderAs="PDF" -->
+<apex:page controller="SolicitudTransferenciaInternacional" standardStylesheets="false" applyHtmlTag="false"  applyBodyTag="false" showHeader="false">
+  <head>
+    <style>
+
+      .tabla {
+        border-collapse: collapse;
+      }
+
+      .cellWrapper {
+         border-collapse: collapse;
+         border: 1px solid black;
+         width: 500px;
+         padding: 0px;
+      }
+
+      .tituloGeneral {
+        white-space:pre;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+      }
+
+      .tituloSeccion {
+        white-space:pre;
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      .label {
+        font-weight: bold;
+
+      }
+
+      .tituloColumna {
+         white-space:pre-line;
+         border-collapse: collapse;
+         border: 1px solid black;
+         background-color: #DDEBF7;
+         width: 150px;
+         font-size: 15px;
+         padding: 8px;
+         height: 30px;         
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+    <table class="tabla">
+
+      <tr>
+        <td></td>
+        <td colspan="1"><apex:image value="{!$Resource.images}/transferenciaLogoDoBrands.jpg" styleClass="header-image"/></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td class="tituloGeneral" colspan="4"><apex:outputText >INTERNATIONAL TRANSFER REQUEST</apex:outputText></td>
+      </tr>
+
+      <tr>
+      <td colspan="2">
+      <table>
+      <tr>
+        <td><apex:outputText ></apex:outputText></td>
+        <td class="label"><apex:outputText >Day</apex:outputText></td>
+        <td class="label"><apex:outputText >Month</apex:outputText></td>
+        <td class="label"><apex:outputText >Year</apex:outputText></td>                        
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >DATE</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >{!fechaConfirmacionDay}</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >{!fechaConfirmacionMonth}</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >{!fechaConfirmacionYear}</apex:outputText></td>
+      </tr>
+      </table>
+      </td>
+
+      <td></td>
+
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td><apex:outputText ></apex:outputText></td>
+        <td class="label"><apex:outputText >Currency</apex:outputText></td>
+        <td colspan="2" class="label"><apex:outputText >Amount</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >AMOUNT TO TRANSFER</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >USD</apex:outputText></td>
+        <td colspan="2" class="tituloColumna">
+           <apex:outputText value="{!importeFormat}"/>
+        </td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td class="tituloSeccion" colspan="4"><apex:outputText >SENDER</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >Name</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td class="tituloColumna" colspan="4"><apex:outputText value="{!htmlSociedadText}" escape="false"/></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >CONCEPT</apex:outputText></td>      
+        <td class="tituloColumna" colspan="3"><apex:outputText >{!concept}</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td class="tituloSeccion" colspan="4"><apex:outputText >BENEFICIARY</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >Name</apex:outputText></td>
+      </tr>
+      <tr>
+        <td colspan="3" class="tituloColumna"><apex:outputText >{!proveedorName}</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >Address</apex:outputText></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="tituloColumna">
+          <apex:outputText >
+            {!order.Proveedor__r.BillingStreet} {!order.Proveedor__r.BillingCity} {!order.Proveedor__r.BillingState} {!order.Proveedor__r.BillingPostalCode} {!order.Proveedor__r.BillingCountry}
+          </apex:outputText>
+        </td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td class="tituloSeccion" colspan="4"><apex:outputText >BENEFICIARY BANK DETAILS</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >Account Number / IBAN</apex:outputText></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="tituloColumna"><apex:outputText >{!order.Proveedor__r.NumeroCuenta__c}</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >Bank Name</apex:outputText></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="tituloColumna"><apex:outputText >{!order.Proveedor__r.NombreBanco__c}</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td class="label"><apex:outputText >Address</apex:outputText></td>
+      </tr>
+      <tr>
+        <td colspan="4" class="tituloColumna"><apex:outputText >{!order.Proveedor__r.DireccionBanco__c}</apex:outputText></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+
+      <tr>
+      <td colspan="3"></td>
+      <td colspan="1">
+       <table>
+        <tr>
+          <td colspan="2" class="label"><apex:outputText >S.W.I.F.T.  CODE</apex:outputText></td>
+        </tr>
+        <tr>
+          <td colspan="4" class="tituloColumna"><apex:outputText >{!order.Proveedor__r.SWIFT__c}</apex:outputText></td>
+        </tr>
+      </table>
+      </td>
+      </tr>
+
+    </table>
+
+
+
+  </body>
+
+</apex:page>

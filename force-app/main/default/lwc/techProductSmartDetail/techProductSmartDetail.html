@@ -1,0 +1,126 @@
+<template>
+    <article class="slds-card slds-card_boundary tech-smart-detail">
+        <div class="slds-card__header slds-grid">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                <div class="slds-media__body">
+                    <h2 class="slds-card__header-title">
+                        <span class="slds-text-heading_small">Detalles del Producto</span>
+                    </h2>
+                </div>
+                <div class="slds-no-flex">
+                    <template if:false={isEditMode}>
+                        <lightning-button-icon icon-name="utility:edit" variant="border-filled" onclick={toggleEditMode} tooltip="Editar Layout"></lightning-button-icon>
+                    </template>
+                    <template if:true={isEditMode}>
+                        <lightning-button label="Cancelar" variant="neutral" onclick={toggleEditMode} class="slds-m-right_x-small"></lightning-button>
+                    </template>
+                </div>
+            </header>
+        </div>
+        <div class="slds-card__body slds-card__body_inner slds-p-top_small">
+            
+            <template if:true={sections.length}>
+                <lightning-record-edit-form object-api-name="Product2" record-id={recordId} onsuccess={handleSuccess} onerror={handleError}>
+                    
+                    <template if:true={isEditMode}>
+                        <div class="slds-m-bottom_medium slds-text-align_right">
+                            <lightning-button variant="brand" type="submit" label="Guardar Cambios"></lightning-button>
+                        </div>
+                    </template>
+
+                    <lightning-accordion allow-multiple-sections-open active-section-name={activeSections}>
+                        
+                        <template for:each={sections} for:item="sec">
+                            <lightning-accordion-section key={sec.id} name={sec.id} label={sec.label}>
+                                
+                                <template if:false={sec.isCard}>
+                                    <lightning-layout multiple-rows>
+                                        <template for:each={sec.fields} for:item="f">
+                                            <lightning-layout-item key={f.name} size="12" medium-device-size="6" padding="horizontal-small">
+                                                
+                                                <!-- Modo de Solo Lectura -->
+                                                <template if:false={isEditMode}>
+                                                    <template if:false={f.isCustomLookup}>
+                                                        <lightning-output-field field-name={f.name} class={f.cssClass}></lightning-output-field>
+                                                    </template>
+                                                    <template if:true={f.isCustomLookup}>
+                                                        <div class="slds-form-element slds-form-element_readonly slds-m-bottom_small">
+                                                            <span class="slds-form-element__label">{f.label}</span>
+                                                            <div class="slds-form-element__control">
+                                                                <div class="slds-form-element__static">
+                                                                    <a href={f.recordLink} target="_blank">{f.displayValue}</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </template>
+
+                                                <!-- Modo de Edicion -->
+                                                <template if:true={isEditMode}>
+                                                    <lightning-input-field field-name={f.name}></lightning-input-field>
+                                                </template>
+
+                                            </lightning-layout-item>
+                                        </template>
+                                    </lightning-layout>
+                                </template>
+
+                                <template if:true={sec.isCard}>
+                                    <div class="tech-blue-card">
+                                        <h3 class="slds-text-heading_small slds-m-bottom_small slds-text-color_weak">{sec.icon}{sec.label}</h3>
+                                        <lightning-layout multiple-rows>
+                                            <template for:each={sec.fields} for:item="f">
+                                                <lightning-layout-item key={f.name} size="12" medium-device-size="6" padding="horizontal-small">
+                                                    
+                                                    <!-- Modo de Solo Lectura -->
+                                                    <template if:false={isEditMode}>
+                                                        <template if:false={f.isCustomLookup}>
+                                                            <lightning-output-field field-name={f.name} class={f.cssClass}></lightning-output-field>
+                                                        </template>
+                                                        <template if:true={f.isCustomLookup}>
+                                                            <div class="slds-form-element slds-form-element_readonly slds-m-bottom_small">
+                                                                <span class="slds-form-element__label">{f.label}</span>
+                                                                <div class="slds-form-element__control">
+                                                                    <div class="slds-form-element__static">
+                                                                        <a href={f.recordLink} target="_blank">{f.displayValue}</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </template>
+                                                    </template>
+
+                                                    <!-- Modo de Edicion -->
+                                                    <template if:true={isEditMode}>
+                                                        <lightning-input-field field-name={f.name}></lightning-input-field>
+                                                    </template>
+
+                                                </lightning-layout-item>
+                                            </template>
+                                        </lightning-layout>
+                                    </div>
+                                </template>
+
+                            </lightning-accordion-section>
+                        </template>
+
+                    </lightning-accordion>
+                    
+                    <template if:true={isEditMode}>
+                        <div class="slds-m-top_medium slds-text-align_right">
+                            <lightning-button label="Cancelar" variant="neutral" onclick={toggleEditMode} class="slds-m-right_x-small"></lightning-button>
+                            <lightning-button variant="brand" type="submit" label="Guardar Cambios"></lightning-button>
+                        </div>
+                    </template>
+
+                </lightning-record-edit-form>
+            </template>
+
+            <template if:false={sections.length}>
+                <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
+                    Cargando estructura de la pagina...
+                </div>
+            </template>
+            
+        </div>
+    </article>
+</template>

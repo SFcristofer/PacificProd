@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Is_Split_Flag__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Esta bandera sirve para determinar si se aplica la regla de validacion &quot;Modificacion_de_oportunidad_con_pedido&quot; al modifica la oportunidad o no. Cuando la oportunidad se cierra parcialmente NO se debe aplicar la regla de validacion.</description>
+    <label>Is Split Flag</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

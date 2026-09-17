@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>AgentMail</label>
+    <protected>false</protected>
+    <values>
+        <field>Proceso__c</field>
+        <value xsi:type="xsd:string">AgentMail</value>
+    </values>
+    <values>
+        <field>Test_Mode__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+    <values>
+        <field>Test_email__c</field>
+        <value xsi:type="xsd:string">delivery@infolastic.com</value>
+    </values>
+</CustomMetadata>

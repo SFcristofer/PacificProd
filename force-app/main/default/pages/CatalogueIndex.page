@@ -1,0 +1,88 @@
+<apex:page Controller="CatalogoController" showHeader="false" standardStylesheets="false" doctype="html-5.0">
+  
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>E-Catalog PACIFIC GLOBAL</title>
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,300i,400,400i,500,500i,700,700i,900,900i|Montserrat:200,400,600,700,800" rel="stylesheet"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="{!URLFOR($Resource.doBrandsCatalogo, 'css/foundation.css')}"/>
+        <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.doBrandsCatalogo, 'slick/slick.css')}"/>
+        <!-- Add the new slick-theme.css if you want the default styling -->
+        <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.doBrandsCatalogo, 'slick/slick-theme.css')}"/>
+        <!-- Custom styles -->
+        <link rel="stylesheet" href="{!URLFOR($Resource.doBrandsCatalogo, 'css/app.css')}"/>
+        <link rel="stylesheet" href="{!URLFOR($Resource.doBrandsCatalogo, 'css/responsive.css')}"/>
+        <style>
+            #do-play-cat{background-color:#eb3538;}
+            #do-play-cat:hover{background-color: white;
+                                transition: ease-in 0.05s;}
+            #do-play-cat h1{color:white}
+            #do-play-cat:hover h1{color:#eb3538}
+
+            /* NUEVOS ESTILOS - Ocultar títulos de las tarjetas */
+            .card.big h1 {
+                display: none !important;
+            }
+            
+            /* NUEVOS ESTILOS - Eliminar solapa superior (clip-path) de las imágenes */
+            a.card.big img, 
+            div.card.big img,
+            .category-img img {
+                -webkit-clip-path: none !important;
+                clip-path: none !important;
+            }
+        </style>
+    </head>
+    <body id="homepage">
+
+        <apex:PageMessages id="portalProvMsgs" rendered="true"/>
+
+        <apex:outputPanel rendered="{!showPage}">
+
+        <div class="grid-container">
+            <div id="header" class="grid-x grid-padding-x">
+                <div class="large-12 cell text-center">
+                    <img id="landing-logo" src="{!URLFOR($Resource.doBrandsCatalogoImages, 'img/pacific-logo.svg')}" alt="do brands logo" style="width:400px;height:auto;"/>
+                    <!-- img id="landing-logo" src="{!URLFOR($Resource.doBrandsCatalogoImages, 'img/dobrands-logo.svg')}" alt="do brands logo"/ -->
+                </div>
+            </div>
+            <div class="grid-x grid-padding-x align-center">
+                <div class="medium-12 large-10 x-large-8  cell text-center">
+                    <h1>Welcome to the E-Catalog</h1>
+                    <p class="center-justified">Explore our catalogs to discover product features and customization options designed to simplify your selection process.</p>
+                    <p class="center-justified">Share your specifications with us, and we will provide a personalized quote aligned with your product and presentation requirements.</p>
+                </div>
+            </div>
+        </div>
+        <div class="divider2 hide-for-small-only hide-for-medium"></div>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x align-center">
+
+                <apex:repeat value="{!catalogoGUI.familias}" var="itemF">
+                    <div class="small-8 medium-4 cell text-center">
+                        <a class="card big" id="{!itemF.idHref}" href="/portal/CatalogueSubfamily?fam={!itemF.clave}">
+                        <!-- a class="card big" id="{!itemF.idHref}" href="/apex/CatalogueSubfamily?fam={!itemF.clave}" -->
+                            <div class="category-img">
+                                <apex:variable var="imageVar" value="{!itemF.imagen}"/>
+                                <img src="{!URLFOR($Resource.doBrandsCatalogoImages, imageVar)}" alt="{!itemF.descripcion}" title="{!itemF.descripcion}"/>
+                            </div>
+                            <h1>{!itemF.descripcion}</h1>
+                        </a>
+                    </div>
+                </apex:repeat>
+
+            </div>
+        </div>
+        
+        <script src="{!URLFOR($Resource.doBrandsCatalogo, 'js/vendor/jquery.js')}"></script>
+        <script src="{!URLFOR($Resource.doBrandsCatalogo, 'js/vendor/what-input.js')}"></script>
+        <script src="{!URLFOR($Resource.doBrandsCatalogo, 'js/vendor/foundation.js')}"></script>
+        <script src="{!URLFOR($Resource.doBrandsCatalogo, 'js/app.js')}"></script>
+
+    </apex:outputPanel>
+
+    </body>
+
+</apex:page>

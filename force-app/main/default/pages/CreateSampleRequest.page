@@ -1,0 +1,105 @@
+<apex:page standardcontroller="Opportunity" extensions="CreateSampleRequestController"
+lightningStylesheets="true">
+    <script type="text/javascript">
+        function selectAllCheckboxes(obj,receivedInputID){
+            var inputCheckBox = document.getElementsByTagName("input");                  
+            for(var i=0; i<inputCheckBox.length; i++){          
+                if(inputCheckBox[i].id.indexOf(receivedInputID)!=-1){                                     
+                    inputCheckBox[i].checked = obj.checked;
+                }
+            }
+        }
+
+        function redirectToOpp(){
+            window.location.href = '/lightning/r/Opportunity/{!Opportunity.Id}/view';
+        }
+    </script>
+    <apex:form id="theForm">
+        <apex:pageMessages />
+
+<apex:pageBlock rendered="{!NOT(success)}" id="main">
+
+        <apex:pageBlockButtons >
+                <!-- apex:commandButton value="Save" action="{!insertSampleRequest}" rerender="theForm"/ -->
+                <apex:commandButton value="Save" action="{!insertSampleRequest}"/>
+                <apex:commandButton value="Cancel" action="{!cancel}" />
+            </apex:pageBlockButtons>
+
+        <apex:pageBlock rendered="{!NOT(success)}">
+            <apex:pageMessage summary="{!samplesOpp}" severity="info" strength="1" escape="false"/>
+            <apex:pageMessage summary="{!samplesClient}" severity="info" strength="1" escape="false"/>
+            <!-- apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!insertSampleRequest}" rerender="theForm"/>
+                <apex:commandButton value="Cancel" action="{!cancel}" />
+            </apex:pageBlockButtons -->
+            <apex:pageBlockTable value="{!samples}" var="samp" id="table" title="Select Samples" columnsWidth="10%, 40%, 15%, 15%, 20%">
+                <apex:column >
+                    <apex:facet name="header">
+                        <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputId')"/>
+                    </apex:facet>
+                    <apex:inputCheckbox value="{!samp.selected}" id="inputId"/>
+                </apex:column>
+                <apex:column headerValue="Image">
+                    <img src="/servlet/servlet.FileDownload?file={!samp.imageId}" style="height:150px; width:150px;" border="0"/>
+                </apex:column>
+                <apex:column headerValue="Code"> 
+                    <apex:outputText value="{!samp.pCode}" />
+                </apex:column>
+                <apex:column headerValue="Product"> 
+                    <apex:outputText value="{!samp.descProd}" />
+                </apex:column>
+                <apex:column headerValue="Type"> 
+                    <apex:selectList value="{!samp.selectedType}" multiselect="false" size="1" styleClass="{!samp.classSelectedType}">
+                        <apex:selectOptions value="{!samp.sampleType}"/>
+                    </apex:selectList>
+                    <apex:outputText value="{!samp.errorMessage}" styleClass="errorMsg" rendered="{!LEN(samp.errorMessage)>0}"/>
+                </apex:column>
+                <apex:column headerValue="Quantity"> 
+                    <apex:inputField value="{!samp.sample.Cantidad__c}" />
+                </apex:column>
+                <apex:column headerValue="Description"> 
+                    <apex:inputTextArea value="{!samp.sample.Descripcion__c}" />
+                </apex:column>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        <apex:pageBlock rendered="{!success}">
+            <apex:commandButton value="Return" onclick="redirectToOpp();return false;" />
+        </apex:pageBlock>
+
+
+    <apex:pageBlock id="muestrasnp">
+        <apex:pageMessage summary="{!messageHeaderMuestra}" severity="info" strength="1" escape="false"/>
+
+        <apex:pageBlockTable value="{!muestrasNP}" var="mnp" id="tableMNP" title="Select Non-Product Samples" columnsWidth="10%, 40%, 15%, 15%, 20%">
+            <apex:column >
+                <!-- apex:facet name="header">
+                    <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputIdmnp')"/>
+                </apex:facet -->
+                <apex:inputCheckbox value="{!mnp.selected}" id="inputIdmnp"/>
+            </apex:column>
+            <apex:column headerValue="Upload Image"> 
+                <apex:inputFile value="{!mnp.fileBody}" filename="{!mnp.fileName}"/>
+            </apex:column>            
+            <apex:column headerValue="Type"> 
+                <apex:selectList value="{!mnp.tipoMuestra}" multiselect="false" size="1">
+                    <apex:selectOptions value="{!mnp.tiposOptions}"/>
+                </apex:selectList>
+            </apex:column>
+            <apex:column headerValue="Quantity"> 
+                <apex:selectList value="{!mnp.cantidadMuestra}" multiselect="false" size="1">
+                    <apex:selectOptions value="{!mnp.cantidadesOptions}"/>
+                </apex:selectList>
+            </apex:column>
+            <apex:column headerValue="Description"> 
+                <apex:inputTextArea value="{!mnp.descripcionMuestra}" />
+            </apex:column>
+        </apex:pageBlockTable>
+
+        <apex:commandButton value="Add Sample" action="{!addMuestraNP}"/>
+
+    </apex:pageBlock>
+
+</apex:pageBlock>    
+</apex:form>
+
+</apex:page>

@@ -1,0 +1,63 @@
+<apex:page standardController="Opportunity" lightningStylesheets="true" extensions="OpportunityAWSController" action="{!generarJSONAWS}">
+  <script>
+    function handleRedirect() {
+            console.log('Redirecting in the controller using pageReference was not refreshing the page');
+            window.location.href = '/lightning/r/Opportunity/{!Opportunity.Id}/view';
+    }
+ </script>
+  <apex:repeat value="{!pageMessages}" var="msg" id="theRepeat">
+     <div class="{!msg.typeClass}" role="alert">
+        <table border="0" cellpadding="0" cellspacing="0" class="messageTable" style="padding:0px;margin:0px;">
+          <tbody>
+            <tr valign="top">
+              <td>
+                <img alt="{!msg.type}" class="msgIcon" src="/s.gif" title="{!msg.type}"/>
+              </td>
+               <td class="messageCell">
+                 <div id="{!msg.idDiv}" class="messageText">
+                   <span id="{!msg.idSpan}">
+                    <h4>{!msg.titleSummary}:</h4>
+                   </span>{!msg.summary}<br/>
+                 </div>
+               </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+     </div>
+  </apex:repeat>
+  
+   <apex:pageBlock rendered="{!renderTable}" id="pbt">
+       <apex:pageBlockTable value="{!oliComments}" var="oli" id="table" title="Opportunity Products">       
+       
+            <apex:column headerValue="Image">
+                <apex:outputText escape="false" styleClass="imagenProd" id="imagenProd" value="{!oli.Product2.ProductoBase__r.Imagen1__c}" />
+            </apex:column>
+            <apex:column headerValue="Code">
+                <apex:outputText value="{!oli.Product2.CodigoDeProductoBase__c}"/>
+            </apex:column>
+            <apex:column headerValue="Description">
+                <apex:outputText value="{!oli.Product2.ProductoBase__r.Descripcion_Larga__c}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Comments"> 
+                <apex:outputField value="{!oli.ComentariosCatalogo__c}"  />
+            </apex:column>
+       </apex:pageBlockTable>
+   </apex:pageBlock>
+  <apex:pageBlock rendered="{!renderLink}">
+      <apex:pageBlockSection id="link" title="Quote Generated" columns="1">
+        <apex:outputText value="One or more quote files were generated, click the following link to go to Opportunity Details: " />
+        <apex:outputLink value="https://pacificglobal.lightning.force.com/lightning/r/Opportunity/{!Opportunity.Id}/view"> Generated Quotes </apex:outputLink>        
+        
+      </apex:pageBlockSection>
+  </apex:pageBlock>
+  <apex:form >
+    <apex:commandButton styleClass="blueButton" value="Return" oncomplete="handleRedirect()" id="regresar"/>
+    <apex:commandButton styleClass="blueButton" value="Do you want to continue?" action="{!confirmSend}" rendered="{!renderButton}">
+    </apex:commandButton>
+  </apex:form>
+</apex:page>

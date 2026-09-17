@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImporteTotalUsd__c</fullName>
+    <label>Importe total (USD)</label>
+    <summarizedField>ItemDeReporteDeGastos__c.ImporteUsd__c</summarizedField>
+    <summaryForeignKey>ItemDeReporteDeGastos__c.ReporteDeGastos__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>QBConfig</label>
+    <protected>false</protected>
+    <values>
+        <field>QB_Bill_AP_Acc_Ref__c</field>
+        <value xsi:type="xsd:string">193</value>
+    </values>
+    <values>
+        <field>QB_Bill_Account_Ref__c</field>
+        <value xsi:type="xsd:string">196</value>
+    </values>
+    <values>
+        <field>QB_Company_ID__c</field>
+        <value xsi:type="xsd:string">9130357683521706</value>
+    </values>
+    <values>
+        <field>QB_Item_Account_Ref__c</field>
+        <value xsi:type="xsd:string">155</value>
+    </values>
+    <values>
+        <field>QB_Item_Ref__c</field>
+        <value xsi:type="xsd:string">4</value>
+    </values>
+    <values>
+        <field>QB_Journal_Acc_Ref_Credit__c</field>
+        <value xsi:type="xsd:string">219</value>
+    </values>
+    <values>
+        <field>QB_Journal_Acc_Ref_Debit__c</field>
+        <value xsi:type="xsd:string">193</value>
+    </values>
+    <values>
+        <field>QB_Minor_Version__c</field>
+        <value xsi:type="xsd:string">65</value>
+    </values>
+    <values>
+        <field>QB_URI_Context__c</field>
+        <value xsi:type="xsd:string">/v3/company/</value>
+    </values>
+    <values>
+        <field>SF_NC_URL_schema__c</field>
+        <value xsi:type="xsd:string">callout:</value>
+    </values>
+    <values>
+        <field>SF_Named_Credential__c</field>
+        <value xsi:type="xsd:string">QBNCR</value>
+    </values>
+</CustomMetadata>

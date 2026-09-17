@@ -1,0 +1,31 @@
+<apex:page showHeader="false" applyHtmlTag="false" sidebar="false" applyBodyTag="false" lightningStylesheets="true" Controller="PortalProveedorAltaProductoController">
+    
+<apex:image url="https://do-brands.com/wp-content/uploads/2019/07/logos_01.png" style="align: left;" alt="Salesforce" height="100" title="Salesforce"/>
+
+  <apex:messages />
+    <apex:form id="attForm" enctype="multipart/form-data">
+        <apex:pageBlock title="{!$Label.PORTAL_UPLOADPRODIMG_TITLE}">
+            <apex:pageBlockSection showHeader="false" columns="1" id="block0">
+                <apex:outputText label="" value="{!product.Name}" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection showHeader="false" columns="2" id="block1">
+                <apex:repeat value="{!prodImageList}" var="image">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputPanel >
+                            <apex:outputLabel value="{!image.label}" />
+                            <apex:image value="/servlet/servlet.FileDownload?file={!image.existingImage}" 
+                                        style="width:80px;height:80px;display:block;clear:both;padding:10px;"/>
+                            <apex:inputFile value="{!image.fileBody}" filename="{!image.fileName}"/>
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <apex:outputPanel style="padding-top:20px;text-align:center;" layout="block">
+                <apex:actionFunction name="save" action="{!saveChanges}" />
+                <apex:commandButton value="{!$Label.PORTAL_BTN_SAVE_IMG_ADD_PROD}" id="saveBtn"
+                        onclick="this.disabled = true;this.style.color = '#CCC';this.value='{!$Label.GENERIC_SAVING}';this.nextSibling.disabled = true;save();"/>
+                <apex:commandButton value="{!$Label.PORTAL_BTN_FINISH_LOAD}" action="{!finish}" />
+            </apex:outputPanel>    
+        </apex:pageBlock> 
+    </apex:form>
+</apex:page>

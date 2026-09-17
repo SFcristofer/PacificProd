@@ -1,0 +1,128 @@
+<apex:page standardcontroller="Opportunity" lightningStylesheets="true" extensions="ModificarProductosOportunidadController">
+
+  <script>
+          function buttonsEnabled(enabled) {
+            var buttons = document.querySelectorAll('.btn');
+            if (enabled === false) {
+                for(i = 0; i < buttons.length; i++){
+                    buttons[i].setAttribute("disabled", "disabled");
+                }
+            } else {
+                for(i = 0; i < buttons.length; i++){
+                    buttons[i].removeAttribute("disabled");
+                }
+            } 
+        }
+  
+    function handleRedirect() {
+            console.log('Redirecting in the controller using pageReference was not refreshing the page');
+            window.location.href = '/lightning/r/Opportunity/{!Opportunity.Id}/view';
+    }
+
+    function disableAndSave() {
+       // first, call the action function to post the form
+       saveBrandsOLI();
+       // second, disable the buttons
+       buttonsEnabled(false);
+       // third, return false to prevent the click from
+       // posting the form a second time
+       return false;
+    }
+
+
+  </script>
+
+   <h3>Modificar productos de oportunidad</h3>
+   <br/>
+
+   <table>
+     <tr>
+        <td><strong>Oportunidad:</strong></td>
+        <td>{!opp.Name}</td>
+     </tr>
+   </table>
+ 
+   <br/>
+
+   <apex:form >   
+   <apex:pageBlock >
+       <apex:pageBlockTable value="{!oppLIWrapperList}" var="oliw" id="table" title="Productos de Oportunidad">
+            <apex:column headerValue="Imagen">
+                <!-- apex:outputText escape="false" styleClass="imagenProd" id="imagenProd" value="{!oliw.imageid}" / -->
+                <img src="/servlet/servlet.FileDownload?file={!oliw.imageid}" style="height:150px; width:150px;" border="0"/>
+            </apex:column>
+
+            <apex:column headerValue="Código">
+                <apex:outputText value="{!oliw.oli.Product2.CodigoDeProductoBase__c}"/>
+            </apex:column>
+
+            <apex:column headerValue="Producto">
+                <apex:outputText value="{!oliw.oli.Product2.Descripcion_Larga__c}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Marca"> 
+               <apex:selectList value="{!oliw.selectedBrand}" size="1">
+                   <apex:selectOptions value="{!oliw.brands}"/>
+
+                   <apex:actionSupport event="onchange" action="{!changeBrand}" rerender="table">
+                      <apex:param name="idOli" value="{!oliw.oli.id}" assignTo="{!oliIdBrandChanged}" />
+                   </apex:actionSupport>
+               </apex:selectList>
+            </apex:column>
+            
+            <apex:column headerValue="Packaging"> 
+               <apex:selectList value="{!oliw.selectedPackaging}" size="1">
+                   <apex:selectOptions value="{!oliw.availablePackagings}"/>
+
+                   <apex:actionSupport event="onchange" action="{!changePackaging}" rerender="table">
+                      <apex:param name="idOli" value="{!oliw.oli.id}" assignTo="{!oliIdBrandChanged}" />
+                   </apex:actionSupport>
+               </apex:selectList>
+            </apex:column>
+
+            <apex:column headerValue="Precio de Venta">
+                <apex:inputField value="{!oliw.oli.UnitPrice}"/>
+            </apex:column>
+
+            <apex:column headerValue="Precio Mínimo">
+                <span>
+                    {!Opportunity.CurrencyISOCode}
+                    {!IF(oliw.oli.Precio_Minimo__c < 0, 
+                        "-", 
+                        "") & 
+                        IF(ABS(oliw.oli.Precio_Minimo__c) >= 1000000, 
+                            TEXT(FLOOR(ABS(oliw.oli.Precio_Minimo__c) / 1000000)) & ".", 
+                            "") & 
+                        IF(ABS(oliw.oli.Precio_Minimo__c) >= 1000, 
+                            RIGHT(TEXT(FLOOR(ABS(oliw.oli.Precio_Minimo__c) / 1000)), 3) & ".", 
+                            "") & 
+                        RIGHT(TEXT(FLOOR(ABS(oliw.oli.Precio_Minimo__c))), 3) & "," & 
+                        IF(MOD(ABS(oliw.oli.Precio_Minimo__c) , 1) * 100 < 10, 
+                            "0" & TEXT(ROUND(MOD(ABS(oliw.oli.Precio_Minimo__c), 1), 2) * 100), 
+                            TEXT(MIN(ROUND(MOD(ABS(oliw.oli.Precio_Minimo__c) , 1), 2) * 100, 99))
+                        )}
+                </span>            
+            </apex:column>
+
+
+            <apex:column headerValue="Cantidad">
+                <apex:inputField value="{!oliw.oli.Quantity}"/>
+            </apex:column>
+
+            <apex:column headerValue="Comentario">
+                <apex:outputText value="{!oliw.oli.ComentariosCatalogo__c}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Check">
+                <apex:inputCheckbox value="{!oliw.isCommentAdressed}" disabled="{!oliw.oli.Comentario_atendido__c}"/>
+            </apex:column>
+            
+       </apex:pageBlockTable>
+   </apex:pageBlock>
+   
+    <apex:commandButton styleClass="blueButton" value="Cancelar" oncomplete="handleRedirect()" id="regresar"/>   
+    <apex:commandButton styleClass="blueButton" onclick="disableAndSave()" value="Confirmar y Guardar Marcas" oncomplete="handleRedirect()" id="guardar"/>
+    <apex:actionFunction name="saveBrandsOLI" action="{!saveBrands}" />
+   
+   </apex:form>
+</apex:page>

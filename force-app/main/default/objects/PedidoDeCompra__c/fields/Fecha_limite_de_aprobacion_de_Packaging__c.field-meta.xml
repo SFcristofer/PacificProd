@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha_limite_de_aprobacion_de_Packaging__c</fullName>
+    <description>Para esta fecha deben estar aprobados todos los packagings solicitados.</description>
+    <inlineHelpText>All requested packaging must be approved by this date</inlineHelpText>
+    <label>Fecha límite de aprobación de Packaging</label>
+    <required>false</required>
+    <trackFeedHistory>true</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

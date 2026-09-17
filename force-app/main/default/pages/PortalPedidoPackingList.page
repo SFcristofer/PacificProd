@@ -1,0 +1,285 @@
+<apex:page showHeader="false" applyHtmlTag="false" sidebar="false" applyBodyTag="false" lightningStylesheets="true" Controller="PortalPedidoPackingListController" action="{!loadPage}">
+    <apex:includeScript value="https://code.jquery.com/jquery-3.3.1.min.js" />
+    <script>
+       /*
+        * This function validates the value of the required fields.
+        * If all the fields has a value, it continues. Otherwise it shows 
+        * an error message.
+        */
+        function validateFields(elemBtn) {
+            var result;
+            var fileInvoiceValue;
+            var filePLValue;
+            var fileLRValue;
+            var fieldDateCtnrValue;            
+            var messageAlert = '';
+            var inputFileInvoice = document.querySelector("[id*='inputInvoiceF']");
+            var inputFilePL = document.querySelector("[id*='inputPLF']");
+            var inputFileLR = document.querySelector("[id*='inputLoadingReportF']");
+            var inputFieldCtnr = document.querySelector("[id*='dateCtnr']");
+            var isInvoice = true;
+            var isPList = true;
+            var isLReport = true;
+            var isDateLoad = true;
+            var elementP = document.querySelector("[id*='validationMessages']");
+
+            if(inputFileInvoice != null && inputFilePL != null && inputFileLR != null && inputFieldCtnr != null) {
+                fileInvoiceValue = inputFileInvoice.value;
+                filePLValue = inputFilePL.value;
+                fileLRValue = inputFileLR.value;
+                fieldDateCtnrValue = inputFieldCtnr.value;
+
+                if(fileInvoiceValue === "") {
+                    messageAlert = messageAlert + ' Invoice file is missing.<br/>';
+                    isInvoice = false;
+                }
+                if(filePLValue === "") {
+                    messageAlert = messageAlert + ' Packing List file is missing.<br/>';
+                    isPList = false;
+                }
+                if(fileLRValue === "") {
+                    messageAlert = messageAlert + ' Loading Report file is missing.<br/>';
+                    isLReport = false;
+                }
+                if(fieldDateCtnrValue === "") {
+                    messageAlert = messageAlert + ' Date Load Container is missing.<br/>';
+                    isDateLoad = false;
+                }
+
+                if(isInvoice && isPList && isLReport && isDateLoad) {
+                    elemBtn.disabled = true;
+                    elemBtn.style.color = '#CCC';
+                    elemBtn.value='{!$Label.GENERIC_SAVING}';
+                    save();
+                    return false;
+                } else {
+                    result = false;
+                    elementP.innerHTML = messageAlert;
+                    elementP.style.color = 'red';                    
+                    //alert(messageAlert);
+                }
+            }
+            return result;
+        }
+
+    </script>
+
+<body onload="afterLoad();">
+
+    <apex:stylesheet value="{!URLFOR($Resource.Portal, 'css/DO-Brands.css')}" />
+    <apex:image url="https://pacificglob.com/wp-content/uploads/logo.png" styleClass="header-image" alt="Salesforce" title="Salesforce"/>
+    <div class="portal-title">Providers Portal</div>
+
+  <apex:PageMessages id="portalProvMsgs" rendered="true"/>
+
+      <apex:form id="addProduct">
+
+        <apex:pageBlock title="Order" rendered="{!isPageShowed}">
+          <apex:pageBlockSection title="Data">
+              <apex:outputField label="Order Number" value="{!order.Name}"/>
+              <apex:outputField label="Supplier Name" value="{!order.Proveedor__r.Name}"/>
+          </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:pageBlock title="{!$Label.PORTAL_MODIFY_PACKINGLIST}" rendered="{!isPageShowed}">
+
+            <!-- apex:pageBlockTable value="{!order.PedidoLineItems__r}" var="item" id="dataProduct" -->
+            <apex:pageBlockTable value="{!portalLineItems}" var="item" id="dataProduct">
+                <apex:column >
+                    <apex:facet name="header">Image</apex:facet>
+                    <!-- img src="/{!If(userType=='Standard', '', '')}servlet/servlet.FileDownload?file={!item.Producto__r.ProductoBase__r.IDImagen1__c}" style="height:150px; width:150px;" border="0"/ -->
+                    <img src="/{!If(userType=='Standard', '', '')}servlet/servlet.FileDownload?file={!item.productoImagen}" style="height:150px; width:150px;" border="0"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Your Code</apex:facet>
+                    <!-- apex:outputText value="{!item.Producto__r.Codigo_Proveedor2__c}"/ -->
+                    <apex:outputText value="{!item.productoCodigoProveedor}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Product Name</apex:facet>
+                    <!-- apex:outputText value="{!item.Producto__r.ProductoBase__r.ProductName__c}"/ -->
+                    <apex:outputText value="{!item.productoName}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Unit Price</apex:facet>
+                    <!-- apex:outputText value="${!item.Producto__r.PrecioDeFabrica__c}"/ -->
+                    <apex:outputText value="${!item.productoPrecioFabrica}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">EAN</apex:facet>
+                    <!-- apex:outputText value="{!item.Producto__r.Codigo_EAN2__c}"/ -->
+                    <apex:outputText value="{!item.productoCodigoEAN}"/>
+                </apex:column>
+                <apex:column >
+                    <apex:facet name="header">Our Code</apex:facet>
+                    <!-- apex:outputField value="{!item.Producto__r.CodigoDeProductoBase__c}"/ -->
+                    <apex:outputText value="{!item.productoCodigoProductoBase}"/>
+                </apex:column>
+                <apex:column title="Qty (Pcs)">
+                        <apex:facet name="header">Qty (Pcs)</apex:facet>
+                    <!-- apex:inputField style="width:90px" ignoreEditPermissionForRendering="true" value="{!item.Quantity__c}"/ -->
+                    <apex:inputText style="width:90px" value="{!item.quantity}"/>
+                </apex:column>
+                <apex:column title="Total Cnts">
+                    <apex:facet name="header">Total Cnts</apex:facet>
+                    <!-- apex:inputField style="width:90px" ignoreEditPermissionForRendering="true" value="{!item.Total_Cnts__c}"/ -->
+                    <apex:inputText style="width:90px" value="{!item.totalCnts}"/>
+                </apex:column>
+                <apex:column title="Net WT kg.">
+                    <apex:facet name="header">Net WT kg.</apex:facet>
+                    <!-- apex:inputField style="width:90px" ignoreEditPermissionForRendering="true" value="{!item.Net_Weight__c}" onkeyup="updateTotals()"/ -->
+                    <apex:inputText style="width:90px" value="{!item.netWeight}" onkeyup="updateTotals()"/>
+                    <apex:facet name="footer">{!totalNetWgt}</apex:facet>
+                </apex:column>
+                <apex:column title="Gross WT kg.">
+                    <apex:facet name="header">Gross WT kg.</apex:facet>
+                    <!-- apex:inputField style="width:90px" ignoreEditPermissionForRendering="true" value="{!item.Gross_Weight__c}" onkeyup="updateTotals()"/ -->
+                    <apex:inputText style="width:90px" value="{!item.grossWeight}" onkeyup="updateTotals()"/>
+                    <apex:facet name="footer">{!totalGrossWgt}</apex:facet>                    
+                </apex:column>
+                <apex:column title="CBM">
+                    <apex:facet name="header">CBM</apex:facet>
+                    <!-- apex:inputField style="width:90px" ignoreEditPermissionForRendering="true" value="{!item.CBM__c}" onkeyup="updateTotals()"/ -->
+                    <apex:inputText style="width:90px" value="{!item.cbm}" onkeyup="updateTotals()"/>
+                    <apex:facet name="footer">{!totalCBM}</apex:facet>
+                </apex:column>
+                <apex:column title="Container #">
+                    <apex:facet name="header">Container #</apex:facet>
+                    <!-- apex:inputField style="width:150px" ignoreEditPermissionForRendering="true" value="{!item.Container_Number__c}"/ -->
+                    <apex:inputText style="width:150px" value="{!item.containerNUmber}"/>
+                </apex:column>
+                <apex:column title="SEAL #">
+                    <apex:facet name="header">SEAL #</apex:facet>
+                    <!-- apex:inputField style="width:150px" ignoreEditPermissionForRendering="true" value="{!item.SEAL_Number__c}"/ -->
+                    <apex:inputText style="width:150px" value="{!item.sealNumber}"/>
+                </apex:column>
+            </apex:pageBlockTable>
+
+            <apex:pageBlockSection title="Upload Files">
+                <table>
+                    <tr>
+                        <td style="widht:10%">Container Load Date *</td>
+                        <td><apex:inputField ignoreEditPermissionForRendering="true" value="{!order.Fecha_de_Carga_de_Contenedor__c}" id="dateCtnr"/></td>
+                    </tr>
+                    <tr>
+                        <td style="widht:10%">Invoice *</td>
+                        <td><apex:inputFile id="inputInvoiceF" value="{!finputInvoice.fileBody}" filename="{!finputInvoice.fileName}" style="float:left"/></td>
+                    </tr>
+                    <tr>
+                        <td style="widht:10%">Invoice Date</td>
+                        <td><apex:inputField ignoreEditPermissionForRendering="true" value="{!order.Fecha_Factura_Proveedor__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td style="widht:10%">Invoice Number</td>
+                        <td><apex:inputField ignoreEditPermissionForRendering="true" value="{!order.Numero_de_Factura_Proveedor__c}"/></td>
+                    </tr>
+                    <tr>
+                        <td style="widht:10%">Packing List *</td>
+                        <td><apex:inputFile id="inputPLF" value="{!finputPL.fileBody}" filename="{!finputPL.fileName}" style="float:left"/></td>
+                    </tr>
+                    <tr>
+                        <td style="widht:10%">Loading Report *</td>
+                        <td><apex:inputFile id="inputLoadingReportF" value="{!finputLoadingReport.fileBody}" filename="{!finputLoadingReport.fileName}" style="float:left"/></td>
+                    </tr>
+                </table>
+                <p id="validationMessages"></p>
+            </apex:pageBlockSection>
+
+
+            <apex:pageBlockSection title="Additional Comments">
+                <apex:inputTextarea value="{!plComments}" id="comentarios" cols="50"/>
+            </apex:pageBlockSection>
+
+            
+            <apex:pageBlockButtons >
+                <apex:actionFunction name="save" action="{!savePL}" />
+                <apex:commandButton value="{!$Label.PORTAL_BTN_SAVE_PACKINGLIST}" id="saveBtn"
+                        onclick="validateFields(this);return false"/>
+
+            </apex:pageBlockButtons>
+  
+        </apex:pageBlock>
+
+     </apex:form> 
+</body>
+
+
+<script>
+   /*
+    * This funnction removes the TH element from a table.
+    * This element is added when calendar is showed as an intput field
+    */
+    function afterLoad() {
+        var child;
+        var j;
+        var elemTh = document.getElementsByClassName("labelCol vfLabelColTextWrap  first");  
+
+        for (j = 0; j < elemTh.length; j++) {
+            child = elemTh[j].firstElementChild;
+            if(child != null && child.innerHTML === "Container Loading Date") {
+                elemTh[j].style.display = 'none';
+            }
+        }
+    }
+
+
+    function updateTotals() {
+        var i;
+        var j;
+        var netWgtTotal = 0;
+        var grossWgtTotal = 0;
+        var cbmTotal = 0;
+        var inputField;
+        var valueFieldTxt = '';
+        var valueField = 0;
+
+        element = document.querySelector("[id*='dataProduct']");
+        tbody = element.getElementsByTagName('tbody')[0];
+        tfoot = element.getElementsByTagName('tfoot')[0];
+
+        trss = tbody.getElementsByTagName('tr');
+        trsfoot = tfoot.getElementsByTagName('tr');
+        totalWgt = trsfoot[0].getElementsByTagName('th')[8];
+        totalGrossWgt = trsfoot[0].getElementsByTagName('th')[9];
+        totalCMB = trsfoot[0].getElementsByTagName('th')[10];
+        
+        for(i = 0; i < trss.length; i++) {
+           tr = trss[i];
+           tds = tr.getElementsByTagName('td');
+           for(j = 0; j < tds.length; j++) {
+               td = tds[j];
+               attribute = td.getAttribute('title');
+
+               if(attribute != null) {
+                  inputField = td.getElementsByTagName('input')[0];
+                  if(inputField != null) {
+                    valueFieldTxt = inputField.value;
+                    if(isNaN(valueFieldTxt)) {
+                        valueFieldTxt = 0;
+                    } else {
+                        valueField = Number(valueFieldTxt);
+                    }
+                  }
+               }
+
+               if(attribute === 'Net WT kg.') {
+                   netWgtTotal = netWgtTotal + valueField;
+               }
+               if(attribute === 'Gross WT kg.') {
+                   grossWgtTotal = grossWgtTotal + valueField;
+               }
+               if(attribute === 'CBM') {
+                   cbmTotal = cbmTotal + valueField;
+               }
+           }
+        }
+
+        totalWgt.innerText = netWgtTotal;
+        totalGrossWgt.innerText = grossWgtTotal;
+        totalCMB.innerText = cbmTotal;
+    }
+
+
+</script>
+
+</apex:page>

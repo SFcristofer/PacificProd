@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Importe_Neto2__c</fullName>
+    <description>Resumen de Importe Neto de Productos de Oportunidad</description>
+    <inlineHelpText>Resumen de Importe Neto de Productos de Oportunidad</inlineHelpText>
+    <label>Importe Neto</label>
+    <summarizedField>OpportunityLineItem.Importe_Neto__c</summarizedField>
+    <summaryForeignKey>OpportunityLineItem.OpportunityId</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

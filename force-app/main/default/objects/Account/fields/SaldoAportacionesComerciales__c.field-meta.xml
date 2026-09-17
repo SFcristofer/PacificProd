@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SaldoAportacionesComerciales__c</fullName>
+    <formula>AportacionesComerciales__c - PagoAportacionesComerciales__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Total commercial contributions less total payment of commercial contributions</inlineHelpText>
+    <label>Saldo aportaciones comerciales</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <type>Currency</type>
+</CustomField>

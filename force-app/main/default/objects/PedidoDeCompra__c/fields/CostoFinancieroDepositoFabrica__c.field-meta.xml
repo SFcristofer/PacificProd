@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CostoFinancieroDepositoFabrica__c</fullName>
+    <description>Importe Adelantado *  (Plazo Fabricación + Plazo Pago) /360 *  Tipo De Interés Deposito Fabrica</description>
+    <formula>ImporteAdelantado__c * (PlazoFabricacion__c + PlazoPagoFab__c) /360 *  TipoDeInteresDepositoFabrica__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Advance payment * (manufacturing time + payment time) / 360 * factory deposit interest rate</inlineHelpText>
+    <label>Costo Financiero (Fabrica)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

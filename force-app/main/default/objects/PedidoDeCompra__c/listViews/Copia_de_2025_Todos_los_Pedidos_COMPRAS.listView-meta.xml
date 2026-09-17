@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copia_de_2025_Todos_los_Pedidos_COMPRAS</fullName>
+    <columns>NAME</columns>
+    <columns>Proforma__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <columns>Fecha_de_Compromiso_con_el_Cliente__c</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Numero_de_Orden__c</columns>
+    <columns>Proveedor__c</columns>
+    <columns>PorcentajeDepositoAFabrica__c</columns>
+    <columns>Estado__c</columns>
+    <columns>Subestado__c</columns>
+    <columns>ETD__c</columns>
+    <columns>Numero_de_Factura__c</columns>
+    <columns>FacturaProveedorPagada__c</columns>
+    <columns>CostoOrigen__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Planificacion__c</field>
+        <operation>startsWith</operation>
+        <value>2026</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PedidoDeCompra__c.Principal</value>
+    </filters>
+    <label>2026 - All Orders PURCHASING</label>
+    <sharedTo>
+        <role>Comprador</role>
+        <role>Super_Compras</role>
+    </sharedTo>
+</ListView>

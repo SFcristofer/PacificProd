@@ -1,0 +1,23 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Simulaciones</fullName>
+    <columns>NAME</columns>
+    <columns>Cuenta__c</columns>
+    <columns>RefOpp__c</columns>
+    <columns>Estado__c</columns>
+    <columns>Proveedor__c</columns>
+    <columns>MargenOperacion__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PedidoDeCompra__c.Simulacion,PedidoDeCompra__c.Simulacion_Aprobador</value>
+    </filters>
+    <label>Simulations</label>
+    <sharedTo>
+        <role>Gerencia_Compras</role>
+        <role>Gerencia_General</role>
+        <role>Gerencia_Ventas</role>
+    </sharedTo>
+</ListView>

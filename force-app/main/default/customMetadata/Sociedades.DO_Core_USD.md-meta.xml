@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>Do Core USD</label>
+    <protected>false</protected>
+    <values>
+        <field>Banco_Beneficiario__c</field>
+        <value xsi:type="xsd:string">Bank of America, N.A.</value>
+    </values>
+    <values>
+        <field>Beneficiario__c</field>
+        <value xsi:type="xsd:string">PACIFIC GLOBAL CORPORATION</value>
+    </values>
+    <values>
+        <field>Calle_2__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Calle__c</field>
+        <value xsi:type="xsd:string">Sort #XX9600 13150 NW 25th ST</value>
+    </values>
+    <values>
+        <field>Ciudad__c</field>
+        <value xsi:type="xsd:string">MIAMI, FLORIDA</value>
+    </values>
+    <values>
+        <field>Correo_Electronico__c</field>
+        <value xsi:type="xsd:string">info@pacificglob.com</value>
+    </values>
+    <values>
+        <field>Direccion_Banco__c</field>
+        <value xsi:type="xsd:string">222 broadway, New York, NY 10038</value>
+    </values>
+    <values>
+        <field>Divisa_de_la_Cuenta__c</field>
+        <value xsi:type="xsd:string">USD</value>
+    </values>
+    <values>
+        <field>Division__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Identificador_Sociedad__c</field>
+        <value xsi:type="xsd:double">200.0</value>
+    </values>
+    <values>
+        <field>Nombre__c</field>
+        <value xsi:type="xsd:string">Do Core USD</value>
+    </values>
+    <values>
+        <field>Numero_De_Cuenta__c</field>
+        <value xsi:type="xsd:string">2290 5841 4199</value>
+    </values>
+    <values>
+        <field>Pais__c</field>
+        <value xsi:type="xsd:string">USA</value>
+    </values>
+    <values>
+        <field>Razon_Social__c</field>
+        <value xsi:type="xsd:string">PACIFIC GLOBAL CORPORATION</value>
+    </values>
+    <values>
+        <field>SWIFT_Code__c</field>
+        <value xsi:type="xsd:string">BOFAUS3N</value>
+    </values>
+    <values>
+        <field>Tax_ID__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Telefono__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>ZIP_CODE__c</field>
+        <value xsi:nil="true"/>
+    </values>
+</CustomMetadata>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>AWSCotizacion</label>
+    <protected>false</protected>
+    <values>
+        <field>AWS_Endpoint__c</field>
+        <value xsi:type="xsd:string">http://pacificaws-env.eba-czyahjb7.us-west-1.elasticbeanstalk.com/test/testinfo/orderLine</value>
+    </values>
+    <values>
+        <field>AWS_Key__c</field>
+        <value xsi:type="xsd:string">AKIA2UI2AGHCZP3RALGP</value>
+    </values>
+    <values>
+        <field>AWS_S3_Bucket_Name__c</field>
+        <value xsi:type="xsd:string">globalpacificbucket-us-west-2</value>
+    </values>
+    <values>
+        <field>AWS_S3_Host__c</field>
+        <value xsi:type="xsd:string">s3.amazonaws.com</value>
+    </values>
+    <values>
+        <field>AWS_S3_Images__c</field>
+        <value xsi:type="xsd:string">images</value>
+    </values>
+    <values>
+        <field>AWS_S3_Region__c</field>
+        <value xsi:type="xsd:string">us-west-2</value>
+    </values>
+    <values>
+        <field>AWS_Secret__c</field>
+        <value xsi:type="xsd:string">k1LWkIhR0/uTCflPhh1ttlwMbXUTMK/9VNX4rs1b</value>
+    </values>
+    <values>
+        <field>AWS_URL_Base__c</field>
+        <value xsi:type="xsd:string">http://pacificaws-env.eba-czyahjb7.us-west-1.elasticbeanstalk.com</value>
+    </values>
+    <values>
+        <field>AWS_call_method_name__c</field>
+        <value xsi:type="xsd:string">orderLineUAT</value>
+    </values>
+    <values>
+        <field>AWS_template_file__c</field>
+        <value xsi:type="xsd:string">templateDoBrandsUAT.xlsx</value>
+    </values>
+    <values>
+        <field>AWS_webcontext_name__c</field>
+        <value xsi:type="xsd:string">test</value>
+    </values>
+    <values>
+        <field>AWS_webpath__c</field>
+        <value xsi:type="xsd:string">testinfo</value>
+    </values>
+    <values>
+        <field>Color_FOB_Price__c</field>
+        <value xsi:type="xsd:string">218,226,242</value>
+    </values>
+    <values>
+        <field>Cotizacion_Font_Name__c</field>
+        <value xsi:type="xsd:string">Arial</value>
+    </values>
+    <values>
+        <field>Cotizacion_Font_Size__c</field>
+        <value xsi:type="xsd:string">13</value>
+    </values>
+    <values>
+        <field>Id_Doc_Imagen_No_Disponible__c</field>
+        <value xsi:type="xsd:string">0154w0000242U1s</value>
+    </values>
+    <values>
+        <field>Numero_OLI__c</field>
+        <value xsi:type="xsd:double">100.0</value>
+    </values>
+    <values>
+        <field>Salesforce_Images_DirId__c</field>
+        <value xsi:type="xsd:string">00l4w000001zx52AAA</value>
+    </values>
+    <values>
+        <field>Size_Image__c</field>
+        <value xsi:type="xsd:string">500000</value>
+    </values>
+    <values>
+        <field>test_items_to_proc__c</field>
+        <value xsi:type="xsd:string">todos</value>
+    </values>
+</CustomMetadata>

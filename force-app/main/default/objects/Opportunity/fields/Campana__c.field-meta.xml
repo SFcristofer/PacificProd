@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Campana__c</fullName>
+    <label>Campaña</label>
+    <required>true</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>true</sorted>
+            <value>
+                <fullName>Back to School</fullName>
+                <default>false</default>
+                <label>Back to School</label>
+            </value>
+            <value>
+                <fullName>Black Friday</fullName>
+                <default>false</default>
+                <label>Black Friday</label>
+            </value>
+            <value>
+                <fullName>Cierre de Año</fullName>
+                <default>false</default>
+                <label>Cierre de Año</label>
+            </value>
+            <value>
+                <fullName>Día de la Madre</fullName>
+                <default>false</default>
+                <label>Día de la Madre</label>
+            </value>
+            <value>
+                <fullName>Día del Niño</fullName>
+                <default>false</default>
+                <label>Día del Niño</label>
+            </value>
+            <value>
+                <fullName>Día del Padre</fullName>
+                <default>false</default>
+                <label>Día del Padre</label>
+            </value>
+            <value>
+                <fullName>Navidad</fullName>
+                <default>false</default>
+                <label>Navidad</label>
+            </value>
+            <value>
+                <fullName>Primera Compra</fullName>
+                <default>false</default>
+                <label>Primera Compra</label>
+            </value>
+            <value>
+                <fullName>Programa Anual</fullName>
+                <default>false</default>
+                <label>Programa Anual</label>
+            </value>
+            <value>
+                <fullName>Reposición</fullName>
+                <default>false</default>
+                <label>Reposición</label>
+            </value>
+            <value>
+                <fullName>Hogar</fullName>
+                <default>false</default>
+                <label>Temporada de Hogar</label>
+            </value>
+            <value>
+                <fullName>Temporada de Jardín</fullName>
+                <default>false</default>
+                <label>Temporada de Jardín</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

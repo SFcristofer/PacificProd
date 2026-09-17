@@ -1,0 +1,58 @@
+<template>
+    <template if:true={isBaseProduct}>
+        <lightning-card title={cardTitle} icon-name="standard:orders">
+            <lightning-tabset>
+                <!-- Pestaña 1: Historial de Órdenes -->
+                <lightning-tab label="History" title="Historial detallado">
+                    <template if:true={hasOrders}>
+                        <div style="height: 300px;">
+                            <lightning-datatable
+                                key-field="Id"
+                                data={orders}
+                                columns={columns}
+                                hide-checkbox-column>
+                            </lightning-datatable>
+                        </div>
+                    </template>
+                    <template if:false={hasOrders}>
+                        <div class="slds-p-around_medium slds-text-align_center slds-text-color_weak">
+                            No order history found for this product's factories.
+                        </div>
+                    </template>
+                </lightning-tab>
+
+                <!-- Pestaña 2: Summary / Resumen -->
+                <lightning-tab label="Summary" title="Resumen global">
+                    <div class="slds-p-around_medium">
+                        <!-- Totales Globales Compactos -->
+                        <div class="slds-grid slds-gutters slds-m-bottom_medium slds-p-bottom_small slds-border_bottom">
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-text-title_caps slds-text-color_weak">Grand Total Units</div>
+                                <div class="slds-text-heading_small slds-text-color_default">
+                                    <lightning-formatted-number value={totalQuantity}></lightning-formatted-number>
+                                </div>
+                            </div>
+                            <div class="slds-col slds-size_1-of-2">
+                                <div class="slds-text-title_caps slds-text-color_weak">Grand Total Revenue</div>
+                                <div class="slds-text-heading_small slds-text-color_default">
+                                    <lightning-formatted-number value={totalRevenue} format-style="currency" currency-code="USD"></lightning-formatted-number>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Desglose por Fabrica -->
+                        <div class="slds-text-title_caps slds-text-color_weak slds-m-bottom_x-small">Breakdown by Factory</div>
+                        <div style="max-height: 200px;">
+                            <lightning-datatable
+                                key-field="id"
+                                data={factorySummaries}
+                                columns={summaryColumns}
+                                hide-checkbox-column>
+                            </lightning-datatable>
+                        </div>
+                    </div>
+                </lightning-tab>
+            </lightning-tabset>
+        </lightning-card>
+    </template>
+</template>

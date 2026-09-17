@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha_Plazo_Remanete__c</fullName>
+    <description>Fecha en la cual se debe generar la solicitud de transeferencia para pago del remamente, es decir, la fecha de embarque mas los dias del plazo.</description>
+    <formula>ETD__c + Proveedor__r.Plazo_pago_int__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Fecha Plazo Remanente</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

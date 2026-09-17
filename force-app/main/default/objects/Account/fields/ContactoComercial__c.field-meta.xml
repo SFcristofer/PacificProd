@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ContactoComercial__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <label>Contacto comercial</label>
+    <lookupFilter>
+        <active>true</active>
+        <errorMessage>El contacto no existe o no es un contacto de la cuenta.</errorMessage>
+        <filterItems>
+            <field>$Source.Id</field>
+            <operation>equals</operation>
+            <valueField>Contact.Account.Id</valueField>
+        </filterItems>
+        <isOptional>false</isOptional>
+    </lookupFilter>
+    <referenceTo>Contact</referenceTo>
+    <relationshipLabel>Cuentas de las que es contacto comercial</relationshipLabel>
+    <relationshipName>CuentasContactoComercial</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Lookup</type>
+</CustomField>

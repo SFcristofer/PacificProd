@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Revisi_n_descripci_n_comercial__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>The Opportunity owner reviews the commercial descriptions</inlineHelpText>
+    <label>Revisión descripción comercial</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

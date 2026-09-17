@@ -1,0 +1,136 @@
+<apex:page showHeader="true" standardController="Opportunity" extensions="OppCostVerificationController" sidebar="true" lightningstylesheets="true">
+
+
+    <script>
+        function buttonsEnabled(enabled) {
+          var buttons = document.querySelectorAll('.btn');
+          if (enabled === false) {
+              for(i = 0; i < buttons.length; i++){
+                  buttons[i].setAttribute("disabled", "disabled");
+              }
+          } else {
+              for(i = 0; i < buttons.length; i++){
+                  buttons[i].removeAttribute("disabled");
+              }
+          } 
+      }
+
+  function handleRedirect() {
+          console.log('Redirecting in the controller using pageReference was not refreshing the page');
+          window.location.href = '/lightning/r/Opportunity/{!Opportunity.Id}/view';
+          //window.location.href = '/lightning/page/home';          
+  }
+
+  function handleRedirectTwo() {
+      verM();
+  }
+
+  function disableAndSave() {
+     // first, call the action function to post the form
+     verificar();
+     // second, disable the buttons
+     buttonsEnabled(false);
+     // third, return false to prevent the click from
+     // posting the form a second time
+     return false;
+  }
+
+
+  function disableAndSaveManual() {
+     // first, call the action function to post the form
+     verificarManual();
+     // second, disable the buttons
+     buttonsEnabled(false);
+     // third, return false to prevent the click from
+     // posting the form a second time
+     return false;
+  }
+
+</script>
+
+
+    <h3>Verificar costos</h3>
+    <br/>
+ 
+    <table>
+      <tr>
+         <td><strong>Oportunidad:</strong></td>
+         <td>&nbsp;{!opportunity.Name}</td>
+      </tr>
+      <tr>
+        <td><strong>Cuenta:</strong></td>
+        <td>&nbsp;{!accountName}</td>
+     </tr>
+      <tr>
+        <td><strong>Total productos:</strong></td>
+        <td>&nbsp;{!totalProductos}</td>
+     </tr>
+
+     <tr>
+        <td><strong>Total productos precio vigente:</strong></td>
+        <td>&nbsp;{!totalVerificados}</td>
+     </tr>
+
+     <tr>
+        <td><strong>Total productos precio NO vigente:</strong></td>
+        <td>&nbsp;{!totalNoVerificados}</td>
+     </tr>
+
+    </table>
+
+    <apex:form >
+
+        <apex:commandButton styleClass="blueButton" value="Cancelar" oncomplete="handleRedirect()" id="regresar"/>   
+        <!-- apex:commandButton styleClass="blueButton" onclick="disableAndSave()" value="Verificación" oncomplete="handleRedirectTwo()" id="guardar"/ -->
+        <apex:commandButton styleClass="blueButton" onclick="disableAndSave()" value="Verificación" id="guardar"/>        
+        <apex:actionFunction name="verificar" action="{!verification}" />
+
+        <!-- apex:commandButton styleClass="blueButton" onclick="disableAndSaveManual()" value="Verificación manual" oncomplete="handleRedirect()" id="vm"/ -->
+        <!-- apex:commandButton styleClass="blueButton" onclick="disableAndSaveManual()" value="Verificación manual" oncomplete="handleRedirectTwo()" id="vm"/ -->
+        <apex:commandButton styleClass="blueButton" onclick="disableAndSaveManual()" value="Verificación manual" id="vm"/>
+        <apex:actionFunction name="verificarManual" action="{!manualVerification}" />
+
+
+        <apex:actionFunction name="verM" action="{!redirectV}" />        
+
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!prods}" var="pvc" id="table" title="Productos de Oportunidad">
+                 <!-- apex:column headerValue="Imagen">
+                     <img src="/servlet/servlet.FileDownload?file={!pvc.imageInfo}" style="height:150px; width:150px;" border="0"/>                     
+                 </apex:column -->
+
+                 <apex:column headerValue="Verificación">
+                     <apex:inputCheckbox value="{!pvc.isMarkedForVerification}" rendered="{!NOT(pvc.isSent)}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Nombre">
+                     <apex:outputText value="{!pvc.descripcion}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Código">
+                     <apex:outputText value="{!pvc.codigo}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Fecha ultima revision">
+                     <apex:outputText value="{0, date, dd/MM/yyyy}">
+                         <apex:param value="{!pvc.fechaRevision}" />
+                     </apex:outputText>
+                 </apex:column>
+
+                 <apex:column headerValue="Días vencimiento">
+                     <apex:outputText value="{!pvc.daysValidCost}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Costo Verificado">
+                    <!-- apex:image url="{!$Resource.greenCircle}" width="50" height="50"/ -->
+                    <!-- apex:image url="{!IF(pvc.isPrecioVigente, $Resource.greenCircle, $Resource.redCircle)}" width="20" height="20"/ -->
+                    <!-- apex:image url="/resource/1560452910000/redCircle" width="20" height="20"/ -->
+                    <apex:image url="{!pvc.colorBall}" width="20" height="20"/>
+                 </apex:column>
+                 
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        </apex:form>
+
+</apex:page>

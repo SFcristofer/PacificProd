@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha_seguimiento_Reposicion__c</fullName>
+    <description>Fecha en la cual quiere que hacer el seguimiento de reposicion</description>
+    <inlineHelpText>Fecha en la cual quiere que hacer el seguimiento de reposicion</inlineHelpText>
+    <label>Fecha seguimiento de Reposición</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

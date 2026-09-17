@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aprobada_Transferencia_Deposito__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Aprobacion de solicutid de transferencia de deposito</description>
+    <label>Aprobada transferencia depsóito</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

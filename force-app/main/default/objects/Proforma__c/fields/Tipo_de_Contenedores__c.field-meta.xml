@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_Contenedores__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(CBMTotal__c &lt; 25,
+&apos;Grupaje&apos;,
+IF( X20_pies__c &gt; 0,
+TEXT(X20_pies__c) &amp; &quot;* 20&apos;&quot;,
+&apos;&apos;)
+&amp;
+IF( X40_pies__c &gt; 0,
+IF(X20_pies__c &gt; 0,
+&apos; + &apos;,
+&apos;&apos;) + TEXT(X40_pies__c) &amp; &quot;* 40&apos;&quot;,
+&apos;&apos;)
+&amp;
+IF( X40_pies_HC__c &gt; 0,
+IF(OR(X20_pies__c &gt; 0, X40_pies__c &gt;0),
+&apos; + &apos;,
+&apos;&apos;) + TEXT(X40_pies_HC__c) &amp; &quot;* 40&apos; HC&quot;,
+&apos;&apos;)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Tipo de Contenedor(es)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

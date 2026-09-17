@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConnectedApp xmlns="http://soap.sforce.com/2006/04/metadata">
+    <contactEmail>bernardo.bello@egosbi.com</contactEmail>
+    <contactPhone>8181852808</contactPhone>
+    <description>Configuración de SSO con Tableau Cloud</description>
+    <label>TABLEAU</label>
+    <samlConfig>
+        <acsUrl>https://sso.online.tableau.com/public/sp/SSO/d617676c-4864-42ab-a2c6-e190db6b5151</acsUrl>
+        <encryptionType>AES_128</encryptionType>
+        <entityUrl>https://sso.online.tableau.com/public/sp/metadata/d617676c-4864-42ab-a2c6-e190db6b5151</entityUrl>
+        <issuer>https://v2pecleaninapp.my.salesforce.com</issuer>
+        <samlIdpSLOBindingEnum>PostBinding</samlIdpSLOBindingEnum>
+        <samlNameIdFormat>EmailAddress</samlNameIdFormat>
+        <samlSigningAlgoType>SHA256</samlSigningAlgoType>
+        <samlSloUrl>https://sso.online.tableau.com/public/sp/SLO/d617676c-4864-42ab-a2c6-e190db6b5151</samlSloUrl>
+        <samlSubjectType>Username</samlSubjectType>
+    </samlConfig>
+</ConnectedApp>

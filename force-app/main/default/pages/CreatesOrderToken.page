@@ -1,0 +1,34 @@
+<apex:page standardcontroller="PedidoDeCompra__c" lightningStylesheets="true" extensions="CreatesOrderTokenController" action="{!generarTokenEnviar}">
+    <script>
+        function handleRedirect() {
+                console.log('Redirecting in the controller using pageReference was not refreshing the page');
+                window.location.href = '/lightning/r/PedidoDeCompra__c/{!PedidoDeCompra__c.Id}/view';
+        }
+        function disableBtnAndSave(btn){
+            btn.disabled = true;
+            btn.className='grayButton';
+            btn.value='Generating..';
+            generateSend();
+        }
+     </script>
+    <apex:PageMessages id="PageMessages" />
+    <table>
+      <tr>
+        <td>Generate and Send Order Token</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+          <td>Order </td>
+          <td><apex:outputText value="{!order.Name}"/></td>
+      </tr>
+      <tr>
+          <td>Factory Email: </td>
+          <td><apex:outputText value="{!order.Email_Fabrica__c}"/></td>
+      </tr>
+    </table>
+  
+    <apex:form >
+        <apex:commandButton styleClass="blueButton" value="Return" oncomplete="handleRedirect()" id="regresar" />
+    </apex:form>
+</apex:page>

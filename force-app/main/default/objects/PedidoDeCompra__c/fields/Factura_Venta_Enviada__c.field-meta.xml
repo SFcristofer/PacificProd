@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Factura_Venta_Enviada__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indica si la factura de venta para este pedido fue enviada con exito hacia Libra</description>
+    <label>Factura Venta Enviada</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

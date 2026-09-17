@@ -1,0 +1,240 @@
+<apex:page standardController="Opportunity" extensions="ProductExtensionController" 
+            lightningStylesheets="true" docType="html-5.0">
+  <style type="text/css">
+    /* The container */
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 1rem;
+        width: 1rem;
+        background-color: #fff;
+        box-shadow: 0 0 3px #0070d2;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+        background-color: #fff;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+        left: 6px;
+        top: 3px;
+        width: 4px;
+        height: 7px;
+        border: solid white;
+        border-width: 0 1px 1px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+
+    .next{
+      margin:10px;
+      background-color: #2196F3 !important;
+      color: #fff !important;
+    }
+  </style>
+
+  <!-- Panel used to search products -->
+  <apex:outputPanel id="searchProducts" rendered="{!isSearchEnabled}">
+  
+    <h1 style="text-align: center; display: block">Search Products</h1>
+
+    <apex:form >
+      <apex:pageBlock >
+        
+        <apex:pageblockSection >
+          <apex:inputText value="{!prodSearch}" label="Search" onkeyup="buscar()"/>
+          <apex:actionFunction action="{!searchProducts}" name="buscar" rerender="resultId, listProducts" />
+          <apex:commandButton action="{!nextPage}" value="Next" id="siguiente"  styleClass="next"/>
+    
+        </apex:pageblockSection>
+      </apex:pageBlock>
+      
+      
+      <apex:pageBlock >
+        <apex:dataList id="selectedProductsId" value="{!selectedProducts}" var="prodSel">
+
+          <apex:outputText value="{!prodSel.Descripcion_Larga__c}"/>
+          
+          <apex:commandLink action="{!clickDeleteSelectedProduct}" id="theCommandLink" style="font-size: 18px; font-weight: bold" value="      X" rerender="selectedProductsId, listProducts">
+            <apex:param name="selProd" value="{!prodSel.Id}" assignTo="{!idSelectedProd}"/>
+            <!-- apex:image value="{!$Resource.deleteIcon}"/ -->
+          </apex:commandLink>
+          
+        </apex:dataList>
+      </apex:pageBlock>
+
+
+
+      <!-- apex:pageBlock id="resultId" rendered="{!if(productList != null && productList.size > 0, true,false )}" -->
+      <apex:pageBlock id="resultId">
+      
+        <apex:pageBlockButtons >
+          <div style="text-align:right">
+           <apex:outputPanel layout="block" style="padding-right:30px"> 
+            <apex:outputText value="Page {!stdCon.PageNumber} of {! CEILING(stdCon.ResultSize / stdCon.PageSize) }"/> 
+           </apex:outputPanel>
+           <apex:image url="/img/search_prevarrow_disabled.gif" styleClass="prevArrow" rendered="{!NOT(stdCon.HasPrevious)}"/> 
+           <apex:image url="/img/search_prevarrow.gif" title="Previous" styleClass="prevArrow" rendered="{!stdCon.HasPrevious}"/>&nbsp; 
+           <apex:commandLink action="{!Previous}" title="Previous" value="Previous" rendered="{!stdCon.HasPrevious}"/> 
+           <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(stdCon.HasPrevious)}">Previous</apex:outputPanel>&nbsp;&nbsp;          
+           <apex:outputPanel styleClass="pShowLess noLink" style="color:grey" rendered="{!NOT(stdCon.HasNext)}">Next</apex:outputPanel>          
+           <apex:commandLink title="Next" value="Next" rendered="{!stdCon.HasNext}" action="{!Next}"/>&nbsp; 
+           <apex:image url="/img/search_nextarrow.gif" title="Next" styleClass="nextArrow" rendered="{!stdCon.HasNext}"/> 
+           <apex:image url="/img/search_nextarrow_disabled.gif" rendered="{!NOT(stdCon.HasNext)}"/>
+           <img src="/s.gif" title="Last Page" alt="Last Page" class="last"/>
+          </div>
+        </apex:pageBlockButtons>       
+      
+        <apex:pageBlockSection columns="1">
+          <apex:pageBlockTable id="listProducts" value="{!productList}" var="prod" >
+
+            <apex:column headerValue="Selected">
+              <label class="container">
+                <apex:inputCheckbox value="{!checkedProducts[prod.Id]}" onclick="addProductSelected('{!prod.id}')"/>
+                <span class="checkmark" />
+              </label>
+            </apex:column>
+
+            <apex:column value="{!prod.Descripcion_Larga__c}" headerValue="Product"/>
+            <apex:column value="{!prod.CodigoDeProductoBase__c}" headerValue="DO Code"/>
+            <apex:column headerValue="Brand">
+              <apex:outputText value="{!RIGHT(prod.ProductoBase__r.Marca__c, LEN(prod.ProductoBase__r.Marca__c) - 2)}" />
+            </apex:column>
+            <apex:column value="{!prod.ProductoBase__r.UnidadesContainer20__c}" headerValue="20' Units"/>
+            <apex:column value="{!prod.ProductoBase__r.UnidadesContainer40__c}" headerValue="40' Units"/>
+            <apex:column value="{!prod.ProductoBase__r.UnidadesHQ__c}" headerValue="HQ Units"/>
+            <apex:column value="{!prod.Thumb1__c}" headerValue="Image"/>
+
+          </apex:PageblockTable>
+        </apex:pageBlockSection>
+      
+      </apex:pageBlock>
+    
+      <apex:actionFunction action="{!clickProduct}" name="addProductSelected" rerender="selectedProductsId">
+        <apex:param name="idProd" value="" />
+      </apex:actionFunction>
+    
+    </apex:form>
+  </apex:outputPanel>
+  
+  <!-- Panel used to edit products -->  
+  <apex:outputPanel id="editProducts" rendered="{!isEditEnabled}">
+    <script>
+      function handleRedirect() {
+              console.log('Has Message? ' + hasMessages);
+              if(!hasMessages){
+                window.location.href = '/lightning/r/Opportunity/{!Opportunity.Id}/view';
+              }
+      }
+    </script>
+    <apex:PageMessages id="whatError"/>
+    <h1 style="text-align: center; display: block">Save Products</h1>
+    <apex:form >
+            <apex:actionFunction name="back" action="{!previousPage}" />
+    </apex:form>
+    <apex:form >
+      <apex:commandButton action="{!saveOppLineItem}" value="Save and Finish" id="siguiente" 
+                    oncomplete="handleRedirect()" rerender="whatError, script-block" styleClass="next"/>
+      <apex:actionRegion >
+        <apex:commandLink onclick="back()" value="Return" id="anterior" rerender="editProducts, searchProducts"/>
+      </apex:actionRegion>
+      <apex:pageBlock >
+       <apex:pageBlockTable value="{!hybridProducts}" var="hybridProd">
+         <apex:column >
+            <apex:facet name="header">Product</apex:facet>
+            <apex:outputText value="{!hybridProd.product.Descripcion_Larga__c}"/>
+         </apex:column>
+        <apex:column >
+            <apex:facet name="header">DO Code</apex:facet>
+            <apex:outputText value="{!hybridProd.product.CodigoDeProductoBase__c}"/>
+        </apex:column>
+         <apex:column >
+            <apex:facet name="header">Brand</apex:facet>
+            <apex:outputText value="{!RIGHT(hybridProd.product.ProductoBase__r.Marca__c, LEN(hybridProd.product.ProductoBase__r.Marca__c) - 2)}" />
+         </apex:column>
+
+         <apex:column >
+            <apex:facet name="header">20' Units</apex:facet>
+            <apex:outputText value="{!hybridProd.product.ProductoBase__r.UnidadesContainer20__c}"/>
+         </apex:column>
+
+         <apex:column >
+            <apex:facet name="header">40' Units</apex:facet>
+            <apex:outputText value="{!hybridProd.product.ProductoBase__r.UnidadesContainer40__c}"/>
+         </apex:column>
+
+         <apex:column >
+            <apex:facet name="header">HQ Units</apex:facet>
+            <apex:outputText value="{!hybridProd.product.ProductoBase__r.UnidadesHQ__c}"/>
+         </apex:column>
+
+         <apex:column >
+            <apex:facet name="header">Quantity</apex:facet>
+            <apex:inputField value="{!hybridProd.item.quantity}"/>
+         </apex:column>
+
+         <apex:column >
+            <apex:facet name="header">Unit Price</apex:facet>
+            <apex:inputField value="{!hybridProd.item.unitprice}"/>
+         </apex:column>
+
+         
+         <apex:column >
+            <apex:facet name="header">Image</apex:facet>
+            <apex:outputText value="{!hybridProd.product.Thumb1__c}" escape="false" />
+         </apex:column>
+
+        
+        
+       </apex:pageBlockTable>
+    </apex:pageBlock>   
+   </apex:form>
+</apex:outputPanel>
+<apex:outPutPanel layout="block" id="script-block">
+    <script>
+        var hasMessages = {!hasError};
+    </script>
+</apex:outPutPanel>
+</apex:page>

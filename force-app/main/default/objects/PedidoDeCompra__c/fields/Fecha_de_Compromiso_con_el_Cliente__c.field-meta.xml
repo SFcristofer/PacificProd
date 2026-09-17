@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha_de_Compromiso_con_el_Cliente__c</fullName>
+    <description>Viene desde la Proforma. Es la fecha de compromiso de entrega aceptada por el Cliente.</description>
+    <formula>Proforma__r.ETD__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>It comes from the proforma invoice. It&apos;s the delivery commitment date accepted by the customer</inlineHelpText>
+    <label>Cargo Ready Date</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

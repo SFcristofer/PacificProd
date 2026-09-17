@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CREATEEDITDOC_UPLOADING_FILE_MSG</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>CREATEEDITDOC-UPLOADING-FILE-MSG</shortDescription>
+        <value>Uploading file to {0} {1} for Account {2}</value>
+    </labels>
+    <labels>
+        <fullName>CreateEditDoc_Title</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>CREATEEDITDOC-TITLE</shortDescription>
+        <value>Document Upload</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_ADDMORE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-ADDMORE</shortDescription>
+        <value>Add More</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_BACK</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-BACK</shortDescription>
+        <value>Back</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_CANCEL</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-CANCEL</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_DESCRIPTION</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-DESCRIPTION</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_DOCTYPE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-DOCTYPE</shortDescription>
+        <value>Document Type</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_FILE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-FILE</shortDescription>
+        <value>File</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_ORDER</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-ORDER</shortDescription>
+        <value>Purchase Order</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_PROCESS</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-PROCESS</shortDescription>
+        <value>Process</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_SAVE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-SAVE</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>GENERIC_SAVING</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>GENERIC-SAVING</shortDescription>
+        <value>Saving...</value>
+    </labels>
+    <labels>
+        <fullName>ORDER_INVOICE_FOOTER</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>ORDER-INVOICE-FOOTER</shortDescription>
+        <value>BENEFICIARY CERTIFIES THAT THIS SHIPMENT CONTAINS NO WOOD PACKING MATERIALS</value>
+    </labels>
+    <labels>
+        <fullName>ORDER_MAIL_BODY</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Pedido embarcado mail body</shortDescription>
+        <value>Dear Customer, We attach the documentation for the shipped order with Purchase Order PO # {0}</value>
+    </labels>
+    <labels>
+        <fullName>ORDER_MAIL_SUBJECT</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Pedido embarcado mail subject</shortDescription>
+        <value>Order {0} has been shipped</value>
+    </labels>
+    <labels>
+        <fullName>PEDIDO_TRIGGER_OK_TASK_DESC</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pedido trigger helper task description</shortDescription>
+        <value>Order number {0} has been shipped with complete documentation.</value>
+    </labels>
+    <labels>
+        <fullName>PEDIDO_TRIGGER_OK_TASK_SUBJECT</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pedido Trigger Task Subject</shortDescription>
+        <value>Order shipped with complete documentation</value>
+    </labels>
+    <labels>
+        <fullName>PEDIDO_TRIGGER_TASK_DESC</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Pedido trigger helper task description</shortDescription>
+        <value>Order number {0} has been shipped; however, some files are missing. Please review and send them manually to the customer&apos;s billing email.</value>
+    </labels>
+    <labels>
+        <fullName>PEDIDO_TRIGGER_TASK_SUBJECT</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Pedido Trigger Task Subject</shortDescription>
+        <value>Order shipped without files</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_BOX</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Caja</shortDescription>
+        <value>Box (dimensions, weight, and volume)</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_CONTAINERUNITS</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Unidades por contenedor</shortDescription>
+        <value>Units per container</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_DESC</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Portal add prods descripcion</shortDescription>
+        <value>Description</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_GENERAL</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Portal add prods general</shortDescription>
+        <value>General Information</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_MASTERBOX</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Masterbox</shortDescription>
+        <value>Masterbox (dimensions, weight, and volume)</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_MASTERBOX2</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Masterbox adicionales</shortDescription>
+        <value>Additional Product Measurements (dimensions, weight, and volume)</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_PROD_MEASURE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Portal medidas de producto</shortDescription>
+        <value>Product (dimensions, weight, and volume)</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_PROD_MEASURE2</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Producto medidas adicionales</shortDescription>
+        <value>Additional Masterbox Measurements (dimensions, weight, and volume)</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_ADD_PRODS_TITLE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Titulo carga de productos</shortDescription>
+        <value>Product Creation - Features - Page 1 of 2</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_BTN_FINISH_LOAD</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Terminar la carga de productos</shortDescription>
+        <value>Finish</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_BTN_SAVE_IMG_ADD_PROD</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Salvar imagenes y agregar productos</shortDescription>
+        <value>Save Images and Add Products</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_BTN_SAVE_PACKINGLIST</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Portal Packing List</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_BTN_SAVE_PROD</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Portal boton salvar producto</shortDescription>
+        <value>Save Product and Save Images</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_INVALID_TOKEN</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Token Invalido</shortDescription>
+        <value>Invalid Token</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_LOAD_IMGS_SIZE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Carga de imagenes</shortDescription>
+        <value>The recommended image size is Width: 1200px, Height: 900px</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_MODIFY_PACKINGLIST</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Packing List</shortDescription>
+        <value>PackingList</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_UNAVAILABLE_TOKEN</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Unavailable token</shortDescription>
+        <value>You can not access to this site. Please ensure you are using the link provided by Do Brands</value>
+    </labels>
+    <labels>
+        <fullName>PORTAL_UPLOADPRODIMG_TITLE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Titulo carga de imágenes</shortDescription>
+        <value>Product Creation - Images - Page 2 of 2</value>
+    </labels>
+    <labels>
+        <fullName>Pedido_Subestado_Contenedor_Cargado</fullName>
+        <categories>Pedido Subestado</categories>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Pedido Subestado Contenedor Cargado</shortDescription>
+        <value>CONTAINER LOADED</value>
+    </labels>
+    <labels>
+        <fullName>Pedido_Subestado_Embarcado</fullName>
+        <categories>Pedido Subestado</categories>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>Pedido Subestado Embarcado</shortDescription>
+        <value>SHIPPED</value>
+    </labels>
+    <labels>
+        <fullName>SHIPPED_ORDER_DOC_INCOMPLETE</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Pedido embarcado documentos incompletos</shortDescription>
+        <value>To send the email, complete documentation is required.</value>
+    </labels>
+    <labels>
+        <fullName>SHIPPED_ORDER_EMAIL_ALREADY_SENT</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Correo enviado previamente</shortDescription>
+        <value>The email has already been sent previously.</value>
+    </labels>
+    <labels>
+        <fullName>SHIPPED_ORDER_EMAIL_SENT</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Correo enviado</shortDescription>
+        <value>The email has been sent successfully.</value>
+    </labels>
+    <labels>
+        <fullName>TASK_BOOKING_MISSING_FIELDS</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>TASK_BOOKING_MISSING_FIELDS_SUBJECT</shortDescription>
+        <value>Order with missing information</value>
+    </labels>
+    <labels>
+        <fullName>TASK_MANUAL_BOOKING_BODY</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>TASK_MANUAL_BOOKING_BODY</shortDescription>
+        <value>In {0} days, the minimum shipping date for this order will be reached. Since it has not been marked for automatic shipment, please manage the booking manually with the corresponding agent or complete the required information (Customer PO, minimum date, maximum date, port of origin, port of destination) for automatic shipment.</value>
+    </labels>
+    <labels>
+        <fullName>TASK_MANUAL_BOOKING_SUBJECT</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>TASK_MANUAL_BOOKING_SUBJECT</shortDescription>
+        <value>In {0} days, the minimum shipping deadline will be reached for {1}.</value>
+    </labels>
+    <labels>
+        <fullName>UPLOADPRODIMG_TITLE</fullName>
+        <language>es</language>
+        <protected>false</protected>
+        <shortDescription>UPLOADPRODIMG-TITLE</shortDescription>
+        <value>Product Images</value>
+    </labels>
+</CustomLabels>

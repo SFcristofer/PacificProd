@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SolicitudBookingInterna__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>This is marked when sales requests purchasing to book the order with the shipping company</inlineHelpText>
+    <label>Solicitud booking interna</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

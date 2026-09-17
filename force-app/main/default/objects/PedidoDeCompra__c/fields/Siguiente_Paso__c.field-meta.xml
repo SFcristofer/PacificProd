@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Siguiente_Paso__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(AND(OR($User.ProfileId == &apos;00e0v000000HxbD&apos;,
+$User.ProfileId == &apos;00e46000001JOT4&apos;,
+$User.ProfileId == &apos;00e0v000000MnbG&apos;),
+fotos_cargue_cont__c, NOT(ISBLANK(N_de_Seal__c))),
+&apos;&apos;,
+IF(AND(OR($User.ProfileId == &apos;00e0v000000HxbD&apos;,
+$User.ProfileId == &apos;00e46000001JOT4&apos;,
+$User.ProfileId == &apos;00e0v000000MnbG&apos;),
+OR(Informe_de_Auditoria__c,
+AND(c_Produccion_Finalizada__c,
+TEXT(c_Requiere_Auditoria__c) == &apos;No&apos;))),
+&apos;Subir fecha ETD, ETA, N◦ contenedor... toda la info del contenedor&apos;,
+IF(AND(OR($User.ProfileId == &apos;00e0v000000HxbD&apos;,
+$User.ProfileId == &apos;00e46000001JOT4&apos;,
+$User.ProfileId == &apos;00e0v000000MnbG&apos;),
+ NOT(ISBLANK(Fecha_de_Auditoria__c)) ),
+&apos;Subir los reportes&apos;,
+IF(AND(OR($User.ProfileId == &apos;00e0v000000HxbD&apos;,
+$User.ProfileId == &apos;00e46000001JOT4&apos;,
+$User.ProfileId == &apos;00e0v000000MnbG&apos;),
+ NOT(ISBLANK(Fecha_fin_de_Produccion__c)) ),
+&apos;Añadir fecha de inspección&apos;,
+IF(AND(OR($User.ProfileId == &apos;00e0v000000HxbD&apos;,
+$User.ProfileId == &apos;00e46000001JOT4&apos;,
+$User.ProfileId == &apos;00e0v000000MnbG&apos;),
+diseno_a_fabrica__c),
+&apos;Añadir fecha estimada de final de producción&apos;,
+IF(AND(OR($User.ProfileId == &apos;00e0v000000HxbD&apos;,
+$User.ProfileId == &apos;00e46000001JOT4&apos;,
+$User.ProfileId == &apos;00e0v000000MnbG&apos;),
+diseno_aprobado__c),
+&apos;Añadir fecha de envío de diseños&apos;,
+IF(AND(info_a_disenadores__c,
+       NOT(diseno_aprobado__c)),
+&apos;Subir documentos aprobados&apos;,
+IF(AND(OR(justificante_de_pago__c, 
+AND( Confirmacion_Proveedor__c, ISBLANK(TEXT(Proveedor__r.PorcentajeDeposito__c)))),
+       NOT(info_a_disenadores__c)),
+&apos;Check a la casilla de INFO A DISEÑADORES. Una vez enviada la info: añadir fecha limite para aprobación de documentos&apos;,
+IF(AND(OR($User.ProfileId == &apos;00e0v000000HxbD&apos;,
+$User.ProfileId == &apos;00e46000001JOT4&apos;,
+$User.ProfileId == &apos;00e0v000000MnbG&apos;),
+Confirmacion_Proveedor__c),
+&apos;Subir justificante de pago&apos;,
+IF(NOT(diseno_aprobado__c),
+&apos;Subir documento de confirmación&apos;,
+&apos;&apos;))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Siguiente Paso</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

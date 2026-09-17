@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Verificacion_Costo__c</fullName>
+    <label>Verificacion Costo</label>
+    <referenceTo>Verificacion_Costo__c</referenceTo>
+    <relationshipLabel>Verificacion Costos Productos</relationshipLabel>
+    <relationshipName>Verificacion_Costos_Productos</relationshipName>
+    <relationshipOrder>0</relationshipOrder>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+    <trackTrending>false</trackTrending>
+    <type>MasterDetail</type>
+    <writeRequiresMasterRead>false</writeRequiresMasterRead>
+</CustomField>

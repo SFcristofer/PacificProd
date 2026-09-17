@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copia_de_2026_Todos_los_Pedidos</fullName>
+    <columns>NAME</columns>
+    <columns>Proforma__c</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Numero_de_Orden__c</columns>
+    <columns>Estado__c</columns>
+    <columns>Fecha_de_Compromiso_con_el_Cliente__c</columns>
+    <columns>Indicador_Booking__c</columns>
+    <columns>Fecha_Minima_Embarque__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ETA__c</columns>
+    <columns>Numero_de_Factura__c</columns>
+    <columns>Precio_Total__c</columns>
+    <columns>MargenOperacion__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>startsWith</operation>
+        <value>PE27</value>
+    </filters>
+    <label>2027 - All Orders</label>
+</ListView>

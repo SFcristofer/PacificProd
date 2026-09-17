@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>Muestra__c.Copia_de_Muestras_Enviadas_Seguimiento</members>
+        <members>Muestra__c.Muestras_Enviadas_Seguimiento_DHL</members>
+        <members>Muestra__c.Muestras_pendientes</members>
+        <members>Muestra__c.Todas_las_Muestras_Vista_Ventas</members>
+        <members>Solicitud_de_Muestra__c.All</members>
+        <name>ListView</name>
+    </types>
+    <version>60.0</version>
+</Package>

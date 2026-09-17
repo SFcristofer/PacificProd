@@ -1,0 +1,87 @@
+<apex:page controller="CreateEditDocument" lightningStylesheets="true">
+    <apex:messages />
+    <script>
+        function buttonsEnabled(enabled) {
+            var buttons = document.querySelectorAll('.btn');
+            if (enabled === false) {
+                for(i = 0; i < buttons.length; i++){
+                    buttons[i].setAttribute("disabled", "disabled");
+                }
+            } else {
+                for(i = 0; i < buttons.length; i++){
+                    buttons[i].removeAttribute("disabled");
+                }
+            } 
+        }
+    
+        function disableAndSave() {
+            // first, call the action function to post the form
+            saveAll();
+            // second, disable the buttons
+            buttonsEnabled(false);
+            // third, return false to prevent the click from
+            // posting the form a second time
+            return false;
+        }
+
+        function disableAndAddMore() {
+            // first, call the action function to post the form
+            addMoreInputs();
+            // second, disable the buttons
+            buttonsEnabled(false);
+            // third, return false to prevent the click from
+            // posting the form a second time
+            return false;
+        }
+
+        function disableAndCancel() {
+            // first, call the action function to post the form
+            cancel();
+            // second, disable the buttons
+            buttonsEnabled(false);
+            // third, return false to prevent the click from
+            // posting the form a second time
+            return false;
+        }
+
+    </script>
+    <apex:form id="attForm">
+        <apex:actionFunction name="saveAll" action="{!saveChanges}" />
+        <apex:actionFunction name="addMoreInputs" action="{!addMore}" />
+        <apex:actionFunction name="cancel" action="{!done}" />
+        <apex:pageBlock title="{!$Label.CreateEditDoc_Title}">
+            <apex:pageBlockSection showHeader="false" columns="1" id="block0">
+                <apex:outputText value="{!whereTo}" />
+            </apex:pageBlockSection>
+            <apex:pageBlockSection showHeader="false" columns="1" id="block1">
+        
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.GENERIC_PROCESS}" for="process" />
+                    <apex:inputField value="{!doc.Proceso__c}" id="process"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.GENERIC_DOCTYPE}" for="typeDoc" />
+                    <apex:inputField value="{!doc.Tipo_de_Documento__c}" id="typeDoc" required="true"/>
+                </apex:pageBlockSectionItem>
+                    
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$Label.GENERIC_DESCRIPTION}" for="description"/>
+                    <apex:inputTextarea value="{!doc.Descripcion__c}" id="description"/>
+                </apex:pageBlockSectionItem>
+        
+            </apex:pageBlockSection>
+            <apex:pageBlockSection showHeader="false" columns="3">
+                <apex:repeat value="{!newContents}" var="newFile">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="{!$Label.GENERIC_FILE}"/>                      
+                        <apex:inputFile value="{!newFile.fileBody}" filename="{!newFile.fileName}"/>
+                    </apex:pageBlockSectionItem>
+                </apex:repeat>
+            </apex:pageBlockSection>
+            <apex:commandButton value="{!$Label.GENERIC_SAVE}" onClick="disableAndSave()"/>
+            <apex:commandButton value="{!$Label.GENERIC_ADDMORE}" onClick="disableAndAddMore()" />      
+            <apex:commandButton value="{!$Label.GENERIC_CANCEL}" onClick="disableAndCancel()" />            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImporteAdelantado__c</fullName>
+    <description>Costo Origen *  Porcentaje Deposito A Fabrica</description>
+    <formula>IF(OR(ISBLANK(Monto_deposito__c), Monto_deposito__c == 0),
+CostoOrigen__c * PorcentajeDepositoAFabrica__c,
+Monto_deposito__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Origin Cost * Deposit Percentage to Factory</inlineHelpText>
+    <label>Monto Depósito (estándar)</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

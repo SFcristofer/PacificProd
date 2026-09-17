@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loss_Reason__c</fullName>
+    <inlineHelpText>Solo aplica si la oportunidad se marca como &quot;Cerrada/Perdida&quot;</inlineHelpText>
+    <label>Motivo por el cual se perdió</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>StageName</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Lost to Competitor</fullName>
+                <default>false</default>
+                <label>Lo ganó un Competidor</label>
+            </value>
+            <value>
+                <fullName>No Budget / Lost Funding</fullName>
+                <default>false</default>
+                <label>El Cliente no lo seleccionó finalmente</label>
+            </value>
+            <value>
+                <fullName>Logistic Problem</fullName>
+                <default>false</default>
+                <label>Problema Logístico</label>
+            </value>
+            <value>
+                <fullName>Target Price</fullName>
+                <default>false</default>
+                <label>Precio Objetivo no conseguido</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Otro</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Cerrada/Perdida</controllingFieldValue>
+            <valueName>Lost to Competitor</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada/Perdida</controllingFieldValue>
+            <valueName>No Budget / Lost Funding</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada/Perdida</controllingFieldValue>
+            <valueName>Logistic Problem</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada/Perdida</controllingFieldValue>
+            <valueName>Target Price</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Cerrada/Perdida</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

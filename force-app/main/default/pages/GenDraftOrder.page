@@ -1,0 +1,4 @@
+<apex:page showHeader="true" sidebar="true" standardController="Proforma__c"
+    extensions="GenDraftOrder" action="{!generateDraft}">
+    
+</apex:page>

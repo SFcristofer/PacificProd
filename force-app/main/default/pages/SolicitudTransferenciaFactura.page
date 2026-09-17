@@ -1,0 +1,20 @@
+<apex:page controller="SolicitudTransferenciaFacturaController" applyHtmlTag="false"  applyBodyTag="false" showHeader="false" lightningStyleSheets="true">
+    <style>
+      .next{
+        margin:10px;
+        background-color: #2196F3 !important;
+        color: #fff !important;
+        border: none;
+        padding: 10px;
+        border-radius: 4px;
+      }
+    </style>
+    <apex:form id="formAprobaciones">
+       <apex:panelGrid columns="1" id="theGrid">
+             <apex:selectList value="{!selectedAprobacion}" size="1">
+               <apex:selectOptions value="{!aprobaciones}"/>
+             </apex:selectList>
+             <apex:commandButton value="List Items" action="{!siguiente}" styleClass="next"/>
+         </apex:panelGrid>
+    </apex:form>
+</apex:page>

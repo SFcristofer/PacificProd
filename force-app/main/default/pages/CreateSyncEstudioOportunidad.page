@@ -1,0 +1,43 @@
+<apex:page standardController="Opportunity" extensions="CreateSyncEstudioOportunidad" 
+                    lightningStylesheets="true" action="{!execute}">
+    
+    <apex:outputPanel id="error" rendered="{!error}">
+        <apex:pageMessages id="msg" />
+    </apex:outputPanel>
+  
+   <apex:pageBlock rendered="{!renderTable}" id="pbt">
+       <apex:pageBlockTable value="{!oliComments}" var="oli" id="table" title="Opportunity Products">
+       
+            <apex:column headerValue="Image">
+                <apex:outputText escape="false" styleClass="imagenProd" id="imagenProd" value="{!oli.Product2.ProductoBase__r.Imagen1__c}" />
+            </apex:column>
+            <apex:column headerValue="Code">
+                <apex:outputText value="{!oli.Product2.CodigoDeProductoBase__c}"/>
+            </apex:column>
+            <apex:column headerValue="Description">
+                <apex:outputText value="{!oli.Product2.ProductoBase__r.Descripcion_Larga__c}"/>
+            </apex:column>
+            
+            <!-- apex:column headerValue="Name">
+                <apex:outputText value="{!oli.Name}"/>
+            </apex:column -->
+            
+            <apex:column headerValue="Comments"> 
+                <apex:outputField value="{!oli.ComentariosCatalogo__c}"  />
+            </apex:column>
+       </apex:pageBlockTable>
+       
+   </apex:pageBlock>
+   <apex:form id="returnForm">
+       <apex:commandButton value="Return" oncomplete="handleRedirect()" id="regresarT" />
+   </apex:form>
+  
+  
+   <script>
+      function handleRedirect() {
+              console.log('Redirecting in the controller using pageReference was not refreshing the page');
+              window.location.href = '/lightning/r/Opportunity/{!Opportunity.Id}/view';
+      }
+   </script> 
+    
+</apex:page>

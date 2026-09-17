@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CP_MueblesSalaYHabitacion__c</fullName>
+    <label>Muebles de Sala y Habitación</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sofas cama</fullName>
+                <default>false</default>
+                <label>Sofas</label>
+            </value>
+            <value>
+                <fullName>Sillones</fullName>
+                <default>false</default>
+                <label>Sillones y Bancos</label>
+            </value>
+            <value>
+                <fullName>Muebles de Recámara</fullName>
+                <default>false</default>
+                <label>Muebles de Recámara</label>
+            </value>
+            <value>
+                <fullName>Muebles de Sala</fullName>
+                <default>false</default>
+                <label>Muebles de Sala</label>
+            </value>
+            <value>
+                <fullName>Muebles TV y percheros</fullName>
+                <default>false</default>
+                <label>Muebles TV</label>
+            </value>
+            <value>
+                <fullName>Libreros y decoración</fullName>
+                <default>false</default>
+                <label>Estanterías y Repisas</label>
+            </value>
+            <value>
+                <fullName>Muebles decoración</fullName>
+                <default>false</default>
+                <label>Decoración e Iluminación de Interior</label>
+            </value>
+            <value>
+                <fullName>Camas literas y transformers.</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Camas literas y transformers.</label>
+            </value>
+            <value>
+                <fullName>Mueble en KIT</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Mueble en KIT</label>
+            </value>
+            <value>
+                <fullName>Organización</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Organización</label>
+            </value>
+            <value>
+                <fullName>Sofas reclinables</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sofas reclinables</label>
+            </value>
+            <value>
+                <fullName>Taburetes de salon</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Taburetes de salon</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

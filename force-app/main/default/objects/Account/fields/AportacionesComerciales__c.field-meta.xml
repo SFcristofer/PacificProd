@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AportacionesComerciales__c</fullName>
+    <inlineHelpText>Total commercial contributions created. Commercial contributions (and those from agreements, not included here) are created automatically when a Purchase Order is created</inlineHelpText>
+    <label>Aportaciones comerciales</label>
+    <summarizedField>Aportacion2__c.Importe__c</summarizedField>
+    <summaryFilterItems>
+        <field>Aportacion2__c.Tipo__c</field>
+        <operation>equals</operation>
+        <value>Comercial</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Aportacion2__c.Cliente__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

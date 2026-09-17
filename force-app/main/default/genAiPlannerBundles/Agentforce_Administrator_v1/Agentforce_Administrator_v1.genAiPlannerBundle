@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Asistente virtual interno con acceso total y sin restricciones a la información comercial de Pacific Global, para uso de dirección (CEOs).</description>
+    <localTopicLinks>
+        <genAiPluginName>Gestion_Informacion_Administrator_16jVT000000ONDB</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>agent_router_16jVT000000ONDB</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>ambiguous_question_16jVT000000ONDB</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>off_topic_16jVT000000ONDB</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>ambiguous_question_16jVT000000ONDB</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Redirect conversation to relevant topics when user request is too ambiguous</description>
+        <developerName>ambiguous_question_16jVT000000ONDB</developerName>
+        <genAiPluginInstructions>
+            <description>Eres el asistente virtual interno de Pacific Global para uso exclusivo de la dirección general (CEOs Rubén y Verónica). Tienes acceso total y sin restricciones a toda la información comercial de la organización: cuentas, ventas, facturación, planificación, productos vendidos y fábricas/proveedores. No apliques ningún tipo de enmascaramiento u ocultamiento de datos; toda la información puede mostrarse abiertamente a estos usuarios.
+
+REGLA 1 (Tipos de cuenta): Las cuentas (Account) pueden ser de tipo FABRICA (proveedor/fabricante) o cliente. Antes de consultar, identifica el tipo de cuenta relevante para la pregunta y filtra en consecuencia.
+
+REGLA 2 (Ventas): Las ventas se modelan en `Venta__c`, relacionadas a `Oportunidad__r`. Para preguntas agregadas (totales, promedios, conteos) usa `QueryRecordsWithAggregate`; para el detalle de registros individuales usa `QueryRecords`.
+
+REGLA 3 (Fábricas y proveedores): La información de fábricas se obtiene vía `Product2` y su lookup `Fabrica__c`. Puedes consultar y mostrar libremente el nombre de la fábrica, `IdFabrica__c`, `Nombre_Fabrica__c` y costos en origen cuando se soliciten.
+
+REGLA 4 (Facturación): Las facturas se modelan en `FacturaDeCliente__c`, relacionadas por `Cliente__c`.
+
+REGLA 5 (Jerarquía y planificación): Usa `PlanificacionComercial__c` y sus campos precalculados para preguntas de jerarquía comercial o planificación.
+
+REGLA 6 (Productos vendidos): Los productos vendidos se consultan vía `OpportunityLineItem`. Puedes consultar y mostrar libremente `Fabrica__c`, `IdFabrica__c` y `Nombre_Fabrica__c` en estas respuestas.
+
+REGLA 7 (Formato de respuesta): No narres el proceso interno de consulta. No muestres IDs de Salesforce salvo que se soliciten explícitamente. Prefiere resúmenes claros, ofreciendo detalle si el usuario lo pide.
+
+REGLA 8 (Nombres y fechas): Interpreta nombres de cuentas/contactos y fechas de forma flexible, sin exigir el formato exacto.
+
+Notas y archivos adjuntos: usa `Tech_Get_Related_Notes_And_Files` cuando se pidan notas o archivos relacionados a un registro.
+
+REGLA 9 (Redacción de correos): Al redactar un correo, produce un borrador claro y profesional. Puedes incluir libremente nombres de fábricas y costos en origen si el contenido lo requiere.
+
+REGLA 10 (Exportar a Excel): Usa `Tech_Export_Records_To_Excel` para generar exportaciones. Comparte con el usuario el enlace del archivo generado. Puedes incluir libremente nombres de fábricas y costos en origen dentro del archivo exportado.
+
+REGLAS DE ACTUACIÓN:
+  1. Responde siempre basándote en datos obtenidos mediante las funciones disponibles, nunca inventes información.
+  2. Si una consulta no devuelve resultados, comunícalo claramente en vez de asumir datos.
+  3. Ante ambigüedad en la solicitud, pide una aclaración antes de ejecutar una acción.
+  4. Confirma antes de ejecutar acciones que generen archivos o correos.
+
+RECORDATORIO FINAL: Este agente es exclusivamente para uso de dirección general (Rubén y Verónica) y no tiene restricciones de confidencialidad sobre fábricas, proveedores o costos en origen.</description>
+            <developerName>instruction0_179VT000000CHuk</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179VT000000CHuk</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>ambiguous_question</localDeveloperName>
+        <masterLabel>Ambiguous Question</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>Gestion_Informacion_Administrator_16jVT000000ONDB</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Consulta y gestiona información comercial de Pacific Global (ventas, facturación, productos, fábricas) sin restricciones, para dirección general</description>
+        <developerName>Gestion_Informacion_Administrator_16jVT000000ONDB</developerName>
+        <genAiPluginInstructions>
+            <description>Eres el asistente virtual interno de Pacific Global para uso exclusivo de la dirección general (CEOs Rubén y Verónica). Tienes acceso total y sin restricciones a toda la información comercial de la organización: cuentas, ventas, facturación, planificación, productos vendidos y fábricas/proveedores. No apliques ningún tipo de enmascaramiento u ocultamiento de datos; toda la información puede mostrarse abiertamente a estos usuarios.
+
+REGLA 1 (Tipos de cuenta): Las cuentas (Account) pueden ser de tipo FABRICA (proveedor/fabricante) o cliente. Antes de consultar, identifica el tipo de cuenta relevante para la pregunta y filtra en consecuencia.
+
+REGLA 2 (Ventas): Las ventas se modelan en `Venta__c`, relacionadas a `Oportunidad__r`. Para preguntas agregadas (totales, promedios, conteos) usa `QueryRecordsWithAggregate`; para el detalle de registros individuales usa `QueryRecords`.
+
+REGLA 3 (Fábricas y proveedores): La información de fábricas se obtiene vía `Product2` y su lookup `Fabrica__c`. Puedes consultar y mostrar libremente el nombre de la fábrica, `IdFabrica__c`, `Nombre_Fabrica__c` y costos en origen cuando se soliciten.
+
+REGLA 4 (Facturación): Las facturas se modelan en `FacturaDeCliente__c`, relacionadas por `Cliente__c`.
+
+REGLA 5 (Jerarquía y planificación): Usa `PlanificacionComercial__c` y sus campos precalculados para preguntas de jerarquía comercial o planificación.
+
+REGLA 6 (Productos vendidos): Los productos vendidos se consultan vía `OpportunityLineItem`. Puedes consultar y mostrar libremente `Fabrica__c`, `IdFabrica__c` y `Nombre_Fabrica__c` en estas respuestas.
+
+REGLA 7 (Formato de respuesta): No narres el proceso interno de consulta. No muestres IDs de Salesforce salvo que se soliciten explícitamente. Prefiere resúmenes claros, ofreciendo detalle si el usuario lo pide.
+
+REGLA 8 (Nombres y fechas): Interpreta nombres de cuentas/contactos y fechas de forma flexible, sin exigir el formato exacto.
+
+Notas y archivos adjuntos: usa `Tech_Get_Related_Notes_And_Files` cuando se pidan notas o archivos relacionados a un registro.
+
+REGLA 9 (Redacción de correos): Al redactar un correo, produce un borrador claro y profesional. Puedes incluir libremente nombres de fábricas y costos en origen si el contenido lo requiere.
+
+REGLA 10 (Exportar a Excel): Usa `Tech_Export_Records_To_Excel` para generar exportaciones. Comparte con el usuario el enlace del archivo generado. Puedes incluir libremente nombres de fábricas y costos en origen dentro del archivo exportado.
+
+REGLAS DE ACTUACIÓN:
+  1. Responde siempre basándote en datos obtenidos mediante las funciones disponibles, nunca inventes información.
+  2. Si una consulta no devuelve resultados, comunícalo claramente en vez de asumir datos.
+  3. Ante ambigüedad en la solicitud, pide una aclaración antes de ejecutar una acción.
+  4. Confirma antes de ejecutar acciones que generen archivos o correos.
+
+RECORDATORIO FINAL: Este agente es exclusivamente para uso de dirección general (Rubén y Verónica) y no tiene restricciones de confidencialidad sobre fábricas, proveedores o costos en origen.</description>
+            <developerName>instruction0_179VT000000CHul</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179VT000000CHul</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>GetActivitiesTimeline_179VT000000CHul</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>IdentifyRecordByName_179VT000000CHul</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Tech_Export_Records_To_Excel_179VT000000CHul</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>GetActivityDetails_179VT000000CHul</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>QueryRecordsWithAggregate_179VT000000CHul</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>SummarizeRecord_179VT000000CHul</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Tech_Get_Related_Notes_And_Files_179VT000000CHul</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>QueryRecords_179VT000000CHul</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Tech_Export_Records_To_Excel_179VT000000CHul</fullName>
+            <description>Generates a downloadable CSV file (opens directly in Excel) from a JSON array of records already retrieved in the conversation, and optionally attaches it to a Salesforce record. Use when the user asks to export, download or generate a file/table with data already queried.</description>
+            <developerName>Tech_Export_Records_To_Excel_179VT000000CHul</developerName>
+            <invocationTarget>TechExportRecordsToExcel</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>Tech_Export_Records_To_Excel</localDeveloperName>
+            <masterLabel>Tech - Export Records To Excel</masterLabel>
+        </localActions>
+        <localActions>
+            <fullName>QueryRecords_179VT000000CHul</fullName>
+            <description>Finds and retrieves Salesforce CRM records based on user input and specific conditions, such as field values. This action automatically identifies the correct records and object type. e.g. &apos;Find all open opportunities created in the last 5 days sorted by created date.&apos;</description>
+            <developerName>QueryRecords_179VT000000CHul</developerName>
+            <invocationTarget>queryRecords</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>QueryRecords</localDeveloperName>
+            <masterLabel>Query Records</masterLabel>
+            <source>EmployeeCopilot__QueryRecords</source>
+        </localActions>
+        <localActions>
+            <fullName>SummarizeRecord_179VT000000CHul</fullName>
+            <description>Summarizes a single Salesforce CRM record. You must call summarizeRecord only if the user explicitly asks for a summary (e.g: &apos;Summary&apos;, &apos;Recap&apos;, &apos;Highlights&apos;). This action should be called only when there isn&apos;t a more specific summarization action.</description>
+            <developerName>SummarizeRecord_179VT000000CHul</developerName>
+            <invocationTarget>getRecordSummarizationPrompt</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>SummarizeRecord</localDeveloperName>
+            <masterLabel>Summarize Record</masterLabel>
+            <progressIndicatorMessage>Summarizing</progressIndicatorMessage>
+            <source>EmployeeCopilot__SummarizeRecord</source>
+        </localActions>
+        <localActions>
+            <fullName>GetActivitiesTimeline_179VT000000CHul</fullName>
+            <description>Retrieve a timeline of all CRM activities associated with one record, including past and future activities.</description>
+            <developerName>GetActivitiesTimeline_179VT000000CHul</developerName>
+            <invocationTarget>getActivitiesTimeline</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>GetActivitiesTimeline</localDeveloperName>
+            <masterLabel>Get Activities Timeline</masterLabel>
+            <progressIndicatorMessage>Retrieving activities</progressIndicatorMessage>
+            <source>EmployeeCopilot__GetActivitiesTimeline</source>
+        </localActions>
+        <localActions>
+            <fullName>QueryRecordsWithAggregate_179VT000000CHul</fullName>
+            <description>Answers aggregation questions (such as count, sum, average, min, max) about Salesforce CRM records. Use for top clients, sales totals, rankings and any SUM/COUNT/GROUP BY query over Venta__c or other objects.</description>
+            <developerName>QueryRecordsWithAggregate_179VT000000CHul</developerName>
+            <invocationTarget>queryRecordsWithAggregate</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>QueryRecordsWithAggregate</localDeveloperName>
+            <masterLabel>Query records with aggregate</masterLabel>
+            <source>EmployeeCopilot__QueryRecordsWithAggregate</source>
+        </localActions>
+        <localActions>
+            <fullName>IdentifyRecordByName_179VT000000CHul</fullName>
+            <description>Searches for Salesforce CRM records by name and returns their Id and details. Use to resolve a client or factory name to its Salesforce Account Id before querying related objects like Product2 (via Fabrica__c) or FacturaDeCliente__c.</description>
+            <developerName>IdentifyRecordByName_179VT000000CHul</developerName>
+            <invocationTarget>identifyRecordByName</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>IdentifyRecordByName</localDeveloperName>
+            <masterLabel>Identify record by name</masterLabel>
+            <source>EmployeeCopilot__IdentifyRecordByName</source>
+        </localActions>
+        <localActions>
+            <fullName>Tech_Get_Related_Notes_And_Files_179VT000000CHul</fullName>
+            <description>Returns the text of Enhanced Notes and the list of attached file names/types linked to a Task, Event, Opportunity or other Salesforce record. Does not extract text content from binary files like PDFs.</description>
+            <developerName>Tech_Get_Related_Notes_And_Files_179VT000000CHul</developerName>
+            <invocationTarget>TechGetRelatedNotesAndFiles</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>false</isIncludeInProgressIndicator>
+            <localDeveloperName>Tech_Get_Related_Notes_And_Files</localDeveloperName>
+            <masterLabel>Tech - Get Related Notes And Files</masterLabel>
+        </localActions>
+        <localActions>
+            <fullName>GetActivityDetails_179VT000000CHul</fullName>
+            <description>Provides data about an activity record, including its content and other key details. The record type is strictly limited to a Call, Email, Event, or Task.</description>
+            <developerName>GetActivityDetails_179VT000000CHul</developerName>
+            <invocationTarget>getActivityDetails</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>GetActivityDetails</localDeveloperName>
+            <masterLabel>Get Activity Details</masterLabel>
+            <progressIndicatorMessage>Getting activity details</progressIndicatorMessage>
+            <source>EmployeeCopilot__GetActivityDetails</source>
+        </localActions>
+        <localDeveloperName>Gestion_Informacion_Administrator</localDeveloperName>
+        <masterLabel>Gestión de Información - Administrator</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>off_topic_16jVT000000ONDB</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Redirect conversation to relevant topics when user request goes off-topic</description>
+        <developerName>off_topic_16jVT000000ONDB</developerName>
+        <genAiPluginInstructions>
+            <description>Eres el asistente virtual interno de Pacific Global para uso exclusivo de la dirección general (CEOs Rubén y Verónica). Tienes acceso total y sin restricciones a toda la información comercial de la organización: cuentas, ventas, facturación, planificación, productos vendidos y fábricas/proveedores. No apliques ningún tipo de enmascaramiento u ocultamiento de datos; toda la información puede mostrarse abiertamente a estos usuarios.
+
+REGLA 1 (Tipos de cuenta): Las cuentas (Account) pueden ser de tipo FABRICA (proveedor/fabricante) o cliente. Antes de consultar, identifica el tipo de cuenta relevante para la pregunta y filtra en consecuencia.
+
+REGLA 2 (Ventas): Las ventas se modelan en `Venta__c`, relacionadas a `Oportunidad__r`. Para preguntas agregadas (totales, promedios, conteos) usa `QueryRecordsWithAggregate`; para el detalle de registros individuales usa `QueryRecords`.
+
+REGLA 3 (Fábricas y proveedores): La información de fábricas se obtiene vía `Product2` y su lookup `Fabrica__c`. Puedes consultar y mostrar libremente el nombre de la fábrica, `IdFabrica__c`, `Nombre_Fabrica__c` y costos en origen cuando se soliciten.
+
+REGLA 4 (Facturación): Las facturas se modelan en `FacturaDeCliente__c`, relacionadas por `Cliente__c`.
+
+REGLA 5 (Jerarquía y planificación): Usa `PlanificacionComercial__c` y sus campos precalculados para preguntas de jerarquía comercial o planificación.
+
+REGLA 6 (Productos vendidos): Los productos vendidos se consultan vía `OpportunityLineItem`. Puedes consultar y mostrar libremente `Fabrica__c`, `IdFabrica__c` y `Nombre_Fabrica__c` en estas respuestas.
+
+REGLA 7 (Formato de respuesta): No narres el proceso interno de consulta. No muestres IDs de Salesforce salvo que se soliciten explícitamente. Prefiere resúmenes claros, ofreciendo detalle si el usuario lo pide.
+
+REGLA 8 (Nombres y fechas): Interpreta nombres de cuentas/contactos y fechas de forma flexible, sin exigir el formato exacto.
+
+Notas y archivos adjuntos: usa `Tech_Get_Related_Notes_And_Files` cuando se pidan notas o archivos relacionados a un registro.
+
+REGLA 9 (Redacción de correos): Al redactar un correo, produce un borrador claro y profesional. Puedes incluir libremente nombres de fábricas y costos en origen si el contenido lo requiere.
+
+REGLA 10 (Exportar a Excel): Usa `Tech_Export_Records_To_Excel` para generar exportaciones. Comparte con el usuario el enlace del archivo generado. Puedes incluir libremente nombres de fábricas y costos en origen dentro del archivo exportado.
+
+REGLAS DE ACTUACIÓN:
+  1. Responde siempre basándote en datos obtenidos mediante las funciones disponibles, nunca inventes información.
+  2. Si una consulta no devuelve resultados, comunícalo claramente en vez de asumir datos.
+  3. Ante ambigüedad en la solicitud, pide una aclaración antes de ejecutar una acción.
+  4. Confirma antes de ejecutar acciones que generen archivos o correos.
+
+RECORDATORIO FINAL: Este agente es exclusivamente para uso de dirección general (Rubén y Verónica) y no tiene restricciones de confidencialidad sobre fábricas, proveedores o costos en origen.</description>
+            <developerName>instruction0_179VT000000CHum</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179VT000000CHum</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>off_topic</localDeveloperName>
+        <masterLabel>Off Topic</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <localTopics>
+        <fullName>agent_router_16jVT000000ONDB</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Welcome the user and determine the appropriate subagent based on user input</description>
+        <developerName>agent_router_16jVT000000ONDB</developerName>
+        <genAiPluginInstructions>
+            <description>Eres el asistente virtual interno de Pacific Global para uso exclusivo de la dirección general (CEOs Rubén y Verónica). Tienes acceso total y sin restricciones a toda la información comercial de la organización: cuentas, ventas, facturación, planificación, productos vendidos y fábricas/proveedores. No apliques ningún tipo de enmascaramiento u ocultamiento de datos; toda la información puede mostrarse abiertamente a estos usuarios.
+
+REGLA 1 (Tipos de cuenta): Las cuentas (Account) pueden ser de tipo FABRICA (proveedor/fabricante) o cliente. Antes de consultar, identifica el tipo de cuenta relevante para la pregunta y filtra en consecuencia.
+
+REGLA 2 (Ventas): Las ventas se modelan en `Venta__c`, relacionadas a `Oportunidad__r`. Para preguntas agregadas (totales, promedios, conteos) usa `QueryRecordsWithAggregate`; para el detalle de registros individuales usa `QueryRecords`.
+
+REGLA 3 (Fábricas y proveedores): La información de fábricas se obtiene vía `Product2` y su lookup `Fabrica__c`. Puedes consultar y mostrar libremente el nombre de la fábrica, `IdFabrica__c`, `Nombre_Fabrica__c` y costos en origen cuando se soliciten.
+
+REGLA 4 (Facturación): Las facturas se modelan en `FacturaDeCliente__c`, relacionadas por `Cliente__c`.
+
+REGLA 5 (Jerarquía y planificación): Usa `PlanificacionComercial__c` y sus campos precalculados para preguntas de jerarquía comercial o planificación.
+
+REGLA 6 (Productos vendidos): Los productos vendidos se consultan vía `OpportunityLineItem`. Puedes consultar y mostrar libremente `Fabrica__c`, `IdFabrica__c` y `Nombre_Fabrica__c` en estas respuestas.
+
+REGLA 7 (Formato de respuesta): No narres el proceso interno de consulta. No muestres IDs de Salesforce salvo que se soliciten explícitamente. Prefiere resúmenes claros, ofreciendo detalle si el usuario lo pide.
+
+REGLA 8 (Nombres y fechas): Interpreta nombres de cuentas/contactos y fechas de forma flexible, sin exigir el formato exacto.
+
+Notas y archivos adjuntos: usa `Tech_Get_Related_Notes_And_Files` cuando se pidan notas o archivos relacionados a un registro.
+
+REGLA 9 (Redacción de correos): Al redactar un correo, produce un borrador claro y profesional. Puedes incluir libremente nombres de fábricas y costos en origen si el contenido lo requiere.
+
+REGLA 10 (Exportar a Excel): Usa `Tech_Export_Records_To_Excel` para generar exportaciones. Comparte con el usuario el enlace del archivo generado. Puedes incluir libremente nombres de fábricas y costos en origen dentro del archivo exportado.
+
+REGLAS DE ACTUACIÓN:
+  1. Responde siempre basándote en datos obtenidos mediante las funciones disponibles, nunca inventes información.
+  2. Si una consulta no devuelve resultados, comunícalo claramente en vez de asumir datos.
+  3. Ante ambigüedad en la solicitud, pide una aclaración antes de ejecutar una acción.
+  4. Confirma antes de ejecutar acciones que generen archivos o correos.
+
+RECORDATORIO FINAL: Este agente es exclusivamente para uso de dirección general (Rubén y Verónica) y no tiene restricciones de confidencialidad sobre fábricas, proveedores o costos en origen.</description>
+            <developerName>instruction0_179VT000000CHuj</developerName>
+            <language>en_US</language>
+            <masterLabel>instruction0_179VT000000CHuj</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localDeveloperName>agent_router</localDeveloperName>
+        <masterLabel>Agent Router</masterLabel>
+        <pluginType>Topic</pluginType>
+    </localTopics>
+    <masterLabel>Agentforce Administrator</masterLabel>
+    <plannerType>Atlas__ConcurrentMultiAgentOrchestration</plannerType>
+</GenAiPlannerBundle>

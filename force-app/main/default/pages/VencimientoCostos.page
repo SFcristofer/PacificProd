@@ -1,0 +1,122 @@
+<apex:page controller="VencimientoCostosController" applyHtmlTag="false" showHeader="false" lightningStyleSheets="true">
+
+    <script>
+        function buttonsEnabled(enabled) {
+          var buttons = document.querySelectorAll('.btn');
+          if (enabled === false) {
+              for(i = 0; i < buttons.length; i++){
+                  buttons[i].setAttribute("disabled", "disabled");
+              }
+          } else {
+              for(i = 0; i < buttons.length; i++){
+                  buttons[i].removeAttribute("disabled");
+              }
+          } 
+      }
+
+  function handleRedirect() {
+          console.log('Redirecting in the controller using pageReference was not refreshing the page');
+          //window.location.href = '/lightning/o/Opportunity/list';
+          window.location.href = '/lightning/page/home';
+  }
+
+  function disableAndSave() {
+     // first, call the action function to post the form
+     verificar();
+     // second, disable the buttons
+     buttonsEnabled(false);
+     // third, return false to prevent the click from
+     // posting the form a second time
+     return false;
+  }
+
+
+  function disableAndSaveManual() {
+     // first, call the action function to post the form
+     verificarManual();
+     // second, disable the buttons
+     buttonsEnabled(false);
+     // third, return false to prevent the click from
+     // posting the form a second time
+     return false;
+  }
+
+
+  function disableAndSaveFabrica() {
+     // first, call the action function to post the form
+     verificarFabrica();
+     // second, disable the buttons
+     buttonsEnabled(false);
+     // third, return false to prevent the click from
+     // posting the form a second time
+     return false;
+  }
+
+</script>
+
+
+
+    <h3>Cost Expiration 2</h3>
+    <br/>
+ 
+    <apex:form >
+
+
+        <apex:commandButton styleClass="blueButton" value="Cancel" oncomplete="handleRedirect()" id="regresar"/>   
+        <apex:commandButton styleClass="blueButton" onclick="disableAndSave()" value="Complete Verification" oncomplete="handleRedirect()" id="guardar"/>
+        <apex:actionFunction name="verificar" action="{!verification}" />
+
+        <apex:commandButton styleClass="blueButton" onclick="disableAndSaveManual()" value="Manual Verification" oncomplete="handleRedirect()" id="vm"/>
+        <apex:actionFunction name="verificarManual" action="{!manualVerification}" />
+
+        <apex:commandButton styleClass="blueButton" onclick="disableAndSaveFabrica()" value="Factory Verification" oncomplete="handleRedirect()" id="fv"/>
+        <apex:actionFunction name="verificarFabrica" action="{!factoryVerification}" />
+
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!productsVC}" var="pvc" id="table" title="Products">
+
+                <apex:column headerValue="#">
+                    <apex:outputText value="{!pvc.numberRow}"/>
+                </apex:column>
+
+                <apex:column headerValue="Verification">
+                    <apex:inputCheckbox value="{!pvc.isMarkedForVerification}"/>
+                </apex:column>
+
+                 <apex:column headerValue="Name">
+                     <apex:outputText value="{!pvc.product.ProductoBase__r.Descripcion_Larga__c}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Factory">
+                     <apex:outputText value="{!pvc.product.Fabrica__r.Name}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Code">
+                     <apex:outputText value="{!pvc.product.CodigoDeProductoBase__c}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Last Review Date">
+                     <apex:outputText value="{0, date, dd/MM/yyyy}">
+                         <apex:param value="{!pvc.product.Fecha_revision_costo__c}" />
+                     </apex:outputText>
+                 </apex:column>
+
+                 <apex:column headerValue="Days to Expiration">
+                     <apex:outputText value="{!pvc.diasVencimiento}"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Verified Cost">
+                    <!-- apex:image url="{!$Resource.greenCircle}" width="50" height="50"/ -->
+                    <apex:image url="{!IF(pvc.isPrecioVigente, $Resource.greenCircle, $Resource.redCircle)}" width="20" height="20"/>
+                 </apex:column>
+
+                 <apex:column headerValue="Notes">
+                     <apex:outputText value="{!pvc.msgDescription}"/>
+                 </apex:column>
+                 
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        
+        </apex:form>
+
+</apex:page>

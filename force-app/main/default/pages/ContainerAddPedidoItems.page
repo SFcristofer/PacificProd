@@ -1,0 +1,376 @@
+<apex:page standardcontroller="PedidoDeCompra__c" lightningStylesheets="true" extensions="ContainerController">
+
+<apex:includeScript value="https://code.jquery.com/jquery-3.3.1.min.js" />
+
+    <script>
+       /*
+        * This function validates the value of the required fields.
+        * If all the fields has a value, it continues. Otherwise it shows 
+        * an error message.
+        */
+        function validateFieldsC(elemBtn) {
+            var result;
+            var fileInvoiceValue;
+            var filePLValue;
+            var fileLRValue;
+            var fieldDateCtnrValue;
+            var fieldInvoiceNumberValue;
+            var fieldInvoiceDateValue;
+            
+            var messageAlert = '';
+            //var inputFileInvoice = document.querySelector("[id*='inputInvoiceF']");
+            //var inputFilePL = document.querySelector("[id*='inputPLF']");
+            var inputFileLR = document.querySelector("[id*='inputLoadingReportF']");
+            var inputFieldCtnr = document.querySelector("[id*='dateCtnr']");
+            
+            //var inputInvoiceNumber = document.querySelector("[id*='invoiceNumber']");
+            //var inputInvoiceDate = document.querySelector("[id*='invoiceDate']");            
+
+            var isInvoiceNumber = true;
+            var isInvoiceDate = true;
+            var isInvoice = true;
+            var isPList = true;
+            var isLReport = true;
+            var isDateLoad = true;
+            var elementP = document.querySelector("[id*='validationMessages']");
+
+            if(inputFieldCtnr != null && inputFileLR != null) {
+                fileLRValue = inputFileLR.value;
+                fieldDateCtnrValue = inputFieldCtnr.value;
+                
+                if(fileLRValue === "") {
+                    messageAlert = messageAlert + ' Loading Report file is missing.<br/>';
+                    isLReport = false;
+                }
+                if(fieldDateCtnrValue === "") {
+                    messageAlert = messageAlert + ' Date Load Container is missing.<br/>';
+                    isDateLoad = false;
+                }
+
+                if(isLReport && isDateLoad) {
+                    elemBtn.disabled = true;
+                    elemBtn.style.color = '#CCC';
+                    //elemBtn.value='{!$Label.GENERIC_SAVING}';
+                    elemBtn.value='Saving';                    
+                    save();
+                    return false;
+                } else {
+                    result = false;
+                    elementP.innerHTML = messageAlert;
+                    elementP.style.color = 'red';                    
+                    //alert(messageAlert);
+                }
+            }
+            return result;
+            
+        }
+
+    </script>
+
+
+<html>
+
+<style>
+
+td.titleordcntr {
+    padding:10px;
+    background-color: #28AEE4;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: none;
+}
+
+
+th.cntrinfordr {
+    padding:5px;
+    width:100px;
+    font-weight: bold;    
+    border: 1px solid black;
+    background-color: #808080;
+    color: white;    
+}
+
+th.cntrinfcntr {
+    padding:5px;
+    width:100px;
+    font-weight: bold;    
+    border: 1px solid black;
+    background-color: #808080;
+    color: white;        
+}
+
+th.cntrinftype {
+    padding:5px;
+    width:70px;
+    font-weight: bold;    
+    border: 1px solid black;
+    background-color: #808080;
+    color: white;        
+}
+
+
+td.cntrinfvl {
+    padding:5px;
+}
+
+th.itemimage {
+    padding:5px;
+    /* width:160px; */
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+    width:150px;    
+}
+
+img.imgpr {
+    height:120px; 
+    width:120px;
+}
+
+th.itempnm {
+    padding:5px;
+    width:200px;
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+th.itempcd {
+    padding:5px;
+    width:90px;
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+td.itempcdval {
+    padding:5px;
+}
+
+th.itemfcd {
+    padding:5px;
+    width:110px;
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+th.itemean {
+    padding:5px;
+    width:110px;
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+th.itemcnts {
+    padding:5px;
+    width:110px;
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+th.itemntw {
+    padding:5px;
+    width:110px;
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+th.itemgrw {
+    padding:5px;
+    width:110px;
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+th.itemcbm {
+    padding:5px;
+    width:110px;
+    font-weight: bold;
+    color: white;    
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+td.titleprods {
+    padding:10px;
+    background-color: #28AEE4;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: none;
+}
+
+
+td.uploadS {
+    padding:5px;
+    font-weight: bold;
+}
+
+
+td.uploadSV {
+    padding:5px;
+}
+
+
+td.uploadBTN {
+    padding:5px;
+    font-weight: bold;
+}
+
+
+</style>
+
+<table style="width:90%;margin-left:50px">
+    <tr>
+        <td class="titleordcntr">CONTAINER DETAILS</td>        
+    </tr>
+</table>
+
+<br/>
+
+<table style="margin-left:50px">
+
+  <tr>
+    <td>
+      <table>
+        <tr>
+          <th class="cntrinfordr">ORDER</th>
+          <th class="cntrinfcntr">CONTAINER</th>
+          <th class="cntrinfcntr">SEAL</th>
+          <th class="cntrinftype">TYPE</th>
+        </tr>
+
+        <tr>
+          <td class="cntrinfvl">{!pedido.Name}</td>
+          <td class="cntrinfvl">{!container.Name}</td>
+          <td class="cntrinfvl">{!container.SEAL__c}</td>
+          <td class="cntrinfvl">{!container.Type__c}</td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+<table style="width:90%;margin-left:50px">
+    <tr>
+        <td class="titleordcntr">ADD CARGO DETAILS</td>        
+    </tr>
+</table>
+
+<br/>
+
+<apex:form >
+
+<table style="margin-left:50px">
+  <tr>
+   <th class="itemimage">IMAGE</th>
+   <th class="itempnm">DESCRIPTION</th>
+   <th class="itempcd">PG REF</th>
+   <th class="itemfcd">FACTORY REF</th>
+   <th class="itemean">EAN</th>
+   <th class="itemcnts">CTNS</th>
+   <th class="itemntw">N.W./Kgs</th>
+   <th class="itemgrw">G.W./Kgs</th>
+   <th class="itemcbm">CBM</th>
+  </tr>
+
+<apex:repeat value="{!cpLineItems}" var="cpli">
+  <tr>
+   <td><img src="/servlet/servlet.FileDownload?file={!cpli.pedidoLineItem.Producto__r.ProductoBase__r.IDImagen1__c}" class="imgpr"/></td>
+   <td class="itempcdval">{!cpli.pedidoLineItem.Producto__r.ProductoBase__r.ProductName__c}</td>
+   <td class="itempcdval">{!cpli.pedidoLineItem.Producto__r.CodigoDeProductoBase__c}</td>
+   <td class="itempcdval">{!cpli.pedidoLineItem.Producto__r.Codigo_Proveedor2__c}</td>
+   <td class="itempcdval">{!cpli.pedidoLineItem.Producto__r.Codigo_EAN2__c}</td>
+   <td class="itempcdval"><apex:inputText value="{!cpli.cantidadCajasCntr}" size="6"/></td>
+   <td class="itempcdval"><apex:inputText value="{!cpli.netWeight}" size="6"/></td>
+   <td class="itempcdval"><apex:inputText value="{!cpli.grossWeight}" size="6"/></td>
+   <td class="itempcdval"><apex:inputText value="{!cpli.cbm}" size="6"/></td>
+
+  </tr>
+</apex:repeat>
+
+</table>
+
+<br/>
+
+   <!-- table style="margin-left:50px">
+      <tr>
+         <td class="uploadBTN">
+            <apex:commandButton id="sButton" value="Save" action="{!saveItems}"/>
+         </td>
+      </tr>
+   </table -->
+
+<!-- /apex:form -->
+
+<br/>
+
+<table style="width:90%;margin-left:50px">
+    <tr>
+        <td class="titleprods">ADD LOADING DETAILS</td>        
+    </tr>
+</table>
+
+<br/>
+
+<!-- apex:form id="upldfiles" -->
+
+    <table style="margin-left:50px">
+        <tr>
+            <td class="uploadS">LOADING DATE *</td>
+            <td class="uploadSV"><apex:inputField ignoreEditPermissionForRendering="true" value="{!container.Fecha_Carga_Contenedor__c}" id="dateCtnr"/></td>
+        </tr>
+        <tr>
+            <td class="uploadS">LOADING REPORT (PDF) *</td>
+            <td class="uploadSV"><apex:inputFile id="inputLoadingReportF" value="{!finputLoadingReport.fileBody}" filename="{!finputLoadingReport.fileName}" style="float:left"/></td>
+        </tr>
+        
+        <tr>
+            <td></td>
+            <td>
+                <table>
+                  <apex:repeat value="{!listDocsOrderCntr}" var="doccntr">
+                    <tr>
+                       <td style="padding: 5px;"><apex:outputText value="{!doccntr.Name}" /></td>
+                    </tr>
+                  </apex:repeat>
+                </table>
+            </td>
+        </tr>
+        
+    </table>
+    <p id="validationMessages"></p>
+            
+    <table style="margin-left:50px">
+        <tr>
+          <td class="uploadBTN">
+              <apex:actionFunction name="save" action="{!saveOrderC}" />
+              <apex:commandButton value="Save Files" id="saveBtn" onclick="validateFieldsC(this);return false"/>
+          </td>
+          <td class="uploadBTN">
+              <apex:commandButton value="Cancel" id="cancelBtn" action="{!cancelCntnrItems}"/>
+          </td>
+        </tr>
+    </table>        
+
+</apex:form>
+
+</html>
+
+</apex:page>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>EnviarAviso</name>
+        <label>Enviar aviso</label>
+        <locationX>50</locationX>
+        <locationY>860</locationY>
+        <actionName>emailSimple</actionName>
+        <actionType>emailSimple</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>emailAddressesArray</name>
+            <value>
+                <elementReference>Destinatarios</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailSubject</name>
+            <value>
+                <stringValue>[PacificPROD] Jobs asincronos con error</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>emailBody</name>
+            <value>
+                <elementReference>CuerpoCorreo</elementReference>
+            </value>
+        </inputParameters>
+        <nameSegment>emailSimple</nameSegment>
+    </actionCalls>
+    <apiVersion>67.0</apiVersion>
+    <areMetricsLoggedToDataCloud>false</areMetricsLoggedToDataCloud>
+    <assignments>
+        <name>AcumularCorreo</name>
+        <label>Acumular correo</label>
+        <locationX>230</locationX>
+        <locationY>780</locationY>
+        <assignmentItems>
+            <assignToReference>Destinatarios</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>RecorrerUsuarios.Email</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>RecorrerUsuarios</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>AcumularIdUsuario</name>
+        <label>Acumular id de usuario</label>
+        <locationX>230</locationX>
+        <locationY>620</locationY>
+        <assignmentItems>
+            <assignToReference>IdsUsuarios</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <elementReference>RecorrerMiembros.UserOrGroupId</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>RecorrerMiembros</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Contar</name>
+        <label>Contar</label>
+        <locationX>230</locationX>
+        <locationY>260</locationY>
+        <assignmentItems>
+            <assignToReference>Contador</assignToReference>
+            <operator>Add</operator>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Recorrer</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>HayAlgoQueAvisar</name>
+        <label>Hay algo que avisar?</label>
+        <locationX>50</locationX>
+        <locationY>380</locationY>
+        <defaultConnectorLabel>No, todo limpio</defaultConnectorLabel>
+        <rules>
+            <name>Si_hay</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Contador</leftValueReference>
+                <operator>GreaterThan</operator>
+                <rightValue>
+                    <numberValue>0.0</numberValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>BuscarGrupo</targetReference>
+            </connector>
+            <label>Si hay</label>
+        </rules>
+    </decisions>
+    <description>Revisa a diario los AsyncApexJob que terminaron con NumberOfErrors mayor que 0 y avisa. Existe porque el batch de precios estuvo fallando 3 semanas en silencio: los jobs terminan con Status=Completed aunque hayan perdido todo el trabajo por una excepcion.
+
+Los destinatarios NO estan escritos en este flujo. Se resuelven en ejecucion a partir de los
+miembros activos del grupo publico indicado en la variable NombreGrupo. Para cambiar a quien
+se avisa se edita el grupo en Configuracion, no este metadato.</description>
+    <environments>Default</environments>
+    <label>Alerta Jobs Asincronos Con Error</label>
+    <loops>
+        <name>Recorrer</name>
+        <label>Recorrer</label>
+        <locationX>50</locationX>
+        <locationY>260</locationY>
+        <collectionReference>BuscarRegistros</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>Contar</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>HayAlgoQueAvisar</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>RecorrerMiembros</name>
+        <label>Recorrer miembros</label>
+        <locationX>50</locationX>
+        <locationY>620</locationY>
+        <collectionReference>BuscarMiembros</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AcumularIdUsuario</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>BuscarUsuarios</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <loops>
+        <name>RecorrerUsuarios</name>
+        <label>Recorrer usuarios</label>
+        <locationX>50</locationX>
+        <locationY>780</locationY>
+        <collectionReference>BuscarUsuarios</collectionReference>
+        <iterationOrder>Asc</iterationOrder>
+        <nextValueConnector>
+            <targetReference>AcumularCorreo</targetReference>
+        </nextValueConnector>
+        <noMoreValuesConnector>
+            <targetReference>EnviarAviso</targetReference>
+        </noMoreValuesConnector>
+    </loops>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>BuscarGrupo</name>
+        <label>Buscar grupo</label>
+        <locationX>50</locationX>
+        <locationY>460</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>BuscarMiembros</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>DeveloperName</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>NombreGrupo</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>Type</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Regular</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>Group</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>BuscarMiembros</name>
+        <label>Buscar miembros</label>
+        <locationX>50</locationX>
+        <locationY>540</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>RecorrerMiembros</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>GroupId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>BuscarGrupo.Id</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>GroupMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>BuscarRegistros</name>
+        <label>Buscar registros</label>
+        <locationX>50</locationX>
+        <locationY>140</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Recorrer</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>NumberOfErrors</field>
+            <operator>GreaterThan</operator>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </filters>
+        <filters>
+            <field>CreatedDate</field>
+            <operator>GreaterThanOrEqualTo</operator>
+            <value>
+                <elementReference>$Flow.CurrentDate</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>AsyncApexJob</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <recordLookups>
+        <name>BuscarUsuarios</name>
+        <label>Buscar usuarios</label>
+        <locationX>50</locationX>
+        <locationY>700</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>RecorrerUsuarios</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>In</operator>
+            <value>
+                <elementReference>IdsUsuarios</elementReference>
+            </value>
+        </filters>
+        <filters>
+            <field>IsActive</field>
+            <operator>EqualTo</operator>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>false</getFirstRecordOnly>
+        <object>User</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>20</locationY>
+        <connector>
+            <targetReference>BuscarRegistros</targetReference>
+        </connector>
+        <schedule>
+            <frequency>Daily</frequency>
+            <startDate>2026-08-19</startDate>
+            <startTime>07:00:00.000Z</startTime>
+        </schedule>
+        <triggerType>Scheduled</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>CuerpoCorreo</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>Se han detectado {!Contador} job(s) asincrono(s) que terminaron con errores.
+
+Ojo: estos jobs figuran como Status = Completed. El contador NumberOfErrors es lo unico
+que delata que perdieron trabajo.
+
+Revisar en Configuracion &gt; Trabajos de Apex, o con esta consulta:
+
+SELECT Id, ApexClass.Name, Status, NumberOfErrors, ExtendedStatus, CreatedBy.Name, CreatedDate
+FROM AsyncApexJob
+WHERE NumberOfErrors &gt; 0 AND CreatedDate = LAST_N_DAYS:1
+ORDER BY CreatedDate DESC</text>
+    </textTemplates>
+    <variables>
+        <name>Contador</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>Destinatarios</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>IdsUsuarios</name>
+        <dataType>String</dataType>
+        <isCollection>true</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>DeveloperName del grupo publico cuyos miembros activos reciben el aviso.</description>
+        <name>NombreGrupo</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Admin</stringValue>
+        </value>
+    </variables>
+</Flow>

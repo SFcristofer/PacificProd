@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha_pago_dep_sito__c</fullName>
+    <description>Fecha pago deposito</description>
+    <inlineHelpText>It will only be completed when a deposit is due for accounting registration</inlineHelpText>
+    <label>Fecha pago depósito</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

@@ -1,0 +1,87 @@
+<apex:page standardController="Informe_Direccion__c" extensions="BoardMeetingAgenda" 
+    showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false">
+    <head>
+        <style>
+            @page {
+                margin-left: 0cm;
+                margin-right: 0cm;
+            }
+        </style>
+    </head>
+    <apex:outputText value="{!Informe_Direccion__c.Informacion_Inicial__c}" escape="false" />
+    <table style="border-collapse: collapse;">
+        <tr>
+            <th style="font-family:sans-serif;padding:5px 20px;border:1px solid black;background:#f8be93;"> BUDGET TRACKING {!currentYear} </th>
+            <th style="font-family:sans-serif;padding:5px 24px;border:1px solid black;background:#f8be93;"> Total </th>
+            <th style="font-family:sans-serif;padding:5px 16px;border:1px solid black;background:#f8be93;"> Soriana </th>
+            <th style="font-family:sans-serif;padding:5px 12px;border:1px solid black;background:#f8be93;"> Other Customers </th>
+            <th style="font-family:sans-serif;padding:5px 30px;border:1px solid black;background:#f8be93;"> Margin </th>
+        </tr>
+        <tr>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1;" > Budget {!currentYear} </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1"  rowspan="3"> 
+                <apex:outputText value="{0, number, ##,###,###}">
+                    <apex:param value="{!yearsBudget[ALL]}"/>
+                </apex:outputText> 
+            </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1" >
+                <apex:outputText value="{0, number, ##,###,###}">
+                    <apex:param value="{!yearsBudget[SORIANA]}"/>
+                </apex:outputText> 
+            </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1" >
+                <apex:outputText value="{0, number, ##,###,###}">
+                    <apex:param value="{!yearsBudget[REST]}"/>
+                </apex:outputText> 
+            </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1"  rowspan="3"> {!targetedProfitMargin[ALL]}% </th>
+        </tr>
+        <tr>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1" > % Sales by Customer </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1" > {!shareOfYearsBudget[SORIANA]}% </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1" > {!100 - shareOfYearsBudget[SORIANA]}% </th>
+        </tr>
+        <tr>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1" > Margin by Customers </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1" > {!targetedProfitMargin[SORIANA]}%</th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#f3dfd1" > {!targetedProfitMargin[REST]}% </th>
+        </tr>
+        <tr>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" > Total Confirmed Sales {!currentYear} </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F"  rowspan="3">
+                <apex:outputText value="{0, number, ##,###,###}">
+                    <apex:param value="{!closedNPendingOppsAmount[ALL]}"/>
+                </apex:outputText>
+            </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" >
+                <apex:outputText value="{0, number, ##,###,###}">
+                    <apex:param value="{!closedNPendingOppsAmount[SORIANA]}"/>
+                </apex:outputText>
+            </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" >
+                <apex:outputText value="{0, number, ##,###,###}">
+                    <apex:param value="{!closedNPendingOppsAmount[REST]}"/>
+                </apex:outputText>
+            </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F"  rowspan="3"> {!closedNPendingOppsMargin[ALL]}% </th>
+        </tr>
+        <tr>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" > % Sales by Customer </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" > {!percentageOfTotalSale[SORIANA]}% </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" > {!percentageOfTotalSale[REST]}% </th>
+        </tr>
+        <tr>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" > Margin by Customers </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" > {!closedNPendingOppsMargin[SORIANA]}% </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#9CBA5F" > {!closedNPendingOppsMargin[REST]}% </th>
+        </tr>
+        <tr>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#EFE738" > % Budget Compliance </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#EFE738" > {!salesOverBudget[ALL]}% </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#EFE738" > {!salesOverBudget[SORIANA]}% </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#EFE738" > {!salesOverBudget[REST]}% </th>
+            <th style="font-family:sans-serif;border:1px solid black;text-align:center;background:#EFE738" > {!closedOverProjectedMargin[ALL]}% </th>
+        </tr>
+    </table>
+    <apex:outputText value="{!Informe_Direccion__c.Informacion_Cierre__c}" escape="false" />
+</apex:page>

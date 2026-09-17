@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Certificates_Expiry_Date__c</fullName>
+    <description>Earliest expiry date among the supplier´s certificates</description>
+    <inlineHelpText>Enter the nearest expiration date of any certificates or audit</inlineHelpText>
+    <label>Certificates Expiry Date</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Date</type>
+</CustomField>

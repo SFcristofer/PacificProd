@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CP_BackToSchool__c</fullName>
+    <label>Back to school</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Sillas ordenador</fullName>
+                <default>false</default>
+                <label>Sillas y Mesas Oficina</label>
+            </value>
+            <value>
+                <fullName>Mesas escritorios</fullName>
+                <default>false</default>
+                <label>Gamers</label>
+            </value>
+            <value>
+                <fullName>Complementos</fullName>
+                <default>false</default>
+                <label>Complementos Escritorio</label>
+            </value>
+            <value>
+                <fullName>infantil</fullName>
+                <default>false</default>
+                <label>Mueble Infantil</label>
+            </value>
+            <value>
+                <fullName>Mochilas escolares</fullName>
+                <default>false</default>
+                <label>Mochilas y Accesorios</label>
+            </value>
+            <value>
+                <fullName>Sets de mesas + sillas</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>Sets de mesas + sillas</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

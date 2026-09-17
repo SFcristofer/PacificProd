@@ -1,0 +1,97 @@
+<apex:page controller="ReporteMargenController" standardStylesheets="false" applyHtmlTag="false"  applyBodyTag="false" showHeader="false">
+  <head>
+    <style>
+      .tabla {
+        border-collapse: collapse;
+      }
+      .cellWrapper {
+         border-collapse: collapse;
+         border: 1px solid black;
+         width: 500px;
+         padding: 0px;
+      }
+      .tituloGeneral {
+        white-space:pre;
+        text-align: center;
+        font-family: 'Salesforce Sans',Arial,sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .tituloSeccion {
+        white-space:pre;
+        text-align: center;
+        font-size: 15px;
+        font-weight: bold;
+      }
+      .label {
+        font-weight: bold;
+      }
+      .tituloColumna {
+         text-align: center;        
+         white-space:pre-line;
+         border-collapse: collapse;
+         border: 1px solid white;
+         background-color: #0070D2;
+         width: 150px;
+         font-family: 'Salesforce Sans',Arial,sans-serif;
+         font-size: 13px;
+         padding: 10px;
+         height: 20px;
+         color: #FFF;
+      }
+      .valueColumna {
+         white-space:pre-line;
+         border-collapse: collapse;
+         border: 1px solid white;
+         background-color: #A0B4CE;
+         width: 150px;
+         font-family: 'Salesforce Sans',Arial,sans-serif;
+         font-size: 13px;
+         padding: 10px;
+         height: 20px;
+         text-align: center;
+         color:#FFF;
+      }
+      .errorMsg {
+        font-family: 'Salesforce Sans',Arial,sans-serif;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <br/>
+    <strong>Period:</strong> {!anoReporte}
+    <br/>
+    <apex:outputText styleClass="errorMsg" value="{!errorMsg}"/>
+    <table class="tabla">
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td class="tituloColumna"><apex:outputText >Operation Margin</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >Target Margin</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >Growth</apex:outputText></td>                
+      </tr>
+      <tr>
+        <td class="valueColumna">
+          <apex:outputText value="{0,number, 0.00}%">
+             <apex:param value="{!margenOperacionGeneral}"/>
+          </apex:outputText>
+        </td>
+        <td class="valueColumna">
+          <apex:outputText value="{0,number, 0.00}%">
+             <apex:param value="{!margenObjetivoGeneral}"/>
+          </apex:outputText>
+        </td>
+        <td class="valueColumna">
+          <apex:outputText value="{0,number, 0.00}%">
+             <apex:param value="{!margenCumplimientoGeneral}"/>
+          </apex:outputText>
+        </td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+  </body>
+</apex:page>

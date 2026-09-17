@@ -1,0 +1,62 @@
+<apex:page standardcontroller="PedidoDeCompra__c" lightningStylesheets="true" extensions="CancelInvoiceController" action="{!genereateInvoiceToSend}">
+  <script>
+    function buttonsEnabled(enabled) {
+        var buttons = document.querySelectorAll('.btn');
+        if (enabled === false) {
+            for(i = 0; i < buttons.length; i++){
+                buttons[i].setAttribute("disabled", "disabled");
+            }
+        } else {
+           for(i = 0; i < buttons.length; i++){
+                buttons[i].removeAttribute("disabled");
+            }
+        } 
+    }
+    function disableAndSend() {
+            // first, call the action function to post the form
+            sendInvoice();
+            // second, disable the buttons
+            buttonsEnabled(false);
+            // third, return false to prevent the click from
+            // posting the form a second time
+            return false;
+    }
+    function handleRedirect() {
+        console.log('Redirecting in the controller using pageReference was not refreshing the page');
+        window.location.href = '/lightning/r/PedidoDeCompra__c/{!PedidoDeCompra__c.Id}/view';
+    }
+   </script>
+  <apex:form >
+   <apex:pageBlock id="pbt">
+       <apex:pageBlockTable value="{!orderParentAccounts}" var="ppl" id="table" title="Invoices">
+           <apex:column headerValue="Quick Code">
+               <apex:outputText escape="false" styleClass="imagenProd" id="imagenProd" value="{!ppl.pedido.Proveedor__r.Codigo_rapido__c}" />
+           </apex:column>
+           <apex:column >
+             <apex:pageBlock >              
+              <apex:pageBlockTable value="{!ppl.pedido.PedidoLineItems__r}" var="ppli" id="table" title="Items">
+                <apex:column headerValue="Code">
+                    <apex:outputText value="{!ppli.Producto__r.CodigoDeProductoBase__c}"/>
+                </apex:column>
+                <apex:column headerValue="Units">
+                    <apex:outputText value="{!ppli.UnidadesPorMasterbox__c * ppli.NumeroDeCajas__c}"/>
+                </apex:column>                
+                <apex:column headerValue="Purchase Amount">
+                    <apex:outputText value="{!ppli.CostoOrigenTot__c}"/>
+                </apex:column>
+                <apex:column headerValue="Sales Amount">
+                    <apex:outputText value="{!ppli.CostoOrigen__c * ppli.Unidades__c}"/>
+                </apex:column>
+              </apex:pageBlockTable>
+             </apex:pageBlock>
+           </apex:column>            
+           <apex:column headerValue="Invoice Cancellation Date">
+                <apex:inputField value="{!ppl.pedido.Fecha_Cancelacion_Factura__c}" id="dateCancel"/>        
+           </apex:column>
+       </apex:pageBlockTable>
+   </apex:pageBlock>
+    <apex:commandButton styleClass="blueButton" value="Return" oncomplete="handleRedirect()" id="regresar"/>
+    <apex:commandButton styleClass="blueButton" value="Cancel Sales Invoice" onClick="disableAndSend()"/>    
+    <apex:actionFunction name="sendInvoice" action="{!executeLibraCallout}" />    
+  </apex:form>
+</apex:page>

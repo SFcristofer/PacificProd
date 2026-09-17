@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cumplimiento_importe_margen_bruto__c</fullName>
+    <formula>IF(
+     Objetivo_importe_margen_bruto__c = 0,
+    0,
+     Importe_margen_bruto__c /  Objetivo_importe_margen_bruto__c 
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Cumplimiento importe margen bruto</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Percent</type>
+</CustomField>

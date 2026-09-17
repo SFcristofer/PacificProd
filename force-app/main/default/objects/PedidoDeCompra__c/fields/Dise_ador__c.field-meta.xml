@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dise_ador__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>The designer has uploaded the final versions of the files to Dropbox for factory submission by the Purchasing team</inlineHelpText>
+    <label>Versión final aprobada</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

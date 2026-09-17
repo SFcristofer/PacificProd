@@ -1,0 +1,14 @@
+<apex:page standardController="Informe_Direccion__c" extensions="SendBoardMeetingAgenda" action="{!sendMail}"
+    lightningStylesheets="true">
+    <script>
+      function handleRedirect() {
+              window.location.href = '/lightning/r/Informe_Direccion__c/{!Informe_Direccion__c.Id}/view';
+      }
+    </script>
+    <apex:pageMessages id="messages" />
+    <apex:outputPanel style="background:#E7F1FA;padding:25px;width:100%" layout="block">
+        <apex:form >
+            <apex:commandButton onclick="handleRedirect();return false;" value="Return"/>
+        </apex:form>
+    </apex:outputPanel>
+</apex:page>

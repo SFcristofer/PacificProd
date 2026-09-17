@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Seguir_en_DHL__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(Numero_de_gu_a_DHL__c == null,
+&quot;Aún sin número de guía&quot;,
+HYPERLINK(&quot;http://www.dhl.com/en/express/tracking.html?AWB=&quot; + 
+  Numero_de_gu_a_DHL__c 
+  + &quot;&amp;brand=DHL&quot;, &quot;Seguir en DHL&quot;, &quot;_blank&quot;)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Seguir en DHL</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

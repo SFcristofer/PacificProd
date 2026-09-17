@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Submit_Documents_to_FW__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Documents Submitted to Forwarder Date</description>
+    <inlineHelpText>Date when Pacific Global confirmed and recorded that the shipping documents were submitted to the forwarder.</inlineHelpText>
+    <label>Submit Documents Forwarder</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

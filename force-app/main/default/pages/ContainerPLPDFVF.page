@@ -1,0 +1,777 @@
+<apex:page standardController="PedidoDeCompra__c" showHeader="false"  
+    applyHtmlTag="false" applyBodyTag="false" standardStylesheets="false" extensions="ContainerPLPDFController" renderAs="PDF">
+    
+<!-- apex:page standardController="PedidoDeCompra__c" showHeader="false"  
+    applyHtmlTag="false" applyBodyTag="false" extensions="OrderPackingListDocument" renderAs="PDF" -->
+<head>
+    
+<style>
+
+  @page{
+   margin:0.15in;
+  } 
+
+  td.pgc {
+      text-align: center;
+      font-weight: bold;
+      font-size: 73%;
+      /*font-size: 11px;*/
+      font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+  
+  td.pgcad {
+      text-align: center;
+      font-size: 73%;
+      /*font-size: 10px;*/
+      font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  td.pltxt {
+      text-align: left;
+      font-weight: bold;
+      font-size: 16px;
+      font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+  
+/* INFO CLIENT INVOICE */
+  
+  td.columnOneTo {
+    width:72%;
+    /*border: 1px solid black;*/
+    font-weight: bold;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }  
+  
+  td.columnOne {
+    width:72%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+  td.columnTwo {
+    width:20%;
+    /*border: 1px solid black;*/
+    font-weight: bold;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+  td.columnThree {
+    width:8%;
+    /*border: 1px solid black;*/
+    text-align: right;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+/* INFO HEADER DETAIL */
+
+  table.headerItems {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width:100%;
+  }
+
+  th.headerItemsitem {
+    width:10%;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    padding-top:7px;
+    padding-bottom:7px;
+    background-color: #D9D9D9;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  th.headerItemsmark {
+    width:20%;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    padding-top:7px;
+    padding-bottom:7px;
+    background-color: #D9D9D9;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  th.headerItemsnull {
+    width:8%;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    padding-top:7px;
+    padding-bottom:7px;
+    background-color: #D9D9D9;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  th.headerItemsdesc {
+    width:35%;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    padding-top:7px;
+    padding-bottom:7px;
+    background-color: #D9D9D9;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  th.headerItemsqty {
+    width:7%;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    padding-top:7px;
+    padding-bottom:7px;
+    background-color: #D9D9D9;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  th.headerItemscnt {
+    width:9%;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    padding-top:7px;
+    padding-bottom:7px;
+    background-color: #D9D9D9;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  th.headerItemspcs {
+    width:11%;
+    border: 1px solid black;
+    text-align: center;
+    font-weight: bold;
+    font-size: 10px;
+    padding-top:7px;
+    padding-bottom:7px;
+    background-color: #D9D9D9;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+  
+/* INFO DETAIL */
+
+  td.detordrno {
+    /*border: 1px solid black;*/
+    font-weight: bold;
+    width:10%;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+  td.detordrnoval {
+    /*border: 1px solid black;*/
+    width:90%;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+/* INFO DETAIL CNTR */
+
+  td.dtcncu {
+    /*border: 1px solid black;*/
+    width:11%;
+    font-weight: bold;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+  td.dtcncd {
+    /*border: 1px solid black;*/
+    width:19%;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;    
+  }
+  
+  td.dtcnct {
+    /*border: 1px solid black;*/
+    width:8%;
+    font-weight: bold;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;    
+  }
+   
+  td.dtcncc {
+    /*border: 1px solid black;*/
+    width:62%;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+   
+/* INFO DETAIL ITEMS CNTR */
+
+  td.itempgref {
+    width:10%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+  td.itemmark {
+    width:20%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+  td.itemnull {
+    width:8%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;    
+  }
+
+  td.itemsdesc {
+    width:35%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;    
+  }
+
+  td.itemsqty {
+    width:7%;
+    /*border: 1px solid black;*/
+    text-align: center;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;    
+  }
+
+  td.itemscnt {
+    width:9%;
+    /*border: 1px solid black;*/
+    text-align: center;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;    
+  }
+
+  td.itemspcs {
+    width:11%;
+    /*border: 1px solid black;*/
+    text-align: center;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+/* INFO DETAIL ITEMS CNTR FEAT */
+
+  td.itemfnetw {
+    width:35%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+  td.itemfgrossw {
+    width:35%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+  
+  td.itemfcbm {
+    width:35%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+   
+  td.itemfean {
+    width:35%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+
+  td.itemfnetwval {
+    width:65%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+
+  td.itemfgrosswval {
+    width:65%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+  
+  td.itemfcbmval {
+    width:65%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+   
+  td.itemfeanval {
+    width:65%;
+    /*border: 1px solid black;*/
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 10px;
+  }
+  
+  tr.spacerow>td {
+      padding-bottom: 10px;
+  }
+   
+/* INFO FOOTER DETAILS */
+  
+  table.tblSummary {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width:100%;
+  }
+
+
+  td.footerdsum {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    width:75%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-family: 'Arial', 'Helvetica', sans-serif;    
+  }
+
+  td.footerdqty {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    width:6%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+  
+  td.footerdcnt {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    width:9%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+  
+  td.footerdpcs {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    width:10%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+    padding-top:5px;
+    padding-bottom:5px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+/* INFO TOTALS */
+
+  table.tblTotals {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width:50%;
+  }
+  
+  td.totalnw {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    width:30%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  td.totalgw {
+    border-left: 1px solid black;
+    width:30%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  td.totalcbm {
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    width:30%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  td.totalnwval {
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+    width:20%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  td.totalgwval {
+    border-right: 1px solid black;
+    width:20%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+  td.totalcbmval {
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    width:20%;
+    background-color: #D9D9D9;
+    font-weight: bold;
+    font-size: 10px;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+
+</style>
+
+</head>
+
+<body>
+
+<table style="width:100%">
+    <tr>
+        <td style="text-align: center;"><apex:image url="{!URLFOR($Resource[pdfDoc.staticResourceName], pdfDoc.imageName)}" width="300" height="55"/></td>
+    </tr>
+</table>
+<br/>
+<table style="width:100%;">
+    <tr>
+        <td class="pgc"><apex:outputText value="{!pdfDoc.companyName}"/></td>
+    </tr>
+    <tr>
+        <td class="pgcad"><apex:outputText value="{!pdfDoc.companyAddressLine1}"/></td>
+    </tr>
+    <tr>
+        <td class="pgcad"><apex:outputText value="{!pdfDoc.companyAddressLine2}"/></td>
+    </tr>
+    <tr>
+        <td class="pgcad"><apex:outputText value="{!pdfDoc.companyAddressLine3}"/></td>
+    </tr>            
+</table>
+<br/>
+<table style="width:100%;">
+    <tr>
+        <td class="pltxt"><apex:outputText value="{!pdfDoc.documentName}"/></td>
+    </tr>
+</table>
+<br/>
+<table style="width:100%;">
+   <tr>
+     <td class="columnOneTo">TO: </td>
+     <td class="columnTwo">DATE: </td>
+     <td class="columnThree">
+         <apex:outputText value="{0, date, MM'/'dd'/'yyyy}">
+             <apex:param value="{!pdfDoc.invoiceDate}" /> 
+         </apex:outputText>     
+     </td>
+   </tr>
+   
+   <tr>
+     <td class="columnOne"><apex:outputText value="{!pdfDoc.customerRazonSocial}"/></td>
+     <!-- td class="columnOne"><apex:outputText value="{!pdfDoc.customerInfoLine1}"/></td -->
+     <td class="columnTwo">INVOICE NUMBER: </td>
+     <td class="columnThree"><apex:outputText value="{!pdfDoc.invoiceNumber}"/></td>
+   </tr>
+
+   <tr>
+     <td class="columnOne"><apex:outputText value="{!pdfDoc.customerBillingStreet}"/></td>   
+     <!-- td class="columnOne"><apex:outputText value="{!pdfDoc.customerInfoLine2}"/></td -->
+     <td class="columnTwo"></td>
+     <td class="columnThree"></td>
+   </tr>
+
+   <tr>
+     <td class="columnOne"><apex:outputText value="{!pdfDoc.customerBillingCity}"/></td>
+     <!-- td class="columnOne"><apex:outputText value="{!pdfDoc.customerInfoLine3}"/></td -->
+     <td class="columnTwo"></td>
+     <td class="columnThree"></td>
+   </tr>
+
+   <tr>
+     <td class="columnOne"><apex:outputText value="{!pdfDoc.customerBillingState}"/></td>
+     <!-- td class="columnOne"><apex:outputText value="{!pdfDoc.customerInfoLine4}"/></td -->
+     <td class="columnTwo"></td>
+     <td class="columnThree"></td>
+   </tr>
+
+   <tr>
+     <td class="columnOne"><apex:outputText value="{!pdfDoc.customerBillingPostalCode}"/></td>
+     <!-- td class="columnOne"><apex:outputText value="{!pdfDoc.customerInfoLine5}"/></td -->
+     <td class="columnTwo"></td>
+     <td class="columnThree"></td>
+   </tr>
+
+   <tr>
+     <td class="columnOne"><apex:outputText value="{!pdfDoc.customerBillingCountry}"/></td>
+     <!-- td class="columnOne"><apex:outputText value="{!pdfDoc.customerInfoLine6}"/></td -->
+     <td class="columnTwo"></td>
+     <td class="columnThree"></td>
+   </tr>
+
+   <tr>
+     <td class="columnOne"><apex:outputText value="{!pdfDoc.customerIDFiscal}"/></td>
+     <!-- td class="columnOne"><apex:outputText value="{!pdfDoc.customerInfoLine6}"/></td -->
+     <td class="columnTwo"></td>
+     <td class="columnThree"></td>
+   </tr>
+
+   <tr>
+     <td class="columnOne"><apex:outputText value="{!pdfDoc.customerPhone}"/></td>
+     <!-- td class="columnOne"><apex:outputText value="{!pdfDoc.customerInfoLine6}"/></td -->
+     <td class="columnTwo"></td>
+     <td class="columnThree"></td>
+   </tr>
+   
+</table>
+<!-- HEADER DETAIL -->
+<br/>
+<table class="headerItems">
+    <tr>
+        <th class="headerItemsitem">ITEM NO.</th>
+        <th class="headerItemsmark">MARK</th>
+        <th class="headerItemsnull">&nbsp;</th>
+        <th class="headerItemsdesc">DESCRIPTION</th>
+        <th class="headerItemsqty">QTY</th>
+        <th class="headerItemscnt">TOTAL CNT</th>
+        <th class="headerItemspcs">TOTAL PIECES</th>        
+    </tr>
+</table>
+<!-- HEADER DETAIL -->
+
+<!-- DETAIL -->
+<br/>
+<table style="width:100%;">
+    <tr>
+        <td class="detordrno">ORDER NO.:</td>
+        <td class="detordrnoval"><apex:outputText value="{!pdfDoc.poCliente}"/></td>
+    </tr>
+</table>
+
+<!-- repeat for each container ----------------------------------------------------------->
+<apex:repeat value="{!pdfDoc.containersPDF}" var="cntr">
+<br/>
+<table style="width:100%;">
+    <tr>
+        <td class="dtcncu">CONTAINER NO:</td>
+        <td class="dtcncd"><apex:outputText value="{!cntr.containerNumber}"/></td>
+        <td class="dtcnct">WEIGHT:</td>
+        <td class="dtcncc"><apex:outputText value="{!cntr.totalWeight}"/> KG</td>
+    </tr>
+    
+    <tr>
+        <td class="dtcncu">SEAL NO:</td>
+        <td class="dtcncd"><apex:outputText value="{!cntr.seal}"/></td>
+        <td class="dtcnct">VOLUME:</td>
+        <td class="dtcncc"><apex:outputText value="{!cntr.totalCBM}"/> CBM</td>
+    </tr>
+    
+    <tr>
+        <td class="dtcncu">TYPE:</td>
+        <td class="dtcncd">40HC</td>
+        <td class="dtcnct"></td>
+        <td class="dtcncc"></td>
+    </tr>
+
+</table>
+<br/>
+<table style="width:100%;">
+    <!-- repeat for each item ---------------------------------->
+<apex:repeat value="{!cntr.items}" var="item">
+    <tr>
+        <td class="itempgref"><apex:outputText value="{!item.pgRef}"/></td>
+        <td class="itemmark"><apex:outputText value="{!item.brandItemInvoice}"/></td>
+        <td class="itemnull">&nbsp;</td>
+        
+        <!-- td class="itemsdesc"><apex:outputText value="{!item.spanishName}"/></td -->
+        <td class="itemsdesc"><apex:outputText value="{!item.englishName}"/></td>        
+        
+        <td class="itemsqty"><apex:outputText value="{!ROUND(item.qty, 0)}"/></td>
+        <td class="itemscnt"><apex:outputText value="{!ROUND(item.cnt, 0)}"/></td>
+        <td class="itemspcs"><apex:outputText value="{!ROUND(item.units, 0)}"/></td>
+    </tr>
+    
+    <tr class="spacerow">
+        <td class="itempgref">&nbsp;</td>
+        <td class="itemmark">&nbsp;</td>
+        <td class="itemnull">&nbsp;</td>
+        <td class="itemsdesc">
+            <table style="width:100%;border-spacing: 0;border-collapse: collapse;">
+            <!-- repeat for each item feature ----------->
+            <apex:repeat value="{!item.features}" var="feat">            
+                <tr>
+                  <td class="{!feat.cssClassLbl}"><apex:outputText value="{!feat.featureName}"/></td>
+                  <td class="{!feat.cssClassVal}"><apex:outputText value="{!feat.featureValue}"/></td>
+                </tr>
+                
+                <!-- tr>
+                  <td class="itemfgrossw">GROSS WT:</td>
+                  <td class="itemfgrosswval">16,684.00 KG</td>
+                </tr>
+
+                <tr>
+                  <td class="itemfcbm">CBM:</td>
+                  <td class="itemfcbmval">67.9 CBM</td>
+                </tr>
+
+                <tr>
+                  <td class="itemfean">EAN:</td>
+                  <td class="itemfeanval">860009618329</td>
+                </tr -->
+            <!-- repeat for each item feature ----------->
+            </apex:repeat>
+            </table>
+        </td>
+        <td class="itemsqty">&nbsp;</td>
+        <td class="itemscnt">&nbsp;</td>
+        <td class="itemspcs">&nbsp;</td>
+    </tr>    
+    <!-- repeat for each item ---------------------------------->
+</apex:repeat>
+</table>     
+<!-- repeat for each container ----------------------------------------------------------->
+</apex:repeat>
+
+
+<br/>    
+<!--     
+<table style="width:100%;">
+    <tr>
+        <td class="dtcncu">CONTAINER NO:</td>
+        <td class="dtcncd">HAMU3025521</td>
+        <td class="dtcnct">WEIGHT:</td>
+        <td class="dtcncc">16,684.00 KG</td>
+    </tr>
+    
+    <tr>
+        <td class="dtcncu">SEAL NO:</td>
+        <td class="dtcncd">HLK1307264</td>
+        <td class="dtcnct">VOLUME:</td>
+        <td class="dtcncc">67.9 CBM</td>
+    </tr>
+    
+    <tr>
+        <td class="dtcncu">TYPE:</td>
+        <td class="dtcncd">40HC</td>
+        <td class="dtcnct"></td>
+        <td class="dtcncc"></td>
+    </tr>
+
+</table>
+    
+<br/>
+<table style="width:100%;">
+    <tr>
+        <td class="itempgref">G101024Q</td>
+        <td class="itemmark">SUNABLE</td>
+        <td class="itemnull">&nbsp;</td>
+        <td class="itemsdesc">MESA RESINA PLEGABLE BLANCO 122</td>
+        <td class="itemsqty">1940</td>
+        <td class="itemscnt">1940</td>
+        <td class="itemspcs">1940</td>        
+    </tr>
+    
+    <tr>
+        <td class="itempgref">&nbsp;</td>
+        <td class="itemmark">&nbsp;</td>
+        <td class="itemnull">&nbsp;</td>
+        <td class="itemsdesc">
+            <table style="width:100%;border-spacing: 0;border-collapse: collapse;">
+                <tr>
+                  <td class="itemfnetw">NET WT:</td>
+                  <td class="itemfnetwval">15,908.00 KG</td>
+                </tr>
+                
+                <tr>
+                  <td class="itemfgrossw">GROSS WT:</td>
+                  <td class="itemfgrosswval">16,684.00 KG</td>
+                </tr>
+
+                <tr>
+                  <td class="itemfcbm">CBM:</td>
+                  <td class="itemfcbmval">67.9 CBM</td>
+                </tr>
+
+                <tr>
+                  <td class="itemfean">EAN:</td>
+                  <td class="itemfeanval">860009618329</td>
+                </tr>
+            </table>
+        </td>
+        <td class="itemsqty">&nbsp;</td>
+        <td class="itemscnt">&nbsp;</td>
+        <td class="itemspcs">&nbsp;</td>
+    </tr>    
+</table>     
+ 
+--> 
+   
+<!-- DETAIL -->
+
+<!-- FOOTER DETAIL -->
+<br/>
+<table class="tblSummary">
+    <tr>
+        <td class="footerdsum">SUMMARY</td>
+        <td class="footerdqty"><apex:outputText value="{!ROUND(pdfDoc.summary.totalQty, 0)}"/></td>
+        <td class="footerdcnt"><apex:outputText value="{!ROUND(pdfDoc.summary.totalCnt, 0)}"/></td>
+        <td class="footerdpcs"><apex:outputText value="{!ROUND(pdfDoc.summary.totalUnits, 0)}"/></td>
+    </tr>
+</table>
+<!-- FOOTER DETAIL -->
+
+<!-- TOTALS -->
+
+<br/>
+<table class="tblTotals">
+    <tr>
+        <td class="totalnw">TOTAL NET WT:</td>
+        <td class="totalnwval"><apex:outputText value="{!pdfDoc.summary.totalNetWt}"/> KG</td>
+    </tr>
+    
+    <tr>
+        <td class="totalgw">TOTAL GROSS WT:</td>
+        <td class="totalgwval"><apex:outputText value="{!pdfDoc.summary.totalGrossWt}"/> KG</td>
+    </tr>
+    
+    <tr>
+        <td class="totalcbm">TOTAL CBM:</td>
+        <td class="totalcbmval"><apex:outputText value="{!pdfDoc.summary.totalCBM}"/> CBM</td>
+    </tr>        
+</table>
+
+
+<!-- TOTALS -->
+
+</body>
+
+</apex:page>

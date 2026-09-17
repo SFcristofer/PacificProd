@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Convenio_2__c</fullName>
+    <description>Guarda el valor de Opportunity.PlanificacionComercial__r.PorcentajeConvenio__c cuando se crea o modifica un Producto de Oportunidad</description>
+    <label>% Convenio</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Percent</type>
+</CustomField>

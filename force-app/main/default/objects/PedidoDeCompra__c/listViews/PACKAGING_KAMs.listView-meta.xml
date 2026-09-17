@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PACKAGING_KAMs</fullName>
+    <columns>NAME</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Indicador_Packaging__c</columns>
+    <columns>Tipo_de_dise_o_de_packaging__c</columns>
+    <columns>Revisi_n_descripci_n_comercial__c</columns>
+    <columns>Revisi_n_interna_comercial__c</columns>
+    <columns>Packaging_enviado_al_Cliente__c</columns>
+    <columns>Packagings_aprobados_por_el_Cliente__c</columns>
+    <columns>Dise_ador_Gr_fico__c</columns>
+    <columns>Propietario_de_la_Oportunidad__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>startsWith</operation>
+        <value>PE25,PE26,PE27,PE28,PE29,PE30</value>
+    </filters>
+    <filters>
+        <field>Estado2__c</field>
+        <operation>notEqual</operation>
+        <value>EMBARCADO</value>
+    </filters>
+    <filters>
+        <field>Indicador_Packaging__c</field>
+        <operation>notContain</operation>
+        <value>Concluido</value>
+    </filters>
+    <label>PACKAGING KAMs</label>
+</ListView>

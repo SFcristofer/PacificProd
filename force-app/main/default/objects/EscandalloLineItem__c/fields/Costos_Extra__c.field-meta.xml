@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Costos_Extra__c</fullName>
+    <formula>Gastos_Bancarios__c + Escandallo__r.GastosEnPuerto__c + Escandallo__r.GastosInspeccion__c + Escandallo__r.OtrosCostos__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Costos Extra</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

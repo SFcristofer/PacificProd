@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Loading_Inspection__c</fullName>
+    <description>Company responsible for the loading inspection.</description>
+    <inlineHelpText>Select the company that performs the loading inspection.</inlineHelpText>
+    <label>Loading Inspection by</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>SELF AUDIT</fullName>
+                <default>false</default>
+                <label>SELF INSPECTION</label>
+            </value>
+            <value>
+                <fullName>VERIFY</fullName>
+                <default>false</default>
+                <label>VERIFY</label>
+            </value>
+            <value>
+                <fullName>QIMA</fullName>
+                <default>false</default>
+                <label>QIMA</label>
+            </value>
+            <value>
+                <fullName>TELESCOPE</fullName>
+                <default>false</default>
+                <label>TELESCOPE</label>
+            </value>
+            <value>
+                <fullName>ASIA ABS</fullName>
+                <default>false</default>
+                <label>ASIA ABS</label>
+            </value>
+            <value>
+                <fullName>KROM</fullName>
+                <default>false</default>
+                <label>KROM</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

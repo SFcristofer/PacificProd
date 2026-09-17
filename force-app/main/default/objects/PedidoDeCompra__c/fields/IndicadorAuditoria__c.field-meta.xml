@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IndicadorAuditoria__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(
+    TEXT($User.LanguageLocaleKey),
+
+    /* --------- ENGLISH --------- */
+    &quot;en_US&quot;,
+    IF(
+        ISPICKVAL(c_Requiere_Auditoria__c, &quot;Si&quot;) &amp;&amp; AuditoriaAprobada__c,
+        IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;Approved&quot;) &amp; &quot; Approved&quot;,
+        
+        IF(
+            ISPICKVAL(c_Requiere_Auditoria__c, &quot;Si&quot;) &amp;&amp; NOT(AuditoriaAprobada__c),
+            IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;Pending&quot;) &amp; &quot; Pending&quot;,
+            
+            &quot;Not required&quot;
+        )
+    ),
+
+    /* --------- SPANISH (DEFAULT) --------- */
+    IF(
+        ISPICKVAL(c_Requiere_Auditoria__c, &quot;Si&quot;) &amp;&amp; AuditoriaAprobada__c,
+        IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;Aprobada&quot;) &amp; &quot; Aprobada&quot;,
+        
+        IF(
+            ISPICKVAL(c_Requiere_Auditoria__c, &quot;Si&quot;) &amp;&amp; NOT(AuditoriaAprobada__c),
+            IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;Pendiente&quot;) &amp; &quot; Pendiente&quot;,
+            
+            &quot;No requiere&quot;
+        )
+    )
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Indicador Auditoría</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

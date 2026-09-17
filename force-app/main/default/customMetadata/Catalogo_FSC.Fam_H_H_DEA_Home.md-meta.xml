@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>H-!DEA Home</label>
+    <protected>false</protected>
+    <values>
+        <field>Clave__c</field>
+        <value xsi:type="xsd:string">H</value>
+    </values>
+    <values>
+        <field>Clave_padre__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Clave_padre_inmediato__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Descripcion__c</field>
+        <value xsi:type="xsd:string">H-!DEA Home</value>
+    </values>
+    <values>
+        <field>ImagenSubF__c</field>
+        <value xsi:type="xsd:string">img/do-home-logo.svg</value>
+    </values>
+    <values>
+        <field>Imagen__c</field>
+        <value xsi:type="xsd:string">img/do-home.jpg</value>
+    </values>
+    <values>
+        <field>Tipo__c</field>
+        <value xsi:type="xsd:string">Familia</value>
+    </values>
+    <values>
+        <field>id_href__c</field>
+        <value xsi:type="xsd:string">H</value>
+    </values>
+</CustomMetadata>

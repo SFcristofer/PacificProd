@@ -1,0 +1,229 @@
+<apex:page standardController="PedidoDeCompra__c" showHeader="false" 
+    applyHtmlTag="false" applyBodyTag="false" renderAs="PDF" extensions="PurchaseOrder">
+    <head>
+
+<style>
+
+@page{
+
+margin:0.15in;
+
+}
+
+.tableClass{
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.tableClass td{
+    text-align: center;
+    font-size:8px;
+    padding-bottom:8px;
+}
+
+.headerRow{
+    padding: 5px;
+    text-align:center;
+    background-color: #CCE5FF;
+    border-top:1px solid;
+    border-bottom:1px solid;
+    font-size:8px;
+}
+.totalRow{
+    padding: 5px;
+    text-align:center;
+    background-color: #CCE5FF;
+    font-size:8px;
+    border-top:1px solid;
+    border-bottom:1px solid;
+    white-space:nowrap; 
+}
+
+
+.topData{
+    padding: 5px;
+    font-size:8px;
+}
+
+
+.topData td{
+    width:60px;
+    vertical-align:top;
+}
+
+.topDataExt{
+    width:220px;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.para{
+    margin-top: 8px;
+}
+
+.indent{
+    padding-left:130px;
+}
+
+.proformaTitle{
+    font-weight:bold;
+}
+
+.compTable {
+    background-color: #CCE5FF;
+}
+
+</style>
+
+</head> 
+
+    <body>
+        <apex:stylesheet value="{!URLFOR($Resource.pdfresources, 'sheet.css')}"/>
+        <apex:panelGrid columns="3" columnClasses="left,left, indent">
+            <apex:image value="{!URLFOR($Resource.pdfresources,'DB_logo.png')}" width="150px"/>
+            <apex:panelGrid columns="1" styleClass="companyTable" width="100%">
+                <!-- apex:outputText value="{!$Organization.Name}" styleClass="companyName"/ -->
+                <apex:outputText value="{!razonSocial}" styleClass="companyName"/>
+                <apex:outputText value="{!calle}"/>
+                <apex:outputText value="{!ciudad}, {!pais} {!division}"/>
+                <apex:outputText value="{!telefono} {!correo}"/>
+            </apex:panelGrid>
+            <!-- apex:panelGrid columns="1" styleClass="companyTable" -->
+            <apex:panelGrid columns="1" styleClass="compTable">
+                <apex:outputText value="Purchase Order" styleClass="proformaTitle"/>
+                <apex:outputText value="Order n: {!PedidoDeCompra__c.Name}"/>
+                <apex:outputText value=""/>
+                <apex:outputText value="{0, date, 'Date: ' dd/MM/YYYY}">
+                    <apex:param value="{!NOW()}" />
+                </apex:outputText>
+            </apex:panelGrid>
+        </apex:panelGrid>
+        <br/><br/><br/><br/>
+        <!--  apex:outputPanel layout="block" styleClass="line"/> -->
+        <apex:panelGrid columns="2" styleClass="topData">
+            <!-- apex:panelGrid columns="1" -->
+                <!-- apex:outputText value="To: {!PedidoDeCompra__c.Proveedor__r.Name}" styleClass="para"/ -->
+            <!-- /apex:panelGrid -->
+            <apex:panelGrid columns="1" styleClass="topDataExt bold">
+                <apex:outputText value="To: {!PedidoDeCompra__c.Proveedor__r.Name}" styleClass="para"/>         
+                <apex:outputText value="{!PedidoDeCompra__c.Proveedor__r.Name}"/>
+                <apex:outputText value="{!PedidoDeCompra__c.Proveedor__r.billingStreet}"/>
+                <apex:panelGroup >
+                    <apex:outputText value="{!PedidoDeCompra__c.Proveedor__r.billingCity}"/>
+                    <apex:outputText value=", {!PedidoDeCompra__c.Proveedor__r.billingState}"/>
+                    <apex:outputText value=" {!PedidoDeCompra__c.Proveedor__r.billingPostalCode}"/>
+                </apex:panelGroup>
+                <!-- apex:outputText value="Phone: {!PedidoDeCompra__c.Proveedor__r.phone}"/ -->
+                <apex:outputText value="Contact Person: {!PedidoDeCompra__c.Proveedor__r.Contacto_Comercial2__c}"/>
+            </apex:panelGrid>
+            <apex:panelGrid columns="1" styleClass="topDataExt">
+                <apex:outputText value="Loading Port: <strong>{!PedidoDeCompra__c.Proveedor__r.Puerto__c}, {!PedidoDeCompra__c.Proveedor__r.PaisDelPuerto__c}</strong>" escape="false"/>
+                <!-- apex:outputText value="ETD:"/ -->
+                <apex:outputText value="ETD: <strong>{0, date, dd/MM/YYYY}</strong>" escape="false">
+                    <apex:param value="{!PedidoDeCompra__c.Factory_ETD__c}"/>
+                </apex:outputText>
+                <!-- apex:outputText value="Total contenedores:"/> Aplicara solo para Proformas a nivel Estudio Proforma -->
+            </apex:panelGrid>
+            <!--apex:panelGrid columns="1" styleClass="topDataExt bold">
+                <apex:outputText value="{!PedidoDeCompra__c.Proveedor__r.Puerto__c}"/>
+                <apex:outputText value="{0, date, dd/MM/YYYY}">
+                    <apex:param value="{!PedidoDeCompra__c.Factory_ETD__c}"/>
+                </apex:outputText -- >
+                <!-- apex:outputText value="Total contenedores:"/> Aplicara solo para Proformas a nivel Estudio Proforma -->
+            <!-- /apex:panelGrid -->
+        </apex:panelGrid>
+        <!--  apex:outputPanel layout="block" styleClass="lineSmall"/>  -->
+        <br/><br/><br/><br/>
+        <apex:pageBlock >
+        <apex:pageBlockTable value="{!PedidoDeCompra__c.PedidoLineItems__r}" var="line" id="theTable" rowClasses="odd,even" 
+            styleClass="tableClass">
+            <apex:column >
+                <apex:facet name="header">Provider Reference</apex:facet>
+                <apex:outputText value="{!line.ProformaLineItem__r.Producto__r.Codigo_Proveedor2__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">DO Reference</apex:facet>
+                <apex:outputText value="{!line.ProformaLineItem__r.Producto__r.CodigoDeProductoBase__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Image</apex:facet>
+                <apex:image value="{!line.ProformaLineItem__r.Producto__r.ProformaImage__c}" width="100px" rendered="{!NOT(line.ProformaLineItem__r.Producto__r.ProformaImage__c == '[NO IMAGE]')}"/>
+                <apex:outputText value="[NO IMAGE]" rendered="{!(line.ProformaLineItem__r.Producto__r.ProformaImage__c == '[NO IMAGE]')}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">EAN</apex:facet>
+                <apex:outputText value="{!line.ProformaLineItem__r.Producto__r.Codigo_EAN2__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Master Pack</apex:facet>
+                <apex:outputField value="{!line.ProformaLineItem__r.Producto__r.Unidades_por_Masterbox2__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Description</apex:facet>
+                <apex:outputText value="{!line.ProformaLineItem__r.Producto__r.Descripcion_Larga__c}"/>
+                <br/>
+                <apex:outputText value="{!line.ProformaLineItem__r.Producto__r.PackagingPersonalizado__c}"/>
+                <apex:facet name="footer"><apex:outputText value="TOTAL IN USD"/></apex:facet>
+            </apex:column>
+            
+            <apex:column >
+                <apex:facet name="header"># of Items</apex:facet>
+                <apex:outputField value="{!line.Unidades__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header"># of Boxes</apex:facet>
+                <apex:outputField value="{!line.NumeroDeCajas__c}"/>
+                <apex:facet name="footer"><apex:outputText value="TOTAL"/></apex:facet>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">CBM</apex:facet>
+                <apex:outputText value="{!line.CBMMasterbox__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">TOTAL CBM</apex:facet>
+                <apex:outputText value="{!line.CBMTotal__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Price $</apex:facet>
+                <apex:outputField value="{!line.CostoOrigen__c}"/>
+            </apex:column>
+            <apex:column >
+                <apex:facet name="header">Line Total $</apex:facet>
+                <apex:outputField value="{!line.CostoOrigenTot__c}"/>
+                <apex:facet name="footer">
+                    <apex:outputText value="${0, number, ###,###,##0.00}">
+                        <apex:param value="{!totalCost}"/>
+                    </apex:outputText>
+                </apex:facet>
+            </apex:column>
+        </apex:pageBlockTable>
+        </apex:pageBlock>
+
+        <br/><br/><br/>
+        <apex:pageBlock >
+          <div style="text-align: center;">
+             <apex:outputText value="{!PedidoDeCompra__c.Comentarios_fabrica__c}"/>
+          </div>
+        </apex:pageBlock>
+
+        <br/><br/><br/>
+         <!-- apex:outputPanel layout="block" styleClass="lineSmall"/> -->
+        <apex:outputPanel layout="block" style="width:100%;height: 40px" id="separator"/>
+        <apex:outputPanel layout="block">
+            <apex:panelGrid columns="2" columnClasses="left,none" width="100%">
+                <apex:outputPanel >
+                    <apex:image value="{!URLFOR($Resource.pdfresources,'firma_vbd.jpg')}" width="150px"/>
+                </apex:outputPanel>
+                <apex:outputPanel layout="block" style="padding-left:50px">
+                    <span style="text-decoration: underline;font-weight: bold;"> Supplier Compliance: </span><br/>
+                    Full Name:<br/>
+                    Title:<br/>
+                    Date:<br/>
+                    Signature and seal:<br/>
+                </apex:outputPanel>
+            </apex:panelGrid>
+        </apex:outputPanel>
+    </body>
+</apex:page>

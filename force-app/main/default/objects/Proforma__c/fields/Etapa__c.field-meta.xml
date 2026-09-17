@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Etapa__c</fullName>
+    <description>Compras edita el campo, Ventas ve únicamente Proformas finalizadas.</description>
+    <inlineHelpText>Compras edita el campo, Ventas ve únicamente Proformas finalizadas.</inlineHelpText>
+    <label>Etapa</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Abierta</fullName>
+                <default>true</default>
+                <label>Abierta</label>
+            </value>
+            <value>
+                <fullName>En estudio</fullName>
+                <default>false</default>
+                <label>En estudio</label>
+            </value>
+            <value>
+                <fullName>Finalizada</fullName>
+                <default>false</default>
+                <label>Finalizada</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Feria__c</fullName>
+    <label>Feria</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>VIFA (Vietnam)</fullName>
+                <default>false</default>
+                <label>VIFA (Vietnam)</label>
+            </value>
+            <value>
+                <fullName>MIFF (Malasia)</fullName>
+                <default>false</default>
+                <label>MIFF (Malasia)</label>
+            </value>
+            <value>
+                <fullName>EFE (Malasia)</fullName>
+                <default>false</default>
+                <label>EFE (Malasia)</label>
+            </value>
+            <value>
+                <fullName>IFFS (Singapur)</fullName>
+                <default>false</default>
+                <label>IFFS (Singapur)</label>
+            </value>
+            <value>
+                <fullName>CIFF (China)</fullName>
+                <default>false</default>
+                <label>CIFF (China)</label>
+            </value>
+            <value>
+                <fullName>Canton Fair (Guangzhou - CN)</fullName>
+                <default>false</default>
+                <label>Canton Fair (Guangzhou - CN)</label>
+            </value>
+            <value>
+                <fullName>Canton Fair (Shanghai - CN)</fullName>
+                <default>false</default>
+                <label>Canton Fair (Shanghai - CN)</label>
+            </value>
+            <value>
+                <fullName>Expo Mueble (Guadalajara - MX)</fullName>
+                <default>false</default>
+                <label>Expo Mueble (Guadalajara - MX)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

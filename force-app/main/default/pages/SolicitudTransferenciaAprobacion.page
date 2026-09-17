@@ -1,0 +1,104 @@
+<apex:page controller="SolicitudTransferenciaController" lightningStyleSheets="true">
+  <style type="text/css">
+        .container {
+            display: block;
+            position: relative;
+            padding-left: 35px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            font-size: 22px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+    
+        .container input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+    
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 1rem;
+            width: 1rem;
+            background-color: #fff;
+            box-shadow: 0 0 3px #0070d2;
+        }
+    
+        .container input:checked ~ .checkmark {
+            background-color: #2196F3;
+        }
+    
+        .checkmark:after {
+            content: "";
+            position: absolute;
+            display: none;
+        }
+    
+        .container input:checked ~ .checkmark:after {
+            display: block;
+        }
+    
+        .container .checkmark:after {
+            left: 6px;
+            top: 3px;
+            width: 4px;
+            height: 8px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+        }
+    </style>
+    <apex:form >  
+      <apex:pageBlock >
+        <apex:pageBlockTable value="{!pedidosSeleccionados}" var="pt" id="theTable" rowClasses="odd,even" styleClass="tableClass">
+          <apex:column >
+            <apex:facet name="header">COMPANY</apex:facet>
+            <apex:outputText value="{!pt.pedido.Proforma__r.Cuenta__r.Parent.Sociedad__c}"/>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">ORDER</apex:facet>
+            <apex:outputLink value="/{!pt.pedido.Id}"><apex:outputText value="{!pt.pedido.Name}"/></apex:outputLink>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">PROVIDER</apex:facet>
+            <apex:outputText value="{!pt.pedido.Proveedor__r.Name}"/>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">PROVIDER INVOICE #</apex:facet>
+            <apex:outputText value="{!pt.pedido.Numero_de_Factura_Proveedor__c}"/>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">AMOUNT</apex:facet>
+            <apex:outputText value="{0, number, Currency}">
+              <apex:param value="{!pt.importe}" />
+            </apex:outputText>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">TYPE</apex:facet>
+            <apex:outputText value="{!pt.tipo}"/>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">TOTAL AMOUNT</apex:facet>
+            <apex:outputText value="{0, number, Currency}">
+              <apex:param value="{!pt.pedido.CostoOrigen__c}" />   
+            </apex:outputText>
+          </apex:column>
+          <apex:column >
+            <apex:facet name="header">INFORMATION</apex:facet>
+            <apex:outputText value="{!pt.informacion}"/>
+          </apex:column>
+        </apex:pageBlockTable>    
+      </apex:pageBlock>
+      <br/>
+      <apex:commandButton value="Return" action="{!regresar}" styleClass="next"/>
+      <apex:commandButton action="{!aprobar}" value="Approve" id="theButton"/>
+    </apex:form>
+  
+</apex:page>

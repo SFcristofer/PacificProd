@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>EstudioOportunidad__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <label>Estudio de Oportunidad</label>
+    <referenceTo>EstudioOportunidad__c</referenceTo>
+    <relationshipLabel>Producto de oportunidad</relationshipLabel>
+    <relationshipName>ProductosDeOportunidad</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

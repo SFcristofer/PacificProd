@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>justificante_de_pago__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>de uso del sistema</description>
+    <label>c_Justificante de pago</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

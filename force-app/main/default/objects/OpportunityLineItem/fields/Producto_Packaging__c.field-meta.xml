@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Producto_Packaging__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Si en una oportunidad se modifica el packaging de un producto es aqui donde queda registrado el cambio.</description>
+    <label>Producto Packaging</label>
+    <referenceTo>Product2</referenceTo>
+    <relationshipLabel>Producto de oportunidad</relationshipLabel>
+    <relationshipName>Producto_de_oportunidad</relationshipName>
+    <required>false</required>
+    <type>Lookup</type>
+</CustomField>

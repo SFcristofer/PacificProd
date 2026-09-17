@@ -1,0 +1,46 @@
+<apex:page controller="VerificacionCostoController" applyHtmlTag="false" showHeader="false" lightningStyleSheets="true">
+Cost Verification
+<apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!verifications}" var="vcp" id="table" title="Cost Verification">
+             <apex:column headerValue="Factory">
+                 <apex:outputText value="{!vcp.factoryName}"/>
+             </apex:column>
+             <apex:column headerValue="Code">
+                 <apex:outputText value="{!vcp.productCode}"/>
+             </apex:column>
+             <apex:column headerValue="Rev. Ops">
+                 <apex:outputText value="{!vcp.numOps}"/>
+             </apex:column>
+             <apex:column headerValue="Description">
+                 <apex:outputText value="{!vcp.productDescription}"/>
+             </apex:column>
+             <apex:column headerValue="Last Review Date">
+                 <apex:outputText value="{0, date, dd/MM/yyyy}">
+                     <apex:param value="{!vcp.fechaUltimaRevision}" />
+                 </apex:outputText>
+             </apex:column>
+             <apex:column headerValue="Days to Expiration">
+                 <apex:outputText value="{!vcp.diasVencimiento}"/>
+             </apex:column>
+             <apex:column headerValue="Send Token">
+                <a href="/apex/CreatesVerificationToken?id={!vcp.idFactory}&idVc={!vcp.idVerificacionCosto}">Generate Token</a>
+             </apex:column>
+             <apex:column headerValue="Status">
+                 <apex:outputText value="{!vcp.estado}"/>
+             </apex:column>
+             <apex:column headerValue="Status Date">
+                 <apex:outputText value="{0, date, dd/MM/yyyy}">
+                     <apex:param value="{!vcp.fechaStatus}" />
+                 </apex:outputText>
+             </apex:column>
+             <apex:column headerValue="Cost Approval">
+                <!-- a href="/apex/AprobacionCostoProducto?idFct={!vcp.idFactory}">Enlace aprobación</a -->
+                <apex:outputLink value="/apex/AprobacionCostoProducto?idFct={!vcp.idFactory}" id="appove" rendered="{!IF(vcp.estado=='Verificado', 'true', 'false')}">Approval Link</apex:outputLink>
+             </apex:column>
+             
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    
+    </apex:form>
+</apex:page>

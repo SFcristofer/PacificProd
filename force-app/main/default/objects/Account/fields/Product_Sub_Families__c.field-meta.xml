@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Sub_Families__c</fullName>
+    <description>Specific product subcategories manufactured by the supplier.</description>
+    <inlineHelpText>Select all product subfamilies this supplier can manufacture.</inlineHelpText>
+    <label>Product Sub-Families</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Living Room Furniture</fullName>
+                <default>false</default>
+                <label>Living Room Furniture</label>
+            </value>
+            <value>
+                <fullName>Kitchen &amp; Dining Furniture</fullName>
+                <default>false</default>
+                <label>Kitchen &amp; Dining Furniture</label>
+            </value>
+            <value>
+                <fullName>Office Furniture</fullName>
+                <default>false</default>
+                <label>Office Furniture</label>
+            </value>
+            <value>
+                <fullName>Storage &amp; Organization</fullName>
+                <default>false</default>
+                <label>Storage &amp; Organization</label>
+            </value>
+            <value>
+                <fullName>Outdoor Furniture</fullName>
+                <default>false</default>
+                <label>Outdoor Furniture</label>
+            </value>
+            <value>
+                <fullName>Outdoor Shades &amp; Structures</fullName>
+                <default>false</default>
+                <label>Outdoor Shades &amp; Structures</label>
+            </value>
+            <value>
+                <fullName>Outdoor Cooking</fullName>
+                <default>false</default>
+                <label>Outdoor Cooking</label>
+            </value>
+            <value>
+                <fullName>Camping &amp; Beach</fullName>
+                <default>false</default>
+                <label>Camping &amp; Beach</label>
+            </value>
+            <value>
+                <fullName>Folding Furniture</fullName>
+                <default>false</default>
+                <label>Folding Furniture</label>
+            </value>
+            <value>
+                <fullName>Fans</fullName>
+                <default>false</default>
+                <label>Fans</label>
+            </value>
+            <value>
+                <fullName>Indoor Heaters</fullName>
+                <default>false</default>
+                <label>Indoor Heaters</label>
+            </value>
+            <value>
+                <fullName>Outdoor Heaters</fullName>
+                <default>false</default>
+                <label>Outdoor Heaters</label>
+            </value>
+            <value>
+                <fullName>Air Treatment</fullName>
+                <default>false</default>
+                <label>Air Treatment</label>
+            </value>
+            <value>
+                <fullName>Kids&apos; furniture</fullName>
+                <default>false</default>
+                <label>Kids&apos; furniture</label>
+            </value>
+            <value>
+                <fullName>Outdoor Toys</fullName>
+                <default>false</default>
+                <label>Outdoor Toys</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>10</visibleLines>
+</CustomField>

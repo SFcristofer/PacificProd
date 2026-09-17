@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2026_Todas_las_Proformas</fullName>
+    <columns>NAME</columns>
+    <columns>RECORDTYPE</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Oportunidad__c</columns>
+    <columns>Tipo_de_Contenedores__c</columns>
+    <columns>CBMTotal__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ImporteTotal__c</columns>
+    <columns>Importe_Venta_Neto_Nuevo__c</columns>
+    <columns>MargenOperacion__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>startsWith</operation>
+        <value>PR26</value>
+    </filters>
+    <label>2026 - All Proformas</label>
+</ListView>

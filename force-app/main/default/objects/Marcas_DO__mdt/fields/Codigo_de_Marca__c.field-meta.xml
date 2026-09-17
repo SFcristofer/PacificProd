@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Codigo_de_Marca__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Letra que representa a la marca (en el código de producto)</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <inlineHelpText>Letter representing the brand in the product code</inlineHelpText>
+    <label>Código de Marca</label>
+    <length>1</length>
+    <required>true</required>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>

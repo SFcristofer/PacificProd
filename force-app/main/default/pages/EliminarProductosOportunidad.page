@@ -1,0 +1,81 @@
+<apex:page standardcontroller="Opportunity" lightningStylesheets="true" extensions="EliminarProductosOportunidadController">
+  <script>
+          function buttonsEnabled(enabled) {
+            var buttons = document.querySelectorAll('.btn');
+            if (enabled === false) {
+                for(i = 0; i < buttons.length; i++){
+                    buttons[i].setAttribute("disabled", "disabled");
+                }
+            } else {
+                for(i = 0; i < buttons.length; i++){
+                    buttons[i].removeAttribute("disabled");
+                }
+            } 
+        }
+  
+    function handleRedirect() {
+            console.log('Redirecting in the controller using pageReference was not refreshing the page');
+            window.location.href = '/lightning/r/Opportunity/{!Opportunity.Id}/view';
+    }
+    function disableAndDelete() {
+       // first, call the action function to post the form
+       deleteOLI();
+       // second, disable the buttons
+       buttonsEnabled(false);
+       // third, return false to prevent the click from
+       // posting the form a second time
+       return false;
+    }
+    function selectAllCheckboxes(obj,receivedInputID){
+        var inputCheckBox = document.getElementsByTagName("input");                  
+        for(var i=0; i<inputCheckBox.length; i++){          
+            if(inputCheckBox[i].id.indexOf(receivedInputID)!=-1){                                     
+                inputCheckBox[i].checked = obj.checked;
+            }
+        }
+    }
+  </script>
+   <h3>Delete Opportunity Products</h3>
+   <br/>
+   <table>
+     <tr>
+        <td><strong>Opportunity:</strong></td>
+        <td>{!opp.Name}</td>
+     </tr>
+   </table>
+ 
+   <br/>
+   <apex:form >   
+   <apex:pageBlock >
+       <apex:pageBlockTable value="{!oppLIWrapperList}" var="oliw" id="table" title="Opportunity Products">
+            <apex:column >
+              <apex:facet name="header">
+                <apex:inputCheckbox onclick="selectAllCheckboxes(this,'inputId')"/>
+              </apex:facet>
+              <apex:inputCheckbox value="{!oliw.selected}" id="inputId"/>
+            </apex:column>
+            <apex:column headerValue="Image">
+                <img src="/servlet/servlet.FileDownload?file={!oliw.oli.Product2.ProductoBase__r.IDImagen1__c}" style="height:150px; width:150px;" border="0"/>
+            </apex:column>
+            <apex:column headerValue="Code">
+                <apex:outputText value="{!oliw.oli.Product2.CodigoDeProductoBase__c}"/>
+            </apex:column>
+            <apex:column headerValue="Product">
+                <apex:outputText value="{!oliw.oli.Product2.Descripcion_Larga__c}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Sales Price">
+                <apex:outputText value="{!oliw.oli.CurrencyIsoCode} {!oliw.oli.UnitPrice}"/>
+            </apex:column>
+            <apex:column headerValue="Quantity">
+                <apex:outputField value="{!oliw.oli.Quantity}"/>
+            </apex:column>
+       </apex:pageBlockTable>
+   </apex:pageBlock>
+   
+    <apex:commandButton styleClass="blueButton" value="Cancel" oncomplete="handleRedirect()" id="regresar"/>   
+    <apex:commandButton styleClass="blueButton" onclick="disableAndDelete()" value="Delete" oncomplete="handleRedirect()" id="guardar"/>
+    <apex:actionFunction name="deleteOLI" action="{!deleteOppLineItems}" />
+   
+   </apex:form>
+</apex:page>

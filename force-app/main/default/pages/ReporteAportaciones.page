@@ -1,0 +1,196 @@
+<apex:page controller="ReporteAportaciones" standardStylesheets="false" applyHtmlTag="false"  applyBodyTag="false" showHeader="false">
+  <head>
+    <style>
+
+      .tabla {
+        border-collapse: collapse;
+      }
+
+      .tituloColumnaClave {
+         text-align: center;        
+         border-collapse: collapse;
+         border: 2px solid black;
+         background-color: #C5D9F0;
+         width: 60px;
+         font-size: 12px;
+         height: 15px; 
+         font-weight: bold;
+         padding: 8px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .tituloColumna {
+         text-align: center;        
+         white-space:pre-line;
+         border-collapse: collapse;
+         border: 2px solid black;
+         background-color: #C5D9F0;
+         width: 150px;
+         font-size: 12px;
+         height: 15px; 
+         font-weight: bold;
+         padding: 8px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .tituloColumnaTotales {
+         text-align: left;        
+         border-collapse: collapse;
+         border: 2px solid black;
+         background-color: #C4D69B;
+         width: 150px;
+         font-size: 12px;
+         height: 15px; 
+         font-weight: bold;
+         padding: 8px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .valueColumna {
+         border-collapse: collapse;
+         border: 1px solid black;
+         background-color: #FFFFFF;
+         width: 150px;
+         font-size: 12px;
+         height: 15px;
+         text-align: left;
+         font-weight: bold;
+         padding: 6px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .valueColumnaLim {
+         border-collapse: collapse;
+         border-top:    1px solid black;
+         border-right:  1px solid black;
+         border-bottom: 1px solid black;
+         border-left:   2px solid black;
+         background-color: #FFFFFF;
+         width: 90px;
+         font-size: 12px;
+         height: 15px;
+         text-align: center;
+         font-weight: bold;
+         padding: 6px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .valueColumnaNumber {
+         border-collapse: collapse;
+         border-top:    1px solid black;
+         border-right:  2px solid black;
+         border-bottom: 1px solid black;
+         border-left:   1px solid black;
+         background-color: #8DB4E2;
+         width: 150px;
+         font-size: 12px;
+         height: 15px;
+         text-align: center;
+         font-weight: bold;
+         padding: 6px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .valueColumnaNumberLim {
+         border-collapse: collapse;
+         border-top:    1px solid black;
+         border-right:  1px solid black;
+         border-bottom: 1px solid black;
+         border-left:   2px solid black;
+         background-color: #8DB4E2;
+         width: 150px;
+         font-size: 12px;
+         height: 15px;
+         text-align: center;
+         font-weight: bold;
+         padding: 6px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .valueColumnaTotal {
+         border-collapse: collapse;
+         border: 2px solid black;
+         background-color: #538DD5;
+         width: 150px;
+         font-size: 12px;
+         height: 15px;
+         text-align: center;
+         font-weight: bold;
+         padding: 8px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .valueColumnaTotalMargen {
+         border-collapse: collapse;
+         border: 2px solid black;
+         background-color: #FF0201;
+         width: 150px;
+         font-size: 12px;
+         height: 15px;
+         text-align: center;
+         font-weight: bold;
+         padding: 8px;
+         font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .tituloGeneral {
+        white-space:pre;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        font-family: Arial, Helvetica, sans-serif;        
+      }
+
+    </style>
+  </head>
+
+  <body>
+
+<table class="tabla">
+
+  <tr>
+    <td class="tituloGeneral" colspan="6"><apex:outputText >{!titulo}</apex:outputText></td>
+  </tr>
+
+  <tr>
+    <td>&nbsp;</td>
+  </tr>
+
+  <tr>
+   <td class="tituloColumna"><apex:outputText >CONTRIBUTION ID</apex:outputText></td>
+   <td class="tituloColumna"><apex:outputText >CUSTOMER CONTRIBUTION ID</apex:outputText></td>   
+   <td class="tituloColumna"><apex:outputText >COMPANY</apex:outputText></td>   
+   <td class="tituloColumna"><apex:outputText >CUSTOMER</apex:outputText></td>
+   <td class="tituloColumna"><apex:outputText >BUYER</apex:outputText></td>
+   <td class="tituloColumna"><apex:outputText >DATE</apex:outputText></td>      
+   <td class="tituloColumna"><apex:outputText >AMOUNT</apex:outputText></td>
+   <td class="tituloColumna"><apex:outputText >DESCRIPTION</apex:outputText></td>   
+
+  </tr>
+
+  <apex:repeat value="{!aportacionesRows}" var="row">  
+  <tr>
+   <td class="valueColumnaLim"><apex:outputText >{!row.aportacion.Name}</apex:outputText></td>
+   <td class="valueColumnaLim"><apex:outputText >{!row.aportacion.Numero_de_folio__c}</apex:outputText></td>   
+   <td class="valueColumnaLim"><apex:outputText >{!row.Sociedad}</apex:outputText></td>
+   <td class="valueColumna"><apex:outputText >{!row.parentAccount.Name}</apex:outputText></td>
+   <td class="valueColumna"><apex:outputText >{!row.compradorName}</apex:outputText></td>
+
+   <td class="valueColumna">
+     <apex:outputText value="{0, date, dd/MM/yyyy}">
+     <apex:param value="{!row.aportacion.Fecha__c}" />
+     </apex:outputText>
+   </td>
+   <td class="valueColumna">
+     <apex:outputText value="{0, number, Currency}">
+      <apex:param value="{!row.aportacion.Importe__c}" />
+     </apex:outputText>
+   </td>
+   <td class="valueColumna"><apex:outputText >{!row.aportacion.Descripcion__c}</apex:outputText></td>   
+  </tr> 
+  </apex:repeat> 
+</table>
+
+  </body>
+
+</apex:page>

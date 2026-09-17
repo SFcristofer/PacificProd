@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Enviar_a__c</fullName>
+    <description>Lista de emails a los que se debe enviar el mensaje separados por coma</description>
+    <inlineHelpText>List of email addresses to which the message should be sent, separated by commas</inlineHelpText>
+    <label>Enviar a</label>
+    <length>32768</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

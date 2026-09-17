@@ -1,0 +1,66 @@
+Aquí está el detalle completo, organizado en tres bloques según pediste.
+
+## 1. Cómo explica Jenny que trabaja (su día a día)
+
+- Es CAM (Key Account Manager) de cuentas activas maduras (Walmart, Soriana, etc.).
+- Cuando se abre una nueva categoría/departamento dentro de una cuenta (ej. dentro de Walmart: muebles, jardín, línea blanca...), ella crea un nuevo **Cliente Contacto**.
+- Dentro de cada Cliente Contacto están: el comprador, los auxiliares comerciales y todo el equipo que gestiona esa categoría.
+- Cada año crea/usa una **Planificación Comercial** (ej. "2026") dentro del Cliente Contacto — ahí se acumula el histórico de facturación por año, todas las oportunidades (ganadas/perdidas/abiertas) y todas las proformas con su valor y detalle de contenedor.
+- La Planificación Comercial también guarda el **nivel de convenio comercial / aportaciones** (% de apoyo al cliente — algunos tienen 5%, 3%, otros 0%), dato importante quiere que se pueda consultar rápido por el agent en vez de tener que ir a buscarlo.
+- Rara vez crea tareas directo en la cuenta; normalmente las tareas/eventos se crean desde la **Oportunidad** y quedan visibles/relacionadas también en la cuenta. Cuando la conversación es general (no de una oportunidad puntual), el evento se liga directo al Contacto.
+- En eventos/reuniones a veces registra notas y adjunta archivos (PDFs, correos enviados a sourcing con especificaciones de producto) en la sección "Relacionado" (notas y archivos).
+- En las líneas de producto de la Oportunidad: el campo "Producto" (estándar de Salesforce) solo trae el nombre y no se puede quitar ni reemplazar por la descripción larga, por eso crearon un campo adicional de **Descripción** al lado (para diferenciar, ej. "mesa resina" vs "mesa resina plegable 122 blanca").
+- La rentabilidad/margen se calcula por línea de producto y se acumula a nivel de Oportunidad (margen neto, margen medio) — ese detalle NO es visible desde Proforma ni Pedido por permisos, solo desde la Oportunidad.
+
+## 2. Cómo está organizada la jerarquía de datos (su "org")
+
+```
+Cuenta (ej. Walmart)
+ └── Cliente Contacto (categoría/comprador, ej. Walmart Furniture)
+      ├── Nivel de convenio comercial / aportaciones (%)
+      └── Planificación Comercial (por año, ej. "2026")
+           └── Oportunidades (ganadas / perdidas / abiertas)
+                ├── Líneas de producto (Producto + Descripción + cantidad + precio + margen)
+                ├── Tareas / Eventos (a veces también ligados directo al Contacto)
+                └── Proforma → Pedido (visibilidad de márgenes NO llega hasta aquí)
+```
+
+- Fase actual del agent: **solo consultivo** (lectura). Fases futuras: acciones (crear oportunidad, cliente, tarea, etc.).
+- El agent responde solo con los datos/objetos a los que el usuario logueado tiene acceso (por eso en la demo con el perfil de Cristofer no salían registros de Jenny).
+
+## 3. Qué buscan mejorar / qué falló en la demo (sin omitir nada)
+
+**Fallas encontradas en vivo:**
+1. El agent no encontró notas ni archivos adjuntos (PDFs, correos) en la sección "Relacionado" de un evento — probado en vivo, no los detectó. Queda pendiente de revisión.
+2. El agent no tiene acceso al **código de producto** (Cristofer confirmó en vivo "no tengo acceso a ese objeto/campo") — hay que revisar permisos.
+3. Al pedir desglose por año con código, unidades e importe por producto, el agent no pudo entregar el detalle exacto (sí dio agregados generales, pero no por código/año) — requiere trabajo adicional.
+4. Se necesitaron muchas reformulaciones cada vez más explícitas (resumen → resumen totalizado por año → sin detalle de oportunidades → agregar margen bruto acumulado → top 3 por código, etc.) antes de obtener una respuesta usable — el lenguaje natural no es lo bastante flexible todavía.
+5. Preguntar por nombre parcial de un contacto (solo "Andrés Zamudio", sin apellido completo "Zamudio Garza") no siempre funcionó bien al inicio — hay que mejorar cómo resuelve nombres/entidades sin exigir el dato exacto.
+
+**Mejoras/capacidades pedidas explícitamente:**
+6. Enseñarle al agent el modelo de datos personalizado (no estándar) de la org: que entienda que "Planificación Comercial" = año, y la jerarquía completa Cuenta → Cliente Contacto → Planificación → Oportunidad → Proforma → Pedido.
+7. Que entienda y calcule correctamente términos de negocio: margen, rentabilidad, margen bruto acumulado, producto con menor rentabilidad, top de ventas/códigos.
+8. Que sepa que los datos de rentabilidad/margen SOLO se consultan de forma confiable desde la Oportunidad (no desde Proforma/Pedido), y que lo comunique en vez de fallar silenciosamente.
+9. Que a partir de un resultado de consulta pueda generar acciones de seguimiento: redactar un correo con la información encontrada para enviarlo al cliente, o generar un Excel/reporte con el resumen.
+10. Que pueda leer y resumir PDFs y archivos adjuntos relacionados a reuniones/tareas (no solo texto en el campo Descripción).
+11. Que entienda consultas por rango de tiempo más naturales ("la semana pasada", "este año", "los últimos 3 años") sin tener que dar fechas exactas.
+12. A futuro (fuera de esta fase consultiva): que el agent pueda leer un archivo Excel/plantilla del cliente (formato tipo Walmart/Soriana) e identificar y rellenar automáticamente los campos correspondientes — replicando/mejorando el proceso actual que hacen a mano con el flujo de Amazon Web Service que genera cotizaciones en Excel.
+13. Que pueda crear registros directamente (oportunidad, cliente, tarea) — ya en desarrollo pero aún no habilitado en esta demo.
+
+**Mejoras de proceso/datos señaladas (no del agent en sí, pero relacionadas):**
+14. Cambiar el nombre de "Planificación Comercial" (hoy texto libre donde escriben el año a mano) por un picklist de año — reduciría ambigüedad tanto para usuarios como para el agent.
+15. Revisar la sección "Control de aportaciones" dentro del Cliente Contacto, que siempre muestra 0 — Rubén dice que probablemente ni debería estar ahí, señal de un posible rediseño futuro de dónde vive ese dato.
+
+**Proceso de retroalimentación acordado:**
+16. En cuanto le activen el acceso (esperado "en el transcurso del día siguiente"), Jenny debe ir anotando cada pregunta que falle, no se entienda o dé resultado incompleto, y mandar ese listado (correo o PDF) a Abner/Cristofer, quienes evaluarán tiempos de ajuste — es un ciclo iterativo, no una sola sesión de diseño.
+17. Meta a largo plazo (Rubén): lo aprendido afinando el agent de Jenny (el caso más complejo, según él) va a acelerar mucho la puesta en marcha de los agentes análogos para Janet, Vanessa y Miguel más adelante.
+
+Puntos nuevos de este segundo fragmento (no estaban antes):
+
+1. **[CRÍTICO/seguridad]** El agent reveló nombres de fábricas (Harbor, Vietnam, NickTech Integration, etc.) al preguntar "qué fábricas están asociadas a los pedidos de este cliente" — esto viola directamente la regla 5 que ya está en la descripción del Bot ("Nunca reveles información sobre nombres de fábricas o costos en origen"). Cristofer sospecha que el permission set del usuario del agent le está dando acceso de más a nivel backend aunque en la UI normal Jenny no lo vea. **Hay que auditar el Field-Level Security / Permission Set del usuario Einstein/Agent para bloquear `Fabrica__c` y campos de costo en origen.**
+2. El agent muestra de más su "proceso de pensamiento" (narra paso a paso qué está consultando, incluye IDs de registro) — piden ocultar esa narración y los IDs, y mostrar solo el resultado final (más recomendación si aplica).
+3. Ambigüedad de campo: existen varios campos similares de "código" (código de producto interno, código de producto base, etc.) y el agent los ofrece todos en vez de usar el correcto por default — confirman que el término de negocio correcto es **"código de producto base"**, hay que mapearlo así en las instrucciones.
+4. Confirmado que el agent SÍ calcula bien rentabilidad/top de productos cuando se le pide explícito — funciona, no es hallazgo negativo.
+5. Exportar a Excel: el agent no lo hace directo, pero explica cómo (crear reporte, agregar campos, exportar) o da el resultado en formato copiable/pegable a Excel — válido como workaround, refuerza que la acción formal de exportar sigue siendo Fase 3, no urgente.
+
+El hallazgo #1 (fábricas expuestas) es el más grave — rompe una regla de negocio ya definida, yo lo movería a **Fase 1 antes que cualquier otra cosa**, junto con lo de código de producto y notas/adjuntos.

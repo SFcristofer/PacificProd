@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha_Factura_Proveedor__c</fullName>
+    <description>Fecha en la que se emitió la factura del proveedor.</description>
+    <inlineHelpText>Date the invoice was issued by the supplier</inlineHelpText>
+    <label>Fecha factura proveedor</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

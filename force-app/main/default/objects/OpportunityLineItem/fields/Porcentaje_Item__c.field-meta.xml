@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Porcentaje_Item__c</fullName>
+    <defaultValue>0</defaultValue>
+    <description>% de descuento que aplica a la referencia específica. Incide en el calculo de márgenes.</description>
+    <inlineHelpText>% de descuento que aplica a la referencia específica. Incide en el calculo de márgenes.</inlineHelpText>
+    <label>% Puntual</label>
+    <precision>5</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Percent</type>
+</CustomField>

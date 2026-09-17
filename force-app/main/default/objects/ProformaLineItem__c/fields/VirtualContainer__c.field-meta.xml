@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>VirtualContainer__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Representa una agrupación por contenedor previo al envío del pedido. Usado por el sistema para soporte al armado proformas de mas de 1 contenedor.</description>
+    <inlineHelpText>Representa una agrupación por contenedor previo al envío del pedido. Usado por el sistema para soporte al armado proformas de mas de 1 contenedor.</inlineHelpText>
+    <label>Virtual Container</label>
+    <referenceTo>Virtual_Container__c</referenceTo>
+    <relationshipLabel>Proforma Line Items</relationshipLabel>
+    <relationshipName>Proforma_Line_Items</relationshipName>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

@@ -1,0 +1,24 @@
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" lightningStylesheets="true" Controller="PortalModifCostProdController">
+    <apex:stylesheet value="{!URLFOR($Resource.Portal, 'css/DO-Brands.css')}" />
+    <apex:image url="https://pacificglob.com/wp-content/uploads/logo.png" styleClass="header-image" alt="Salesforce" title="Salesforce"/>
+    <div class="portal-title">Providers Portal</div>
+    
+  <apex:PageMessages id="portalProvMsgs" rendered="true"/>
+
+  <style>
+   table, th, td {
+     border: 1px solid;
+     font-weight: bold;
+     padding: 15px;
+   }  
+  </style>
+
+  <table width="800px">
+    <tr>
+      <td>
+      <apex:outputText value="Thank you for updating the Price. Global Pacific team will review them and contact you if any further information is necessary" />
+      </td>
+    </tr>
+  </table>
+
+</apex:page>

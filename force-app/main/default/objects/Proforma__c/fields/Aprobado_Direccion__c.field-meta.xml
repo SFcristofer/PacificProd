@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aprobado_Direccion__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>De uso del sistema. Cuando se aprueba una proforma con margen bajo o que excede el monto de seguridad o que excede el Crédito Preaprobado, el sistema marca este campo</description>
+    <label>Aprobado Dirección</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>true</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

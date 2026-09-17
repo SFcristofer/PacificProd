@@ -1,0 +1,1 @@
+Product2 base = [SELECT Id, Family, Subfamilia__c, Clase__c FROM Product2 WHERE Id = '01tVT000001t3r7YAA']; Product2 factory = [SELECT Id FROM Product2 WHERE Id = '01tVT000001t3r8YAA']; factory.Family = base.Family; factory.Subfamilia__c = base.Subfamilia__c; factory.Clase__c = base.Clase__c; update factory;

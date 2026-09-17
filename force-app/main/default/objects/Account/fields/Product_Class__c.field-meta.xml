@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Product_Class__c</fullName>
+    <label>Product Classes</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Accent Chairs &amp; Recliners</fullName>
+                <default>false</default>
+                <label>Accent Chairs &amp; Recliners</label>
+            </value>
+            <value>
+                <fullName>Air Conditioner</fullName>
+                <default>false</default>
+                <label>Air Conditioner</label>
+            </value>
+            <value>
+                <fullName>Air Cooler</fullName>
+                <default>false</default>
+                <label>Air Cooler</label>
+            </value>
+            <value>
+                <fullName>Air Purifiers</fullName>
+                <default>false</default>
+                <label>Air Purifiers</label>
+            </value>
+            <value>
+                <fullName>Awnings</fullName>
+                <default>false</default>
+                <label>Awnings</label>
+            </value>
+            <value>
+                <fullName>Bar Stools</fullName>
+                <default>false</default>
+                <label>Bar Stools</label>
+            </value>
+            <value>
+                <fullName>Beach Carts &amp; Wagons</fullName>
+                <default>false</default>
+                <label>Beach Carts &amp; Wagons</label>
+            </value>
+            <value>
+                <fullName>Beach Chairs &amp; Umbrellas</fullName>
+                <default>false</default>
+                <label>Beach Chairs &amp; Umbrellas</label>
+            </value>
+            <value>
+                <fullName>Benches &amp; Ottomans</fullName>
+                <default>false</default>
+                <label>Benches &amp; Ottomans</label>
+            </value>
+            <value>
+                <fullName>Bookcases</fullName>
+                <default>false</default>
+                <label>Bookcases</label>
+            </value>
+            <value>
+                <fullName>Camping Accessories</fullName>
+                <default>false</default>
+                <label>Camping Accessories</label>
+            </value>
+            <value>
+                <fullName>Camping Chairs &amp; Tables</fullName>
+                <default>false</default>
+                <label>Camping Chairs &amp; Tables</label>
+            </value>
+            <value>
+                <fullName>Camping Tents</fullName>
+                <default>false</default>
+                <label>Camping Tents</label>
+            </value>
+            <value>
+                <fullName>Ceiling Fans</fullName>
+                <default>false</default>
+                <label>Ceiling Fans</label>
+            </value>
+            <value>
+                <fullName>Ceramic &amp; Fan Heaters</fullName>
+                <default>false</default>
+                <label>Ceramic &amp; Fan Heaters</label>
+            </value>
+            <value>
+                <fullName>Chairs</fullName>
+                <default>false</default>
+                <label>Chairs</label>
+            </value>
+            <value>
+                <fullName>Charcoal Grills</fullName>
+                <default>false</default>
+                <label>Charcoal Grills</label>
+            </value>
+            <value>
+                <fullName>Closet Storage</fullName>
+                <default>false</default>
+                <label>Closet Storage</label>
+            </value>
+            <value>
+                <fullName>Coffee Tables, Side &amp; End Tables</fullName>
+                <default>false</default>
+                <label>Coffee Tables, Side &amp; End Tables</label>
+            </value>
+            <value>
+                <fullName>Console Tables &amp; Sideboards</fullName>
+                <default>false</default>
+                <label>Console Tables &amp; Sideboards</label>
+            </value>
+            <value>
+                <fullName>Coolers &amp; Thermal Bags</fullName>
+                <default>false</default>
+                <label>Coolers &amp; Thermal Bags</label>
+            </value>
+            <value>
+                <fullName>Dining Chairs</fullName>
+                <default>false</default>
+                <label>Dining Chairs</label>
+            </value>
+            <value>
+                <fullName>Dining Sets</fullName>
+                <default>false</default>
+                <label>Dining Sets</label>
+            </value>
+            <value>
+                <fullName>Dining Storage</fullName>
+                <default>false</default>
+                <label>Dining Storage</label>
+            </value>
+            <value>
+                <fullName>Dining Tables</fullName>
+                <default>false</default>
+                <label>Dining Tables</label>
+            </value>
+            <value>
+                <fullName>Desk &amp; Floor Fans</fullName>
+                <default>false</default>
+                <label>Desk &amp; Floor Fans</label>
+            </value>
+            <value>
+                <fullName>Desks</fullName>
+                <default>false</default>
+                <label>Desks</label>
+            </value>
+            <value>
+                <fullName>Electric Grills</fullName>
+                <default>false</default>
+                <label>Electric Grills</label>
+            </value>
+            <value>
+                <fullName>Electric Heaters &amp; Convectors</fullName>
+                <default>false</default>
+                <label>Electric Heaters &amp; Convectors</label>
+            </value>
+            <value>
+                <fullName>Fire Pits &amp; Fire Tables</fullName>
+                <default>false</default>
+                <label>Fire Pits &amp; Fire Tables</label>
+            </value>
+            <value>
+                <fullName>Folding Benches</fullName>
+                <default>false</default>
+                <label>Folding Benches</label>
+            </value>
+            <value>
+                <fullName>Folding Chairs</fullName>
+                <default>false</default>
+                <label>Folding Chairs</label>
+            </value>
+            <value>
+                <fullName>Folding Sets (Tables + Chairs)</fullName>
+                <default>false</default>
+                <label>Folding Sets (Tables + Chairs)</label>
+            </value>
+            <value>
+                <fullName>Garden Decoration</fullName>
+                <default>false</default>
+                <label>Garden Decoration</label>
+            </value>
+            <value>
+                <fullName>Garden Tools &amp; Equipment</fullName>
+                <default>false</default>
+                <label>Garden Tools &amp; Equipment</label>
+            </value>
+            <value>
+                <fullName>Garment Clothes Storage</fullName>
+                <default>false</default>
+                <label>Garment Clothes Storage</label>
+            </value>
+            <value>
+                <fullName>Gas Grills</fullName>
+                <default>false</default>
+                <label>Gas Grills</label>
+            </value>
+            <value>
+                <fullName>Gas Heaters</fullName>
+                <default>false</default>
+                <label>Gas Heaters</label>
+            </value>
+            <value>
+                <fullName>Grill Accessories</fullName>
+                <default>false</default>
+                <label>Grill Accessories</label>
+            </value>
+            <value>
+                <fullName>Hammocks &amp; Swings</fullName>
+                <default>false</default>
+                <label>Hammocks &amp; Swings</label>
+            </value>
+            <value>
+                <fullName>Hanging &amp; Drying</fullName>
+                <default>false</default>
+                <label>Hanging &amp; Drying</label>
+            </value>
+            <value>
+                <fullName>Humidifiers &amp; Dehumidifiers</fullName>
+                <default>false</default>
+                <label>Humidifiers &amp; Dehumidifiers</label>
+            </value>
+            <value>
+                <fullName>Infrared &amp; Halogen Heaters</fullName>
+                <default>false</default>
+                <label>Infrared &amp; Halogen Heaters</label>
+            </value>
+            <value>
+                <fullName>Kids&apos; Beds &amp; Bunk Beds</fullName>
+                <default>false</default>
+                <label>Kids&apos; Beds &amp; Bunk Beds</label>
+            </value>
+            <value>
+                <fullName>Kids&apos; Chairs &amp; Tables</fullName>
+                <default>false</default>
+                <label>Kids&apos; Chairs &amp; Tables</label>
+            </value>
+            <value>
+                <fullName>Kids&apos; Storage</fullName>
+                <default>false</default>
+                <label>Kids&apos; Storage</label>
+            </value>
+            <value>
+                <fullName>Kitchen Carts &amp; Islands</fullName>
+                <default>false</default>
+                <label>Kitchen Carts &amp; Islands</label>
+            </value>
+            <value>
+                <fullName>Loveseats</fullName>
+                <default>false</default>
+                <label>Loveseats</label>
+            </value>
+            <value>
+                <fullName>Office Accessories</fullName>
+                <default>false</default>
+                <label>Office Accessories</label>
+            </value>
+            <value>
+                <fullName>Office Chairs</fullName>
+                <default>false</default>
+                <label>Office Chairs</label>
+            </value>
+            <value>
+                <fullName>Office Storage</fullName>
+                <default>false</default>
+                <label>Office Storage</label>
+            </value>
+            <value>
+                <fullName>Oil Filled Radiators</fullName>
+                <default>false</default>
+                <label>Oil Filled Radiators</label>
+            </value>
+            <value>
+                <fullName>Outdoor Benches</fullName>
+                <default>false</default>
+                <label>Outdoor Benches</label>
+            </value>
+            <value>
+                <fullName>Outdoor Chairs &amp; Loungers</fullName>
+                <default>false</default>
+                <label>Outdoor Chairs &amp; Loungers</label>
+            </value>
+            <value>
+                <fullName>Outdoor Dining Sets</fullName>
+                <default>false</default>
+                <label>Outdoor Dining Sets</label>
+            </value>
+            <value>
+                <fullName>Outdoor Playsets</fullName>
+                <default>false</default>
+                <label>Outdoor Playsets</label>
+            </value>
+            <value>
+                <fullName>Outdoor Seating Sets</fullName>
+                <default>false</default>
+                <label>Outdoor Seating Sets</label>
+            </value>
+            <value>
+                <fullName>Outdoor Storage</fullName>
+                <default>false</default>
+                <label>Outdoor Storage</label>
+            </value>
+            <value>
+                <fullName>Outdoor Tables</fullName>
+                <default>false</default>
+                <label>Outdoor Tables</label>
+            </value>
+            <value>
+                <fullName>Pergolas &amp; Gazebos</fullName>
+                <default>false</default>
+                <label>Pergolas &amp; Gazebos</label>
+            </value>
+            <value>
+                <fullName>Pizza Oven</fullName>
+                <default>false</default>
+                <label>Pizza Oven</label>
+            </value>
+            <value>
+                <fullName>Plant Containers &amp; Planters</fullName>
+                <default>false</default>
+                <label>Plant Containers &amp; Planters</label>
+            </value>
+            <value>
+                <fullName>Quartz &amp; Carbon Heaters</fullName>
+                <default>false</default>
+                <label>Quartz &amp; Carbon Heaters</label>
+            </value>
+            <value>
+                <fullName>Rechargeable Fans</fullName>
+                <default>false</default>
+                <label>Rechargeable Fans</label>
+            </value>
+            <value>
+                <fullName>Sectional Sofas</fullName>
+                <default>false</default>
+                <label>Sectional Sofas</label>
+            </value>
+            <value>
+                <fullName>Shelving Units</fullName>
+                <default>false</default>
+                <label>Shelving Units</label>
+            </value>
+            <value>
+                <fullName>Shoe Storage</fullName>
+                <default>false</default>
+                <label>Shoe Storage</label>
+            </value>
+            <value>
+                <fullName>Sink Storage &amp; Organizers</fullName>
+                <default>false</default>
+                <label>Sink Storage &amp; Organizers</label>
+            </value>
+            <value>
+                <fullName>Sofa Beds</fullName>
+                <default>false</default>
+                <label>Sofa Beds</label>
+            </value>
+            <value>
+                <fullName>Sofas &amp; Couches</fullName>
+                <default>false</default>
+                <label>Sofas &amp; Couches</label>
+            </value>
+            <value>
+                <fullName>Stand &amp; Tower Fans</fullName>
+                <default>false</default>
+                <label>Stand &amp; Tower Fans</label>
+            </value>
+            <value>
+                <fullName>Stationery Storage</fullName>
+                <default>false</default>
+                <label>Stationery Storage</label>
+            </value>
+            <value>
+                <fullName>Storage Bins &amp; Boxes</fullName>
+                <default>false</default>
+                <label>Storage Bins &amp; Boxes</label>
+            </value>
+            <value>
+                <fullName>Storage Carts &amp; Drawers</fullName>
+                <default>false</default>
+                <label>Storage Carts &amp; Drawers</label>
+            </value>
+            <value>
+                <fullName>Storage Furniture</fullName>
+                <default>false</default>
+                <label>Storage Furniture</label>
+            </value>
+            <value>
+                <fullName>Swings &amp; Ride-ons</fullName>
+                <default>false</default>
+                <label>Swings &amp; Ride-ons</label>
+            </value>
+            <value>
+                <fullName>TV Stands &amp; Entertainment Centers</fullName>
+                <default>false</default>
+                <label>TV Stands &amp; Entertainment Centers</label>
+            </value>
+            <value>
+                <fullName>Umbrellas</fullName>
+                <default>false</default>
+                <label>Umbrellas</label>
+            </value>
+            <value>
+                <fullName>Umbrellas Accessories</fullName>
+                <default>false</default>
+                <label>Umbrellas Accessories</label>
+            </value>
+            <value>
+                <fullName>Utility Folding Tables (HDPE)</fullName>
+                <default>false</default>
+                <label>Utility Folding Tables (HDPE)</label>
+            </value>
+            <value>
+                <fullName>Wall Fans</fullName>
+                <default>false</default>
+                <label>Wall Fans</label>
+            </value>
+            <value>
+                <fullName>Watering &amp; Irrigation</fullName>
+                <default>false</default>
+                <label>Watering &amp; Irrigation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Informe_de_Auditoria__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>De uso del sistema, cuando se adjunta el informe de auditoria se marca el campo mediante un proceso automatizado.</description>
+    <label>c_Informe de Auditoría</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

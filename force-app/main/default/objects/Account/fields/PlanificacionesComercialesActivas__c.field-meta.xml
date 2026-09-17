@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PlanificacionesComercialesActivas__c</fullName>
+    <label>Planificaciones comerciales activas</label>
+    <summaryFilterItems>
+        <field>PlanificacionComercial__c.Activa__c</field>
+        <operation>equals</operation>
+        <value>True</value>
+    </summaryFilterItems>
+    <summaryForeignKey>PlanificacionComercial__c.Cuenta__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackHistory>false</trackHistory>
+    <type>Summary</type>
+</CustomField>

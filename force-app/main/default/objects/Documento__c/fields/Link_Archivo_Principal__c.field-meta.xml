@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Link_Archivo_Principal__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(ISBLANK(Archivo_Principal__c),
+&quot;-- Sin Datos --&quot;,
+IF($User.UIThemeDisplayed=&quot;Theme4d&quot;,
+HYPERLINK(&quot;/lightning/r/ContentDocument/&quot; +  Archivo_Principal__c  + &quot;/view?0.source=alohaHeader&quot;,
+&quot;Archivo Principal&quot;),
+HYPERLINK(&quot;/&quot; +  Archivo_Principal__c, &quot;Archivo Principal&quot;)
+))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Link Archivo Principal</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

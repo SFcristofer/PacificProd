@@ -1,0 +1,76 @@
+<apex:page standardController="Product2" 
+            extensions="CloneProduct" lightningStylesheets="true">
+    <style>
+        .tableHeader{
+            background:#596E8F;
+            color:#FFF;
+            padding: 5px;
+        }
+        .tableCell{
+            padding: 5px;
+            border:1px solid #556A8C;
+        }
+        .formItem{
+            margin:10px;
+        }
+        .blueButton{
+            background-color: #2196F3 !important;
+            color: #fff !important;
+        }
+        .grayButton{
+            background-color: #DCDCDC !important;
+            color: #696969 !important;
+        }
+    </style>
+    <script>
+        function disableBtnAndSave(btn){
+            btn.disabled = true;
+            btn.className='grayButton';
+            btn.value='Cloning..';
+            cloneProd();
+        }
+    </script>
+    <apex:pageMessages />
+        <table>
+            <tr>
+                <th class="tableCell tableHeader" colspan="2"> Original Product </th>
+            </tr>
+            <tr>
+                <td class="tableCell"> Name </td>
+                <td class="tableCell"> <apex:outputField value="{!Product2.Name}" /> </td>
+            </tr>
+            <tr>
+                <td class="tableCell"> Code </td>
+                <td class="tableCell"> <apex:outputField value="{!Product2.ProductCode}" /> </td>
+            </tr>
+            <tr>
+                <td class="tableCell"> Brand </td>
+                <td class="tableCell"> <apex:outputField value="{!Product2.Marca__c}" /> </td>
+            </tr>
+            <tr>
+                <td class="tableCell"> Color </td>
+                <td class="tableCell"> <apex:outputField value="{!Product2.Color__c}" /> </td>
+            </tr>
+        </table>
+    <apex:form id="mainForm">
+        <apex:outputPanel rendered="{!AND(NOT(modifyBrand), NOT(modifyColor))}">
+            <apex:commandButton styleClass="formItem" value="New Brand" action="{!setMBrand}" reRender="mainForm" rendered="{!newBrandEnabled}"/>
+            <apex:commandButton styleClass="formItem" value="New Color" action="{!setMColor}" reRender="mainForm" rendered="{!newColorEnabled}"/>
+        </apex:outputPanel>
+        <apex:outputPanel rendered="{!OR(modifyBrand, modifyColor)}">
+            <apex:outputPanel rendered="{!modifyBrand}">
+                <apex:outputLabel for="brands" value="New Brand" />
+                <apex:selectList styleClass="formItem" value="{!newBrand}" multiselect="false" size="1" id="brands">
+                    <apex:selectOptions value="{!altBrands}"/>
+                </apex:selectList><p/>
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!modifyColor}">
+                <apex:outputLabel for="color" value="New Color" />
+                <apex:inputText styleClass="formItem" value="{!newColor}" id="color"/><p/>
+            </apex:outputPanel>
+            <apex:actionFunction name="cloneProd" action="{!cloneWithFactory}" />
+            <apex:commandButton styleClass="blueButton" onClick="disableBtnAndSave(this)" value="Clone with Factory" />
+        </apex:outputPanel>
+    </apex:form>
+    
+</apex:page>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comentario_atendido__c</fullName>
+    <defaultValue>true</defaultValue>
+    <description>Indica si el comentario hecho sobre un porducto de oportunidad ha sido atendido.</description>
+    <label>Comentario atendido</label>
+    <type>Checkbox</type>
+</CustomField>

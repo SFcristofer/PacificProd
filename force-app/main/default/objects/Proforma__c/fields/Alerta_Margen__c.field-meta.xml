@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Alerta_Margen__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( MargenOperacion__c &lt; 0.18,
+IMAGE(&quot;/resource/redCircle&quot;, &apos;rojo&apos; , 10, 10) + &quot;    MARGEN BAJO (&quot; + RIGHT(TEXT(FLOOR(MargenOperacion__c * 100)), 2) &amp; &quot;,&quot; &amp; 
+IF( 
+  MOD(MargenOperacion__c * 100, 1) * 100 &lt; 10, 
+  &quot;0&quot; &amp; TEXT(ROUND(MOD(MargenOperacion__c * 100, 1), 2) * 100), 
+  TEXT(MIN(ROUND(MOD(MargenOperacion__c * 100, 1), 2) * 100, 99)) 
+) &amp; &quot;%)&quot;,
+IMAGE(&quot;/resource/greenCircle&quot;, &quot;verde&quot; , 10, 10) + &quot;    OK!&quot;)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Alerta Margen Bajo</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

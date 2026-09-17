@@ -1,0 +1,1190 @@
+<apex:page showHeader="false" standardController="PedidoDeCompra__c" extensions="AgentMailController" standardStylesheets="false" applyHtmlTag="false"  applyBodyTag="false">
+
+        <head>
+            <title>PE19144 MBL DRAFT</title>
+            <style type="text/css" nonce="E9DtGe8xcEE2dwfgC8HneA">
+
+                @page {
+                    size: A4 landscape;
+                }
+                
+                .grid-container {
+                    overflow: visible;
+                    background: white;
+                }
+        
+                .grid-table-container {
+                    overflow: visible;
+                }
+        
+                .dash {
+                    padding: 0 6px;
+                }
+        
+                .ritz .waffle a {
+                    color: inherit;
+                }
+        
+                .ritz .waffle .s18 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s9 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s23 {
+                    border-left: none;
+                    border-bottom: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: center;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s5 {
+                    border-bottom: 1px DOTTED #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s16 {
+                    border-left: none;
+                    border-bottom: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s11 {
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'SimSun';
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s3 {
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Calibri', Arial;
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s22 {
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'SimSun';
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s4 {
+                    border-bottom: 1px DOTTED #000000;
+                    border-right: 1px DOTTED #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s24 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: center;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s45 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s30 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s25 {
+                    border-bottom: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #ffffff;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s34 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 8pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s53 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s1 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s19 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: center;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s51 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Calibri', Arial;
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s17 {
+                    border-left: none;
+                    border-bottom: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: center;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s43 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s46 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Calibri', Arial;
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s33 {
+                    border-left: none;
+                    border-right: none;
+                    background-color: #ffffff;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s47 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #ff0000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s27 {
+                    border-bottom: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s20 {
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #ffffff;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s2 {
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Calibri', Arial;
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s39 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Calibri', Arial;
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s48 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s14 {
+                    border-bottom: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s49 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s35 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s36 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s41 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s0 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 16pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s40 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s8 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px DOTTED #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s10 {
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'Arial';
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s31 {
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s15 {
+                    border-right: none;
+                    border-bottom: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s38 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s21 {
+                    background-color: #ffffff;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s13 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    color: #000000;
+                    font-family: 'Arial';
+                    font-size: 8pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s42 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Calibri', Arial;
+                    font-size: 12pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s7 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s50 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s6 {
+                    border-right: 1px DOTTED #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: top;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s29 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s32 {
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s37 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ff0000;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s28 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s44 {
+                    border-bottom: 1px SOLID transparent;
+                    border-right: 1px SOLID #000000;
+                    background-color: #deeaf6;
+                    text-align: center;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: normal;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s12 {
+                    border-right: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: center;
+                    color: #000000;
+                    font-family: 'Arial';
+                    font-size: 8pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s26 {
+                    border-bottom: 1px SOLID #000000;
+                    background-color: #ffffff;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+        
+                .ritz .waffle .s52 {
+                    border-bottom: 1px SOLID #000000;
+                    border-right: 1px SOLID transparent;
+                    background-color: #ff0000;
+                    text-align: left;
+                    font-weight: bold;
+                    color: #000000;
+                    font-family: 'docs-Arimo', Arial;
+                    font-size: 10pt;
+                    vertical-align: middle;
+                    white-space: nowrap;
+                    direction: ltr;
+                    padding: 0px 3px 0px 3px;
+                }
+            </style>
+        </head>
+        
+        <body>
+            <div class="ritz grid-container" dir="ltr">
+            
+            <table class="waffle no-grid" cellspacing="0" cellpadding="0">
+                <thead>
+                    <tr>
+                        <th class="row-header freezebar-origin-ltr header-shim row-header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:111px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                        <th style="width:94px" class="header-shim"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="height:20px;">
+                        <td class="s0" colspan="16">SHIPPING ORDER </td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s1" colspan="11"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;color:#000000;">Shipper
+                            </span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;color:#ff0000;">(Full
+                                name and complete address) </span><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">标注*的是必填项！！！</span>
+                        </td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4">Company:</td>
+                        <td class="s5" colspan="10">{!sociedad.Razon_Social__c}</td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s6">Address:</td>
+                        <td class="s7" colspan="10">{!sociedad.Calle__c}</td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4"></td>
+                        <td class="s5" colspan="10">{!sociedad.Ciudad__c}</td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4"></td>
+                        <td class="s5" colspan="10">{!sociedad.Division__c}</td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4">Tel:</td>
+                        <td class="s5" colspan="10">{!sociedad.Telefono__c}</td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s8">Ctc:</td>
+                        <td class="s9" colspan="10">Veronica Bernardo (Email: veronica.bernardo@pacificglob.com) </td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s1" colspan="11"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Consignee (Full
+                                name and complete address)</span></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4">Company:</td>
+                        <td class="s5" colspan="10">{!nameTopParent}</td>
+                        <td class="s10" colspan="5"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s6">Address:</td>
+                        <td class="s7" colspan="10">{!topParent.Consignee_Linea_2__c}</td>
+                        <td class="s11" colspan="5"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4"></td>
+                        <td class="s5" colspan="10">{!topParent.Consignee_Linea_3__c}</td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4"></td>
+                        <td class="s5" colspan="10">{!topParent.Consignee_Linea_4__c}</td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4"></td>
+                        <td class="s5" colspan="10">{!topParent.Consignee_Linea_5__c}</td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s2"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4">Tel:</td>
+                        <td class="s5" colspan="10"></td>
+                        <td class="s12" colspan="5"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s8">Ctc:</td>
+                        <td class="s9" colspan="10"></td>
+                        <td class="s13" colspan="5"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s1" colspan="11"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Notify Party
+                                (Full name and complete address of notify party where goods are carried under a negotiable
+                                "to order" B/L)</span></td>
+                        <td class="s14" colspan="5"><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Delivery Agent
+                                (Full name and complete address)</span></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4">Company:</td>
+                        <td class="s5" colspan="10">{!topParent.Notify_Party_Linea_1__c}</td>
+                        <td class="s9" colspan="5">{!topParent.Delivery_Agent_Company__c}</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s6">Address:</td>
+                        <td class="s7" colspan="10">{!topParent.Notify_Party_Linea_2__c}</td>
+                        <td class="s9" colspan="5">{!topParent.Delivery_Agent_Address_1__c}</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4"></td>
+                        <td class="s5" colspan="10">{!topParent.Notify_Party_Linea_3__c}</td>
+                        <td class="s9" colspan="5">{!topParent.Delivery_Agent_Address_2__c}</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4"></td>
+                        <td class="s5" colspan="10">{!topParent.Notify_Party_Linea_4__c}</td>
+                        <td class="s9" colspan="5">{!topParent.Delivery_Agent_Address_3__c}</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4"></td>
+                        <td class="s5" colspan="10">{!topParent.Notify_Party_Linea_5__c}</td>
+                        <td class="s9" colspan="5">{!topParent.Delivery_Agent_Address_4__c}</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s4">Tel:</td>
+                        <td class="s5" colspan="10">{!topParent.Notify_Party_Linea_6__c}</td>
+                        <td class="s9" colspan="5">{!topParent.Delivery_Agent_CTC__c}</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s8">Ctc:</td>
+                        <td class="s9" colspan="10">{!topParent.Notify_Party_Linea_7__c}</td>
+                        <td class="s9" colspan="5">{!topParent.Delivery_Agent_Phone__c}</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s15 softmerge">
+                            <div class="softmerge-inner" style="width: 186px; left: -1px;"><span
+                                    style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                    style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Place of
+                                    Receipt</span></div>
+                        </td>
+                        <td class="s16"></td>
+                        <td class="s17" colspan="4"></td>
+                        <td class="s18" colspan="2"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Port of
+                                Loading</span></td>
+                        <td class="s19" colspan="3">{!PedidoDeCompra__c.Proveedor__r.Puerto__c}</td>
+                        <td class="s20"></td>
+                        <td class="s21"></td>
+                        <td class="s21"></td>
+                        <td class="s22"></td>
+                        <td class="s3"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s15 softmerge">
+                            <div class="softmerge-inner" style="width: 186px; left: -1px;"> Port of Discharge</div>
+                        </td>
+                        <td class="s16"></td>
+                        <td class="s23" colspan="4">{!PedidoDeCompra__c.Puerto_de_destino__c}</td>
+                        <td class="s18" colspan="2"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Place of
+                                Delivery</span></td>
+                        <td class="s24" colspan="3"></td>
+                        <td class="s25"></td>
+                        <td class="s26"></td>
+                        <td class="s26"></td>
+                        <td class="s27"></td>
+                        <td class="s28"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s29" colspan="16">PARTICULARS DECLARED BY SHIPPER</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s30" colspan="2" rowspan="2">Shipping Marks</td>
+                        <td class="s31"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">No. of</span>
+                        </td>
+                        <td class="s32" colspan="2"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Package</span>
+                        </td>
+                        <td class="s30" colspan="5" rowspan="2"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Goods
+                                Description</span></td>
+                        <td class="s30" rowspan="2"><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Order No.</span>
+                        </td>
+                        <td class="s30" rowspan="2">中文品名</td>
+                        <td class="s32"><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">H.S.code</span>
+                        </td>
+                        <td class="s32" colspan="2"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Gross
+                                Weight</span></td>
+                        <td class="s33 softmerge">
+                            <div class="softmerge-inner" style="width: 111px; left: -11px;"><span
+                                    style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                    style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Measurement</span>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <apex:repeat value="{!PedidoDeCompra__c.PedidoLineItems__r}" var="item">
+
+                    <tr style="height:20px;">
+                        <td class="s30"> Package</td>
+                        <td class="s30" colspan="2">Type</td>
+                        <td class="s34">(first 6 digits)</td>
+                        <td class="s30" colspan="2">(KGS)</td>
+                        <td class="s30">(CBM)</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s35" colspan="2"></td>
+                        <td class="s35">1040</td>
+                        <td class="s35" colspan="2">CTNS</td>
+                        <td class="s36" colspan="5">{!item.ProformaLineItem__r.Producto__r.Codigo_EAN__c}-{!item.Name}-{!item.ProformaLineItem__r.Codigo_de_Producto__c}</td>
+                        <td class="s36" rowspan="2">PO#{!PedidoDeCompra__c.Numero_de_Orden__c}</td>
+                        <td class="s37"></td>
+                        <td class="s37"></td>
+                        <td class="s38" colspan="2">{!item.Gross_Weight__c}</td>
+                        <td class="s39">{!item.CBMTotal__c}</td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s40" colspan="2"></td>
+                        <td class="s40"></td>
+                        <td class="s40" colspan="2"></td>
+                        <td class="s36" colspan="5">{!PedidoDeCompra__c.Name}- PO#{!PedidoDeCompra__c.Numero_de_Orden__c}</td>
+                        <td class="s41"></td>
+                        <td class="s41"></td>
+                        <td class="s36" colspan="2"></td>
+                        <td class="s42"></td>
+                    </tr>
+
+                </apex:repeat>
+
+                    <tr style="height:20px;">
+                        <td class="s18" colspan="2"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Incoterm</span>
+                        </td>
+                        <td class="s48" colspan="3">FOB</td>
+                        <td class="s29" colspan="3"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Numbers of
+                                Original B/L</span></td>
+                        <td class="s50" colspan="2">3</td>
+                        <td class="s29" colspan="2"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Place of B/L
+                                receipt</span></td>
+                        <td class="s52"></td>
+                        <td class="s52"></td>
+                        <td class="s52"></td>
+                        <td class="s53"></td>
+                    </tr>
+                    <tr style="height:20px;">
+                        <td class="s18" colspan="2"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Freight
+                                Term</span></td>
+                        <td class="s48" colspan="3">Freight Collect</td>
+                        <td class="s29" colspan="3"><span
+                                style="font-size:10pt;font-family:Arial;font-weight:bold;color:#ff0000;">*</span><span
+                                style="font-size:10pt;font-family:Arial Unicode MS,Arial;font-weight:bold;">Container
+                                Type</span></td>
+                        <td class="s38" colspan="8">1*40GP >> {!PedidoDeCompra__c.TipoDeContenedor__c}</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+        
+        </body>
+        
+</apex:page>

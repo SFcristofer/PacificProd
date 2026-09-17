@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todas_las_Oportunidades</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>Antiguedad__c</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Importe_Neto2__c</columns>
+    <columns>OPPORTUNITY.FISCAL_YEAR</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.FISCAL_YEAR</field>
+        <operation>equals</operation>
+        <value>2018</value>
+    </filters>
+    <label>Opportunities 2018</label>
+</ListView>

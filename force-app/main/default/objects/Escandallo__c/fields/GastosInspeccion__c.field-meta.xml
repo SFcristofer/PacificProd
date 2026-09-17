@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>GastosInspeccion__c</fullName>
+    <description>Inspección X Entrega *  Nro. Inspecciones</description>
+    <formula>InspeccionXEntrega__c *  NroInspecciones__c</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Inspección X Entrega *  Nro. Inspecciones</inlineHelpText>
+    <label>Gastos Inspección</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

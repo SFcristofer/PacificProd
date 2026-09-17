@@ -1,0 +1,118 @@
+<apex:page showHeader="true" sidebar="true" lightningstylesheets="true"
+        standardController="PedidoDeCompra__c" extensions="ChangeProvider">
+    <style>
+        .next{
+            margin: 10px;
+            background-color: #2196F3 !important;
+            color: #fff !important;
+        }
+        .replacements{
+            color:#2196F3;
+        }
+        .non-header{
+            color:red;
+            background-color: #FFF;
+        }
+    </style>
+    <apex:form id="forma">
+        <apex:pageBlock title="Change Provider">
+            <script>
+                function handleRedirect() {
+                        console.log('Has Message? ' + hasMessages);
+                        if(!hasMessages){
+                            window.location.href = '/lightning/r/PedidoDeCompra__c/{!PedidoDeCompra__c.Id}/view';
+                        }
+                }
+            </script>
+            <apex:pageMessages id="whatError"/>
+            <apex:PageBlockButtons location="bottom">
+                <apex:commandButton action="{!changeProvider}" value="Save" id="siguiente" 
+                    oncomplete="handleRedirect()" rerender="whatError, script-block" styleClass="next"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:PageBlockButtons>
+        </apex:pageBlock>
+        <apex:repeat value="{!altProviders}" var="alt">
+            <apex:pageBlock title="{!alt.Provider.Name}" onClick="selectAltProvider(this, '{!alt.Provider.Id}')" 
+                            rendered="{!alt.missing.size == 0}" html-data-id="proContext-{!alt.Provider.Id}">
+                <input id="rad_{!alt.Provider.Id}"  name="OH" type="radio" class="rad"
+                        style="margin-bottom:10px" />
+                <apex:pageBlockTable value="{!alt.offerings}" var="offer">
+                    <apex:column value="{!offer.Descripcion_Larga__c}"/>
+                    <apex:column value="{!offer.PrecioDeFabrica__c}"/>
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+            <apex:pageBlock title="{!alt.Provider.Name}" rendered="{!alt.missing.size != 0}"
+                            html-data-id="incompletePro-{!alt.Provider.Id}">
+                
+                <div class="message warningM3" role="alert">
+                    <table border="0" cellpadding="0" cellspacing="0" class="messageTable" style="padding:0px;margin:0px;">
+                    <tbody>
+                        <tr valign="top">
+                            <td>
+                                <img alt="WARNING" class="msgIcon" src="/s.gif" title="WARNING" />
+                            </td>
+                            <td class="messageCell">
+                                <div class="messageText">
+                                    We only have some of the order items registered for the alternative provider.
+                                    <br/>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+                <apex:pageBlockTable value="{!alt.offerings}" var="offer" headerClass="replacements">
+                    <apex:facet name="header">Replacement Products</apex:facet>
+                    <apex:column value="{!offer.Descripcion_Larga__c}"/>
+                    <apex:column value="{!offer.PrecioDeFabrica__c}"/>
+                </apex:pageBlockTable>
+                <br/>
+                <apex:pageBlockTable value="{!alt.missing}" var="miss" style="background:lightyellow"
+                                    headerClass="non-header">
+                    <apex:facet name="header">Non-existent Products for Provider</apex:facet>
+                    <apex:column headerValue="Long Description">
+                        <apex:outputLink value="/lightning/r/Product2/{!miss.ProductoBase__c}/view" target="_blank">
+                            <apex:outputText value="{!miss.Name} {!miss.Color__c} {!miss.ProductoLargoCm__c}x{!miss.ProductoAnchoCm__c}x{!miss.ProductoAltoCm__c} CM
+                                            {!IF(miss.ProductoDiametroCm__c != null, 'ø' + miss.ProductoDiametroCm__c, '')}" />
+                        </apex:outputLink>
+                    </apex:column>
+                    <!-- apex:column value="{!miss.PrecioDeFabrica__c}"/ -->
+                </apex:pageBlockTable>
+            </apex:pageBlock>
+        </apex:repeat>
+        <apex:actionFunction name="saveOptionJS"  action="{!selectProvider}" rerender="nada" >
+            <apex:param name="option" assignTo="{!selectedProvider}" value="" />
+        </apex:actionFunction>
+        <apex:outputPanel id="nada" />
+    </apex:form>
+    <apex:outPutPanel layout="block" id="script-block">
+        <script>
+            var hasMessages = {!hasError};
+        </script>
+    </apex:outPutPanel>
+    <script>
+        /*
+        window.onload = function(){
+            var divs = document.querySelectorAll("[data-id*='incompletePro']");
+            console.log(divs.length);
+            for (i = 0; i < divs.length; i++) {
+                divs[i].querySelector('.bPageBlock').style.background = "lightyellow";
+            }
+        };
+        */
+        function selectAltProvider(caller, altId){
+            var divs = document.querySelectorAll("[data-id*='proContext']");
+            console.log(divs.length);
+            for (i = 0; i < divs.length; i++) {
+                divs[i].querySelector('.bPageBlock').style.background = "#FFF";
+            }
+            caller.style.background='lightgreen';
+            caller.querySelector('.rad').checked = true;
+            saveOptionJS(altId);
+        }
+    </script>
+</apex:page>

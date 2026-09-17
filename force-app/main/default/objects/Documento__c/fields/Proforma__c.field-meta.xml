@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proforma__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Unicamente para la Confirmación Cliente</description>
+    <inlineHelpText>Unicamente para la Confirmación Cliente</inlineHelpText>
+    <label>Proforma</label>
+    <referenceTo>Proforma__c</referenceTo>
+    <relationshipName>Documentos</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

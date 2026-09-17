@@ -1,0 +1,8 @@
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" lightningStylesheets="true" Controller="PortalPedidoPackingListController">
+    <apex:stylesheet value="{!URLFOR($Resource.Portal, 'css/DO-Brands.css')}" />
+    <apex:image url="https://pacificglob.com/wp-content/uploads/logo.png" styleClass="header-image" alt="Salesforce" title="Salesforce"/>
+    <div class="portal-title">Providers Portal</div>
+    
+  <apex:PageMessages id="portalProvMsgs" rendered="true"/>
+
+</apex:page>

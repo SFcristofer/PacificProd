@@ -1,0 +1,39 @@
+<apex:page id="ConsolidarProforma" standardController="Proforma__c" extensions="ConsolidarProformaController" lightningStyleSheets="true">
+    <apex:panelGrid columns="2" id="grid">
+        <apex:outputText value="Base Proforma" />
+        <apex:outputText value="{!proforma.Name}"/>
+        <apex:outputText value="Account" />
+        <apex:outputText value="{!proforma.Cuenta__r.Name}" />
+        <apex:outputText value="Planning" />
+        <apex:outputText value="{!proforma.Oportunidad__r.PlanificacionComercial__r.Name}" />
+    </apex:panelGrid>
+    <apex:form >
+    <apex:pageBlock >
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Group" action="{!agruparProformas}"/>
+            <!-- apex:commandButton value="Cancel" action="{!cancel}" / -->
+        </apex:pageBlockButtons>
+        <apex:pageBlockTable value="{!proformasSelected}" var="prfs" id="table" title="Proformas">
+            <apex:column headerValue="Proforma" style="width:250px"> 
+                <apex:outputText value="{!prfs.proforma.Name}"/>
+            </apex:column>
+            <apex:column headerValue="Opportunity"> 
+                <apex:outputText value="{!prfs.proforma.Oportunidad__r.Name}"/>
+            </apex:column>
+            <apex:column >
+                <apex:pageBlockTable value="{!prfs.proforma.ProformaLineItems__r}" var="prfsitem" id="tableIt" title="items" columnsWidth="30%, 60%, 10%"> <!-- units -->
+                    <apex:column headervalue="Items" style="width:250px"> 
+                        <apex:outputText value="{!prfsitem.Name}"/>
+                    </apex:column>
+                    <apex:column headervalue="Product">
+                        <apex:outputText value="{!prfsitem.Producto__r.Name}"/>
+                    </apex:column>
+                    <apex:column headervalue="Units">
+                        <apex:outputText value="{!prfsitem.Unidades__c}"/>
+                    </apex:column> 
+                </apex:pageBlockTable>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    </apex:form>    
+</apex:page>

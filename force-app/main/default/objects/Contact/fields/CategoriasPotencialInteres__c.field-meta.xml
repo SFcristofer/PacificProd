@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CategoriasPotencialInteres__c</fullName>
+    <label>Categorías de Potencial Interés</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>AIRES y CALEFACTORES</fullName>
+                <default>false</default>
+                <label>AIRES y CALEFACTORES</label>
+            </value>
+            <value>
+                <fullName>AUTOMOCION</fullName>
+                <default>false</default>
+                <label>AUTOMOCION</label>
+            </value>
+            <value>
+                <fullName>BLANCOS TEXTIL</fullName>
+                <default>false</default>
+                <label>BLANCOS TEXTIL</label>
+            </value>
+            <value>
+                <fullName>DECORACION</fullName>
+                <default>false</default>
+                <label>DECORACION</label>
+            </value>
+            <value>
+                <fullName>DEPORTES</fullName>
+                <default>false</default>
+                <label>DEPORTES</label>
+            </value>
+            <value>
+                <fullName>ENSERES MENORES</fullName>
+                <default>false</default>
+                <label>ENSERES MENORES</label>
+            </value>
+            <value>
+                <fullName>HERRAMIENTAS</fullName>
+                <default>false</default>
+                <label>HERRAMIENTAS</label>
+            </value>
+            <value>
+                <fullName>LINEA BLANCA</fullName>
+                <default>false</default>
+                <label>LINEA BLANCA</label>
+            </value>
+            <value>
+                <fullName>MENAJE</fullName>
+                <default>false</default>
+                <label>MENAJE</label>
+            </value>
+            <value>
+                <fullName>PAPELERIA</fullName>
+                <default>false</default>
+                <label>PAPELERIA</label>
+            </value>
+            <value>
+                <fullName>PINTURAS</fullName>
+                <default>false</default>
+                <label>PINTURAS</label>
+            </value>
+            <value>
+                <fullName>ROPA</fullName>
+                <default>false</default>
+                <label>ROPA</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ImporteConvenio__c</fullName>
+    <label>Importe Convenio</label>
+    <summarizedField>PedidoLineItem__c.ImporteConvenio__c</summarizedField>
+    <summaryForeignKey>PedidoLineItem__c.PedidoDeCompra__c</summaryForeignKey>
+    <summaryOperation>sum</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>

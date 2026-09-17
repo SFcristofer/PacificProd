@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Clasificaci_n_Cliente__c</fullName>
+    <inlineHelpText>Depending on the customer classification, they will have access to either the general catalog or specific selections</inlineHelpText>
+    <label>Clasificación Cliente</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>A - Clubes de Precio y Departamentales</fullName>
+                <default>false</default>
+                <label>A - Clubes de Precio y Departamentales</label>
+            </value>
+            <value>
+                <fullName>B - Hipermercados y Tiendas OPP</fullName>
+                <default>false</default>
+                <label>B - Hipermercados y Tiendas OPP</label>
+            </value>
+            <value>
+                <fullName>C - Tiendas Especializadas (A+B)</fullName>
+                <default>false</default>
+                <label>C - Tiendas Especializadas (A+B)</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,4 @@
+<apex:page standardController="Solicitud_de_Muestra__c" extensions="TranslateSampleDescription"
+            action="{!translate}">
+Traduciendo..
+</apex:page>

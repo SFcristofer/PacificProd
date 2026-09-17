@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Packagings_aprobados_por_el_Cliente__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>The packaging has been definitively approved by all involved areas of the Customer</inlineHelpText>
+    <label>Packaging aprobado por cliente</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

@@ -1,0 +1,15 @@
+<apex:page standardController="PedidoDeCompra__c" extensions="EnvioCorreoPedidoEmbarcadoController" lightningStyleSheets="true" action="{!sendEmail}">
+
+    <script>
+        function handleRedirect() {
+                window.location.href = '/lightning/r/PedidoDeCompra__c/{!PedidoDeCompra__c.Id}/view';
+        }
+    
+     </script>
+
+    <apex:PageMessages id="portalProvMsgs" rendered="true"/>
+
+    <apex:form >
+        <apex:commandButton styleClass="blueButton" value="Regresar" oncomplete="handleRedirect()" id="regresar"/>
+    </apex:form>    
+</apex:page>

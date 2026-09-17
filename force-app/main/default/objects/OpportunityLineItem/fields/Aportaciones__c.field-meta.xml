@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Aportaciones__c</fullName>
+    <formula>IF(NOT(ISNULL(Aportaciones_2__c)),
+Aportaciones_2__c,
+Opportunity.PlanificacionComercial__r.PorcentajeAportaciones__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>% Aportaciones</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <type>Percent</type>
+</CustomField>

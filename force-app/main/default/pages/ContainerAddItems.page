@@ -1,0 +1,322 @@
+<apex:page id="ConteinerAddItems" standardController="Proforma__c" extensions="ContainerAddItems" lightningStyleSheets="true">
+    <apex:includeScript value="https://code.jquery.com/jquery-3.3.1.min.js" /> 
+    <style>
+        .next {
+            margin:10px;
+            background-color: #2196F3 !important;
+            color: #fff !important;
+        }
+        .pbTitle {
+            white-space: nowrap
+        }
+
+        .buttons-section {
+            background-color: #CCC;
+        }
+
+        .end {
+            margin-top: 10px;
+        }
+    </style>
+    <apex:form id="theForm">
+        <apex:pageBlock id="Block" title="Proforma {!Proforma__c.Name} - {!Proforma__c.Cuenta__r.Name}">
+            <apex:PageMessages id="PageMessages" />
+            <apex:pageBlockSection id="Section1" title="Select items to include in container" columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel for="cList" value="Container Type" />
+                    <apex:selectList id="cList" value="{!selectedCType}" multiselect="flase" size="1" styleClass="cType" onchange="updateCBM(null, null)">
+                        <apex:selectOptions value="{!optionsCType}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:outputText styleClass="volumen" id="volumen" value="Used {0} of {!C20_FT_MAX_CBM}" style="color:green">
+                    <apex:param value="{!volume}"/>
+                </apex:outputText>
+                <hr/>
+                <apex:outputText styleClass="creditoPreAporbado" id="creditoPreAporbado" value="Credit: $ {0, number, #,###,##0.00}" style="color:green">
+                  <apex:param value="{!totalCreditoCuenta}"/>
+                </apex:outputText>
+                <apex:outputText styleClass="balancePedidos" id="balancePedidos" value="Orders Balance: $ {0, number, #,###,##0.00}" style="color:green">
+                  <apex:param value="{!totalCreditoPedidos}"/>
+                </apex:outputText>
+                <apex:outputText styleClass="importeProforma" id="importeProforma" value="Proforma Amount: $ {0, number, #,###,##0.00}" style="color:green">
+                  <apex:param value="{!totalAmount}"/>
+                </apex:outputText>
+                <apex:outputText styleClass="estadoCredito" id="estadoCredito" value="Credit Status: $ {0, number, #,###,##0.00}" style="{!IF(estadoDeCredito < 0, 'color:red', styleEstadoCredito)}">
+                  <apex:param value="{!estadoDeCredito}"/>
+                </apex:outputText>
+
+                <apex:pageBlockTable id="TableItemsPF" value="{!containerItems}" var="item"
+                                    rowClasses="odd,even" styleClass="tableClass">
+                    <apex:column >
+                        <apex:facet name="header"> Selection </apex:facet>
+                        <apex:inputCheckbox styleClass="Check" id="Check" value="{!item.Selected}" onchange="updateCBMCheck($(this))"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Product Code</apex:facet>
+                        <apex:outputText styleClass="codigoProd" id="codigoProd" value="{!item.oli.Codigo_de_Producto__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Product </apex:facet>
+                        <apex:outputText id="Venta" value="{!item.oli.Product2.Descripcion_Larga__c}" /> 
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Number of Boxes </apex:facet>
+                        <apex:inputText styleClass="numBoxes" id="numBoxes" value="{!item.numBoxes}" 
+                                onchange="updateCBMInput($(this))" />
+                        <apex:inputHidden value="{!item.closedPrice}" id="unitPriceHid"/>
+                        <apex:inputHidden value="{!item.oli.Product2.Unidades_por_Masterbox2__c}" id="unidadesHid"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Requested (units)</apex:facet>
+                        <apex:outputText id="sUnits" value="{!CEILING(item.oli.Quantity)}" />
+                        <apex:outputText id="sBoxes" value=" (~{!CEILING(item.oli.Quantity/item.oli.Product2.Unidades_por_Masterbox2__c)} boxes)" 
+                                            rendered="{!item.oli.Product2.Unidades_por_Masterbox2__c > 1}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Pending</apex:facet>
+                        <apex:outputText id="sPending" value="{!item.pending}"/>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Served (boxes in other containers) </apex:facet>
+                        <apex:repeat value="{!item.servedItems}" var="pli">
+                            <apex:outputText value="{!pli.NumeroDeCajas__c} boxes in Current Proforma<br/>" escape="false" style="color:#3399FF" rendered="{!pli.Proforma__c == Proforma__c.Id}"/>
+                            <apex:outputText value="{!pli.NumeroDeCajas__c} boxes in #{!pli.Proforma__r.Name}<br/>" escape="false" style="color:rgb(103, 104, 105)" rendered="{!pli.Proforma__c != Proforma__c.Id}"/>
+                        </apex:repeat>
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> CBM Masterbox </apex:facet>
+                        <apex:outputText styleClass="CBMMB" id="CBMMB" value="{!item.oli.Product2.MasterboxM3_2__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Total CBM </apex:facet>
+                        <apex:outputText styleClass="CBMTotal" id="CBMTotal" value="{!item.pli.CBMTotal__c}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Image</apex:facet>
+                        <apex:outputText escape="false" styleClass="imagenProd" id="imagenProd" value="{!item.oli.Imagen__c}" />
+                    </apex:column>
+
+                </apex:pageBlockTable>
+                <apex:pageBlockSectionItem dataStyleClass="buttons-section" labelStyleClass="buttons-section">
+                    <apex:commandButton id="GButton" value="Close Container" action="{!save}" styleClass="next"/>
+                    <apex:commandButton id="CButton" value="Finish" action="{!cancel}" styleClass="end"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="ClosedCnt" title="Closed Containers This Proforma ({!closedContainersNum})" columns="1">
+                <apex:pageBlockTable id="TableClosedContainers" value="{!closedContainers}" var="cc"
+                                    rowClasses="odd,even" styleClass="tableClass" columnsWidth="33%, 33%, 33%">
+                    <apex:column >
+                        <apex:facet name="header"> Type </apex:facet>
+                        <apex:outputText value="{!cc.vcType}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Total CBM </apex:facet>
+                        <apex:outputText styleClass="codigoProd" id="codigoProd" value="{!cc.loadVolume}" />
+                    </apex:column>
+                    <apex:column >
+                        <apex:facet name="header"> Gross Sales Amount </apex:facet>
+                        <apex:outputText value="{0, number, #,###,###.00}">
+                            <apex:param value="{!cc.amount}" />
+                        </apex:outputText>
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+    <script>
+
+        function updateCBMCheck(jObj){
+            console.log('checkbox id[' + jObj.attr('id') + ']');
+            row = jObj.parents('tr').first();
+            cBMLine = eval(row.find(".CBMTotal").text());
+            console.log('CBM Line: ' + cBMLine);
+            if(cBMLine == null){
+                cBMMB = eval(row.find(".CBMMB").text());
+                console.log('CBM MB: ' + cBMMB);
+                numBoxes = eval(row.find(".numBoxes").val());
+                console.log('Boxes: ' + numBoxes);
+                row.find(".CBMTotal").text(roundToFour(cBMMB * numBoxes));
+            }
+            updateCBM(jObj, 0);
+            traverseTBodyInputs(jObj);
+        }
+
+        function traverseTBodyInputs(jObj)
+        {
+            balancePedido = {!totalCreditoPedidos};
+            totCreditoCuenta = {!totalCreditoCuenta};           
+            sumTotal = 0;
+            row = jObj.parents('tr').first();
+            tbody = jObj.parents('tbody').first();
+            hijosTR = tbody.children();
+
+            console.log('hijos TR [' + hijosTR.length + ']');
+
+            hijosTR.each(
+                function(index)
+                {
+                    console.log('indexTR[' + index + '] txtTR[' + $(this) + ']');
+                    sumTotal = sumTotal + traverseTRInputs($(this));
+                }
+            );
+
+            console.log('TOTALES cp[' + balancePedido + '] cc[' + totCreditoCuenta + '] st[' + sumTotal + ']');
+            sumaCreds = balancePedido + sumTotal;
+            if(sumaCreds > totCreditoCuenta)
+            {
+                $(".estadoCredito").css('color', 'red');            
+                $(".estadoCredito").text('Credit Status: $ ' + formatNumber(eval(totCreditoCuenta - sumaCreds)));
+            }
+            else
+            {
+                $(".estadoCredito").css('color', 'green');          
+                $(".importeProforma").text('Proforma Amount: $ ' + formatNumber(eval(sumTotal)));
+                $(".estadoCredito").text('Credit Status: $ ' + formatNumber(eval(totCreditoCuenta - sumaCreds)));
+            }
+        }
+
+        function traverseTRInputs(jObj)
+        {
+            chkbxIsChckd = true;
+            sumaProProf = 0;
+            hijosTD = jObj.children();
+            console.log('  hijos TD [' + hijosTD.length + ']');
+
+            hijosTD.each(
+                function(index)
+                {
+                    if(index == 0)
+                    {
+                       console.log('  indexTD[' + index + '] txtTDc[' + $(this).is(':checked') + '] [' + $(this).attr('id') + ']');
+                       chkbxElement = $(this).find(".Check");
+                       console.log('    txtTDc[' + chkbxElement.is(':checked') + '] [' + chkbxElement.attr('id') + ']');
+                       chkbxIsChckd = chkbxElement.is(':checked');
+                    }
+                    else
+                    {
+                       console.log('  indexTD[' + index + '] txtTD[' + $(this).text() + ']');
+                    }
+                    if(index == 3)
+                    {
+                        if(chkbxIsChckd)
+                        {
+                            sumaProProf = sumaProProf + eval(sumaCantidades($(this)));
+                        }
+                    }
+                }
+            );
+            console.log('  suma Prod Prof TD [' + sumaProProf + ']');
+            return sumaProProf;
+        }
+
+        function sumaCantidades(jObj)
+        {
+           prodValues = 1;
+           listInputs = jObj.children();
+           console.log('     hijos inpt [' + listInputs.length + ']');
+
+           listInputs.each(
+                function(index)
+                {
+                    console.log('     indexINPT[' + index + '] txtINPT[' + $(this).val() + ']');
+                    prodValues = prodValues * eval($(this).val());
+                }
+           );
+           console.log('     prodTotal[' + prodValues + ']');
+           return prodValues;
+        }
+
+        
+        function updateCBMInput(jObj){
+            
+            console.log('entra');
+            console.log('jonbj [' + jObj.attr('id') + ']');         
+            row = jObj.parents('tr').first();
+
+            hijos = jObj.parents('tr').first().children();
+
+            hijos.each(
+                function(index)
+                {
+                    console.log('index[' + index + '] txt[' + $(this).text() + ']');
+                }
+            );
+
+            console.log('caall suma');
+            traverseTBodyInputs(jObj);
+
+            console.log('hijosBBB [' + hijos.length + ']');
+            console.log('rowid [' + row.attr('id') + ']  [' + row.attr('class') + ']');
+            
+            cBMMB = eval(row.find(".CBMMB").text());
+            console.log('cbmmn [' + cBMMB + '] ');
+            console.log(jObj.val());
+            
+            oldCBMTotal = eval(row.find(".CBMTotal").text());
+            console.log('old cbm total [' + oldCBMTotal + ']');
+            newCBMTotal = roundToFour(cBMMB * jObj.val());
+            row.find(".CBMTotal").text(newCBMTotal);
+            if(row.find(".Check").is(':checked')){
+                updateCBM(row.find(".Check"), oldCBMTotal);
+            }
+            
+        }
+        
+
+        function updateCBM(jObj, prev){
+            currentCBMTxt = $(".volumen").text();
+            currentCBM = eval(currentCBMTxt.substring(5, currentCBMTxt.indexOf(" of")));
+            
+            selCBM = pickCBM($(".cType").val()); //PICK CBM
+            console.log('jObj >>> ' + jObj);
+            console.log('selCBM >> ' + selCBM);
+            console.log('currentCBM >> ' + currentCBM);
+            if(jObj != null) {
+                row = jObj.parents('tr').first();
+                
+                ganancia = eval(row.find(".CBMTotal").text());
+                if(jObj.is(':checked')){
+                    currentCBM = currentCBM + ganancia - prev;
+                }else{
+                    currentCBM = currentCBM - ganancia;
+                }
+            }
+            console.log('currentCBM after calc >> ' + currentCBM);
+            reRenderCBMMessage(currentCBM, selCBM);
+        }
+        
+        function reRenderCBMMessage(currentCBM, selCBM) {
+            $(".volumen").text("Used " + roundToFour(currentCBM) + " of " + roundToFour(selCBM));
+            if(currentCBM > selCBM){
+                $(".volumen").css('color', 'red');
+                $(".volumen").append(' (Exceeds container volume)');
+                $("[id*='GButton']").prop("disabled", true);
+                $("[id*='GButton']").addClass("btnDisabled");
+            }else{
+                $(".volumen").css('color', 'green');
+                $("[id*='GButton']").prop("disabled", null);
+                $("[id*='GButton']").removeClass("btnDisabled");
+            }
+        }
+        function roundToFour(num) {    
+              return Math.round(num * 10000) / 10000;
+          }
+
+        function formatNumber(num) {
+            num = num.toFixed(2);
+            return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+        }
+
+        function pickCBM(sel) {
+            if(sel == '{!C20}') {
+                return {!C20_FT_MAX_CBM};
+            } else if(sel == '{!C40}') {
+                return {!C40_FT_MAX_CBM};
+            } else {
+                return {!C40_FT_HC_MAX_CBM};
+            }
+        }
+
+    </script>   
+
+</apex:page>

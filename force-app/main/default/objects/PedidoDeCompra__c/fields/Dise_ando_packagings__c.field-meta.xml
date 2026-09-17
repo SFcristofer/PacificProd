@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Dise_ando_packagings__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>The designer has received the technical information and has started the design</inlineHelpText>
+    <label>Diseñando packaging</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

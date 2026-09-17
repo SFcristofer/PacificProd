@@ -1,0 +1,29 @@
+<apex:page id="ConsolidarProforma" standardController="Proforma__c" extensions="ConsolidarProformaController" lightningStyleSheets="true">
+    <apex:panelGrid columns="2" id="grid">
+        <apex:outputText value="Base Proforma" />
+        <apex:outputText value="{!proforma.Name}"/>
+        <apex:outputText value="Account" />
+        <apex:outputText value="{!proforma.Cuenta__r.Name}" />
+        <apex:outputText value="Planning" />
+        <apex:outputText value="{!proforma.Oportunidad__r.PlanificacionComercial__r.Name}" />
+    </apex:panelGrid>
+    <apex:form >    
+    <apex:pageBlock >
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Continue" action="{!mostrarProformasAgrupadas}"/>
+            <!-- apex:commandButton value="Cancel" action="{!cancel}" / -->
+        </apex:pageBlockButtons>
+        <apex:pageBlockTable value="{!proformasPorAgrupar}" var="prf" id="table" title="Proformas">
+            <apex:column >
+                <apex:inputCheckbox value="{!prf.selected}" id="inputId"/>
+            </apex:column>
+            <apex:column headerValue="Proforma"> 
+                <apex:outputText value="{!prf.proforma.Name}" />
+            </apex:column>
+            <apex:column headerValue="Opportunity"> 
+                <apex:outputText value="{!prf.proforma.Oportunidad__r.Name}" />
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+    </apex:form>    
+</apex:page>

@@ -1,0 +1,282 @@
+<apex:page controller="UploadAmountCSVController" lightningStylesheets="true">
+
+   <script>
+
+      function buttonsEnabled(enabled) {
+         var buttons = document.querySelectorAll('.btn');
+         if (enabled === false) {
+            for(i = 0; i < buttons.length; i++){
+               buttons[i].setAttribute("disabled", "disabled");
+            }
+         } else {
+            for(i = 0; i < buttons.length; i++){
+               buttons[i].removeAttribute("disabled");
+            }
+         } 
+      }
+    
+      function disableAndSave() {
+         // first, call the action function to post the form
+         saveChanges();
+         // second, disable the buttons
+         buttonsEnabled(false);
+         // third, return false to prevent the click from
+         // posting the form a second time
+         return false;
+      }
+
+      function disableAndAddMore() {
+         // first, call the action function to post the form
+         //addMoreInputs();
+         // second, disable the buttons
+         buttonsEnabled(false);
+         // third, return false to prevent the click from
+         // posting the form a second time
+         return false;
+      }
+
+      function disableAndCancel() {
+         // first, call the action function to post the form
+         //cancel();
+         // second, disable the buttons
+         buttonsEnabled(false);
+         // third, return false to prevent the click from
+         // posting the form a second time
+         return false;
+      }
+
+      function validateRecords(isError) {
+         if(isError) {
+            confirm("Records marked in red will not be saved");
+         }
+         save();
+      }
+
+    </script>
+
+    <style>
+  
+       .tabla {
+          border-collapse: collapse;
+       }
+  
+  
+       .validCell {
+          border-collapse: collapse;
+          border: 1px solid black;
+          background-color: #FFFFFF;
+          font-size: 14px;
+          text-align: center;
+          padding: 6px;             
+          font-family: Arial, Helvetica, sans-serif;
+       }
+
+       .errorCell {
+          border-collapse: collapse;
+          border: 1px solid black;
+          background-color: #ecd4d4;
+          color: #c82020;
+          font-size: 14px;
+          text-align: center;
+          font-weight: bold;
+          padding: 6px;
+          font-family: Arial, Helvetica, sans-serif;
+       }
+
+       .warningCell {
+          border-collapse: collapse;
+          border: 1px solid black;
+          background-color: #FFFFFF;
+          color: #F1F013;
+          font-size: 14px;
+          text-align: center;
+          font-weight: bold;
+          padding: 6px;
+          font-family: Arial, Helvetica, sans-serif;
+       }
+
+
+       .validLine {
+          border-collapse: collapse;
+          border: 1px solid black;
+          background-color: #FFFFFF;
+          font-size: 14px;
+          text-align: center;
+          padding: 6px;
+          font-family: Arial, Helvetica, sans-serif;
+       }
+
+       .tooltip {
+          position: relative;
+          display: inline-block;
+       }
+
+       .tooltip .tooltiptext {
+          visibility: hidden;
+          width: 220px;
+          background-color: black;
+          color: #fff;
+          text-align: center;
+          border-radius: 3px;
+          padding: 5px 0;
+
+          /* Position the tooltip */
+          position: absolute;
+          z-index: 1;
+       }
+
+       .tooltip:hover .tooltiptext {
+         visibility: visible;
+       }
+
+
+      .buttonSave{
+         margin:10px;
+         background-color: #2196F3 !important;
+         color: #fff !important;
+         border: none;
+         padding: 10px;
+         border-radius: 4px;
+       }       
+
+    </style>
+
+
+
+    <apex:form id="attForm">
+        <apex:actionFunction name="saveChanges" action="{!readCSV}" />
+        <apex:pageBlock title="Upload Amounts">
+
+         <apex:pageMessages escape="false"/>
+
+            <apex:pageBlockSection showHeader="false" columns="3">
+
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="File to Upload:"/>
+                        <apex:inputFile value="{!csvFileBody}" filename="{!csvFileName}"/>
+                    </apex:pageBlockSectionItem>
+
+            </apex:pageBlockSection>
+
+            <apex:commandButton value="Load File" onClick="disableAndSave()"/>
+
+            <apex:actionFunction name="save" action="{!saveAmounts}" />
+      
+            <apex:commandButton value="Save" id="saveBtn"
+                    onclick="validateRecords({!notValidData});return false" 
+                    rendered="{!AND(amountsRecord != null, amountsRecord.size > 0)}"
+                    styleClass="buttonSave"/>
+
+        </apex:pageBlock>
+
+    </apex:form>
+
+
+    <apex:pageBlock >
+
+        <apex:variable var="counterRecord" value="{!0}"/>
+        <table class="tabla">
+
+           <apex:variable var="ttypeVar" rendered="{!If(isRecordsEmpty, 'false', 'true')}" value="ttypeVar">
+               <tr>
+                 <th class="validLine">No.</th>
+                 <th class="validLine">Due Date</th>
+                 <th class="validLine">Libra Code</th>
+                 <th class="validLine"><apex:outputText value="{!If(fileType = 'Provider', 'Provider', 'Customer')}"/></th>
+                 <th class="validLine">Invoice</th>
+                 <apex:variable var="typr" rendered="{!If(fileType = 'Provider', 'false', 'true')}" value="typr">
+                    <th class="validLine">SF Invoice</th>
+                    <th class="validLine">Order</th>
+                  </apex:variable>
+                 <th class="validLine">Invoice Date</th>
+                 <th class="validLine">Amount EUR</th>
+                 <th class="validLine">Amount USD</th>
+               </tr>
+           </apex:variable>
+
+
+           <apex:repeat value="{!amountsRecord}" var="record">
+               <apex:variable var="counterRecord" value="{!counterRecord + 1}"/>
+               <tr>
+                   <td class="{!If(record.isValidLine, 'validLine', 'errorCell')}">{!counterRecord}</td>
+                   <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">
+                     <div class="tooltip">{!IF(record.expirationDate =='', '-', record.expirationDate)}
+                        <apex:variable var="noValidDateT" rendered="{!If(record.isValidLine, 'false', 'true')}" value="noValidDateT">
+                           <span class="tooltiptext"><apex:outputText value="{!record.errorMessage}"/></span>
+                        </apex:variable>
+                     </div>
+                   </td>
+                   <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">
+                     <div class="tooltip">{!record.customerCode}
+                        <apex:variable var="noValidCC" rendered="{!If(record.isValidLine, 'false', 'true')}" value="noValidCC">
+                           <span class="tooltiptext"><apex:outputText value="{!record.errorMessage}"/></span>
+                        </apex:variable>
+                     </div>
+                   </td>
+                   <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">
+                     <div class="tooltip">{!IF(record.customerName == '', '-', record.customerName)}
+                        <apex:variable var="noValidCN" rendered="{!If(record.isValidCustomerName, 'false', 'true')}" value="noValidCN">
+                           <span class="tooltiptext"><apex:outputText value="{!record.errorMessage}"/></span>
+                        </apex:variable>
+                     </div>
+                   </td>
+
+                   <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">{!record.invoiceNumber}</td>
+
+                   <apex:variable var="formatInvoice" rendered="{!If(fileType = 'Provider', 'false', 'true')}" value="formatInvoice">
+                      <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">{!record.formatedInvoiceNumber}</td>
+                   </apex:variable>
+
+                   <apex:variable var="onr" rendered="{!If(fileType = 'Provider', 'false', 'true')}" value="onr">
+                     <td class="{!IF(record.isValidLine, IF(record.isValidOrderName, 'validCell', 'warningCell'), 'errorCell')}">
+                       <div class="tooltip">{!IF(record.orderName == '', 'No Order', record.orderName)}
+                       </div>
+                     </td>
+                  </apex:variable>
+
+                   <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">
+                     <div class="tooltip">{!record.invoiceDate}
+                        <apex:variable var="noValidID" rendered="{!If(record.isValidLine, 'false', 'true')}" value="noValidID">
+                           <span class="tooltiptext"><apex:outputText value="{!record.errorMessage}"/></span>
+                        </apex:variable>
+                     </div>
+                   </td>
+
+                   <apex:variable var="ttypeVar" rendered="{!If(fileType = 'Provider', 'false', 'false')}" value="ttypeVar">
+                     <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">
+                        <div class="tooltip">{!IF(record.amount =='', '-', record.amount)}
+                           <apex:variable var="noValidA" rendered="{!If(record.isValidLine, 'false', 'true')}" value="noValidA">
+                              <span class="tooltiptext"><apex:outputText value="{!record.errorMessage}"/></span>
+                           </apex:variable>
+                        </div>
+                      </td>
+                  </apex:variable>
+
+                  <apex:variable var="ttypeVar" rendered="{!If(fileType = 'Provider', 'true', 'true')}" value="ttypeVar">
+                     <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">
+                        <div class="tooltip">{!IF(record.amountPendingEUR =='', '-', record.amountPendingEUR)}
+                           <apex:variable var="noValidA" rendered="{!If(record.isValidLine, 'false', 'true')}" value="noValidA">
+                              <span class="tooltiptext"><apex:outputText value="{!record.errorMessage}"/></span>
+                           </apex:variable>
+                        </div>
+                      </td>
+                  </apex:variable>
+
+                  <apex:variable var="ttypeVar" rendered="{!If(fileType = 'Provider', 'true', 'true')}" value="ttypeVar">
+                     <td class="{!If(record.isValidLine, 'validCell', 'errorCell')}">
+                        <div class="tooltip">{!IF(record.amountPendingUSD =='', '-', record.amountPendingUSD)}
+                           <apex:variable var="noValidA" rendered="{!If(record.isValidLine, 'false', 'true')}" value="noValidA">
+                              <span class="tooltiptext"><apex:outputText value="{!record.errorMessage}"/></span>
+                           </apex:variable>
+                        </div>
+                      </td>
+                  </apex:variable>
+
+               </tr>
+   
+          </apex:repeat>
+        </table>
+   
+    </apex:pageBlock>
+
+</apex:page>

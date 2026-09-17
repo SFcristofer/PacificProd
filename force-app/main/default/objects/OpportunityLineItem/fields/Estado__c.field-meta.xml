@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISBLANK(EstudioOportunidad__c)),
+IF(CreatedDate &gt; EstudioOportunidad__r.CreatedDate,
+&quot;AGREGADO &quot; + TEXT(DAY(DATEVALUE(CreatedDate))) + &apos;/&apos; + TEXT(MONTH(DATEVALUE(CreatedDate))) + &apos;/&apos; + TEXT(YEAR(DATEVALUE(CreatedDate))),
+IF(LastModifiedDate &gt; EstudioOportunidad__r.CreatedDate,
+&quot;MODIFICADO &quot; + TEXT(DAY(DATEVALUE(LastModifiedDate))) + &apos;/&apos; + TEXT(MONTH(DATEVALUE(LastModifiedDate))) + &apos;/&apos; + TEXT(YEAR(DATEVALUE(LastModifiedDate))),
+&quot;-&quot;
+)
+),
+&quot;-&quot;
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estado</label>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

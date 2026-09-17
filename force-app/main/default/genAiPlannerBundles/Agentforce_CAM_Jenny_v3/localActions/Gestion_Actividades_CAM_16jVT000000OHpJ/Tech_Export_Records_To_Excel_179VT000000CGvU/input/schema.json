@@ -1,0 +1,28 @@
+{
+  "required" : [ "fileName", "dataJson" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "dataJson" : {
+      "title" : "Data (JSON array of records)",
+      "description" : "Data (JSON array of records)",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "fileName" : {
+      "title" : "File Name",
+      "description" : "File Name",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "recordId" : {
+      "title" : "Record Id to attach file to",
+      "description" : "Record Id to attach file to",
+      "lightning:type" : "lightning__recordIdType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

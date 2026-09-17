@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <label>40 pies</label>
+    <protected>false</protected>
+    <values>
+        <field>CBM__c</field>
+        <value xsi:type="xsd:double">59.0</value>
+    </values>
+    <values>
+        <field>Tipo__c</field>
+        <value xsi:type="xsd:string">40 pies</value>
+    </values>
+</CustomMetadata>

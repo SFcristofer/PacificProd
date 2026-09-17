@@ -1,0 +1,37 @@
+{
+  "required" : [ "recordId", "emailCount", "startDate", "endDate" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "recordId" : {
+      "title" : "Record ID",
+      "description" : "The unique ID of the parent record from which the email will be retrieved.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "emailCount" : {
+      "title" : "Email Count",
+      "description" : "The number of records retrieved and stored in the emailCollection variable.",
+      "multipleOf" : 1.0E-34,
+      "lightning:type" : "lightning__numberType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "startDate" : {
+      "title" : "Start Date",
+      "description" : "The first date in the date range from which to retrieve emails.",
+      "lightning:type" : "lightning__dateType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    },
+    "endDate" : {
+      "title" : "End Date",
+      "description" : "The last date in the date range from which to retrieve emails.",
+      "lightning:type" : "lightning__dateType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

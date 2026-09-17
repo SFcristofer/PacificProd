@@ -1,0 +1,80 @@
+<apex:page controller="FacturasLibraAprobacion" applyHtmlTag="false" showHeader="false" standardStylesheets="false" applyBodyTag="false" lightningStyleSheets="true">
+    <head>
+        <style>
+    
+          .tabla {
+            border-collapse: collapse;
+          }
+    
+          .tituloColumna {
+             text-align: center;        
+             white-space:pre-line;
+             border-collapse: collapse;
+             border: 2px solid black;
+             background-color: #000000;
+             width: 150px;
+             font-size: 12px;
+             height: 10px; 
+             font-weight: bold;
+             padding: 8px;
+             font-family: Arial, Helvetica, sans-serif;
+             color: #FFFFFF;
+          }
+    
+          .valueColumna {
+             border-collapse: collapse;
+             border: 1px solid black;
+             background-color: #FFFFFF;
+             width: 150px;
+             font-size: 12px;
+             height: 15px;
+             text-align: left;
+             font-weight: bold;
+             padding: 6px;
+             font-family: Arial, Helvetica, sans-serif;
+          }
+    
+        </style>
+      </head>
+  <body>
+    <p>The following invoices will be registered in Libra: </p>
+    <br/>
+    <br/>
+    <table class="tabla">
+       <tr>
+        <td class="tituloColumna"><apex:outputText >ORDER</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >CUSTOMER</apex:outputText></td>      
+        <td class="tituloColumna"><apex:outputText >CUSTOMER<br/>INVOICE AMOUNT</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >CUSTOMER<br/>INVOICE #</apex:outputText></td>        
+        <td class="tituloColumna"><apex:outputText >PROVIDER</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >PROVIDER<br/>INVOICE AMOUNT</apex:outputText></td>      
+        <td class="tituloColumna"><apex:outputText >PROVIDER<br/>INVOICE #</apex:outputText></td>
+        <td class="tituloColumna"><apex:outputText >PROVIDER<br/>INVOICE DATE</apex:outputText></td>        
+       </tr>
+       <apex:repeat value="{!pedidosSeleccionados}" var="ppt">
+       <tr>
+        <td class="valueColumna"><a href="{!ppt.urlOrder}"><apex:outputText value="{!ppt.pedido.Name}"/></a></td>  
+        <td class="valueColumna"><apex:outputText value="{!ppt.parentAccount.Name}"/></td>
+        <td class="valueColumna">
+          <apex:outputText value="{0, number, Currency}">
+            <apex:param value="{!ppt.pedido.Precio_Total__c}" />
+          </apex:outputText>
+        </td>
+        <td class="valueColumna"><apex:outputText value="{!ppt.pedido.Numero_de_Factura__c}"/></td>        
+        <td class="valueColumna"><apex:outputText value="{!ppt.pedido.Proveedor__r.Name}"/></td>
+        <td class="valueColumna">
+          <apex:outputText value="{0, number, Currency}">
+            <apex:param value="{!ppt.pedido.CostoOrigen__c}" />
+          </apex:outputText>
+        </td>
+        <td class="valueColumna"><apex:outputText value="{!ppt.pedido.Numero_de_Factura_Proveedor__c}"/></td>
+        <td class="valueColumna">
+          <apex:outputText value="{0, date, dd/MM/yyyy}">
+            <apex:param value="{!ppt.pedido.Fecha_Factura_Proveedor__c}" />
+          </apex:outputText>
+        </td>
+       </tr>
+       </apex:repeat>
+    </table>
+  </body>
+</apex:page>

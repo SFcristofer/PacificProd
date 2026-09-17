@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Copia_de_Muestras_Enviadas_Seguimiento</fullName>
+    <columns>NAME</columns>
+    <columns>Cliente__c</columns>
+    <columns>CREATEDBY_USER.ALIAS</columns>
+    <columns>PropietarioOrigen__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Tipo__c</columns>
+    <columns>Cantidad__c</columns>
+    <columns>ID_DO__c</columns>
+    <columns>Producto__c</columns>
+    <columns>Descripcion__c</columns>
+    <columns>Thumb_1__c</columns>
+    <columns>Fecha_de_finalizacion__c</columns>
+    <columns>Seguir_en_DHL__c</columns>
+    <columns>Estado__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>12/1/2025 12:00 AM</value>
+    </filters>
+    <label>All Samples Shipped</label>
+    <sharedTo>
+        <role>Comprador</role>
+    </sharedTo>
+</ListView>

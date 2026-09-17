@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Supplier_Rating__c</fullName>
+    <label>Supplier Rating</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>A - Excellent</fullName>
+                <default>false</default>
+                <label>A - Excellent</label>
+            </value>
+            <value>
+                <fullName>B- Good</fullName>
+                <default>false</default>
+                <label>B- Good</label>
+            </value>
+            <value>
+                <fullName>C- Acceptable</fullName>
+                <default>false</default>
+                <label>C- Acceptable</label>
+            </value>
+            <value>
+                <fullName>D- Not Recommended</fullName>
+                <default>false</default>
+                <label>D- Not Recommended</label>
+            </value>
+            <value>
+                <fullName>Pending Evaluation</fullName>
+                <default>false</default>
+                <label>E - Pending Evaluation</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

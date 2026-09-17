@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subestado__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(NOT(ISBLANK( N_de_Seal__c)),
+&apos;EMBARCADO&apos;,
+IF(fotos_cargue_cont__c,
+&apos;CONTENEDOR CARGADO&apos;,
+IF(TEXT(c_Requiere_Auditoria__c) == &apos;No&apos;,
+&apos;NO REQUIERE AUDITORIA&apos;,
+IF(Informe_de_Auditoria__c,
+&apos;INSPECCIÓN REALIZADA&apos;,
+IF(NOT(ISBLANK(Fecha_de_Auditoria__c)) ,
+&apos;PENDIENTE INSPECCIÓN&apos;,
+IF(diseno_a_fabrica__c,
+&apos;DISEÑO ENVIADO A FABRICA&apos;,
+IF(AND(diseno_aprobado__c, NOT(ISBLANK(Fecha_aprobacion_Packaging_Cliente__c))),
+&apos;PACKAGING APROBADO&apos;,
+IF(info_a_disenadores__c,
+&apos;DISEÑANDO PACKAGING&apos;,
+IF(OR(justificante_de_pago__c, 
+AND( Confirmacion_Proveedor__c, ISBLANK(TEXT(Proveedor__r.PorcentajeDeposito__c)))),
+&apos;&apos;,
+IF(Confirmacion_Proveedor__c,
+ IF(OR($User.ProfileId == &apos;00e0v000000HxbD&apos;,
+    $User.ProfileId == &apos;00e46000001JOT4&apos;,
+    $User.ProfileId == &apos;00e0v000000MnbG&apos;),
+    &apos;ENVIO DEPOSITO&apos;,
+    &apos;&apos;),
+ &apos;CONFIRMACION FABRICA&apos;))))))))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Sub-Estado</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

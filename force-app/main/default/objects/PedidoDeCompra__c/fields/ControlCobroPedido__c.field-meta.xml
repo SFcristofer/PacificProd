@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ControlCobroPedido__c</fullName>
+    <externalId>false</externalId>
+    <formula>FechaDeCobro__c - ( ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Actual collection date - (ETD + main account collection period). Expressed in days</inlineHelpText>
+    <label>Control cobro pedido</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>0</scale>
+    <trackTrending>false</trackTrending>
+    <type>Number</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Clave_padre_inmediato__c</fullName>
+    <description>Clave del padre inmediato, en el caso de familias no tuene valor, en el caso de tipo subfamilia es la clave de la familia a la que pertenece, en el caso de clase es la clave de la subfamilia a la que pertenece</description>
+    <externalId>false</externalId>
+    <fieldManageability>DeveloperControlled</fieldManageability>
+    <label>Clave padre inmediato</label>
+    <length>100</length>
+    <required>false</required>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

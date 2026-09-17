@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2020_Todas_las_Oportunidades</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.CREATED_DATE</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>Antiguedad__c</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Importe_Neto2__c</columns>
+    <columns>OPPORTUNITY.FISCAL_YEAR</columns>
+    <columns>CORE.USERS.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>OPPORTUNITY.CLOSE_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2020</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.ALIAS</field>
+        <operation>lessOrEqual</operation>
+        <value>31/12/2020</value>
+    </filters>
+    <filters>
+        <field>PlanificacionComercial__c</field>
+        <operation>equals</operation>
+        <value>2020</value>
+    </filters>
+    <label>Opportunities 2020</label>
+</ListView>

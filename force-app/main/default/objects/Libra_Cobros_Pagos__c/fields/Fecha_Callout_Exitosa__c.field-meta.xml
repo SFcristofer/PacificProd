@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fecha_Callout_Exitosa__c</fullName>
+    <description>Fecha de la ultima consulta exitosa  hacia libra, pueden ser cobros o pueden ser pagos.</description>
+    <label>Fecha Callout Exitosa</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>DateTime</type>
+</CustomField>

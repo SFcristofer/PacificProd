@@ -1,0 +1,14 @@
+<apex:page standardController="Informe_Direccion__c" extensions="PreviewBoardMeetingAgenda" 
+    showHeader="false" sidebar="false" standardStylesheets="false" applyHtmlTag="false" applyBodyTag="false"
+            lightningStylesheets="true">
+    <apex:pageMessages id="messages" />
+    <apex:outputPanel style="background:#E7F1FA;padding:40px;width:100%" layout="block">
+        <apex:form >
+            <apex:commandButton action="{!cancel}" value="Return"/>
+        </apex:form>
+    </apex:outputPanel>
+        ***** Preview *****
+        <apex:iframe src="{!boardMeetingPreviewURL}" 
+                        rendered="{!NOT(enviado)}" scrolling="true" id="previewFrame"/>
+    
+</apex:page>

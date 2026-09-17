@@ -1,0 +1,4 @@
+<apex:page showHeader="true" sidebar="true" standardController="PedidoDeCompra__c"
+        extensions="ApplyChangesCloseSimulation" action="{!execute}" lightningStylesheets="true">
+    <apex:pageMessages />
+</apex:page>

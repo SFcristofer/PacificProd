@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>correo_pago_balance__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>En pedidos confirmados , indicador para determinar si el correo de pago de balance ya fue enviado</description>
+    <label>correo pago balance</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

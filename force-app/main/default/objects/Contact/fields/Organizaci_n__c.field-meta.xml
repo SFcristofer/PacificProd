@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Organizaci_n__c</fullName>
+    <label>Organización</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Baño, Limpieza y Lavado</fullName>
+                <default>false</default>
+                <label>Baño, Limpieza y Lavado</label>
+            </value>
+            <value>
+                <fullName>Almacenaje y Ordenación</fullName>
+                <default>false</default>
+                <label>Almacenaje y Ordenación</label>
+            </value>
+            <value>
+                <fullName>Escaleras y Taburetes Taller</fullName>
+                <default>false</default>
+                <label>Escaleras y Taburetes Taller</label>
+            </value>
+            <value>
+                <fullName>Equipaje</fullName>
+                <default>false</default>
+                <label>Equipaje</label>
+            </value>
+            <value>
+                <fullName>Accesorios Personales</fullName>
+                <default>false</default>
+                <label>Accesorios Personales</label>
+            </value>
+            <value>
+                <fullName>Seguridad del Hogar</fullName>
+                <default>false</default>
+                <label>Seguridad del Hogar</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

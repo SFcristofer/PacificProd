@@ -1,0 +1,17 @@
+<apex:page standardController="EstudioOportunidad__c" extensions="CreateProforma" action="{!createProformaAndRedirect}">
+
+    <script>
+        function handleRedirect() {
+                console.log('Redirecting in the controller using pageReference was not refreshing the page');
+                window.location.href = '/lightning/r/EstudioOportunidad__c/{!EstudioOportunidad__c.Id}/view';
+        }
+    
+    </script>
+
+    <apex:pageMessages />
+
+    <apex:form >
+        <apex:commandButton styleClass="blueButton" value="Regresar" oncomplete="handleRedirect()" id="regresar"/>
+    </apex:form>
+
+</apex:page>

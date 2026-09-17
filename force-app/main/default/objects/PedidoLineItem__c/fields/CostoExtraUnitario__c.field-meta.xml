@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CostoExtraUnitario__c</fullName>
+    <description>El resultado de dividir la suma de todos los costos extra: Gastos Puerto, Auditoria, Otros Costos, etc. entre el volumen total de Pedido, todo multiplicado por el volumen del Item (empaque): (Costo_Ext /  CBM_total) * (CBM_MasterB / Unidades por MB).</description>
+    <formula>(PedidoDeCompra__r.CostosImportacion__c / PedidoDeCompra__r.CBMTotal__c) *  (CBMMasterbox__c / UnidadesPorMasterbox__c)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>El resultado de dividir la suma de todos los costos extra: Gastos Puerto, Auditoria, Otros Costos, etc. entre el volumen total de Pedido, todo multiplicado por el volumen del Item (empaque): (Costo_Ext /  CBM_total) * (CBM_MasterB / Unidades por MB).</inlineHelpText>
+    <label>Costo Extra</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>6</scale>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>

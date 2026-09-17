@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IndicadorDeCobro__c</fullName>
+    <description>Indicador visual del cobro:
+- Blanco: Cuando no existe factura (añade el texto &quot;Sin facturar&quot;);
+- Amarillo: Cuando existe factura, no se ha cobrado, y la fecha ETD + Plazo de pago de la cuenta es mayor o igual al día en curso (añade el texto &quot;Pendiente. Queda(n) x día(s)&quot;);
+- Rojo: Cuando existe factura, no se ha cobrado, y la fecha ETD + Plazo de pago de la cuenta es menor al día en curso (añade el texto &quot;Excedido por x día(s)&quot;);
+- Verde: Cuando existe factura y se ha cobrado (añade el texto &quot;Cobrado&quot;).</description>
+    <externalId>false</externalId>
+    <formula>IF ( ISBLANK ( Numero_de_Factura__c ) ,
+IMAGE ( &quot;/img/x.gif&quot; , &quot;Sin facturar&quot; ) &amp; &quot; Sin facturar&quot; ,
+
+IF ( NOT ( ISBLANK ( Numero_de_Factura__c ) ) &amp;&amp;  ISPICKVAL ( FacturaClienteCobrada__c , &quot;No&quot; ) &amp;&amp; ( ( ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ) &gt;= TODAY() ) ,
+IMAGE ( &quot;/img/samples/flag_yellow.gif&quot; , &quot;Pendiente&quot; ) &amp; &quot; Pendiente. Queda(n) &quot; &amp; TEXT ( ( ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ) - TODAY() ) &amp; &quot; día(s)&quot;,
+
+IF ( NOT ( ISBLANK ( Numero_de_Factura__c ) ) &amp;&amp;  ISPICKVAL ( FacturaClienteCobrada__c , &quot;No&quot; ) &amp;&amp; ( ( ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ) &lt; TODAY() ) ,
+IMAGE ( &quot;/img/samples/flag_red.gif&quot; , &quot;Excedido&quot; ) &amp; &quot; Excedido por &quot; &amp; TEXT ( TODAY() - ( ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ) ) &amp; &quot; día(s)&quot; ,
+
+IF ( NOT ( ISBLANK ( Numero_de_Factura__c ) ) &amp;&amp;  ISPICKVAL ( FacturaClienteCobrada__c , &quot;Parcialmente&quot; ) ,
+IMAGE ( &quot;/img/samples/flag_yellow.gif&quot; , &quot;Pendiente Cobro Parcial&quot; ) &amp; &quot; Pendiente Cobro Parcial&quot; ,
+
+IF ( NOT ( ISBLANK ( Numero_de_Factura__c ) ) &amp;&amp;  ISPICKVAL ( FacturaClienteCobrada__c , &quot;Sí&quot; ) ,
+IMAGE ( &quot;/img/samples/flag_green.gif&quot; , &quot;Cobrado&quot; ) &amp; &quot; Cobrado&quot; ,
+
+&quot;No es posible definir el indicador&quot;
+)
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Visual collection indicator. White: when there is no invoice; Yellow: when there is an invoice, it has not been collect, and the ETD+deadline date is greater than or equal to the current date; Red: when there is an invoice, it has not been collect, and the ETD+deadline date is less than the current date; Green: when there is an invoice and it has been collect</inlineHelpText>
+    <label>Indicador de cobro</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

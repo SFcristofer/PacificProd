@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2023_Todos_los_Pedidos_CONTROL</fullName>
+    <columns>NAME</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Proveedor__c</columns>
+    <columns>FechaConfirmacionCliente__c</columns>
+    <columns>Tipo_de_dise_o_de_packaging__c</columns>
+    <columns>info_a_disenadores__c</columns>
+    <columns>FechaInfoDisenadores__c</columns>
+    <columns>Fecha_limite_de_aprobacion_de_Packaging__c</columns>
+    <columns>Fecha_aprobacion_Packaging_Cliente__c</columns>
+    <columns>diseno_a_fabrica__c</columns>
+    <columns>FechaDisenoFabrica__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Planificacion__c</field>
+        <operation>startsWith</operation>
+        <value>2025,2026</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PedidoDeCompra__c.Principal</value>
+    </filters>
+    <filters>
+        <field>Estado2__c</field>
+        <operation>notEqual</operation>
+        <value>EMBARCADO,SIMULACION</value>
+    </filters>
+    <filters>
+        <field>diseno_a_fabrica__c</field>
+        <operation>notEqual</operation>
+        <value>1</value>
+    </filters>
+    <label>2026 - PACKAGING CONTROL</label>
+    <sharedTo>
+        <role>Comprador</role>
+        <role>Super_Compras</role>
+    </sharedTo>
+</ListView>

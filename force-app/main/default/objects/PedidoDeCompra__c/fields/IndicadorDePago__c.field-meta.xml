@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IndicadorDePago__c</fullName>
+    <description>Indicador visual del pago balance:
+* Blanco: no se ha recibido la factura del proveedor.
+* Amarillo: la factura está recibida, el balance está pendiente y el ETD todavía no ha llegado. Muestra los días restantes hasta el ETD.
+* Rojo: la factura está recibida, el balance sigue pendiente y el ETD ya ha pasado. Muestra los días transcurridos desde el ETD.
+* Verde: el balance está pagado. Muestra los días transcurridos entre el ETD y la fecha real de pago del balance.</description>
+    <externalId>false</externalId>
+    <formula>CASE(
+TEXT($User.LanguageLocaleKey),
+
+&quot;en_US&quot;,
+
+IF(
+ISBLANK(Numero_de_Factura_Proveedor__c),
+
+IMAGE(&quot;/img/x.gif&quot;, &quot;Not invoiced&quot;) &amp;
+&quot; Invoice not received&quot;,
+
+IF(
+AND(
+NOT(ISBLANK(Numero_de_Factura_Proveedor__c)),
+ISPICKVAL(FacturaProveedorPagada__c, &quot;No&quot;),
+ETD__c &gt; TODAY()
+),
+
+IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;Pending&quot;) &amp;
+&quot; ETD in &quot; &amp;
+TEXT(ETD__c - TODAY()) &amp;
+&quot; day(s)&quot;,
+
+IF(
+AND(
+NOT(ISBLANK(Numero_de_Factura_Proveedor__c)),
+ISPICKVAL(FacturaProveedorPagada__c, &quot;No&quot;),
+ETD__c = TODAY()
+),
+
+IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;Pending&quot;) &amp;
+&quot; ETD today&quot;,
+
+IF(
+AND(
+NOT(ISBLANK(Numero_de_Factura_Proveedor__c)),
+ISPICKVAL(FacturaProveedorPagada__c, &quot;No&quot;),
+ETD__c &lt; TODAY()
+),
+
+IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;Pending&quot;) &amp;
+&quot; Balance pending &quot; &amp;
+TEXT(TODAY() - ETD__c) &amp;
+&quot; day(s)&quot;,
+
+IF(
+AND(
+NOT(ISBLANK(Numero_de_Factura_Proveedor__c)),
+ISPICKVAL(FacturaProveedorPagada__c, &quot;Sí&quot;)
+),
+
+IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;Paid&quot;) &amp;
+&quot; Paid in &quot; &amp;
+TEXT(ControlPagoPedido__c) &amp;
+&quot; day(s)&quot;,
+
+&quot;Unable to determine indicator&quot;
+)
+)
+)
+)
+),
+
+IF(
+ISBLANK(Numero_de_Factura_Proveedor__c),
+
+IMAGE(&quot;/img/x.gif&quot;, &quot;Sin facturar&quot;) &amp;
+&quot; Factura no recibida&quot;,
+
+IF(
+AND(
+NOT(ISBLANK(Numero_de_Factura_Proveedor__c)),
+ISPICKVAL(FacturaProveedorPagada__c, &quot;No&quot;),
+ETD__c &gt; TODAY()
+),
+
+IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;Pendiente&quot;) &amp;
+&quot; ETD en &quot; &amp;
+TEXT(ETD__c - TODAY()) &amp;
+&quot; día(s)&quot;,
+
+IF(
+AND(
+NOT(ISBLANK(Numero_de_Factura_Proveedor__c)),
+ISPICKVAL(FacturaProveedorPagada__c, &quot;No&quot;),
+ETD__c = TODAY()
+),
+
+IMAGE(&quot;/img/samples/flag_yellow.gif&quot;, &quot;Pendiente&quot;) &amp;
+&quot; ETD hoy&quot;,
+
+IF(
+AND(
+NOT(ISBLANK(Numero_de_Factura_Proveedor__c)),
+ISPICKVAL(FacturaProveedorPagada__c, &quot;No&quot;),
+ETD__c &lt; TODAY()
+),
+
+IMAGE(&quot;/img/samples/flag_red.gif&quot;, &quot;Pendiente&quot;) &amp;
+&quot; Balance pendiente &quot; &amp;
+TEXT(TODAY() - ETD__c) &amp;
+&quot; día(s)&quot;,
+
+IF(
+AND(
+NOT(ISBLANK(Numero_de_Factura_Proveedor__c)),
+ISPICKVAL(FacturaProveedorPagada__c, &quot;Sí&quot;)
+),
+
+IMAGE(&quot;/img/samples/flag_green.gif&quot;, &quot;Pagado&quot;) &amp;
+&quot; Pagado en &quot; &amp;
+TEXT(ControlPagoPedido__c) &amp;
+&quot; día(s)&quot;,
+
+&quot;No es posible definir el indicador&quot;
+)
+)
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <inlineHelpText>Visual payment indicator. White: when there is no invoice; Yellow: when there is an invoice but it hasn&apos;t been paid; Green: when there is an invoice and it has been paid</inlineHelpText>
+    <label>Indicador de balance</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

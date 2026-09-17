@@ -1,0 +1,54 @@
+<apex:page controller="Cumplimiento">
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Dato', 'Valor'],
+          ['Oportunidades', {!avance}],
+          ['Pendiente', {!falta}]
+        ]);
+        
+        
+        var options = {
+          //title: '   Avance vs Objetivo \n(Prueba de concepto)',
+          pieHole: 0.5,
+          slices: {
+            0: { color: 'rgb(0, 112, 210)' },
+            1: { color: 'rgb(160, 180, 206)' }
+          },
+          legendText: 'value-and-percentage',
+          chartArea:{left:20,top:20,width:"50%",height:"50%"}
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+        chart.draw(data, options);
+      }
+    </script>
+    <style>
+        .overlay {
+        display:block;
+        text-align:center;
+        vertical-align: middle;
+        position: absolute;
+        top: 84px;  /* chartArea top  */
+        left: 155px; /* chartArea left */
+        font-size: 24px;
+        margin-top: 60px;
+        }
+    </style>
+  </head>
+  <body>
+    <strong>Período:</strong> {!anoReporte}
+    <br/>
+    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+    <div id="cnt" class="overlay"> 
+        {!objetivoFormated.minifiedFig}
+    <span style="font-size:18px">{!objetivoFormated.figLetter}</span> 
+    </div>
+  </body>
+</html>
+</apex:page>

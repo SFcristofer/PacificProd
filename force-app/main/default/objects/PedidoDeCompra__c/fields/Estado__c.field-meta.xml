@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF(RecordType.DeveloperName = &apos;Simulacion&apos;,
+&apos;SIMULACION&apos;,
+IF(AND(OR(fotos_cargue_cont__c, Grupaje__c), NOT(ISBLANK( N_de_Seal__c))), 
+&apos;EMBARCADO&apos;,
+IF(c_Produccion_Finalizada__c,
+&apos;PRODUCCIÓN FINALIZADA&apos;, 
+IF(diseno_a_fabrica__c, 
+&apos;PRODUCCIÓN&apos;, 
+IF(OR(justificante_de_pago__c,
+   AND( Confirmacion_Proveedor__c,  ISBLANK(TEXT(Proveedor__r.PorcentajeDeposito__c)))), 
+&apos;PACKAGING&apos;, 
+&apos;PEDIDO CONFIRMADO&apos;)))))</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Estado</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

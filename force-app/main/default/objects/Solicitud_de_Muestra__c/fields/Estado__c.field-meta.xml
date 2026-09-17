@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Estado__c</fullName>
+    <label>Estado</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Pendiente</fullName>
+                <default>true</default>
+                <label>Pendiente</label>
+            </value>
+            <value>
+                <fullName>Solicitada a Fábrica</fullName>
+                <default>false</default>
+                <label>Solicitada a Fábrica</label>
+            </value>
+            <value>
+                <fullName>En Producción</fullName>
+                <default>false</default>
+                <label>En Producción</label>
+            </value>
+            <value>
+                <fullName>Producción finalizada</fullName>
+                <default>false</default>
+                <label>Producción finalizada</label>
+            </value>
+            <value>
+                <fullName>Enviada</fullName>
+                <default>false</default>
+                <label>Enviada</label>
+            </value>
+            <value>
+                <fullName>Recibida</fullName>
+                <default>false</default>
+                <label>Recibida</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

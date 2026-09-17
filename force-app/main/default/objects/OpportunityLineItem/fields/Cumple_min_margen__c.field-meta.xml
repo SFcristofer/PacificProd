@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Cumple_min_margen__c</fullName>
+    <formula>UnitPrice &gt; CostoProducto__c / 0.80</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Cumple min margen</label>
+    <type>Checkbox</type>
+</CustomField>

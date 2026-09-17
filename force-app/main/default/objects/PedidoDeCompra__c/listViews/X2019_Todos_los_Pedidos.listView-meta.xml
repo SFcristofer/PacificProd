@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2019_Todos_los_Pedidos</fullName>
+    <columns>NAME</columns>
+    <columns>Proforma__c</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Numero_de_Orden__c</columns>
+    <columns>Estado__c</columns>
+    <columns>Numero_de_Factura__c</columns>
+    <columns>Fecha_fin_de_Produccion__c</columns>
+    <columns>ETD__c</columns>
+    <columns>Precio_Total__c</columns>
+    <columns>MargenOperacion__c</columns>
+    <columns>CREATED_DATE</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Planificacion__c</field>
+        <operation>equals</operation>
+        <value>2019</value>
+    </filters>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>PedidoDeCompra__c.Principal</value>
+    </filters>
+    <label>Orders 2019</label>
+</ListView>

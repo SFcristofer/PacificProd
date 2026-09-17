@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>FechaEstimadaCobro__c</fullName>
+    <formula>IF ( ISBLANK ( Numero_de_Factura__c ) ,
+Fecha_de_Compromiso_con_el_Cliente__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ,
+
+IF ( NOT ( ISBLANK ( Numero_de_Factura__c ) ) &amp;&amp; ISPICKVAL ( FacturaClienteCobrada__c , &quot;No&quot; ) &amp;&amp; ( ( ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ) &gt;= TODAY() ) ,
+ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ,
+
+IF ( NOT ( ISBLANK ( Numero_de_Factura__c ) ) &amp;&amp; ISPICKVAL ( FacturaClienteCobrada__c , &quot;No&quot; ) &amp;&amp; ( ( ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ) &lt; TODAY() ) ,
+ETD__c + VALUE ( TEXT ( Proforma__r.Cuenta__r.Parent.PlazoPago__c ) ) ,
+
+IF ( NOT ( ISBLANK ( Numero_de_Factura__c ) ) &amp;&amp; ISPICKVAL ( FacturaClienteCobrada__c , &quot;Parcialmente&quot; ) ,
+NULL ,
+
+IF ( NOT ( ISBLANK ( Numero_de_Factura__c ) ) &amp;&amp; ISPICKVAL ( FacturaClienteCobrada__c , &quot;Sí&quot; ) ,
+FechaDeCobro__c ,
+
+NULL
+
+)
+)
+)
+)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Fecha estimada cobro</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

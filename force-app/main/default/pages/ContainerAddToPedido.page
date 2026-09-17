@@ -1,0 +1,868 @@
+<!-- apex:page standardcontroller="PedidoDeCompra__c" lightningStylesheets="true" extensions="CancelInvoiceController" action="{!genereateInvoiceToSend}" -->
+<apex:page standardcontroller="PedidoDeCompra__c" lightningStylesheets="true" extensions="ContainerController">
+<apex:includeScript value="https://code.jquery.com/jquery-3.3.1.min.js" />
+
+    <script>
+       /*
+        * This function validates the value of the required fields.
+        * If all the fields has a value, it continues. Otherwise it shows 
+        * an error message.
+        */
+        function validateFields(elemBtn) {
+            var result;
+            var fileInvoiceValue;
+            var filePLValue;
+            var fileLRValue;
+            var fieldDateCtnrValue;
+            var fieldInvoiceNumberValue;
+            var fieldInvoiceDateValue;
+            
+            var messageAlert = '';
+            var inputFileInvoice = document.querySelector("[id*='inputInvoiceF']");
+            var inputFilePL = document.querySelector("[id*='inputPLF']");
+            var inputFileLR = document.querySelector("[id*='inputLoadingReportF']");
+            var inputFieldCtnr = document.querySelector("[id*='dateCtnr']");
+            
+            var inputInvoiceNumber = document.querySelector("[id*='invoiceNumber']");
+            var inputInvoiceDate = document.querySelector("[id*='invoiceDate']");            
+
+            var isInvoiceNumber = true;
+            var isInvoiceDate = true;
+            var isInvoice = true;
+            var isPList = true;
+            var isLReport = true;
+            var isDateLoad = true;
+            var elementP = document.querySelector("[id*='validationMessages']");
+
+            if(inputInvoiceNumber != null && inputInvoiceDate != null && inputFileInvoice != null && inputFilePL != null) {
+            //if(inputFileInvoice != null && inputFilePL != null && inputFileLR != null && inputFieldCtnr != null) {
+                fileInvoiceValue = inputFileInvoice.value;
+                filePLValue = inputFilePL.value;
+                /*fileLRValue = inputFileLR.value;
+                fieldDateCtnrValue = inputFieldCtnr.value;*/
+                
+                fieldInvoiceNumberValue = inputInvoiceNumber.value;
+                fieldInvoiceDateValue = inputInvoiceDate.value;
+
+                if(fieldInvoiceNumberValue === "") {
+                    messageAlert = messageAlert + ' Invoice Number is missing.<br/>';
+                    isInvoiceNumber = false;
+                }
+
+                if(fieldInvoiceDateValue === "") {
+                    messageAlert = messageAlert + ' Invoice Date is missing.<br/>';
+                    isInvoiceDate = false;
+                }
+
+                
+                if(fileInvoiceValue === "") {
+                    messageAlert = messageAlert + ' Invoice file is missing.<br/>';
+                    isInvoice = false;
+                }
+                if(filePLValue === "") {
+                    messageAlert = messageAlert + ' Packing List file is missing.<br/>';
+                    isPList = false;
+                }
+                /*if(fileLRValue === "") {
+                    messageAlert = messageAlert + ' Loading Report file is missing.<br/>';
+                    isLReport = false;
+                }
+                if(fieldDateCtnrValue === "") {
+                    messageAlert = messageAlert + ' Date Load Container is missing.<br/>';
+                    isDateLoad = false;
+                }*/
+
+                //if(isInvoice && isPList && isLReport && isDateLoad) {
+                if(isInvoiceNumber && isInvoiceDate && isInvoice && isPList) {
+                    elemBtn.disabled = true;
+                    elemBtn.style.color = '#CCC';
+                    //elemBtn.value='{!$Label.GENERIC_SAVING}';
+                    elemBtn.value='Saving';                    
+                    save();
+                    return false;
+                } else {
+                    result = false;
+                    elementP.innerHTML = messageAlert;
+                    elementP.style.color = 'red';                    
+                    //alert(messageAlert);
+                }
+            }
+            return result;
+            
+        }
+
+    </script>
+
+
+<html>
+
+
+<style>
+
+td.titleorder {
+    padding:10px;
+    background-color: #28AEE4;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: none;
+}
+
+
+th.ordfctordr {
+    padding:5px;
+    width:100px;
+    font-weight: bold;
+    border: 1px solid black;
+    background-color: #808080;
+    color: white;
+}
+
+th.ordfctfct {
+    padding:5px;
+    width:500px;
+    font-weight: bold;
+    border: 1px solid black;
+    background-color: #808080;
+    color: white;
+}
+
+
+td.ordfctvl {
+    padding:5px;
+}
+
+td.qtys {
+    padding:5px;
+    width:150px;
+    font-weight: bold;    
+    border: 1px solid black;
+}
+
+td.qtysvl {
+    padding:10px;
+}
+
+
+td.titleprods {
+    padding:10px;
+    background-color: #28AEE4;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: none;
+}
+
+
+td.titlecntrs {
+    padding:10px;
+    background-color: #28AEE4;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border-style: none;
+}
+
+
+td.addcntrtitle {
+    padding:6px;
+    background-color: #28AEE4;
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    border-style: none;
+}
+
+
+th.addcntrcntr {
+    padding:5px;
+    width:150px;
+    color: white;    
+    background-color: #808080;
+}
+
+th.addcntrseal {
+    padding:5px;
+    width:150px;
+    /* font-weight: bold; */
+    color: white;    
+    /*background-color: #000000;*/
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+th.addcntrtype {
+    padding:5px;
+    width:75px;
+    /* font-weight: bold; */
+    color: white;    
+    /*background-color: #000000;*/
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+th.addcntractions {
+    padding:5px;
+    width:150px;
+    /* font-weight: bold; */
+    color: white;    
+    /*background-color: #000000;*/
+    background-color: #808080;
+    /* border: 1px solid black; */
+}
+
+
+td.addcntrval {
+    padding:5px;
+}
+
+td.addcntrvalact {
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:20px;
+}
+
+th.showcntrcntr {
+    padding:5px;
+    width:150px;
+    color: white;    
+    background-color: #808080;       
+}
+
+th.showcntrseal {
+    padding:5px;
+    width:150px;
+    /* font-weight: bold; */
+    color: white;    
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+
+th.showcntrtype {
+    padding:5px;
+    width:75px;
+    /* font-weight: bold; */
+    color: white;    
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+th.showcntrprod {
+    padding:5px;
+    width:75px;
+    /* font-weight: bold; */
+    color: white;    
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+th.showcntractions {
+    padding:5px;
+    width:200px;
+    /* font-weight: bold; */
+    color: white;    
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+
+td.showcntrvalues {
+    padding:5px;
+    font-size: 15px;
+}
+
+th.cntrdetname {
+    padding:5px;
+    width:200px;
+    font-weight: bold;
+    font-size: 12px;    
+}
+
+th.cntrdetvals {
+    padding:5px;
+    width:100px;
+    font-weight: bold;
+    font-size: 12px;    
+}
+
+td.cntrdetfoot {
+    padding:5px;
+    /*width:200px;*/
+    font-weight: bold;
+}
+
+
+td.cntrdetfootzro {
+    padding:5px;
+    /*width:200px;*/
+    font-weight: bold;
+    color: red;
+}
+
+td.dtlproddesc {
+    padding:5px;
+}
+
+td.dtlprod {
+    padding:5px;
+}
+
+
+th.hdrName {
+    padding:5px;
+    width:250px;
+    color: white;    
+    background-color: #808080;       
+}
+
+th.hdrtbox {
+    padding:5px;
+    width:100px;
+    color: white;    
+    background-color: #808080;
+}
+
+th.hdrtprod {
+    padding:5px;
+    width:150px;
+    /* font-weight: bold; */
+    color: white;
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+th.hdrtprodpgref {
+    padding:5px;
+    width:100px;
+    color: white;
+    background-color: #808080; 
+}
+
+th.hdrtprodunits {
+    padding:5px;
+    width:100px;
+    color: white;    
+    background-color: #808080;       
+}
+
+th.hdrtcntrbox {
+    padding:5px;
+    width:150px;
+    /* font-weight: bold; */
+    color: white;    
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+th.hdrtcntrprod {
+    padding:5px;
+    width:150px;
+    /* font-weight: bold; */
+    color: white;    
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+
+th.hdrrprod {
+    padding:5px;
+    width:150px;
+    /* font-weight: bold; */
+    color: white;    
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+
+th.hdrrbox {
+    padding:5px;
+    width:150px;
+    /* font-weight: bold; */
+    color: white;    
+    background-color: #808080;       
+    /* border: 1px solid black; */
+}
+
+
+td.detprodvcod {
+    padding:5px;
+    width:150px;
+}
+
+td.detprodvcodunits {
+    padding:5px;
+}
+
+td.detprodvcodcnt {
+    padding:5px;
+}
+
+
+td.detprodvcodpgref {
+    padding:5px;
+}
+
+
+td.detprodvg {
+    padding:5px;
+    width:150px;
+    color: green;
+}
+
+td.detprodvr {
+    padding:5px;
+    width:150px;
+    color: red;
+}
+
+
+td.footprod {
+    padding-top:10px;
+    padding-left:5px;
+    font-weight: bold;
+}
+
+td.footprodg {
+    padding-top:10px;
+    padding-left:5px;
+    font-weight: bold;
+    color: green;
+}
+
+
+td.footprodr {
+    padding-top:10px;
+    padding-left:5px;
+    font-weight: bold;
+    color: red;
+}
+
+td.footprodtot {
+    padding-top:10px;
+    /*padding-left:3px;*/
+    font-weight: bold;
+    color: #28AEE4;
+}
+
+
+td.uploadS {
+    padding:5px;
+    font-weight: bold;
+}
+
+
+td.uploadSV {
+    padding:5px;
+}
+
+
+td.uploadBTN {
+    padding:5px;
+    font-weight: bold;
+}
+
+
+.styleImage {
+  width:18px;
+  height:16px;
+  padding: 0px;
+}
+
+
+.styleImageC {
+  width:21px;
+  height:15px;
+  padding: 0px;
+}
+
+.styleImageD {
+  width:22px;
+  height:22px;
+  padding: 0px;
+}
+
+
+</style>
+
+
+<table style="width:90%;margin-left:40px">
+    <tr>
+        <td><apex:image url="{!URLFOR($Resource.pdfresources, 'DB_logo.png')}" width="300" height="60"/></td>        
+    </tr>
+</table>
+
+<br/>
+
+<table style="width:95%;margin-left:40px">
+    <tr>
+        <td class="titleorder">ORDER DETAIL </td>        
+    </tr>
+</table>
+
+<br/>
+
+<table style="margin-left:40px">
+  <tr>
+    <th class="ordfctordr">ORDER</th>
+    <th class="ordfctfct">FACTORY</th>
+  </tr>
+
+  <tr>
+    <td class="ordfctvl">{!pedido.Name}</td>  
+    <td class="ordfctvl">{!pedido.Proveedor__r.Name}</td>
+  </tr>
+</table>
+
+<br/>
+
+
+<br/>
+
+<table style="width:95%;margin-left:40px">
+    <tr>
+        <td class="titleprods">ITEMS DETAIL</td>        
+    </tr>
+</table>
+
+<br/>
+
+<table style="border:1px;margin-left:40px">
+    <tr>
+      <th class="hdrName">DESCRIPTION</th>
+      <th class="hdrtprodpgref">PG REF</th>
+      <th class="hdrtprod">FACTORY REF</th>      
+      <th class="hdrtprodunits">UNITS</th>
+      <th class="hdrtbox">CNT</th>
+      <th class="hdrtcntrprod">LOADED UNITS</th>
+      <th class="hdrtcntrbox">LOADED CNT</th>
+      <th class="hdrrbox">PENDING UNITS</th>
+      <th class="hdrrprod">PENDING CNT</th>
+    </tr>
+    
+<apex:repeat value="{!tableSumarize.tableRows}" var="trw">
+    <tr>
+      <td>
+          <apex:outputText value="{!trw.nameProd}"/>
+      </td>
+      <td class="detprodvcodpgref">
+          <apex:outputText value="{!trw.pgref}"/>
+      </td>
+      <td class="detprodvcod">
+          <apex:outputText value="{!trw.factoryref}"/>
+      </td>
+      <td class="detprodvcodunits">
+          <!-- apex:outputText value="{!trw.decTotalProd}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!trw.decTotalProd}"/>
+          </apex:outputText>
+      </td>
+      <td class="detprodvcodcnt">
+          <!-- apex:outputText value="{!trw.decTotalCajas}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!trw.decTotalCajas}"/>
+          </apex:outputText>
+      </td>
+      <td class="detprodvg">
+          <!-- apex:outputText value="{!trw.decTotalProdCntr}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!trw.decTotalProdCntr}"/>
+          </apex:outputText>
+      </td>
+      <td class="detprodvg">
+          <!-- apex:outputText value="{!trw.decTotalCajasCntr}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!trw.decTotalCajasCntr}"/>
+          </apex:outputText>
+      </td>
+      <td class="detprodvr">
+          <!-- apex:outputText value="{!trw.decFaltanteProds}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!trw.decFaltanteProds}"/>
+          </apex:outputText>
+      </td>
+      <td class="detprodvr">
+          <!-- apex:outputText value="{!trw.decFaltanteCajas}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!trw.decFaltanteCajas}"/>
+          </apex:outputText>
+      </td>
+    </tr>
+</apex:repeat>
+
+    <tr>
+      <td class="footprodtot"><apex:outputText value="TOTAL ORDER"/></td>
+      <td class="footprodtot"><apex:outputText value=""/></td>
+      <td class="footprodtot"><apex:outputText value=""/></td>
+      <td class="footprod">
+          <!-- apex:outputText value="{!tableSumarize.totalProds}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!tableSumarize.totalProds}"/>
+          </apex:outputText>
+      </td>
+      <td class="footprod">
+          <!-- apex:outputText value="{!tableSumarize.totalBox}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!tableSumarize.totalBox}"/>
+          </apex:outputText>
+      </td>
+      <td class="footprodg">
+          <!-- apex:outputText value="{!tableSumarize.totalProdsCntr}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!tableSumarize.totalProdsCntr}"/>
+          </apex:outputText>
+      </td>
+      <td class="footprodg">
+          <!-- apex:outputText value="{!tableSumarize.totalBoxCntr}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!tableSumarize.totalBoxCntr}"/>
+          </apex:outputText>
+      </td>
+      <td class="footprodr">
+          <!-- apex:outputText value="{!tableSumarize.totalProdsRemain}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!tableSumarize.totalProdsRemain}"/>
+          </apex:outputText>
+      </td>
+      <td class="footprodr">
+          <!-- apex:outputText value="{!tableSumarize.totalBoxRemain}"/ -->
+          <apex:outputText value="{0, number, #######0}">
+              <apex:param value="{!tableSumarize.totalBoxRemain}"/>
+          </apex:outputText>
+      </td>
+    </tr>
+    
+</table>
+
+<br/>
+
+
+  <table style="width:95%;margin-left:40px">
+      <tr>
+          <td class="titlecntrs"> CONTAINERS DETAIL</td>        
+      </tr>    
+  </table>
+
+  <br/>
+
+<apex:form >
+
+<table style="width:50%;margin-left:40px">
+    <tr>
+        <td class="addcntrtitle">ADD CONTAINER INFO</td>        
+    </tr>
+</table>
+
+<br/>
+
+<table style="margin-left:40px">
+  <tr>
+   <th class="addcntrcntr"># CONTAINER</th>
+   <th class="addcntrseal">SEAL</th>
+   <th class="addcntrtype">TYPE</th>
+   <th class="addcntractions">ACTIONS</th>
+  </tr>
+
+  <tr>
+   <td class="addcntrval"><apex:inputText id="inCN" value="{!containerNumber}"/></td>
+   <td class="addcntrval"><apex:inputText id="inCS" value="{!containerSEAL}"/></td>
+
+   <td class="addcntrval">
+      <apex:selectList multiselect="false" value="{!containerTypeNew}" size="1">
+          <apex:selectOptions value="{!containerTypeOptions}"></apex:selectOptions>
+      </apex:selectList>   
+   </td>
+
+   <td class="addcntrvalact">
+       <!-- apex:commandLink action="{!saveContainer}" value="Save" id="theCommandLink" -->
+       <apex:commandLink action="{!saveContainer}" id="theCommandLink">
+           <apex:image url="{!URLFOR($Resource.cntrIcons, 'disk.png')}" alt="Delete Container" title="Save Container" styleClass="styleImageD"/>
+       </apex:commandLink>
+   </td>
+  </tr>
+
+</table>
+
+<br/>
+
+<apex:pageBlock >
+    <apex:pageMessages ></apex:pageMessages>
+</apex:pageBlock>
+
+<table style="width:50%;margin-left:40px">
+    <tr>
+        <td class="addcntrtitle">CONTAINERS</td>        
+    </tr>
+</table>
+
+<br/>
+
+<apex:repeat value="{!containersWrpr}" var="cntnrW">
+
+<table style="border:1px;margin-left:40px">
+  <tr>
+   <th class="showcntrcntr"># CONTAINER</th>
+   <th class="showcntrseal">SEAL</th>
+   <th class="showcntrtype">TYPE</th>
+   <th class="showcntrprod">REPORT</th>
+   <th class="showcntractions">ACTIONS</th>
+  </tr>
+
+  <tr>
+   <td class="showcntrvalues"><apex:outputText id="inCNw" value="{!cntnrW.containerNumber}"/></td>
+   <td class="showcntrvalues"><apex:outputText id="inCNSw" value="{!cntnrW.containerSEAL}"/></td>
+   <td class="showcntrvalues"><apex:outputText id="inCNTw" value="{!cntnrW.containerType}" /></td>
+   <!-- td><apex:outputText id="inCNPw" value="{!ROUND(cntnrW.totalProducts, 0)}" /></td -->
+   <!-- td class="showcntrvalues"><apex:outputText id="inCNPw" value="{!cntnrW.loadCntrDocInfo}" /></td -->
+   <td class="showcntrvalues">
+       <apex:image url="{!URLFOR($Resource.cntrIcons, cntnrW.imageNameInfo)}" title="{!cntnrW.imageInfoTooltip}" styleClass="styleImage"/>
+   </td>
+
+   <td class="showcntrvalues">
+       <!-- a href="/apex/ContainerAddPedidoItems?idp={!cntnrW.idPedido}&idc={!cntnrW.idContainer}">ADD ITEMS</a -->
+       <a href="/apex/ContainerAddPedidoItems?idp={!cntnrW.idPedido}&idc={!cntnrW.idContainer}">
+          <!-- apex:image url="{!URLFOR($Resource.cntrIcons, 'add.png')}" alt="Add Items" title="Add Items" styleClass="styleImage"/ -->
+          <!-- apex:image url="{!URLFOR($Resource.cntrIcons, 'containerMod.png')}" alt="Add Items" title="Add Items" styleClass="styleImageC"/ -->
+          <!-- apex:image url="{!URLFOR($Resource.cntrIcons, 'boxes.png')}" alt="Add Items" title="Add Items" styleClass="styleImage"/ -->
+          <apex:image url="{!URLFOR($Resource.cntrIcons, 'box-open.png')}" alt="Add Items" title="Add Items" styleClass="styleImage"/>
+       </a>&nbsp;&nbsp;|&nbsp;&nbsp;
+       <apex:commandLink action="{!deleteContainer}">
+       <!-- apex:commandLink action="{!deleteContainer}" value="Delete Containers" -->
+          <apex:param name="idContainer" assignTo="{!idContainer}" value="{!cntnrW.idContainer}"/>
+          <apex:image url="{!URLFOR($Resource.cntrIcons, 'trash.png')}" alt="Delete Container" title="Delete Container" styleClass="styleImage"/>
+       </apex:commandLink>
+       
+       <!-- apex:commandButton action="{!deleteContainer}" styleClass="styleButton" image="{!URLFOR($Resource.cntrIcons, 'trash.png')}">
+          <apex:param name="idContainer" value="{!cntnrW.idContainer}"/>
+       </apex:commandButton -->
+       
+   </td>
+  </tr>
+</table>
+
+     <table style="margin-left:100px">
+       <tr>
+         <th class="cntrdetname">DESCRIPTION</th>
+         <th class="cntrdetvals">PG REF</th>
+         <th class="cntrdetvals">FACTORY REF</th>
+         <th class="cntrdetvals">UNITS</th>
+         <th class="cntrdetvals">CNTS</th>         
+         <th class="cntrdetvals">N.W./Kgs</th>
+         <th class="cntrdetvals">G.W./Kgs</th>
+         <th class="cntrdetvals">CBM</th>
+       </tr>
+       <apex:repeat value="{!cntnrW.cItems}" var="cLit">
+         <tr>
+            <td class="dtlproddesc"><apex:outputText value="{!cLit.Producto__r.ProductoBase__r.ProductName__c}" /></td>
+            <td class="dtlprod"><apex:outputText value="{!cLit.Producto__r.ProductoBase__r.CodigoDeProductoBase__c}" /></td>
+            <td class="dtlprod"><apex:outputText value="{!cLit.Producto__r.Codigo_Proveedor2__c}" /></td>            
+            <td class="dtlprod"><apex:outputText value="{!ROUND(cLit.Total_Productos__c, 0)}" /></td>
+            <td class="dtlprod"><apex:outputText value="{!ROUND(cLit.Cajas__c, 0)}" /></td>
+            <td class="dtlprod"><apex:outputText value="{!cLit.Net_Weight__c}" /></td>
+            <td class="dtlprod"><apex:outputText value="{!cLit.Gross_Weight__c}" /></td>
+            <td class="dtlprod"><apex:outputText value="{!cLit.CBM__c}" /></td>
+         </tr>
+       </apex:repeat>
+       
+       <tr>
+         <td class="cntrdetfoot">TOTAL</td>
+         <td class="cntrdetfoot"></td>
+         <td class="cntrdetfoot"></td>         
+         <td class="{!IF(cntnrW.totalProducts > 0, 'cntrdetfoot', 'cntrdetfootzro')}"><apex:outputText value="{!ROUND(cntnrW.totalProducts, 0)}" /></td>
+         <td class="{!IF(cntnrW.totalCajas > 0, 'cntrdetfoot', 'cntrdetfootzro')}"><apex:outputText value="{!ROUND(cntnrW.totalCajas, 0)}" /></td>         
+         <td class="{!IF(cntnrW.totalNetW > 0, 'cntrdetfoot', 'cntrdetfootzro')}"><apex:outputText value="{!cntnrW.totalNetW}" /></td>
+         <td class="{!IF(cntnrW.totalGrossW > 0, 'cntrdetfoot', 'cntrdetfootzro')}"><apex:outputText value="{!cntnrW.totalGrossW}" /></td>
+         <td class="{!IF(cntnrW.totalCBM > 0, 'cntrdetfoot', 'cntrdetfootzro')}"><apex:outputText value="{!cntnrW.totalCBM}" /></td>
+       </tr>
+     </table>
+     
+</apex:repeat>
+
+<!-- br/ -->
+
+<!-- table style="width:45%;margin-left:40px">
+</table>
+
+<br/>
+
+<table style="margin-left:40px">
+
+</table -->
+
+<br/>
+
+</apex:form>
+
+<table style="width:95%;margin-left:40px">
+    <tr>
+        <td class="titleprods">ADD SHIPPING DOCUMENTS</td>        
+    </tr>
+</table>
+
+<br/>
+
+<apex:form id="upldfiles">
+
+    <table style="margin-left:40px">
+        <tr>
+            <td class="uploadS">INVOICE DATE *</td>
+            <td class="uploadSV"><apex:inputField id="invoiceDate" ignoreEditPermissionForRendering="true" value="{!pedido.Fecha_Factura_Proveedor__c}"/></td>
+        </tr>
+        <tr>
+            <td class="uploadS">INVOICE NUMBER *</td>
+            <td class="uploadSV"><apex:inputField id="invoiceNumber" ignoreEditPermissionForRendering="true" value="{!pedido.Numero_de_Factura_Proveedor__c}"/></td>
+        </tr>
+        <tr>
+            <td class="uploadS">INVOICE *</td>
+            <td class="uploadSV"><apex:inputFile id="inputInvoiceF" value="{!finputInvoice.fileBody}" filename="{!finputInvoice.fileName}" style="float:left"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <table>
+                  <apex:repeat value="{!invoiceDocs}" var="docinv">
+                    <tr>
+                       <td style="padding: 5px;"><apex:outputText value="{!docinv.Name}" /></td>
+                    </tr>
+                  </apex:repeat>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="uploadS">PACKING LIST *</td>
+            <td class="uploadSV"><apex:inputFile id="inputPLF" value="{!finputPL.fileBody}" filename="{!finputPL.fileName}" style="float:left"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <table>
+                  <apex:repeat value="{!plDocs}" var="docpl">
+                    <tr>
+                       <td style="padding: 5px;"><apex:outputText value="{!docpl.Name}" /></td>
+                    </tr>
+                  </apex:repeat>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <p id="validationMessages"></p>
+            
+
+    <table style="margin-left:40px">
+        <tr>
+          <td class="uploadBTN">
+              <apex:actionFunction name="save" action="{!saveOrder}" />
+              <apex:commandButton value="Upload/Save" id="saveBtn" onclick="validateFields(this);return false"/>
+          </td>
+          
+          <td class="uploadBTN">
+              <apex:commandButton value="Cancel" id="cancelBtn" action="{!cancelCntnrs}"/>
+          </td>
+        </tr>
+    </table>
+
+</apex:form>
+
+</html>
+
+</apex:page>

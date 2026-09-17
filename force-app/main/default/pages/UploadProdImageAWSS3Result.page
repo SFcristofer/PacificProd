@@ -1,0 +1,15 @@
+<apex:page standardController="Product2" lightningStylesheets="true" extensions="UploadAWSS3Controller">
+    <script>
+        function handleRedirect() {
+            console.log('Redirecting in the controller using pageReference was not refreshing the page');
+            window.location.href = '/lightning/r/Product2/home';
+        }
+    
+    </script>
+    <apex:messages />
+    
+    <apex:form >
+        <apex:commandButton styleClass="blueButton" value="Return" oncomplete="handleRedirect()" id="regresar"/>
+    </apex:form>
+    
+</apex:page>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Proceso__c</fullName>
+    <label>Proceso</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Confirmación</fullName>
+                <default>false</default>
+                <label>Confirmación</label>
+            </value>
+            <value>
+                <fullName>Pedido Fábrica</fullName>
+                <default>false</default>
+                <label>Pedido Fábrica</label>
+            </value>
+            <value>
+                <fullName>Packaging</fullName>
+                <default>false</default>
+                <label>Packaging</label>
+            </value>
+            <value>
+                <fullName>Producción</fullName>
+                <default>false</default>
+                <label>Producción</label>
+            </value>
+            <value>
+                <fullName>Documentación del Cliente</fullName>
+                <default>false</default>
+                <label>Documentación del Cliente</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

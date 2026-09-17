@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tipo_de_dise_o_de_packaging__c</fullName>
+    <inlineHelpText>The Commercial Opportunity owner defines the type of design to be created in the Order</inlineHelpText>
+    <label>Tipo de diseño de packaging</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DISEÑO NUEVO</fullName>
+                <default>true</default>
+                <label>DISEÑO NUEVO</label>
+            </value>
+            <value>
+                <fullName>ACTUALIZACION DE INFORMACION</fullName>
+                <default>false</default>
+                <label>ACTUALIZACION DE INFORMACION</label>
+            </value>
+            <value>
+                <fullName>NO REQUIERE CAMBIOS</fullName>
+                <default>false</default>
+                <label>SIN CAMBIOS - CONFIRMAR CON VENTAS</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

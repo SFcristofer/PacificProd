@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <types>
+        <members>PedidoDeCompra__c.CONTROL_PAGO_INSPECCIONES</members>
+        <members>PedidoDeCompra__c.Copia_de_2024_Todos_los_Pedidos</members>
+        <members>PedidoDeCompra__c.Copia_de_2025_CONTROL_INSPECCIONES</members>
+        <members>PedidoDeCompra__c.Copia_de_2025_Todos_los_Pedidos_COMPRAS</members>
+        <members>PedidoDeCompra__c.Copia_de_2026_CONTROL_EMBARQUES</members>
+        <members>PedidoDeCompra__c.Copia_de_2026_Todos_los_Pedidos</members>
+        <members>PedidoDeCompra__c.Copia_de_PACKAGING_KAMs</members>
+        <members>PedidoDeCompra__c.PACKAGINGS</members>
+        <members>PedidoDeCompra__c.PACKAGING_DISE_ADOR</members>
+        <members>PedidoDeCompra__c.PACKAGING_KAMs</members>
+        <members>PedidoDeCompra__c.Pedidos_EMBARCADOS_pendiente_BALANCE</members>
+        <members>PedidoDeCompra__c.Simulaciones</members>
+        <members>PedidoDeCompra__c.TODOS_los_pedidos</members>
+        <members>PedidoDeCompra__c.X2019_Todos_los_Pedidos</members>
+        <members>PedidoDeCompra__c.X2020_Todos_los_Pedidos</members>
+        <members>PedidoDeCompra__c.X2021_Todos_los_Pedidos</members>
+        <members>PedidoDeCompra__c.X2022_Todos_los_Pedidos</members>
+        <members>PedidoDeCompra__c.X2023_CONTROL_BOOKINGS</members>
+        <members>PedidoDeCompra__c.X2023_CONTROL_EMBARQUES</members>
+        <members>PedidoDeCompra__c.X2023_CONTROL_INSPECCIONES</members>
+        <members>PedidoDeCompra__c.X2023_Todos_los_Pedidos</members>
+        <members>PedidoDeCompra__c.X2023_Todos_los_Pedidos_CONTROL</members>
+        <members>PedidoDeCompra__c.X2024_Todos_los_Pedidos</members>
+        <members>PedidoDeCompra__c.X2026_Todos_los_Pedidos</members>
+        <name>ListView</name>
+    </types>
+    <version>60.0</version>
+</Package>

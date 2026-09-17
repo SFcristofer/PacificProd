@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Todas_las_Proformas_2022</fullName>
+    <columns>NAME</columns>
+    <columns>Cuenta__c</columns>
+    <columns>Oportunidad__c</columns>
+    <columns>Tipo_de_Contenedores__c</columns>
+    <columns>CBMTotal__c</columns>
+    <columns>ETD__c</columns>
+    <columns>ImporteTotal__c</columns>
+    <columns>Importe_Venta_Neto_Nuevo__c</columns>
+    <columns>MargenOperacion__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>greaterOrEqual</operation>
+        <value>1/1/2022 12:00 AM</value>
+    </filters>
+    <filters>
+        <field>FechaConfirmacionCliente__c</field>
+        <operation>equals</operation>
+    </filters>
+    <filters>
+        <field>CREATED_DATE</field>
+        <operation>lessOrEqual</operation>
+        <value>12/31/2022 12:00 AM</value>
+    </filters>
+    <label>Proformas 2022</label>
+</ListView>

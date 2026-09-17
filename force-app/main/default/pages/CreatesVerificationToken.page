@@ -1,0 +1,36 @@
+<apex:page lightningStylesheets="true" controller="CreatesVerificationTokenController" action="{!generarTokenEnviar}">
+    <script>
+        function handleRedirect() {
+                console.log('Redirecting in the controller using pageReference was not refreshing the page');
+                window.location.href = '/lightning/n/Verificacion_Costos';
+        }
+        function disableBtnAndSave(btn){
+            btn.disabled = true;
+            btn.className='grayButton';
+            btn.value='Generating..';
+            generateSend();
+        }
+     </script>
+    <apex:PageMessages id="PageMessages" />
+    <table>
+      <tr>
+        <td>Generate and Send Token to Provider</td>
+      </tr>
+    </table>
+    <table>
+      <tr>
+          <td>Provider: </td>
+          <td><apex:outputText value="{!provider.Name}"/></td>
+      </tr>
+      <tr>
+          <td>Email: </td>
+          <td><apex:outputText value="{!provider.EmailComercial__c}"/></td>
+      </tr>
+    </table>
+  
+    <apex:form >
+        <apex:commandButton styleClass="blueButton" value="Return" oncomplete="handleRedirect()" id="regresar" />
+        <!-- apex:actionFunction name="generateSend" action="{!generarTokenEnviar}" / -->
+        <!-- apex:commandButton styleClass="blueButton" onClick="disableBtnAndSave(this)" value="Generate Token and Send" disabled="{!NOT(generateTokenEnabled)}"/ -->
+    </apex:form>
+</apex:page>

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2021_Todas_las_Oportunidades</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.CREATED_DATE</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>Antiguedad__c</columns>
+    <columns>OPPORTUNITY.AMOUNT</columns>
+    <columns>Importe_Neto2__c</columns>
+    <columns>OPPORTUNITY.FISCAL_YEAR</columns>
+    <columns>CORE.USERS.LAST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PlanificacionComercial__c</field>
+        <operation>equals</operation>
+        <value>2021</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.LAST_NAME</field>
+        <operation>equals</operation>
+        <value>Cardenal,Benavides,Cuellar,Bernardo,Blanco</value>
+    </filters>
+    <label>Opportunities 2021</label>
+</ListView>

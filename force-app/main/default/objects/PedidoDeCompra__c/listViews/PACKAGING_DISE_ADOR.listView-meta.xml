@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>PACKAGING_DISE_ADOR</fullName>
+    <columns>NAME</columns>
+    <columns>Indicador_Packaging__c</columns>
+    <columns>Tipo_de_dise_o_de_packaging__c</columns>
+    <columns>info_a_disenadores__c</columns>
+    <columns>FechaInfoDisenadores__c</columns>
+    <columns>Dise_ando_packagings__c</columns>
+    <columns>Fecha_dise_ando_packaging__c</columns>
+    <columns>Versi_n_inicial_dise_ador__c</columns>
+    <columns>Fecha_versi_n_inicial_dise_ador__c</columns>
+    <columns>Dise_ador__c</columns>
+    <columns>Fecha_versi_n_final_aprobada__c</columns>
+    <columns>Dise_ador_Gr_fico__c</columns>
+    <columns>Propietario_de_la_Oportunidad__c</columns>
+    <columns>OWNER.FIRST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>NAME</field>
+        <operation>startsWith</operation>
+        <value>PE25,PE26,PE27,PE28,PE29,PE30</value>
+    </filters>
+    <filters>
+        <field>Estado2__c</field>
+        <operation>notEqual</operation>
+        <value>EMBARCADO</value>
+    </filters>
+    <filters>
+        <field>Indicador_Packaging__c</field>
+        <operation>notContain</operation>
+        <value>Concluido</value>
+    </filters>
+    <label>PACKAGING GRAPHIC DESIGNERS</label>
+</ListView>

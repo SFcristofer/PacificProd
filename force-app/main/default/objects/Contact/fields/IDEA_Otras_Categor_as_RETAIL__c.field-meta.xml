@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>IDEA_Otras_Categor_as_RETAIL__c</fullName>
+    <label>IDEA Otras Categorías RETAIL</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Línea Blanca</fullName>
+                <default>false</default>
+                <label>Línea Blanca</label>
+            </value>
+            <value>
+                <fullName>Tecnología</fullName>
+                <default>false</default>
+                <label>Tecnología</label>
+            </value>
+            <value>
+                <fullName>Juguetes</fullName>
+                <default>false</default>
+                <label>Juguetes</label>
+            </value>
+            <value>
+                <fullName>Navidad</fullName>
+                <default>false</default>
+                <label>Navidad</label>
+            </value>
+            <value>
+                <fullName>Deportes</fullName>
+                <default>false</default>
+                <label>Deportes</label>
+            </value>
+            <value>
+                <fullName>Automoción</fullName>
+                <default>false</default>
+                <label>Automoción</label>
+            </value>
+            <value>
+                <fullName>Motos</fullName>
+                <default>false</default>
+                <label>Motos</label>
+            </value>
+            <value>
+                <fullName>Colchones</fullName>
+                <default>false</default>
+                <label>Colchones</label>
+            </value>
+            <value>
+                <fullName>Papelería</fullName>
+                <default>false</default>
+                <label>Papelería</label>
+            </value>
+            <value>
+                <fullName>Ferretería</fullName>
+                <default>false</default>
+                <label>Ferretería</label>
+            </value>
+            <value>
+                <fullName>Cocina y Hogar</fullName>
+                <default>false</default>
+                <label>Cocina y Hogar</label>
+            </value>
+            <value>
+                <fullName>Moda</fullName>
+                <default>false</default>
+                <label>Moda</label>
+            </value>
+            <value>
+                <fullName>Cuidado Personal</fullName>
+                <default>false</default>
+                <label>Cuidado Personal</label>
+            </value>
+            <value>
+                <fullName>Bebés</fullName>
+                <default>false</default>
+                <label>Bebés</label>
+            </value>
+            <value>
+                <fullName>Mascotas</fullName>
+                <default>false</default>
+                <label>Mascotas</label>
+            </value>
+            <value>
+                <fullName>Farmacia</fullName>
+                <default>false</default>
+                <label>Farmacia</label>
+            </value>
+            <value>
+                <fullName>Categorías Food</fullName>
+                <default>false</default>
+                <label>Categorías Food</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

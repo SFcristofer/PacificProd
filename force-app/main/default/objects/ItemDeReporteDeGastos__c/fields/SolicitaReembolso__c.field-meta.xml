@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SolicitaReembolso__c</fullName>
+    <defaultValue>false</defaultValue>
+    <inlineHelpText>Marcar esta casilla si solicita reembolso por haber pagado por otros medios distintos a la tarjeta corporativa.</inlineHelpText>
+    <label>Solicita reembolso</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

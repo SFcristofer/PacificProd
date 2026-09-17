@@ -1,0 +1,188 @@
+<apex:page standardController="FacturaDeCliente__c" renderAs="PDF" standardStylesheets="false" applyBodyTag="false" applyHTMLTag="false" sidebar="false" showHeader="false">
+
+<html>
+
+<head>
+
+<style>
+
+@page {
+size: letter;
+margin-top: 10mm;
+margin-bottom: 10mm;
+margin-left: 15mm;
+margin-right: 15mm;
+@top-left { content: element(header); }
+@bottom-center { content: element(footer); }
+}
+
+div.header {
+padding: 10px;
+position: running(header);
+}
+
+div.footer {
+display: block;
+padding: 10px;
+position: running(footer);
+}
+
+</style>
+
+</head>
+
+<div class="Header" style="text-align:center; font-family:sans-serif; font-size:8pt; line-height: 12px;">
+<apex:image url="{!URLFOR ( $Resource.pdfresources ,'DB_logo.png' ) }" width="40%" height="40%"/>
+<br/>1101 BRICKELL AVENUE, SUITE N-1400, MIAMI, FL 33131, USA
+<br/>TAX ID: 84-2434080
+</div>
+
+<div class="Footer" style="text-align:center; font-family:sans-serif; font-size:8pt; line-height: 12px;">
+</div>
+
+<br/>
+
+<body>
+
+<table id="InvoiceTitle" style="border-spacing:0px; width:100%;">
+
+<tr>
+
+<td style="text-align:left; font-family:sans-serif; font-size:14pt; line-height: 12px;">
+
+<b>INVOICE</b>
+
+</td>
+
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+<table id="InvoiceInfo" style="border-spacing:0px; width:100%;">
+
+<tr>
+
+<td style="text-align:left; font-family:sans-serif; font-size:7pt; line-height: 12px; width:47.5%; vertical-align:top;">
+
+<b>TO:</b>
+<br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.RazonSocial__c}"/>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.BillingStreet))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.BillingStreet}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.BillingCity))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.BillingCity}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.BillingState))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.BillingState}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.BillingPostalCode))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.BillingPostalCode}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.BillingCountry))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.BillingCountry}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.NroIdFiscal__c))}"><br/>TAX ID:&nbsp;<apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.NroIdFiscal__c}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Phone))}"><br/>PHONE:&nbsp;<apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.Phone}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.ComentarioFacturasCliente__c))}"><br/>Phone:&nbsp;<apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.ComentarioFacturasCliente__c}"/></apex:outputPanel>
+
+<apex:outputPanel rendered="{!OR(NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_1__c)),NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_2__c)),NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_3__c)),NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_4__c)),NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_5__c)),NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_6__c)),NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_7__c)))}"><br/><br/><b>NOTIFY PARTY:</b></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_1__c))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_1__c}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_2__c))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_2__c}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_3__c))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_3__c}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_4__c))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_4__c}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_5__c))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_5__c}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_6__c))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_6__c}"/></apex:outputPanel>
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_7__c))}"><br/><apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.Notify_Party_Linea_7__c}"/></apex:outputPanel>
+
+</td>
+
+<td style="text-align:left; align-items:top; font-family:sans-serif; font-size:7pt; line-height: 12px; width:5%; vertical-align:top;">
+
+</td>
+
+<td style="text-align:right; font-family:sans-serif; font-size:7pt; line-height: 12px; width:47.5%; vertical-align:top;">
+
+<b>DATE:</b>&nbsp;<apex:outputField value="{!FacturaDeCliente__c.FechaDeFactura__c}"/>
+<br/><b>INVOICE NUMBER:</b>&nbsp;<apex:outputField value="{!FacturaDeCliente__c.Name}"/>
+<br/>
+<br/><b>PORT OF LOADING:</b>&nbsp;<apex:outputField value="{!FacturaDeCliente__c.PedidoPrincipal__r.Puerto_de_origen__c}"/>
+<br/><b>PORT OF DISCHARGE:</b>&nbsp;<apex:outputField value="{!FacturaDeCliente__c.PedidoPrincipal__r.Puerto_de_destino__c}"/>
+<br/><b>FOB:</b>&nbsp;<apex:outputField value="{!FacturaDeCliente__c.PedidoPrincipal__r.Puerto_de_origen__c}"/>
+<br/><b>PAYMENT TERMS:</b>&nbsp;<apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.FormaPago__c}"/>&nbsp;<apex:outputField value="{!FacturaDeCliente__c.Cliente__r.Parent.PlazoPago__c}"/> DAYS AFTER B/L DATE
+
+</td>
+
+</tr>
+
+</table>
+
+<br/>
+
+<div class="bank_info" style="text-align:left; font-family:sans-serif; font-size:7pt; line-height: 20px;">
+<br/><b>ORDER(S):</b>&nbsp;<apex:variable var="count" value="{!0}"/><apex:repeat var="POs" value="{!FacturaDeCliente__c.FacturacionDePedidos__r}"><apex:outputPanel rendered="{!count>0}">, </apex:outputPanel><apex:outputField value="{!POs.Pedido__r.Numero_de_Orden__c}"/><apex:variable var="count" value="{!count+1}"/></apex:repeat>
+</div>
+
+<table id="Items" style="border-spacing:0px; width:100%;">
+
+<tr>
+<th style="text-align:center; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1; height:20px; width:12.5%;">ITEM #</th>
+<th style="text-align:center; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1; height:20px; width:12.5%;">MARK</th>
+<th style="text-align:center; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1; height:20px; width:35%;">DESCRIPTION</th>
+<th style="text-align:center; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1; height:20px; width:5%;">QTY</th>
+<th style="text-align:right; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1;  height:20px; width:15%;">UNIT PRICE</th>
+<th style="text-align:right; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1;  height:20px; width:25%;">AMOUNT</th>
+</tr>
+
+<apex:repeat var="Items" value="{!FacturaDeCliente__c.ItemsDeFacturaDeCliente__r}">
+
+<tr>
+<td style="text-align:center; font-size:7pt; font-family:sans-serif; height:16px; width:12.5%;"><apex:outputField value="{!Items.CodigoDeProducto__c}"/></td>
+<td style="text-align:center; font-size:7pt; font-family:sans-serif; height:16px; width:12.5%;"><apex:outputField value="{!Items.MarcaDeProducto__c}"/></td>
+<td style="text-align:center; font-size:7pt; font-family:sans-serif; height:16px; width:35%;"><apex:outputField value="{!Items.Descripcion__c}"/></td>
+<td style="text-align:center; font-size:7pt; font-family:sans-serif; height:16px; width:5%;"><apex:outputField value="{!Items.Cantidad__c}"/></td>
+<td style="text-align:right; font-size:7pt; font-family:sans-serif; height:16px; width:15%;"><apex:outputField value="{!Items.PrecioDeVenta__c}"/></td>
+<td style="text-align:right; font-size:7pt; font-family:sans-serif; height:16px; width:25%;"><apex:outputField value="{!Items.Total__c}"/></td>
+</tr>
+
+</apex:repeat>
+
+</table>
+
+<table id="Items" style="border-spacing:0px; width:100%;">
+
+<tr>
+<th style="text-align:center; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1; height:20px; width:12.5%;">SUMMARY:</th>
+<th style="text-align:center; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1; height:20px; width:12.5%;"></th>
+<th style="text-align:center; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1; height:20px; width:35%;"></th>
+<th style="text-align:center; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1; height:20px; width:5%;"><apex:outputField value="{!FacturaDeCliente__c.TotalCantidad__c}"/></th>
+<th style="text-align:right; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1;  height:20px; width:15%;"></th>
+<th style="text-align:right; font-size:7pt; font-family:sans-serif; background-color:#D1D1D1;  height:20px; width:25%;"><apex:outputField value="{!FacturaDeCliente__c.Total__c}"/></th>
+</tr>
+
+</table>
+
+<table id="ItemsBottomMessage" style="text-align:right; font-family:sans-serif; font-size:6pt; line-height: 12px; width:100%;">
+
+<tr>
+
+<td style="text-align:right; font-family:sans-serif; font-size:6pt; line-height: 12px; width:100%;">
+
+<apex:outputPanel rendered="{!NOT(ISBLANK(FacturaDeCliente__c.TotalEnLetras__c))}"><b>TOTAL:</b>&nbsp;<apex:outputField value="{!FacturaDeCliente__c.TotalEnLetras__c}"/></apex:outputPanel>
+<br/>BENEFICIARY CERTIFIES THAT THIS SHIPMENT CONTAINS NO WOOD PACKING MATERIALS
+
+</td>
+
+</tr>
+
+</table>
+
+<br/>
+
+<div class="bank_info" style="text-align:left; font-family:sans-serif; font-size:7pt; line-height: 12px;">
+<br/><b>BANK DETAILS:</b>
+<br/>BENEFICIARY: PACIFIC GLOBAL CORPORATION
+<br/>BANK: BANCO SABADELL MIAMI BRANCH
+<br/>BANK ADDRESS: 1111 BRICKELL AVE. SUITE 3010 MIAMI, FL. 33131
+<br/>ACCOUNT NUMBER: 00516319
+<br/>ABA ROUNTING NUMBER: 066014069
+<br/>SWIFT CODE: BSABUS3X
+</div>
+
+</body>
+
+</html>
+
+</apex:page>

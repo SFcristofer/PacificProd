@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MetodoPagoAportaciones__c</fullName>
+    <inlineHelpText>Commercial contributions payment method agreed upon with the customer</inlineHelpText>
+    <label>Método pago aportaciones</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetName>MetodoPagoAportaciones</valueSetName>
+    </valueSet>
+</CustomField>

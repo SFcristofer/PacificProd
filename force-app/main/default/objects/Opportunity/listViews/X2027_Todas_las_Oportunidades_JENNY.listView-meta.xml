@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>X2027_Todas_las_Oportunidades_JENNY</fullName>
+    <columns>OPPORTUNITY.NAME</columns>
+    <columns>ACCOUNT.NAME</columns>
+    <columns>OPPORTUNITY.STAGE_NAME</columns>
+    <columns>OPPORTUNITY.CLOSE_DATE</columns>
+    <columns>OPPORTUNITY.AGE_IN_DAYS</columns>
+    <columns>Imp_Neto_Previsto__c</columns>
+    <columns>Margen__c</columns>
+    <columns>CORE.USERS.FIRST_NAME</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>PlanificacionComercial__c</field>
+        <operation>equals</operation>
+        <value>2027</value>
+    </filters>
+    <filters>
+        <field>CORE.USERS.FIRST_NAME</field>
+        <operation>equals</operation>
+        <value>Jenny</value>
+    </filters>
+    <label>2027 - All Opportunities JENNY</label>
+</ListView>

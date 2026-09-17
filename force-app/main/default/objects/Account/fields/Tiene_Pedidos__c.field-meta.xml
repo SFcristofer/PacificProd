@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tiene_Pedidos__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Se marca para los Proveedores que tienen Pedidos asociados</description>
+    <inlineHelpText>It is marked for suppliers who have associated orders</inlineHelpText>
+    <label>Tiene Pedidos</label>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackHistory>false</trackHistory>
+    <type>Checkbox</type>
+</CustomField>

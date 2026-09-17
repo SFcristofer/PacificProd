@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ETD__c</fullName>
+    <description>Fecha estimada de partida (Estimated Time of Departure)</description>
+    <inlineHelpText>Estimated time of departure</inlineHelpText>
+    <label>ETD</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Date</type>
+</CustomField>

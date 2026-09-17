@@ -1,0 +1,5 @@
+<apex:page showHeader="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" lightningStylesheets="true" Controller="PortalProveedorAltaProductoController">
+
+  <apex:PageMessages id="portalProvMsgs" rendered="true"/>
+
+</apex:page>
