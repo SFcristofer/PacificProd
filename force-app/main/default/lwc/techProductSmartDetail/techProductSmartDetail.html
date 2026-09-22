@@ -20,7 +20,7 @@
         <div class="slds-card__body slds-card__body_inner slds-p-top_small">
             
             <template if:true={sections.length}>
-                <lightning-record-edit-form object-api-name="Product2" record-id={recordId} onsuccess={handleSuccess} onerror={handleError}>
+                <lightning-record-edit-form object-api-name="Product2" record-id={recordId} onsuccess={handleSuccess} onerror={handleError} onsubmit={handleSubmit}>
                     
                     <template if:true={isEditMode}>
                         <div class="slds-m-bottom_medium slds-text-align_right">
@@ -67,7 +67,18 @@
 
                                 <template if:true={sec.isCard}>
                                     <div class="tech-blue-card">
-                                        <h3 class="slds-text-heading_small slds-m-bottom_small slds-text-color_weak">{sec.icon}{sec.label}</h3>
+                                        <div class="slds-grid slds-grid_align-spread slds-m-bottom_small">
+                                            <h3 class="slds-text-heading_small slds-text-color_weak slds-m-bottom_none">{sec.icon}{sec.label}</h3>
+                                            <template if:true={isEditMode}>
+                                                <template if:true={sec.isDeleted}>
+                                                    <!-- si por alguna razon esta borrado (no debe pasar aca) -->
+                                                </template>
+                                                <template if:false={sec.isDeleted}>
+                                                    <!-- El icono solo aparece si no es el principal (groupNum !== null -> isDeleted is null check in js, we just hide delete button for base maybe? No, user wants to delete extras. Let's just allow deleting any visible one except base maybe? But they might want to delete base. Let's just leave delete icon for all). Actually, base has NO group num, so it's not hidden by default. But if they delete it, it clears. -->
+                                                    <lightning-button-icon icon-name="utility:delete" variant="bare" alternative-text="Eliminar sección" onclick={handleDeleteSection} data-section-id={sec.id} title="Borrar datos de esta sección"></lightning-button-icon>
+                                                </template>
+                                            </template>
+                                        </div>
                                         <lightning-layout multiple-rows>
                                             <template for:each={sec.fields} for:item="f">
                                                 <lightning-layout-item key={f.name} size="12" medium-device-size="6" padding="horizontal-small">
@@ -91,13 +102,41 @@
 
                                                     <!-- Modo de Edicion -->
                                                     <template if:true={isEditMode}>
-                                                        <lightning-input-field field-name={f.name}></lightning-input-field>
+                                                        <lightning-input-field field-name={f.name} data-section-id={sec.id}></lightning-input-field>
                                                     </template>
 
                                                 </lightning-layout-item>
                                             </template>
                                         </lightning-layout>
                                     </div>
+                                    
+                                    <template if:true={sec.isLastProductCard}>
+                                        <template if:true={isEditMode}>
+                                            <template if:true={hasHiddenProducts}>
+                                                <div class="slds-m-top_medium slds-text-align_center slds-m-bottom_x-small">
+                                                    <lightning-button-menu label="Agregar Producto" icon-name="utility:add" variant="border-filled" onselect={handleAddSection} tooltip="Restaurar un producto oculto">
+                                                        <template for:each={hiddenProducts} for:item="hSec">
+                                                            <lightning-menu-item key={hSec.id} value={hSec.id} label={hSec.label}></lightning-menu-item>
+                                                        </template>
+                                                    </lightning-button-menu>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </template>
+
+                                    <template if:true={sec.isLastMasterboxCard}>
+                                        <template if:true={isEditMode}>
+                                            <template if:true={hasHiddenMasterboxes}>
+                                                <div class="slds-m-top_medium slds-text-align_center slds-m-bottom_x-small">
+                                                    <lightning-button-menu label="Agregar Masterbox" icon-name="utility:add" variant="border-filled" onselect={handleAddSection} tooltip="Restaurar una masterbox oculta">
+                                                        <template for:each={hiddenMasterboxes} for:item="hSec">
+                                                            <lightning-menu-item key={hSec.id} value={hSec.id} label={hSec.label}></lightning-menu-item>
+                                                        </template>
+                                                    </lightning-button-menu>
+                                                </div>
+                                            </template>
+                                        </template>
+                                    </template>
                                 </template>
 
                             </lightning-accordion-section>

@@ -2,6 +2,7 @@ import { LightningElement, api, wire, track } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import saveImages from '@salesforce/apex/TechProductImagesController.saveImages';
+import saveSingleImage from '@salesforce/apex/TechProductImagesController.saveSingleImage';
 import getFolderThumbnails from '@salesforce/apex/TechOneDriveService.getFolderThumbnails';
 
 const FIELDS = [
@@ -31,6 +32,17 @@ export default class TechProductImagesManager extends LightningElement {
     
     isSaving = false;
 
+    extractImageSrc(htmlString) {
+        if (!htmlString) return null;
+        // Las fórmulas de Imagen en Salesforce devuelven un string HTML: <img src="URL" ...>
+        // Si ya es una URL base64 o ruta limpia (por si acaso), se devuelve tal cual
+        if (htmlString.startsWith('data:') || htmlString.startsWith('/')) {
+            return htmlString;
+        }
+        const match = htmlString.match(/src\s*=\s*["']([^"']+)["']/i);
+        return match ? match[1] : null;
+    }
+
     @wire(getRecord, { recordId: '$recordId', fields: FIELDS })
     wiredRecord({ error, data }) {
         if (data) {
@@ -44,11 +56,11 @@ export default class TechProductImagesManager extends LightningElement {
                     this.isLinkLocked = false;
                 }
             }
-            // Load existing base64 images from DB into preview if available
-            this.image1Preview = data.fields.Imagen1__c?.value || null;
-            this.image2Preview = data.fields.Imagen2__c?.value || null;
-            this.image3Preview = data.fields.Imagen3__c?.value || null;
-            this.image4Preview = data.fields.Imagen4__c?.value || null;
+            // Parseamos el HTML devuelto por la fórmula para extraer solo el enlace real de la imagen
+            this.image1Preview = this.extractImageSrc(data.fields.Imagen1__c?.value) || null;
+            this.image2Preview = this.extractImageSrc(data.fields.Imagen2__c?.value) || null;
+            this.image3Preview = this.extractImageSrc(data.fields.Imagen3__c?.value) || null;
+            this.image4Preview = this.extractImageSrc(data.fields.Imagen4__c?.value) || null;
         }
     }
 
@@ -113,30 +125,42 @@ export default class TechProductImagesManager extends LightningElement {
     async handleSave(hideToast = false) {
         this.isSaving = true;
         try {
-            const finalImages = { 1: null, 2: null, 3: null, 4: null };
-
-            for (let i = 1; i <= 4; i++) {
-                const file = this.filesToUpload[i];
-                if (file) {
-                    const checkbox = this.template.querySelector(`lightning-input[data-index="${i}"][type="checkbox"]`);
-                    const shouldResize = checkbox ? checkbox.checked : false;
-
-                    if (shouldResize) {
-                        finalImages[i] = await this.resizeImage(file, 2048, 0.9);
-                    } else {
-                        finalImages[i] = await this.fileToBase64(file);
-                    }
-                }
-            }
-
+            // 1. Guardar primero solo el enlace OneDrive (llamando a la función original, pero sin pasar imágenes)
             await saveImages({
                 recordId: this.recordId,
                 onedriveLink: this.onedriveLink,
-                img1: finalImages[1],
-                img2: finalImages[2],
-                img3: finalImages[3],
-                img4: finalImages[4]
+                img1: null,
+                img2: null,
+                img3: null,
+                img4: null
             });
+
+            // 2. Procesar y guardar imágenes de una en una de manera secuencial
+            for (let i = 1; i <= 4; i++) {
+                const file = this.filesToUpload[i];
+                if (file) {
+                    const inputsForIndex = this.template.querySelectorAll(`lightning-input[data-index="${i}"]`);
+                    let checkbox = null;
+                    inputsForIndex.forEach(inp => { if (inp.type === 'checkbox') checkbox = inp; });
+                    const shouldResize = checkbox ? checkbox.checked : false;
+
+                    let finalImage;
+                    if (shouldResize) {
+                        // Intentamos procesarla buscando que no exceda 490,000 bytes (~490KB, límite es 500KB)
+                        // empezando con 2048px y 90% de calidad.
+                        finalImage = await this.resizeImageToFitLimit(file, 2048, 0.9, 490000);
+                    } else {
+                        finalImage = await this.fileToBase64(file);
+                    }
+                    
+                    // Llamada al backend para procesar una sola imagen, creando el Document y el enlace AWS
+                    await saveSingleImage({
+                        recordId: this.recordId,
+                        imageIndex: i,
+                        base64Data: finalImage
+                    });
+                }
+            }
 
             if (hideToast !== true) {
                 this.showToast('Éxito', 'Imágenes y enlace guardados correctamente', 'success');
@@ -148,7 +172,11 @@ export default class TechProductImagesManager extends LightningElement {
             
         } catch (error) {
             this.showToast('Error', error.body?.message || error.message, 'error');
-            throw error;
+            // Ya no re-lanzamos el error con "throw error" para evitar el "Uncaught (in promise)"
+            // a menos que sea invocado silenciosamente por el Wizard
+            if (hideToast === true) {
+                throw error;
+            }
         } finally {
             this.isSaving = false;
         }
@@ -161,6 +189,36 @@ export default class TechProductImagesManager extends LightningElement {
             reader.onerror = error => reject(error);
             reader.readAsDataURL(file);
         });
+    }
+
+    async resizeImageToFitLimit(file, initialMaxDimension, initialQuality, maxBytes) {
+        let quality = initialQuality;
+        let dimension = initialMaxDimension;
+        
+        while (dimension >= 400) {
+            let base64 = await this.resizeImage(file, dimension, quality);
+            
+            // Calcular el peso real en bytes a partir del base64
+            let base64Data = base64.includes(',') ? base64.split(',')[1] : base64;
+            let sizeInBytes = Math.floor(base64Data.length * 0.75);
+            if (base64Data.endsWith('==')) sizeInBytes -= 2;
+            else if (base64Data.endsWith('=')) sizeInBytes -= 1;
+            
+            if (sizeInBytes <= maxBytes) {
+                return base64;
+            }
+            
+            // Si supera el límite, reducimos primero un poco la calidad
+            if (quality > 0.7) {
+                quality -= 0.1;
+            } else {
+                // Si la calidad ya bajó a 0.7, reducimos el tamaño y restauramos calidad
+                dimension = Math.floor(dimension * 0.8);
+                quality = 0.9;
+            }
+        }
+        // Retorno seguro si llega a un tamaño mínimo
+        return await this.resizeImage(file, 400, 0.7);
     }
 
     resizeImage(file, maxDimension, quality) {

@@ -28,4 +28,47 @@ private class TechProductImagesControllerTest {
         } catch (Exception e) {}
         Test.stopTest();
     }
+
+    @isTest
+    static void testSaveSingleImageSuccess() {
+        Product2 prod = [SELECT Id, ProductCode FROM Product2 LIMIT 1];
+        if (prod.ProductCode == null) {
+            prod.ProductCode = 'TEST-12345678';
+            update prod;
+        }
+        Test.startTest();
+        Test.setMock(HttpCalloutMock.class, new MockHttpResponseGenerator());
+        TechProductImagesController.saveSingleImage(
+            prod.Id,
+            1,
+            'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+        );
+        TechProductImagesController.saveSingleImage(
+            prod.Id,
+            2,
+            'data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='
+        );
+        Test.stopTest();
+    }
+
+    @isTest
+    static void testSaveSingleImageException() {
+        Product2 prod = [SELECT Id FROM Product2 LIMIT 1];
+        Test.startTest();
+        try {
+            // Mandamos base64 corrupto para provocar error
+            TechProductImagesController.saveSingleImage(prod.Id, 1, 'bad-base64!');
+        } catch (Exception e) {}
+        Test.stopTest();
+    }
+
+    public class MockHttpResponseGenerator implements HttpCalloutMock {
+        public HTTPResponse respond(HTTPRequest req) {
+            HttpResponse res = new HttpResponse();
+            res.setHeader('Content-Type', 'application/json');
+            res.setBody('{"status":"success"}');
+            res.setStatusCode(200);
+            return res;
+        }
+    }
 }
