@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Pendientes – Reunión Pacific Global 22 sep</title>
+<style>
+body{font-family:Segoe UI,Arial,sans-serif;max-width:1100px;margin:30px auto;padding:0 20px;color:#222;background:#f7f9fb}
+h1{color:#0b5cab;margin-bottom:4px}
+.sub{color:#666;margin-top:0}
+h2{background:#0b5cab;color:#fff;padding:8px 12px;border-radius:6px;margin-top:32px;font-size:18px}
+table{width:100%;border-collapse:collapse;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+th,td{border:1px solid #dde3ea;padding:8px 10px;text-align:left;vertical-align:top;font-size:14px}
+th{background:#eef3f8}
+td:first-child{width:36px;text-align:center;color:#888}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:12px;font-weight:600;white-space:nowrap}
+.pend{background:#fff3cd;color:#8a6d00}
+.cli{background:#e2e3ff;color:#3b3ba0}
+.conf{background:#fde2e1;color:#a12a22}
+.done{background:#d4edda;color:#1e6b34}
+.nof{background:#e9ecef;color:#555}
+.note{background:#fff;border-left:4px solid #f0ad4e;padding:10px 14px;margin-top:20px;font-size:14px}
+</style>
+</head>
+<body>
+<h1>Pendientes – Reunión Pacific Global</h1>
+<p class="sub">22 de septiembre · Asistentes: Rubén Bernardo, Verónica Bernardo (Pacific Global) · Abner Trujillo, Cristofer Contreras (Technovalue)</p>
+
+<p>
+<span class="tag pend">Pendiente Technovalue</span>
+<span class="tag cli">Pendiente cliente</span>
+<span class="tag conf">Por confirmar / decidir</span>
+<span class="tag done">Hecho</span>
+<span class="tag nof">No viable</span>
+</p>
+
+<h2>1. Vista “Agregar productos” en Oportunidad</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>1</td><td>Mostrar la <b>descripción en inglés</b> (hoy muestra la de español).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>2</td><td>Mostrar columnas: <b>código, marca, familia, subfamilia, clase y foto</b>.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>3</td><td><b>Quitar</b> las columnas de unidades por contenedor (20 / 40 / HQ).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>4</td><td>Renombrar columna <b>“Código DO” → “Código PG”</b>.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>5</td><td>Permitir <b>buscar por cualquiera de esas columnas</b> (incluida familia, subfamilia y clase).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>6</td><td>Filtro de fondo para que <b>solo aparezcan productos activos</b>.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+</table>
+
+<h2>2. Producto (Product2) y datos maestros</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>7</td><td><b>Quitar/ocultar el check “Activo”</b> en el layout del producto base (nivel 1); confunde a los usuarios. La activación se hace en el producto de fábrica (nivel 2).</td><td>Technovalue (Cristofer)</td><td><span class="tag done">Hecho</span></td><td>Se quitó la casilla "Activo" de la pantalla visual del producto para que ya no se pueda modificar desde ahí, evitando confusiones.</td></tr>
+<tr><td>8</td><td>Revisar en el <b>add-on</b> (Outlook) si se puede poner una condición para que la búsqueda de productos solo muestre activos. (Cristofer indicó que sí se puede.)</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>9</td><td>Enviar a Verónica el <b>export de la lista de productos</b> agregando columna de <b>estado (activo/inactivo)</b> y <b>fecha de última modificación</b>.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>10</td><td>Trabajar la lista: marcar como <b>inactivos</b> los códigos antiguos (2023 y anteriores) que no entren en el nuevo árbol, y completar <b>familia, subfamilia, clase y estado</b>. Devolverla lo antes posible.</td><td>Cliente (Verónica)</td><td><span class="tag cli">Pendiente cliente</span></td><td></td></tr>
+<tr><td>11</td><td><b>Actualización masiva</b> de familia / subfamilia / clase / estado con la lista que devuelva el cliente (no se borran productos por el histórico de ventas).</td><td>Technovalue</td><td><span class="tag pend">Tras recibir lista</span></td><td></td></tr>
+<tr><td>12</td><td>Ocultar productos inactivos en la búsqueda global / por perfil.</td><td>—</td><td><span class="tag nof">No viable nativo</span> Product es objeto estándar/público; se mantienen reglas de validación y la vista “Productos Activos” (ya existe).</td><td></td></tr>
+</table>
+
+<h2>3. Masterbox</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>13</td><td>Nuevas secciones de masterbox visibles solo cuando tienen cantidad; las de 0 se ocultan automáticamente.</td><td>Technovalue</td><td><span class="tag done">Hecho</span></td><td></td></tr>
+<tr><td>14</td><td>Validar el funcionamiento de masterbox.</td><td>Cliente</td><td><span class="tag cli">Pendiente cliente</span></td><td></td></tr>
+</table>
+
+<h2>4. Correo / Outlook / Einstein Activity Capture</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>15</td><td>Revisar configuración de Einstein Activity Capture: opción “agregar todos los correos al activity timeline” y dirección de sincronización de <b>eventos y contactos</b> (ambos sentidos / Outlook→SF / SF→Outlook).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>16</td><td>Entregar el <b>manual de usuario del add-on de Outlook</b> (comprometido).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>17</td><td>Explicar/documentar que si se borra la dirección <b>BCC de Salesforce</b> el correo no se registra.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>18</td><td>Decidir si se trabajará <b>desde Outlook o desde Salesforce</b> para configurar un único sentido de sincronización.</td><td>Cliente</td><td><span class="tag conf">Por decidir</span></td><td></td></tr>
+<tr><td>19</td><td>Hacer <b>pruebas conjuntas</b> con cuentas del dominio Pacific Global (el equipo consultor no tiene cuentas del dominio).</td><td>Technovalue + Cliente</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>20</td><td><b>Excluir a Rubén y Verónica de la sincronización</b> de Einstein Activity Capture (sus correos directos a contactos, p. ej. directivos de City Club que están como contacto para Marketing Cloud, no deben aparecer); el resto de perfiles sigue sincronizando. Lo que participen dentro de una cadena del equipo sí se verá.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span> (acordado “sí, mejor”)</td><td></td></tr>
+<tr><td>21</td><td>Borrado de los correos ya sincronizados (~180 días) de Rubén/Verónica: Rubén y Verónica indicaron que no tienen comunicación privada relevante (“lo dejamos así”).</td><td>Cliente</td><td><span class="tag conf">Confirmar si se borra o no</span></td><td></td></tr>
+<tr><td>22</td><td><b>Seguimiento de correos por pedido</b> (ej. pedido 26203): Verónica quiere que todos los correos con ese pedido/asunto (fábrica, diseñador, book, compañía de inspección: cotización, día y nombre del inspector) queden guardados en el pedido. Recomendación: enviar desde el apartado Email del pedido en Salesforce (o relacionar con “Pick Records” en el add-on) y que respondan en la misma cadena. Prueba en curso con Cristofer.</td><td>Technovalue + Cliente</td><td><span class="tag pend">Completar prueba / validar</span></td><td></td></tr>
+<tr><td>23</td><td>Aclarar que si el tercero no responde en la cadena, el correo no aparece; si se relaciona un contacto, debe estar en la cuenta correcta (Cris estaba en la cuenta Pacific Global).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+</table>
+
+<h2>5. Agentforce / Agentes</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>24</td><td>Explicar a Rubén los ~10 correos recibidos por la prueba de política que están implementando Cristofer y Rodrigo.</td><td>Technovalue (Cristofer/Rodrigo)</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>25</td><td>Que Rubén pueda <b>acceder a lo que se quiere descargar</b> para revisarlo y <b>aprobar o rechazar</b> (hoy solo ve un reporte con aprobar/rechazar).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>26</td><td>Revisar si se puede <b>reducir el texto de razonamiento</b> del agente (“exploring… finding 36 resultados”) para que dé el resultado directo y más rápido.</td><td>Technovalue (“lo revisamos”)</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>27</td><td><b>Activar el agente para el perfil Nutra</b> (igual que con Janet) y avisar por correo cuando esté activo.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+</table>
+
+<h2>6. Gestión del proyecto</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>28</td><td>Enviar <b>reporte actualizado de horas</b> consumidas y disponibles.</td><td>Abner</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>29</td><td>Avanzar esta semana con todos los pendientes; avisar por correo lo que esté listo antes de la próxima reunión.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>30</td><td><b>Próxima reunión: martes siguiente.</b> Se anula la agenda del jueves (las dudas que iban al curso del jueves, p. ej. filtro del add-on, pasan a esta reunión).</td><td>Todos</td><td><span class="tag conf">Agendar</span></td><td></td></tr>
+</table>
+
+<div class="note"><b>Nota:</b> el transcript tiene huecos sin texto (≈1:01:51–1:11:39, 1:15:30–1:21:55 y 1:25:37–1:51:21). Puede haber acuerdos en esos tramos que no quedaron registrados; conviene revisar la grabación si existe.</div>
+</body>
+</html>
