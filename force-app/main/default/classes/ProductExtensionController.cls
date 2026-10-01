@@ -49,18 +49,18 @@ public class ProductExtensionController
         
         productList = [SELECT Id, 
                             Name,
-                            Descripcion_Larga__c, 
+                            Description, 
                             Thumb1__c, 
                             CodigoDeProductoBase__c, 
                             ProductoBase__r.Marca__c, 
-                            ProductoBase__r.unidadescontainer20__c, 
-                            ProductoBase__r.unidadescontainer40__c, 
-                            ProductoBase__r.unidadeshq__c, 
+                            Familia_producto_base__c, 
+                            Subfamilia__c, 
+                            Clase__c, 
                             IsActive 
                             FROM Product2 
                             WHERE IsActive = true
                             AND Id IN (SELECT Product2Id FROM PricebookEntry WHERE CurrencyISOCode = :opp.CurrencyISOCode)
-                            ORDER BY Descripcion_Larga__c
+                            ORDER BY Name
                             LIMIT 300];
 
         checkedProducts = new Map<Id, Boolean>();
@@ -112,23 +112,22 @@ public class ProductExtensionController
                 if(i > 0){
                     strFilter += ' AND ';
                 }
-                strFilter += 'Descripcion_Larga__c Like \'%' + s + '%\'';
+                strFilter += '(Name Like \'%' + s + '%\' OR Familia_producto_base__c Like \'%' + s + '%\' OR Subfamilia__c Like \'%' + s + '%\' OR Clase__c Like \'%' + s + '%\')';
                 i++;
             }
-            strFilter += ') OR CodigoDeProductoBase__c Like \'%' + prodSearch.trim() + '%\')';
+            strFilter += ') OR CodigoDeProductoBase__c Like \'%' + prodSearch.trim() + '%\' OR ProductoBase__r.Marca__c Like \'%' + prodSearch.trim() + '%\')';
             
         }
 
-        query = 'SELECT Id, Name, Descripcion_Larga__c, Thumb1__c, CodigoDeProductoBase__c, ProductoBase__r.Marca__c,'
-                + ' ProductoBase__r.Unidadescontainer20__c, ProductoBase__r.unidadescontainer40__c,' 
-                + ' ProductoBase__r.unidadeshq__c, IsActive FROM Product2 WHERE IsActive = true'
+        query = 'SELECT Id, Name, Description, Thumb1__c, CodigoDeProductoBase__c, ProductoBase__r.Marca__c,'
+                + ' Familia_producto_base__c, Subfamilia__c, Clase__c, IsActive FROM Product2 WHERE IsActive = true'
                 + ' AND Id IN (SELECT Product2Id FROM PricebookEntry WHERE CurrencyISOCode = \'' + opp.CurrencyISOCode +'\')';
         
         if(strFilter != null)
         {
             query += ' AND ' + strFilter;
         }
-        query += ' ORDER BY Descripcion_Larga__c LIMIT 300';
+        query += ' ORDER BY Name LIMIT 300';
 
         system.debug('QUERY > ' + query + ' < ');
         productList = Database.query(query);
@@ -384,19 +383,19 @@ public class ProductExtensionController
                                      UnitPrice,
                                      Product2.Id,
                                      Product2.Name,
-                                     Product2.Descripcion_Larga__c, 
+                                     Product2.Description, 
                                      Product2.Thumb1__c, 
                                      Product2.CodigoDeProductoBase__c, 
                                      Product2.ProductoBase__r.Marca__c, 
-                                     Product2.ProductoBase__r.Unidadescontainer20__c, 
-                                     Product2.ProductoBase__r.Unidadescontainer40__c, 
-                                     Product2.ProductoBase__r.Unidadeshq__c, 
+                                     Product2.Familia_producto_base__c, 
+                                     Product2.Subfamilia__c, 
+                                     Product2.Clase__c, 
                                      Product2.IsActive 
                                 FROM PricebookEntry 
                                WHERE Pricebook2Id = :selectedPricebook 
                                  AND Product2Id IN :idsProduct
                                  AND CurrencyISOCode = :opp.CurrencyISOCode
-                                 ORDER BY Product2.Descripcion_Larga__c];
+                                 ORDER BY Product2.Name];
 
         PriceBook2 priceBook = [SELECT Id, Name from Pricebook2 WHERE Id =:selectedPricebook ];
         

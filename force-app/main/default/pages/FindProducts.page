@@ -95,7 +95,7 @@
       <apex:pageBlock >
         <apex:dataList id="selectedProductsId" value="{!selectedProducts}" var="prodSel">
 
-          <apex:outputText value="{!prodSel.Descripcion_Larga__c}"/>
+          <apex:outputText value="{!prodSel.Name}"/>
           
           <apex:commandLink action="{!clickDeleteSelectedProduct}" id="theCommandLink" style="font-size: 18px; font-weight: bold" value="      X" rerender="selectedProductsId, listProducts">
             <apex:param name="selProd" value="{!prodSel.Id}" assignTo="{!idSelectedProd}"/>
@@ -137,14 +137,14 @@
               </label>
             </apex:column>
 
-            <apex:column value="{!prod.Descripcion_Larga__c}" headerValue="Product"/>
-            <apex:column value="{!prod.CodigoDeProductoBase__c}" headerValue="DO Code"/>
+            <apex:column value="{!prod.Name}" headerValue="Product"/>
+            <apex:column value="{!prod.CodigoDeProductoBase__c}" headerValue="PG Code"/>
             <apex:column headerValue="Brand">
               <apex:outputText value="{!RIGHT(prod.ProductoBase__r.Marca__c, LEN(prod.ProductoBase__r.Marca__c) - 2)}" />
             </apex:column>
-            <apex:column value="{!prod.ProductoBase__r.UnidadesContainer20__c}" headerValue="20' Units"/>
-            <apex:column value="{!prod.ProductoBase__r.UnidadesContainer40__c}" headerValue="40' Units"/>
-            <apex:column value="{!prod.ProductoBase__r.UnidadesHQ__c}" headerValue="HQ Units"/>
+            <apex:column value="{!prod.Familia_producto_base__c}" headerValue="Family"/>
+            <apex:column value="{!prod.Subfamilia__c}" headerValue="Subfamily"/>
+            <apex:column value="{!prod.Clase__c}" headerValue="Class"/>
             <apex:column value="{!prod.Thumb1__c}" headerValue="Image"/>
 
           </apex:PageblockTable>
@@ -184,10 +184,10 @@
        <apex:pageBlockTable value="{!hybridProducts}" var="hybridProd">
          <apex:column >
             <apex:facet name="header">Product</apex:facet>
-            <apex:outputText value="{!hybridProd.product.Descripcion_Larga__c}"/>
+            <apex:outputText value="{!hybridProd.product.Name}"/>
          </apex:column>
         <apex:column >
-            <apex:facet name="header">DO Code</apex:facet>
+            <apex:facet name="header">PG Code</apex:facet>
             <apex:outputText value="{!hybridProd.product.CodigoDeProductoBase__c}"/>
         </apex:column>
          <apex:column >
@@ -196,18 +196,18 @@
          </apex:column>
 
          <apex:column >
-            <apex:facet name="header">20' Units</apex:facet>
-            <apex:outputText value="{!hybridProd.product.ProductoBase__r.UnidadesContainer20__c}"/>
+            <apex:facet name="header">Family</apex:facet>
+            <apex:outputText value="{!hybridProd.product.Familia_producto_base__c}"/>
          </apex:column>
 
          <apex:column >
-            <apex:facet name="header">40' Units</apex:facet>
-            <apex:outputText value="{!hybridProd.product.ProductoBase__r.UnidadesContainer40__c}"/>
+            <apex:facet name="header">Subfamily</apex:facet>
+            <apex:outputText value="{!hybridProd.product.Subfamilia__c}"/>
          </apex:column>
 
          <apex:column >
-            <apex:facet name="header">HQ Units</apex:facet>
-            <apex:outputText value="{!hybridProd.product.ProductoBase__r.UnidadesHQ__c}"/>
+            <apex:facet name="header">Class</apex:facet>
+            <apex:outputText value="{!hybridProd.product.Clase__c}"/>
          </apex:column>
 
          <apex:column >
