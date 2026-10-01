@@ -36,12 +36,12 @@ td:first-child{width:36px;text-align:center;color:#888}
 <h2>1. Vista “Agregar productos” en Oportunidad</h2>
 <table>
 <tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
-<tr><td>1</td><td>Mostrar la <b>descripción en inglés</b> (hoy muestra la de español).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
-<tr><td>2</td><td>Mostrar columnas: <b>código, marca, familia, subfamilia, clase y foto</b>.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
-<tr><td>3</td><td><b>Quitar</b> las columnas de unidades por contenedor (20 / 40 / HQ).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
-<tr><td>4</td><td>Renombrar columna <b>“Código DO” → “Código PG”</b>.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
-<tr><td>5</td><td>Permitir <b>buscar por cualquiera de esas columnas</b> (incluida familia, subfamilia y clase).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
-<tr><td>6</td><td>Filtro de fondo para que <b>solo aparezcan productos activos</b>.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>1</td><td>Mostrar la <b>descripción en inglés</b> (hoy muestra la de español).</td><td>Technovalue</td><td><span class="tag done">Hecho</span></td><td>Se actualizó ProductExtensionController y FindProducts.page para usar el campo Description.</td></tr>
+<tr><td>2</td><td>Mostrar columnas: <b>código, marca, familia, subfamilia, clase y foto</b>.</td><td>Technovalue</td><td><span class="tag done">Hecho</span></td><td>Se agregaron los campos Familia, Subfamilia y Clase a las consultas y a la tabla visual.</td></tr>
+<tr><td>3</td><td><b>Quitar</b> las columnas de unidades por contenedor (20 / 40 / HQ).</td><td>Technovalue</td><td><span class="tag done">Hecho</span></td><td>Se removieron de la vista y de la consulta Apex.</td></tr>
+<tr><td>4</td><td>Renombrar columna <b>“Código DO” → “Código PG”</b>.</td><td>Technovalue</td><td><span class="tag done">Hecho</span></td><td>Se cambió la cabecera a "PG Code" en FindProducts.page.</td></tr>
+<tr><td>5</td><td>Permitir <b>buscar por cualquiera de esas columnas</b> (incluida familia, subfamilia y clase).</td><td>Technovalue</td><td><span class="tag done">Hecho</span></td><td>Se amplió la consulta de búsqueda en Apex (cláusula LIKE) para incluir Familia, Subfamilia y Clase.</td></tr>
+<tr><td>6</td><td>Filtro de fondo para que <b>solo aparezcan productos activos</b>.</td><td>Technovalue</td><td><span class="tag done">Hecho</span></td><td>Verificado: el código Apex ya incluía IsActive = true.</td></tr>
 </table>
 
 <h2>2. Producto (Product2) y datos maestros</h2>
@@ -94,5 +94,64 @@ td:first-child{width:36px;text-align:center;color:#888}
 </table>
 
 <div class="note"><b>Nota:</b> el transcript tiene huecos sin texto (≈1:01:51–1:11:39, 1:15:30–1:21:55 y 1:25:37–1:51:21). Puede haber acuerdos en esos tramos que no quedaron registrados; conviene revisar la grabación si existe.</div>
+
+<hr style="margin:40px 0">
+<h1>Pendientes – Reunión 29 de septiembre</h1>
+<p class="sub">29 de septiembre · Asistentes: Rubén Bernardo, Verónica Bernardo (Pacific Global) · Abner Trujillo, Cristofer Contreras, Rodrigo Oropeza (Technovalue) · Próxima reunión: jueves 1 de octubre</p>
+
+<h2>7. Agentforce / IA (prioridad)</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>31</td><td><b>Priorizar la implementación del agente</b>: el día 1 se activan las 13 licencias (incluida una para Technovalue). Después, revisar qué desarrollos pendientes (pagos, booking lists, reportes) siguen siendo necesarios o los cubre el agente.</td><td>Technovalue + Rubén</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>32</td><td><b>Licencias Max día 1</b>: configurar la licencia del agente para Technovalue y <b>habilitar el agente a Miguel y Vanessa</b>. Avisar a Rubén cuando esté listo.</td><td>Abner</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>33</td><td><b>Agente de catálogos de proveedores</b>: las cuentas de proveedor tienen catálogos adjuntos; el agente debe leerlos e identificar qué proveedor tiene un producto (ej. “silla de playa”).</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>34</td><td><b>Reportes / información con el agente</b> (bookings, pagos, booking lists). Ej.: “¿cuántos balances me quedan por pagar con ETD?” → lista + total. Definir qué información se necesita y que el agente la prepare (documento, etc.).</td><td>Technovalue + Cliente (definir info)</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>35</td><td><b>Historial de conversaciones del agente</b> (pregunta de Rubén): Agentforce no guarda historial navegable como ChatGPT/Gemini; cada sesión inicia de cero con contexto limitado por seguridad. Explicar/documentar.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>36</td><td><b>Agente Nu</b> (activo para usuario Nu). Casos: estatus y ruta de pedido, producción, inspección, ruta por cliente (Walmart, City Club: plataforma de booking, inspección, documentos), empaque y muestras, cumplimiento/auditoría de fábrica, pedido listo para enviar a proveedor, documentos y cobranza (pago, documentos a banco).<br>a) <b>Afinar permisos del usuario Nu</b> para que el agente pueda consultar.<br>b) El agente está configurado en <b>inglés</b>.<br>c) <b>Nuevo (Verónica): consultas genéricas</b>, no solo de un pedido: pedidos a inspeccionar el próximo mes, a embarcar, cargo ready date del próximo mes, estatus de documentos.</td><td>Rodrigo</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>37</td><td>Hablar con Nu para que <b>pruebe el agente</b>, dé retroalimentación y definir hasta dónde dar permisos.</td><td>Cliente (Verónica)</td><td><span class="tag cli">Pendiente cliente</span></td><td></td></tr>
+<tr><td>38</td><td><b>Integración de Claude en Salesforce</b>: revisar con Adriana cómo funciona y si tiene costo extra o está incluida en la licencia Max. Caso de uso: armar presentaciones.</td><td>Abner</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>39</td><td><b>Seguridad de los agentes</b>: el agente (ej. el de Jenny) no debe acceder a información de fábrica ni datos restringidos. “Lo más importante es dejar todo esto a nivel de seguridad bien”.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+</table>
+
+<h2>8. FindProducts (Agregar productos en Oportunidad)</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>40</td><td><b>Validar lo entregado</b>: nombres en inglés, columnas código / marca / familia / subfamilia / clase / foto, solo productos activos, check quitado.</td><td>Cliente</td><td><span class="tag cli">Pendiente cliente</span></td><td></td></tr>
+<tr><td>41</td><td><b>Filtro por Marca</b>: picklist con “Todas” por defecto o una marca específica.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>42</td><td><b>Filtros en cascada Familia → Subfamilia → Clase</b>: al elegir familia solo salen sus subfamilias; al elegir subfamilia, sus clases. Cada nivel puede quedar en “Todas”. Solo valores <b>vigentes</b>. Ej.: Outdoor Trend + Idea Garden + Outdoor Temporada + Barbacoas.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>43</td><td>Con los filtros, la <b>caja de texto busca solo por nombre o código</b>.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>44</td><td>Pregunta de Verónica: ¿esta búsqueda puede ser <b>general (fuera de la oportunidad)</b>? Rubén: serían filtros en las list views de Producto. Responder / proponer.</td><td>Technovalue</td><td><span class="tag conf">Por definir</span></td><td></td></tr>
+</table>
+
+<h2>9. Búsqueda global y seguridad de Producto</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>45</td><td><b>Duplicados base + fábrica en búsqueda global</b>: antes solo aparecía la base. Requisito: “que en ningún perfil puedan aparecer 2”. Investigar causa (herencia de ProductCode + automatización que lo vuelve a poner, o el cambio de visualización “Primary Supplier Information”) y corregir para que solo salga la base.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td>Prueba: se quitó ProductCode a una fábrica (01tVT00000DXbyzYAD) y por nombre sigue saliendo; código restaurado (H407015B).</td></tr>
+<tr><td>46</td><td><b>Perfil Vendedor sin acceso al registro de producto de fábrica</b> (ni por búsqueda ni por link). La related list ya estaba oculta para vendedores; los demás perfiles acceden a fábricas desde la related list de la base.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>47</td><td><b>FLS Código Proveedor</b> (Codigo_Proveedor__c): Rubén lo quitó en la reunión a todos los perfiles excepto Compras, SuperCompras y Administrador. Verificar que ya no lo vean vendedores ni el agente. Puerto, incoterm, MOQ y plazo de fabricación se mantienen (salen en la cotización).</td><td>Technovalue (verificar)</td><td><span class="tag pend">Verificar</span></td><td></td></tr>
+<tr><td>48</td><td><b>Documentación de seguridad</b>: no existe. Entregar documento/matriz de perfiles y permisos.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>49</td><td><b>Search Layout de Producto</b> (resultados de búsqueda global): Código, Nombre/descripción (Product Name obligatorio en 1ª columna), <b>Status</b> (Activo/Inactivo/Draft – el segundo campo Status), Familia, Subfamilia, Clase y Foto. Quitar código de artículo y cantidades por contenedor. Rubén agregó “Active product” de prueba. Verónica dijo que lo haría ella: confirmar o apoyar.</td><td>Verónica / Cristofer (apoyo)</td><td><span class="tag conf">Confirmar</span></td><td></td></tr>
+<tr><td>50</td><td><b>List views compartidas</b>: hoy son “All users” y los usuarios modifican los filtros. Que cada usuario cree sus propias vistas (“Only I can see this list view”) y evitar que editen las compartidas.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>51</td><td>Vista <b>“Active Products”</b> muestra duplicados base + fábrica: agregar filtro Record Type = Producto (base).</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>52</td><td>Vista <b>“Inactive Products”</b> no muestra nada: revisar filtro (segundo Status = Inactivo) y visibilidad (grupos Admin y SuperCompras). Rubén no pudo guardar por no ser owner.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>53</td><td>Vista <b>Draft</b> visible solo para Compras.</td><td>—</td><td><span class="tag done">OK</span></td><td></td></tr>
+</table>
+
+<h2>10. Otros pendientes</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>54</td><td><b>Estudio de oportunidades</b>: en desarrollo, con errores en sandbox dev.</td><td>Technovalue</td><td><span class="tag pend">En curso</span></td><td></td></tr>
+<tr><td>55</td><td><b>Manual de Einstein Activity Capture</b>: pasos para que los usuarios conecten su cuenta (configuración de usuario o banner de EAC) y uso del add-on. Abner lo envía mañana (30-sep).</td><td>Abner</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>56</td><td><b>Excepción de sincronización EAC para Rubén y Verónica</b> (sus correos con clientes externos no deben sincronizarse ni verse por otros usuarios). Sigue pendiente (ver #20).</td><td>Abner</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>57</td><td><b>Correos ligados a la oportunidad equivocada</b> (correo de Miguel, cuenta Home Sentry; ej. de “Ventilación sobre el mes económico” a “Resurtido de manguera”): permitir editar <b>Related To</b> del EmailMessage (hoy bloqueado, sin botón editar). Alternativa: re-sincronizar.</td><td>Abner</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>58</td><td><b>Próxima reunión: jueves 1 de octubre.</b></td><td>Todos</td><td><span class="tag conf">Agendada</span></td><td></td></tr>
+</table>
+
+<h2>11. Decisiones abiertas (previas)</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>59</td><td>Back-fill de clasificación en fábricas: <b>7,295 registros bloqueados</b> por valores de picklist restringida obsoletos (2,830 ya actualizados). Decidir cómo tratarlos.</td><td>Cliente / Technovalue</td><td><span class="tag conf">Por decidir</span></td><td>Respaldo: BACKUP_clasificacion_fabricas_2026-09-29.csv</td></tr>
+<tr><td>60</td><td>Opción para duplicados en búsqueda global: 1) Search layout con columnas Activo y Record Type, 2) prefijo “[BASE]” en el nombre, 3) ambas.</td><td>Cliente / Cristofer</td><td><span class="tag conf">Por decidir</span></td><td></td></tr>
+</table>
 </body>
 </html>
