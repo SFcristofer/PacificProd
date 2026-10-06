@@ -44,7 +44,30 @@ public class TestProductExtensionController
         System.debug('search[' + controller.getProductList().size() + ']');
         
         //system.assertEquals(controller.getProductList().size(), 1);
-        
+
+        controller.getBrandOptions();
+        controller.getFamilyOptions();
+        controller.getSubfamilyOptions();
+        controller.getClassOptions();
+        controller.selFamily = Product2.Family.getDescribe().getPicklistValues()[0].getValue();
+        controller.familyChanged();
+        System.assert(controller.getSubfamilyOptions().size() >= 1);
+        controller.selSubfamily = Product2.Subfamilia__c.getDescribe().getPicklistValues()[0].getValue();
+        controller.subfamilyChanged();
+        System.assert(controller.getClassOptions().size() >= 1);
+        System.assertEquals(null, controller.selClass);
+        controller.getPGCodes();
+        controller.selPGCode = 'x\'';
+        controller.selBrand = 'x';
+        controller.selFamily = 'x';
+        controller.selSubfamily = 'x';
+        controller.selClass = 'x';
+        controller.searchProducts();
+        System.assertEquals(0, controller.getProductList().size());
+        controller.clearFilters();
+        controller.prodSearch = prodSearch;
+        controller.searchProducts();
+
         prodClicked = controller.getProductList().get(0);
         
         controller.findProductById(prodClicked.id);

@@ -73,6 +73,25 @@
       background-color: #2196F3 !important;
       color: #fff !important;
     }
+
+    /* Search and filters card */
+    .filters { padding: 4px 8px; }
+    .filters-head { display: flex; justify-content: space-between; align-items: center;
+                    padding-bottom: 12px; margin-bottom: 14px; border-bottom: 1px solid #e5e5e5; }
+    .filters-title { font-size: 15px; font-weight: 600; color: #181818; }
+    .filters-sub { font-size: 12px; color: #706e6b; margin-left: 8px; }
+    .filters-actions .next { margin: 0 0 0 8px; }
+    .filters-actions .btn-clear { background: #fff !important; color: #0176d3 !important;
+                                  border: 1px solid #c9c9c9 !important; }
+    .filters label { display: block; font-size: 12px; color: #444444; margin-bottom: 6px; }
+    .filters input[type=text], .filters select, .filters input[type=search] { width: 100%; height: 34px; box-sizing: border-box;
+                     border: 1px solid #dddbda; border-radius: 4px; padding: 0 12px; background-color: #fff; color: #080707; transition: border .1s linear,background-color .1s linear; }
+    .filters input[type=text]:focus, .filters select:focus, .filters input[type=search]:focus { outline: 0; border-color: #1b96ff;
+                     box-shadow: 0 0 3px #0176d3; }
+    .filters .search-input { padding-left: 40px !important; background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23706e6b' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.5' y2='16.5'/%3E%3C/svg%3E") no-repeat 12px center; }
+    .filters-search { margin-bottom: 18px; }
+    .filters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; align-items: start; }
+    @media (max-width: 900px) { .filters-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   </style>
 
   <!-- Panel used to search products -->
@@ -83,12 +102,29 @@
     <apex:form >
       <apex:pageBlock >
         
-        <apex:pageblockSection >
-          <apex:inputText value="{!prodSearch}" label="Search" onkeyup="buscar()"/>
-          <apex:actionFunction action="{!searchProducts}" name="buscar" rerender="resultId, listProducts" />
-          <apex:commandButton action="{!nextPage}" value="Next" id="siguiente"  styleClass="next"/>
-    
-        </apex:pageblockSection>
+        <apex:outputPanel id="filtros" layout="block" styleClass="filters">
+          <div class="filters-head">
+            <div><span class="filters-title">Search &amp; Filters</span><span class="filters-sub">Combine the search with any filter</span></div>
+            <div class="filters-actions">
+              <apex:commandButton action="{!clearFilters}" value="Clear filters" rerender="filtros, resultId" styleClass="btn-clear"/>
+              <apex:commandButton action="{!nextPage}" value="Next" id="siguiente"  styleClass="next"/>
+            </div>
+          </div>
+          <div class="filters-search">
+            <label>Search</label>
+            <apex:inputText value="{!prodSearch}" onkeyup="buscar()" styleClass="search-input" html-placeholder="Search by product, PG code, brand, family, subfamily or class..."/>
+          </div>
+          <div class="filters-grid">
+            <div><label>PG Code</label><apex:input value="{!selPGCode}" list="{!PGCodes}" html-placeholder="Type to search..." onchange="buscar()"/></div>
+            <div><label>Brand</label><apex:selectList value="{!selBrand}" size="1" onchange="buscar()"><apex:selectOptions value="{!brandOptions}"/></apex:selectList></div>
+            <div><label>Family</label><apex:selectList value="{!selFamily}" size="1" onchange="cambiaFamilia()"><apex:selectOptions value="{!familyOptions}"/></apex:selectList></div>
+            <div><label>Subfamily</label><apex:selectList id="subfam" value="{!selSubfamily}" size="1" onchange="cambiaSubfamilia()"><apex:selectOptions value="{!subfamilyOptions}"/></apex:selectList></div>
+            <div><label>Class</label><apex:selectList id="clase" value="{!selClass}" size="1" onchange="buscar()"><apex:selectOptions value="{!classOptions}"/></apex:selectList></div>
+          </div>
+        </apex:outputPanel>
+        <apex:actionFunction action="{!searchProducts}" name="buscar" rerender="resultId, listProducts" />
+        <apex:actionFunction action="{!familyChanged}" name="cambiaFamilia" rerender="subfam, clase, resultId, listProducts" />
+        <apex:actionFunction action="{!subfamilyChanged}" name="cambiaSubfamilia" rerender="clase, resultId, listProducts" />
       </apex:pageBlock>
       
       
@@ -143,8 +179,8 @@
               <apex:outputText value="{!RIGHT(prod.ProductoBase__r.Marca__c, LEN(prod.ProductoBase__r.Marca__c) - 2)}" />
             </apex:column>
             <apex:column value="{!prod.Familia_producto_base__c}" headerValue="Family"/>
-            <apex:column value="{!prod.Subfamilia__c}" headerValue="Subfamily"/>
-            <apex:column value="{!prod.Clase__c}" headerValue="Class"/>
+            <apex:column value="{!prod.ProductoBase__r.Subfamilia__c}" headerValue="Subfamily"/>
+            <apex:column value="{!prod.ProductoBase__r.Clase__c}" headerValue="Class"/>
             <apex:column value="{!prod.Thumb1__c}" headerValue="Image"/>
 
           </apex:PageblockTable>

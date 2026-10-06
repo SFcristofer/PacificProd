@@ -55,9 +55,11 @@ public class ProductExtensionController
                             ProductoBase__r.Marca__c, 
                             Familia_producto_base__c, 
                             Subfamilia__c, 
-                            Clase__c, 
-                            IsActive 
-                            FROM Product2 
+                            Clase__c,
+                            ProductoBase__r.Subfamilia__c,
+                            ProductoBase__r.Clase__c,
+                            IsActive
+                            FROM Product2
                             WHERE IsActive = true
                             AND Id IN (SELECT Product2Id FROM PricebookEntry WHERE CurrencyISOCode = :opp.CurrencyISOCode)
                             ORDER BY Name
@@ -100,33 +102,129 @@ public class ProductExtensionController
     }
  
     
+    // Dropdown filters (exact match, combined with AND)
+    public String selPGCode {get;set;}
+    public String selBrand {get;set;}
+    public String selFamily {get;set;}
+    public String selSubfamily {get;set;}
+    public String selClass {get;set;}
+
+    public List<SelectOption> getBrandOptions() { return picklistOptions(Product2.Marca__c.getDescribe()); }
+    public List<SelectOption> getFamilyOptions() { return picklistOptions(Product2.Family.getDescribe()); }
+    public List<SelectOption> getSubfamilyOptions() { return picklistOptions(Product2.Subfamilia__c.getDescribe(), Product2.Family.getDescribe(), selFamily); }
+    public List<SelectOption> getClassOptions() { return picklistOptions(Product2.Clase__c.getDescribe(), Product2.Subfamilia__c.getDescribe(), selSubfamily); }
+
+    private List<SelectOption> picklistOptions(Schema.DescribeFieldResult f)
+    {
+        return picklistOptions(f, null, null);
+    }
+
+    // Active values of f; if ctrlValue is set, only those valid for it per the field dependency (validFor bitmap)
+    private List<SelectOption> picklistOptions(Schema.DescribeFieldResult f, Schema.DescribeFieldResult ctrl, String ctrlValue)
+    {
+        Integer idx = -1;
+        if(String.isNotBlank(ctrlValue))
+        {
+            List<Schema.PicklistEntry> ctrlValues = ctrl.getPicklistValues();
+            for(Integer i = 0; i < ctrlValues.size(); i++)
+            {
+                if(ctrlValues[i].getValue().equals(ctrlValue)) idx = i;
+            }
+        }
+        List<SelectOption> opts = new List<SelectOption>{ new SelectOption('', '-- All --') };
+        for(Schema.PicklistEntry pe : f.getPicklistValues())
+        {
+            if(!pe.isActive()) continue;
+            if(String.isNotBlank(ctrlValue) && !isValidFor(pe, idx)) continue;
+            opts.add(new SelectOption(pe.getValue(), pe.getLabel()));
+        }
+        return opts;
+    }
+
+    private static Boolean isValidFor(Schema.PicklistEntry pe, Integer idx)
+    {
+        if(idx < 0) return false;
+        String validFor = (String)((Map<String, Object>)JSON.deserializeUntyped(JSON.serialize(pe))).get('validFor');
+        if(String.isBlank(validFor)) return false;
+        String hex = EncodingUtil.convertToHex(EncodingUtil.base64Decode(validFor));
+        if(idx / 4 >= hex.length()) return false;
+        Integer nibble = '0123456789abcdef'.indexOf(hex.substring(idx / 4, idx / 4 + 1));
+        Integer mask = 8 >> Math.mod(idx, 4);
+        return (nibble & mask) != 0;
+    }
+
+    public void familyChanged()
+    {
+        selSubfamily = selClass = null;
+        searchProducts();
+    }
+
+    public void subfamilyChanged()
+    {
+        selClass = null;
+        searchProducts();
+    }
+
+    // Distinct PG Codes of the searchable products, used by the PG Code datalist (type-ahead)
+    public List<String> getPGCodes()
+    {
+        Set<String> codes = new Set<String>();
+        for(Product2 p : [SELECT CodigoDeProductoBase__c FROM Product2
+                          WHERE IsActive = true
+                          AND Id IN (SELECT Product2Id FROM PricebookEntry WHERE CurrencyISOCode = :opp.CurrencyISOCode)])
+        {
+            if(String.isNotBlank(p.CodigoDeProductoBase__c)) codes.add(p.CodigoDeProductoBase__c);
+        }
+        List<String> sorted = new List<String>(codes);
+        sorted.sort();
+        return sorted;
+    }
+
+    public void clearFilters()
+    {
+        prodSearch = selPGCode = selBrand = selFamily = selSubfamily = selClass = null;
+        searchProducts();
+    }
+
+    private static String eqFilter(String field, String value)
+    {
+        return String.isBlank(value) ? '' : ' AND ' + field + ' = \'' + String.escapeSingleQuotes(value.trim()) + '\'';
+    }
+
     public void searchProducts()
     {
         String query, strFilter;
 
         if(prodSearch != null && (prodSearch).trim() !='')
         {
+            String term = String.escapeSingleQuotes(prodSearch.trim());
             strFilter = '((';
             Integer i = 0;
-            for(String s : prodSearch.trim().split(' ')){
+            for(String s : term.split(' ')){
                 if(i > 0){
                     strFilter += ' AND ';
                 }
-                strFilter += '(Name Like \'%' + s + '%\' OR Familia_producto_base__c Like \'%' + s + '%\' OR Subfamilia__c Like \'%' + s + '%\' OR Clase__c Like \'%' + s + '%\')';
+                strFilter += '(Name Like \'%' + s + '%\' OR Familia_producto_base__c Like \'%' + s + '%\' OR ProductoBase__r.Subfamilia__c Like \'%' + s + '%\' OR ProductoBase__r.Clase__c Like \'%' + s + '%\')';
                 i++;
             }
-            strFilter += ') OR CodigoDeProductoBase__c Like \'%' + prodSearch.trim() + '%\' OR ProductoBase__r.Marca__c Like \'%' + prodSearch.trim() + '%\')';
-            
+            strFilter += ') OR CodigoDeProductoBase__c Like \'%' + term + '%\' OR ProductoBase__r.Marca__c Like \'%' + term + '%\')';
+
         }
 
         query = 'SELECT Id, Name, Description, Thumb1__c, CodigoDeProductoBase__c, ProductoBase__r.Marca__c,'
-                + ' Familia_producto_base__c, Subfamilia__c, Clase__c, IsActive FROM Product2 WHERE IsActive = true'
+                + ' Familia_producto_base__c, Subfamilia__c, Clase__c, ProductoBase__r.Subfamilia__c, ProductoBase__r.Clase__c,'
+                + ' IsActive FROM Product2 WHERE IsActive = true'
                 + ' AND Id IN (SELECT Product2Id FROM PricebookEntry WHERE CurrencyISOCode = \'' + opp.CurrencyISOCode +'\')';
-        
+
         if(strFilter != null)
         {
             query += ' AND ' + strFilter;
         }
+        query += eqFilter('CodigoDeProductoBase__c', selPGCode)
+               + eqFilter('ProductoBase__r.Marca__c', selBrand)
+               + eqFilter('Familia_producto_base__c', selFamily)
+               + eqFilter('ProductoBase__r.Subfamilia__c', selSubfamily)
+               + eqFilter('ProductoBase__r.Clase__c', selClass);
         query += ' ORDER BY Name LIMIT 300';
 
         system.debug('QUERY > ' + query + ' < ');
