@@ -1,0 +1,2 @@
+FECHA | COMPONENTE | TIPO | ACCION | NOTAS
+2026-10-06 | Pendientes_Pacific_22sep.html | Documentación | Actualizado | Estados de #40-43, #45 y #60 actualizados; se agrega el bloque de la reunión del 1-oct (#61-83), tomado de transcripcionPacificXD.txt. Sin cambios en el org.

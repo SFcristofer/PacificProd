@@ -116,17 +116,17 @@ td:first-child{width:36px;text-align:center;color:#888}
 <h2>8. FindProducts (Agregar productos en Oportunidad)</h2>
 <table>
 <tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
-<tr><td>40</td><td><b>Validar lo entregado</b>: nombres en inglés, columnas código / marca / familia / subfamilia / clase / foto, solo productos activos, check quitado.</td><td>Cliente</td><td><span class="tag cli">Pendiente cliente</span></td><td></td></tr>
-<tr><td>41</td><td><b>Filtro por Marca</b>: picklist con “Todas” por defecto o una marca específica.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
-<tr><td>42</td><td><b>Filtros en cascada Familia → Subfamilia → Clase</b>: al elegir familia solo salen sus subfamilias; al elegir subfamilia, sus clases. Cada nivel puede quedar en “Todas”. Solo valores <b>vigentes</b>. Ej.: Outdoor Trend + Idea Garden + Outdoor Temporada + Barbacoas.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
-<tr><td>43</td><td>Con los filtros, la <b>caja de texto busca solo por nombre o código</b>.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>40</td><td><b>Validar lo entregado</b>: nombres en inglés, columnas código / marca / familia / subfamilia / clase / foto, solo productos activos, check quitado.</td><td>Cliente</td><td><span class="tag done">Hecho</span></td><td>Validado por Rubén en reunión 1-oct (“está perfecto”).</td></tr>
+<tr><td>41</td><td><b>Filtro por Marca</b>: picklist con “Todas” por defecto o una marca específica.</td><td>Cristofer</td><td><span class="tag done">Hecho</span></td><td>Desplegado en producción; validado en reunión 1-oct.</td></tr>
+<tr><td>42</td><td><b>Filtros en cascada Familia → Subfamilia → Clase</b>: al elegir familia solo salen sus subfamilias; al elegir subfamilia, sus clases. Cada nivel puede quedar en “Todas”. Solo valores <b>vigentes</b>. Ej.: Outdoor Trend + Idea Garden + Outdoor Temporada + Barbacoas.</td><td>Cristofer</td><td><span class="tag done">Hecho</span></td><td>Desplegado en producción; validado en reunión 1-oct.</td></tr>
+<tr><td>43</td><td>Con los filtros, la <b>caja de texto busca solo por nombre o código</b>.</td><td>Cristofer</td><td><span class="tag done">Hecho</span></td><td>Desplegado en producción; validado en reunión 1-oct.</td></tr>
 <tr><td>44</td><td>Pregunta de Verónica: ¿esta búsqueda puede ser <b>general (fuera de la oportunidad)</b>? Rubén: serían filtros en las list views de Producto. Responder / proponer.</td><td>Technovalue</td><td><span class="tag conf">Por definir</span></td><td></td></tr>
 </table>
 
 <h2>9. Búsqueda global y seguridad de Producto</h2>
 <table>
 <tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
-<tr><td>45</td><td><b>Duplicados base + fábrica en búsqueda global</b>: antes solo aparecía la base. Requisito: “que en ningún perfil puedan aparecer 2”. Investigar causa (herencia de ProductCode + automatización que lo vuelve a poner, o el cambio de visualización “Primary Supplier Information”) y corregir para que solo salga la base.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td>Prueba: se quitó ProductCode a una fábrica (01tVT00000DXbyzYAD) y por nombre sigue saliendo; código restaurado (H407015B).</td></tr>
+<tr><td>45</td><td><b>Duplicados base + fábrica en búsqueda global</b>: antes solo aparecía la base. Requisito: “que en ningún perfil puedan aparecer 2”. Investigar causa (herencia de ProductCode + automatización que lo vuelve a poner, o el cambio de visualización “Primary Supplier Information”) y corregir para que solo salga la base.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td><b>Acordado 1-oct:</b> al generar el producto de fábrica, la automatización borra el ProductCode del producto base (ver #61). Prueba previa: se quitó ProductCode a una fábrica (01tVT00000DXbyzYAD) y por nombre sigue saliendo; código restaurado (H407015B).</td></tr>
 <tr><td>46</td><td><b>Perfil Vendedor sin acceso al registro de producto de fábrica</b> (ni por búsqueda ni por link). La related list ya estaba oculta para vendedores; los demás perfiles acceden a fábricas desde la related list de la base.</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
 <tr><td>47</td><td><b>FLS Código Proveedor</b> (Codigo_Proveedor__c): Rubén lo quitó en la reunión a todos los perfiles excepto Compras, SuperCompras y Administrador. Verificar que ya no lo vean vendedores ni el agente. Puerto, incoterm, MOQ y plazo de fabricación se mantienen (salen en la cotización).</td><td>Technovalue (verificar)</td><td><span class="tag pend">Verificar</span></td><td></td></tr>
 <tr><td>48</td><td><b>Documentación de seguridad</b>: no existe. Entregar documento/matriz de perfiles y permisos.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
@@ -151,7 +151,49 @@ td:first-child{width:36px;text-align:center;color:#888}
 <table>
 <tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
 <tr><td>59</td><td>Back-fill de clasificación en fábricas: <b>7,295 registros bloqueados</b> por valores de picklist restringida obsoletos (2,830 ya actualizados). Decidir cómo tratarlos.</td><td>Cliente / Technovalue</td><td><span class="tag conf">Por decidir</span></td><td>Respaldo: BACKUP_clasificacion_fabricas_2026-09-29.csv</td></tr>
-<tr><td>60</td><td>Opción para duplicados en búsqueda global: 1) Search layout con columnas Activo y Record Type, 2) prefijo “[BASE]” en el nombre, 3) ambas.</td><td>Cliente / Cristofer</td><td><span class="tag conf">Por decidir</span></td><td></td></tr>
+<tr><td>60</td><td>Opción para duplicados en búsqueda global: 1) Search layout con columnas Activo y Record Type, 2) prefijo “[BASE]” en el nombre, 3) ambas.</td><td>Cliente / Cristofer</td><td><span class="tag done">Decidido</span></td><td>1-oct: se descarta; se opta por borrar el código del base (ver #61).</td></tr>
+</table>
+
+<hr style="margin:40px 0">
+<h1>Pendientes – Reunión 1 de octubre</h1>
+<p class="sub">1 de octubre · Asistentes: Rubén Bernardo, Verónica Bernardo (Pacific Global) · Abner Trujillo, Cristofer Contreras, Rodrigo Oropeza (Technovalue) · Próxima reunión: martes 6 de octubre</p>
+
+<h2>12. Productos / búsqueda global</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>61</td><td><b>Duplicados en búsqueda global</b>: al generar el producto de fábrica, la automatización debe <b>borrar el ProductCode del producto base</b> (el base se desactiva; no se pierde ningún otro dato). Descartada la idea de un status activo/inactivo en la fábrica (“mejor no mezclarlo”).</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>62</td><td>FindProducts: Rubén podría pedir más adelante un filtro todavía más detallado.</td><td>Cliente</td><td><span class="tag conf">Por definir</span></td><td></td></tr>
+</table>
+
+<h2>13. Einstein Activity Capture / correo</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>63</td><td>Permisos EAC asignados a <b>todos los usuarios</b> (incluye vendedores). Revisión y capacitación la próxima semana.</td><td>Cliente (Rubén)</td><td><span class="tag cli">Pendiente cliente</span></td><td></td></tr>
+<tr><td>64</td><td>Permiso EAC en el perfil de Verónica (“Dirección comercial y administrativa”).</td><td>Cristofer</td><td><span class="tag done">Hecho</span></td><td>Asignado en la reunión.</td></tr>
+<tr><td>65</td><td>Sincronización validada: 180 días, en ambos sentidos; los eventos sincronizan Salesforce↔Outlook; el correo enviado desde el Contacto o la Cuenta funciona y las respuestas se agrupan en el hilo.</td><td>—</td><td><span class="tag done">OK</span></td><td></td></tr>
+<tr><td>66</td><td>Falta el <b>botón de acción Email</b> en Contacto (y en Cuenta).</td><td>Cristofer</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>67</td><td><b>PRIORIDAD – Correos ligados a Pedidos</b>: EAC no soporta Order, y en la prueba la respuesta no se ligó al pedido. Opciones: un flujo que relacione el correo o el hilo con el Pedido por asunto/número de pedido, o “pick record” en el conector de Outlook. Abner lo revisa con el equipo.</td><td>Abner / Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>68</td><td>Recomendación: trabajar el correo <b>desde Salesforce</b> en lugar de Outlook. Verónica está de acuerdo.</td><td>Cliente</td><td><span class="tag done">Acordado</span></td><td></td></tr>
+<tr><td>69</td><td><b>Plantillas de correo con firma</b> por usuario.</td><td>Technovalue</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>70</td><td>Enviar las <b>firmas de correo</b> de cada persona para las plantillas.</td><td>Cliente (Verónica)</td><td><span class="tag cli">Pendiente cliente</span></td><td></td></tr>
+<tr><td>71</td><td><b>Agentes logísticos</b> (comunicaciones de booking) no están en Salesforce: hay que darlos de alta como Cuentas/Contactos para que se registren sus correos. El cliente confirma si ya están todos cargados.</td><td>Cliente</td><td><span class="tag cli">Pendiente cliente</span></td><td></td></tr>
+<tr><td>72</td><td>Preocupación de Sourcing: el historial en las cuentas de proveedor será muy desordenado. Rubén: el acceso se controla por permisos y la consulta se hará a través del agente.</td><td>—</td><td><span class="tag conf">Informativo</span></td><td></td></tr>
+<tr><td>73</td><td>El <b>Related To</b> de los correos de EAC no se puede editar (ver #57). Abner sigue investigando; si no hay forma, hay que borrar el mensaje.</td><td>Abner</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+</table>
+
+<h2>14. Agentforce</h2>
+<table>
+<tr><th>#</th><th>Punto</th><th>Responsable</th><th>Estado</th><th>Solución aplicada</th></tr>
+<tr><td>74</td><td>Demo de avances: formato con viñetas y más consultivo; confirmación de datos; consultas sobre varios pedidos (este mes / mes pasado); estado del pedido, ruta/origen, producción con fechas, nuevas solicitudes (mapeo campo a campo, color 1/2 corregido), documentos y cobros con semáforo, depósito y saldo; aviso de pedidos atrasados (rojo/amarillo); Knowledge desde el PDF (bookings por empresa, p. ej. City Club).</td><td>Rodrigo</td><td><span class="tag done">Presentado</span></td><td></td></tr>
+<tr><td>75</td><td>Algunos <b>links no se generan</b> (problema de despliegue o de instrucción).</td><td>Rodrigo</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>76</td><td>Instrucción del <b>idioma de respuesta</b>.</td><td>Rodrigo</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>77</td><td>El agente de <b>Janet Mesa</b> abre el link de pedido equivocado: darle acceso a este agente y revisar la fórmula del link de pedido. Ella envió un correo hace días y no recibió respuesta.</td><td>Rodrigo</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>78</td><td><b>Excluir los pedidos de “Simulación”</b> (p. ej. “Simulación PR 26266”) de los resultados del agente. Son pedidos internos que Verónica usa para ajustar costes de la proforma.</td><td>Rodrigo</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>79</td><td><b>Formato del listado de pedidos</b>: Pedido, luego ETD (fecha máxima), y quitar el nombre del cliente por defecto (el usuario puede pedirlo o pedir la fábrica).</td><td>Rodrigo</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>80</td><td>Enviar a Verónica por correo las <b>preguntas clave</b> del agente, para que ella y la usuaria de pruebas las revisen y prueben.</td><td>Rodrigo</td><td><span class="tag pend">Pendiente</span></td><td></td></tr>
+<tr><td>81</td><td>Activación de los agentes de <b>Miguel y Vanessa</b>: Rodrigo sigue refinándolos.</td><td>Rodrigo</td><td><span class="tag pend">En curso</span></td><td></td></tr>
+<tr><td>82</td><td>Usar el agente desde <b>Ask / la barra de búsqueda superior</b> (Verónica vio a una compañera usarlo así).</td><td>Rodrigo</td><td><span class="tag conf">Por confirmar</span></td><td></td></tr>
+<tr><td>83</td><td>Siguiente paso (no ahora): <b>agente de Sourcing</b>. El cliente prepara un manual de lo que necesita su buscador, y Rodrigo lo sube como Knowledge. También: generar un PDF con datos de Salesforce para enviar a los agentes logísticos (bookings pendientes).</td><td>Cliente / Rodrigo</td><td><span class="tag conf">Futuro</span></td><td></td></tr>
 </table>
 </body>
 </html>
