@@ -29,6 +29,12 @@ public class CloneProduct {
                                             + ' FROM Product2'
                                             + ' WHERE Id = \'' + std.getId() + '\'');
         originalProduct = pro[0];
+        // Si se clona desde una fábrica, el origen es su producto base
+        if(originalProduct.ProductoBase__c != null){
+            Id baseId = originalProduct.ProductoBase__c;
+            originalProduct = Database.query('SELECT ' + String.join((Iterable<String>)fieldNames, ',')
+                                            + ' FROM Product2 WHERE Id = :baseId');
+        }
 
         //Setup alternative brand options
         altBrands = new List<SelectOption>();
@@ -96,7 +102,7 @@ public class CloneProduct {
             list<Product2> mainFactory = Database.query('SELECT ' + String.join((Iterable<String>)fieldNames, ',') 
                                                 + ' FROM Product2'
                                                 + ' WHERE ProductoBase__c = \'' + originalProduct.Id + '\''
-                                                + ' AND Estatus__c = \'Principal\''
+                                                + ' AND IsActive = true'
                                                 + ' LIMIT 1');
             if(!mainFactory.isEmpty()){
                 Product2 clonedFactory = mainFactory[0].clone();
